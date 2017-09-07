@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="pancake.css">
+</head>
+
+<body>
+    <div id="meny">
+        <ul>
+                <li> <a class="showing" href="index.html">Side 1</a></li>
+                <li> <a href="side2.html">Side 2</a></li>
+                <li> <a href="side3.html">Side 3</a></li>
+                <li> <a href="side4.html">Side 4</a></li>
+        </ul>
+    </div>
+    <div class="tittel">
+        Afrikansk Safari
+    </div>
+    <div id="innhold">
+        <form id="skjema">
+            <br><label> Fornavn 
+                <input id="fornavn" type="text"> </label>
+            <br><button id="lagre" type="button">Lagre</button>
+        </form>
+    </div>
+    <div id="bunn">
+        bunntekst
+    </div>
+    <script>
+        let btn = document.getElementById("lagre");
+        btn.addEventListener("click", lagreData);
+
+        function lagreData() {
+            let fornavn = document.getElementById("fornavn").value;
+            alert("Hei " + fornavn);
+        }
+    </script>
+</body>
+
+</html>

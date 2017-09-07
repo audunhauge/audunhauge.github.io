@@ -1,0 +1,60 @@
+#main {
+    position: relative;
+    overflow: hidden;
+    width: 600px;
+    height: 600px;
+    border: 2px solid green;
+    margin: 5%;
+    background-image: url("cityscape.png");
+    background-size: contain;
+    /* background-repeat: no-repeat; */
+    background-repeat: repeat-x;
+    /*background-position: bottom;*/
+    animation: bevegelse 3s linear infinite;
+} 
+
+@keyframes bevegelse {
+    0% { background-position: 600px bottom; }
+    100% { background-position: 0px bottom; }
+}
+
+#poeng {
+    position: absolute;
+    right: 0px;
+    top:0;
+    width: 50px;
+    height: 20px;
+    color: green;
+    font-size: 1.2em;
+}
+
+#bird {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    left: 255px;
+    top:255px;
+    background-image: url("floppy.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: 59ms;
+}
+
+#b1,#b2 {
+    position: absolute;
+    background: red;
+    animation: sbevegelse 3s linear infinite;
+    width: 50px;
+    height: 130px;
+    left: 650px;
+    top: 0px;  
+}
+
+#b1 {
+  top: 470px;
+}
+
+@keyframes sbevegelse {
+    0% { left: 650px; }
+    100% { left:-250px; }
+}
