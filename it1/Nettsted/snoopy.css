@@ -7,7 +7,7 @@
     background: url("bilder/snoopy.png");
     background-size: contain;
     background-repeat: no-repeat;
-    animation: gaaTur 6s linear ;
+    animation: gaaTur 6s linear infinite;
     animation-fill-mode: forwards;
 }
 
@@ -15,7 +15,10 @@
     0% { top:80%; left: 0%; transform: rotate(0deg);}
     23% { top:80%; left: 90%; transform: rotate(0deg);}
     24% { top:80%; left: 90%;transform: rotate(-90deg);}
-    50% { top: 0%; left: 90%;transform: rotate(-90deg);}
-    75% { top: 0%; left: 0%;transform: rotate(-90deg);}
-    100% { top: 80%; left: 0%;transform: rotate(-90deg);}
+    48% { top:0%; left: 90%;transform: rotate(-90deg);}
+    50% { top: 0%; left: 90%;transform: rotate(-180deg);}
+    75% { top: 0%; left: 0%;transform: rotate(-180deg);}
+    78% { top: 0%; left: 0%;transform: rotate(-270deg);}
+    98% { top: 80%; left: 0%;transform: rotate(-270deg);}
+    100% { top: 80%; left: 0%;transform: rotate(-360deg);}
 }
