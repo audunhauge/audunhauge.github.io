@@ -1,0 +1,45 @@
+:root {
+    --link-bg: cornsilk;
+    --heading: darkcyan;
+}
+
+#main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+ul li a {
+    display: block;
+    position: relative;
+    width: 20em;
+    height: 2em;
+    background: var(--link-bg);
+    border: 1px solid gray;
+    padding: 0.1em;
+    padding-top: 0.8em;
+    margin: 0.3em;
+    text-align: center;
+    border-radius: 0.5em;
+    color: da
+}
+
+ul li a:after {
+    content: attr(data-icon);
+    position: absolute;
+    right: 1.2em;
+    top: 0.5em;
+}
+
+ul li {
+    display: block;
+}
+
+h4 {
+    color: var(--heading);
+    display: block;
+    width: 20em;
+    margin:1em;
+    margin-left: 2.5em;
+    text-align: center;
+}
