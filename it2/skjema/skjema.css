@@ -15,18 +15,22 @@ form {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    width: 100%;
 }
 form label {
     position: relative;
     display: block;
     min-width: 10em;
-    width: 20%;
+    width: 45%;
+    margin: 3px;
+    padding: 1px;
     margin-right: 2em;
+    background-color: rgba(0, 0, 0, 0.03);
 }
 
 form input {
     display: inline-block;
     position: absolute;
-    right: -2em;
-    width: 55%;
+    right: 2px;
+    width: 45%;
 }
