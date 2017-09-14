@@ -10,3 +10,23 @@ body {
 #lagre {
     background: red;
 }
+
+form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+form label {
+    position: relative;
+    display: block;
+    min-width: 10em;
+    width: 20%;
+    margin-right: 2em;
+}
+
+form input {
+    display: inline-block;
+    position: absolute;
+    right: -2em;
+    width: 55%;
+}
