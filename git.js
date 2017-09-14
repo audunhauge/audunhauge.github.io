@@ -15,7 +15,7 @@ function setup() {
             let icon = e.attributes.getNamedItem("data-icon");
             if (icon) {
                 let iconName = icon.value;
-                let iconCode = icons[iconName] || "";
+                let iconCode = icons[iconName];
                 if (iconCode) {
                     e.setAttribute("data-icon", iconCode);
                 }

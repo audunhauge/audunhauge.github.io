@@ -1,0 +1,25 @@
+:root {
+    --bakgrunn: cornflowerblue;
+}
+
+#slideshow {
+    background: url("bilder/snoopy.png");
+    position: relative;
+    left: 2em;
+    top: 2em;
+    bottom: 2em;
+    width: calc(100% - 4em);
+    height: calc(100% - 4em);
+    border: 5px solid gray;
+    border-radius: 2em;
+    background-color: var(--bakgrunn);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    animation: slideshow 6s steps(1) infinite alternate;
+}
+
+@keyframes slideshow {
+   0%  { background-image: url("bilder/snoopy.png")}
+   50%  { background-image: url("bilder/tittel.gif")}
+}
