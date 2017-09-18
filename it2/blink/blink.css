@@ -1,0 +1,39 @@
+#main {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    background: rgba(160,0,0,0.04);
+}
+
+.sprite {
+    position: absolute;
+}
+.sprite.hidden {
+    display: none;
+}
+
+#kanon {  
+    left: 10%;
+    top: 10%;
+    width: 30px;
+    height: 30px;
+    background: blue;
+}
+
+#blink {
+    left: 10%;
+    bottom: 10%;
+    width: 30px;
+    height: 30px;
+    background: green;
+   
+}
+
+#skudd {
+    right: 10%;
+    top: 10%;
+    width: 10px;
+    height: 10px;
+    background: red;
+    border-radius: 50%;
+}
