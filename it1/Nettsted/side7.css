@@ -1,0 +1,10 @@
+div div:nth-child(2) span {
+    color:red;
+}
+
+
+div div::first-letter {
+    color: green;
+    font:italic small-caps bold 4em cursive;
+    margin-right: 5px;
+  }

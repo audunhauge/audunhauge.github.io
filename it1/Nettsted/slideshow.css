@@ -2,7 +2,7 @@
     --bakgrunn: cornflowerblue;
 }
 
-#slideshow {
+#slideshow { 
     background: url("bilder/snoopy.png");
     position: relative;
     left: 2em;

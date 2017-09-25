@@ -5,6 +5,12 @@
     background: rgba(160,0,0,0.04);
 }
 
+.blink {
+    background: green;
+    width: 30px;
+    height: 30px;
+}
+
 .sprite {
     position: absolute;
 }
@@ -12,21 +18,34 @@
     display: none;
 }
 
-#kanon {  
+#tank {  
     left: 10%;
     top: 10%;
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 26px;
     background: blue;
 }
 
-#blink {
-    left: 10%;
-    bottom: 10%;
-    width: 30px;
-    height: 30px;
-    background: green;
-   
+#tank::after {
+    content: "x";
+    color:rgba(0,0,0,0);
+    position: absolute;
+    left: 7px;
+    top: 3px;
+    width: 19px;
+    height: 18px;
+    background-color: pink;
+}
+
+#tank::before {
+    content: ".";
+    color:rgba(0,0,0,0);
+    position: absolute;
+    left: 23px;
+    top: 11px;
+    width: 27px;
+    height: 3px;
+    background-color: yellow;
 }
 
 #skudd {
@@ -37,3 +56,14 @@
     background: red;
     border-radius: 50%;
 }
+
+#tank.h0 {  background-color: rgb(200,0,0); }
+#tank.h1 {  background-color: rgb(180,20,20); }
+#tank.h2 {  background-color: rgb(160,40,40); }
+#tank.h3 {  background-color: rgb(140,60,60); }
+#tank.h4 {  background-color: rgb(120,80,80); }
+#tank.h5 {  background-color: rgb(100,100,100); }
+#tank.h6 {  background-color: rgb(80,120,120); }
+#tank.h7 {  background-color: rgb(60,140,140); }
+#tank.h8 {  background-color: rgb(40,160,160); }
+#tank.h9 {  background-color: rgb(20,200,200); }
