@@ -22,12 +22,13 @@ class Sprite {
         this.w = w;
         this.h = h;
         this.rot = 0;
+        this.radius = (w + h) / 4;
     }
 
     render() {
         if (!this.div) return;
-        this.div.style.left = this.x + "px";
-        this.div.style.top = this.y + "px";
+        this.div.style.left = this.x - this.radius + "px";
+        this.div.style.top = this.y - this.radius + "px";
         this.div.style.transform = "rotate(" + this.rot + "deg)";
     }
 
@@ -42,31 +43,127 @@ class Sprite {
  *  En movable p har p.flytt() og p.roter() som metoder
  */
 class Movable extends Sprite {
+    // previous position
     constructor(div, x, y, w, h, rot, velocity) {
         super(div, x, y, w, h); // konstruer spriten først
+        this.px = x;
+        this.py = y;
         this.rot = rot;
         let vinkel = this.rot * Math.PI / 180;
-        this.vx = velocity * Math.cos(vinkel);
-        this.vy = velocity * Math.sin(vinkel);
+        this.x += velocity * Math.cos(vinkel);
+        this.y += velocity * Math.sin(vinkel);
         this.alive = true;
     }
 
-    flytt() {
+    static get damping() {
+        return 1.0;
+    }
+
+    accelerate(delta) {
         if (!this.alive) return;
-        this.x += this.vx;
-        this.y += this.vy;
-        this.render();
+        this.x += this.ax * delta * delta;
+        this.y += this.ay * delta * delta;
+        this.ax = 0;
+        this.ay = 0;
+    }
+
+    inertia(delta) {
+        if (!this.alive) return;
+        let x = this.x * 2 - this.px;
+        let y = this.y * 2 - this.py;
+        this.px = this.x;
+        this.py = this.y;
+        this.x = x;
+        this.y = y;
     }
 
     roter(delta) {
         if (!this.alive) return;
-        this.rot += delta;
+        let vx = this.x - this.px;
+        let vy = this.y - this.py;
+        this.rot = (this.rot + delta) % 360;
         let angle = this.rot;
-        let velocity = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+        let velocity = Math.sqrt(vx * vx + vy * vy);
         let vinkel = angle * Math.PI / 180;
-        this.vx = velocity * Math.cos(vinkel);
-        this.vy = velocity * Math.sin(vinkel);
+        this.x = this.px + velocity * Math.cos(vinkel);
+        this.y = this.py + velocity * Math.sin(vinkel);
         this.render();
+    }
+
+    edge(box) {
+        let damping = Movable.damping;
+        let radius = this.radius;
+        let x = this.x;
+        let y = this.y;
+
+        if (x - radius < 0) {
+            let vx = (this.px - this.x) * damping;
+            this.x = radius;
+            this.px = this.x - vx;
+        } else if (x + radius > box.w) {
+            let vx = (this.px - this.x) * damping;
+            this.x = box.w - radius;
+            this.px = this.x - vx;
+        }
+        if (y - radius < 0) {
+            let vy = (this.py - this.y) * damping;
+            this.y = radius;
+            this.py = this.y - vy;
+        } else if (y + radius > box.h) {
+            let vy = (this.py - this.y) * damping;
+            this.y = box.h - radius;
+            this.py = this.y - vy;
+        }
+    }
+
+    static physics(bodies) {
+
+        function collide(bodies, preserve_impulse = true) {
+            let damping = Movable.damping;
+            for (let i = 0, l = bodies.length; i < l; i++) {
+                let body1 = bodies[i];
+                if (!body1.alive) continue;
+                for (let j = i + 1; j < l; j++) {
+                    let body2 = bodies[j];
+                    if (!body2.alive) continue;
+                    let x = body1.x - body2.x;
+                    let y = body1.y - body2.y;
+                    let slength = x * x + y * y;
+                    let length = Math.sqrt(slength);
+                    let target = body1.radius + body2.radius;
+
+                    if (length < target) {
+                        let v1x = body1.x - body1.px;
+                        let v1y = body1.y - body1.py;
+                        let v2x = body2.x - body2.px;
+                        let v2y = body2.y - body2.py;
+
+                        let factor = (length - target) / length;
+                        body1.x -= x * factor * 0.5;
+                        body1.y -= y * factor * 0.5;
+                        body2.x += x * factor * 0.5;
+                        body2.y += y * factor * 0.5;
+
+                        if (preserve_impulse) {
+                            let f1 = damping * (x * v1x + y * v1y) / slength;
+                            let f2 = damping * (x * v2x + y * v2y) / slength;
+
+                            v1x += f2 * x - f1 * x;
+                            v2x += f1 * x - f2 * x;
+                            v1y += f2 * y - f1 * y;
+                            v2y += f1 * y - f2 * y;
+
+                            body1.px = body1.x - v1x;
+                            body1.py = body1.y - v1y;
+                            body2.px = body2.x - v2x;
+                            body2.py = body2.y - v2y;
+                        }
+                    }
+                }
+            }
+        }
+
+        collide(bodies);
     }
 }
 
@@ -103,26 +200,35 @@ class Blink extends Movable {
                 vx = Math.floor(Math.random() * 4) + 1;
             }
         }
-        this.x = xpos;
-        this.y = ypos;
-        this.vy = vy;
-        this.vx = vx;
+        this.px = xpos;
+        this.py = ypos;
+        this.y = ypos + vy;
+        this.x = xpos + vx;
         this.alive = true;
     }
-    /**
-     * Sjekk om blinken har kommet utenfor brettet
-     */
-    bounce(box) {
-        if (!Sprite.overlap(this, box)) {
-            this.respawn();
-        }
-    }
+
 }
 
 class Tank extends Movable {
     constructor(div, x, y, w, h, rot, velocity) {
         super(div, x, y, w, h, rot, velocity);
         this.hitpoints = 100;
+        this.reload = 0;
+    }
+
+    skyt(skudd) {
+        this.reload = 15; // tanks kan ikke snu/skyte på xx frames
+        let angle = this.rot;
+        let vinkel = angle * Math.PI / 180;
+        let vx = 20 * Math.cos(vinkel);
+        let vy = 20 * Math.sin(vinkel);
+        skudd.x = this.x;
+        skudd.y = this.y;
+        skudd.px = skudd.x - vx;
+        skudd.py = skudd.y - vy;
+
+        skudd.alive = true;
+        skudd.div.classList.remove("hidden");
     }
 
     takeDamage() {
@@ -143,12 +249,6 @@ class Tank extends Movable {
         }
     }
 
-    bounce(box, wall) {
-        if (!Sprite.overlap(this, wall)) {
-            this.x = Math.max(wall.x - this.w, Math.min(this.x, wall.w + wall.x));
-            this.y = Math.max(wall.y - this.h, Math.min(this.y, wall.h + wall.y));
-        }
-    }
 }
 
 function setup() {
@@ -178,8 +278,9 @@ function setup() {
         manyBlinks.push(blinkSprite);
     }
 
-    let tank = new Tank(divTank, 250, 250, 50, 50, 0, 2);
+    let tank = new Tank(divTank, 250, 250, 26, 26, 0, 2);
     let skudd = new Movable(divSkudd, 260, 260, 10, 10, 0, 20);
+    skudd.alive = false;
 
     tank.render();
 
@@ -200,21 +301,30 @@ function setup() {
 
     function gameEngine(e) {
         for (let blink of manyBlinks) {
-            blink.flytt();
-            blink.bounce(box);
+            blink.inertia(1);
+            blink.edge(box);
+            blink.render();
         }
-        skudd.flytt();
-        tank.flytt();
-        tank.bounce(box, wall);
+        skudd.render();
+        skudd.inertia(1);
+        tank.inertia(1);
+        tank.edge(box);
+        tank.render();
         styrSpillet();
+        tank.reload--;
         kollisjonSkudd();
         kollisjonTanks();
+        Movable.physics(manyBlinks);
     }
 
     function kollisjonSkudd() {
         for (let blink of manyBlinks) {
             if (!blink.alive || !skudd.alive) return;
-            if (Sprite.overlap(blink, skudd)) {
+            let dx = blink.x - skudd.x;
+            let dy = blink.y - skudd.y;
+            let avstand = Math.sqrt(dx * dx + dy * dy);
+            if (avstand < blink.radius + skudd.radius) {
+                // if (Sprite.overlap(blink, skudd)) {
                 blink.alive = false;
                 skudd.alive = false;
                 skudd.div.classList.add("hidden");
@@ -224,8 +334,9 @@ function setup() {
     }
 
     function kollisjonTanks() {
+        if (!tank.alive) return;
         for (let blink of manyBlinks) {
-            if (!blink.alive || !tank.alive) return;
+            if (!blink.alive) return;
             if (Sprite.overlap(blink, tank)) {
                 blink.alive = false;
                 tank.takeDamage();
@@ -234,28 +345,16 @@ function setup() {
         }
     }
 
-    function skyt() {
-        let angle = tank.rot;
-        let vinkel = angle * Math.PI / 180;
-        let vx = 20 * Math.cos(vinkel);
-        let vy = 20 * Math.sin(vinkel);
-        skudd.vx = vx;
-        skudd.vy = vy;
-        skudd.x = tank.x + 10;
-        skudd.y = tank.y + 10;
-        skudd.alive = true;
-        skudd.div.classList.remove("hidden");
-    }
-
     function styrSpillet() {
+        if (tank.reload > 0) return;
+        if (keys[32] === 1) {
+            tank.skyt(skudd);
+        }
         if (keys[39] === 1) {
             tank.roter(3);
         }
         if (keys[37] === 1) {
             tank.roter(-3);
-        }
-        if (keys[32] === 1) {
-            skyt();
         }
     }
 }

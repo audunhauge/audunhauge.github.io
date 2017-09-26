@@ -3,12 +3,14 @@
     width: 800px;
     height: 600px;
     background: rgba(160,0,0,0.04);
+    overflow: hidden;
 }
 
 .blink {
     background: green;
     width: 30px;
     height: 30px;
+    border-radius: 50%;
 }
 
 .sprite {
@@ -24,6 +26,7 @@
     width: 50px;
     height: 26px;
     background: blue;
+    transform-origin: 13px 13px;
 }
 
 #tank::after {
