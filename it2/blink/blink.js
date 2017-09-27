@@ -86,7 +86,7 @@ class Movable extends Sprite {
     this.ay = 0;
   }
 
-  inertia(delta) {
+  inertia() {
     if (!this.alive) return;
     let x = this.x * 2 - this.px;
     let y = this.y * 2 - this.py;
@@ -231,6 +231,20 @@ class Tank extends Movable {
     this.isA = "tank";
   }
 
+  throttle(delta) {
+    let vx = this.x - this.px;
+    let vy = this.y - this.py;
+    let velocity = Math.abs(Math.sqrt(vx * vx + vy * vy));
+    return velocity < 4 ? delta : 0;
+  }
+
+  friction(coff) {
+    let vx = this.x - this.px;
+    let vy = this.y - this.py;
+    this.ax = -coff * vx + (Math.random() * 0.08 - 0.04);
+    this.ay = -coff * vy;
+  }
+
   skyt(skudd) {
     this.reload = 15; // tanks kan ikke snu/skyte på xx frames
     let angle = this.rot;
@@ -243,6 +257,7 @@ class Tank extends Movable {
     skudd.py = skudd.y - vy;
 
     skudd.alive = true;
+    skudd.render();
     skudd.div.classList.remove("hidden");
   }
 
@@ -265,7 +280,7 @@ class Tank extends Movable {
   }
 }
 
-function collide(me, bodies, soft = true) {
+function collide(me, bodies, damage) {
   let damping = Movable.damping;
   let hit = false;
   for (let body of bodies) {
@@ -277,7 +292,7 @@ function collide(me, bodies, soft = true) {
     let target = me.radius + body.radius;
     if (length < target) {
       hit = true;
-      body.alive = soft;
+      damage(body);
       let v1x = me.x - me.px;
       let v1y = me.y - me.py;
       let v2x = body.x - body.px;
@@ -309,6 +324,9 @@ function collide(me, bodies, soft = true) {
 
 function setup() {
   let antallBlinker = 5;
+
+  let friction = 0.03;
+  let power = friction;
 
   let keys = {}; // registrerer alle keys som er trykket ned
   let manyThings = [];
@@ -371,19 +389,25 @@ function setup() {
     skudd.inertia(1);
     skudd.edge(box);
     skudd.render();
-    if (collide(skudd, manyThings, true)) {
+    if (collide(skudd, manyThings, b => {
+      b.alive = false;
+    })) {
       skudd.alive = false;
       skudd.div.classList.add("hidden");
     }
 
-    tank.inertia(1);
-    tank.edge(box);
-    tank.render();
-    if (collide(tank, manyThings)) {
-      tank.takeDamage();
-    }
+    power = friction;
 
     styrSpillet();
+
+    tank.inertia(1.1);
+    tank.edge(box);
+    tank.render();
+    tank.friction(power);
+    tank.accelerate(1);
+    if (collide(tank, manyThings, () => {})) {
+      tank.takeDamage();
+    }
 
     Movable.collide(manyThings);
   }
@@ -393,6 +417,13 @@ function setup() {
     if (keys[32] === 1) {
       tank.skyt(skudd);
     }
+    if (keys[38] === 1) {
+      power = tank.throttle(-0.02);
+    }
+    if (keys[36] === 1) {
+      power = tank.throttle(0.5);
+    }
+
     if (keys[39] === 1) {
       tank.roter(3);
     }
