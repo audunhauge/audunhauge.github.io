@@ -20,7 +20,7 @@
 }
 
 .blink {
-    background: green;
+    border: solid 2px green;
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -38,8 +38,9 @@
     top: 10%;
     width: 34px;
     height: 27px;
-    background: blue;
+    border: 1px solid black;
     transform-origin: 13px 13px;
+    box-shadow: 2px 2px 2px gray;
 }
 
 #tank::after {
@@ -50,7 +51,7 @@
     top: 4px;
     width: 21px;
     height: 18px;
-    background-color: pink;
+    background-color: gray; 
 }
 
 #tank::before {
@@ -73,13 +74,13 @@
     border-radius: 50%;
 }
 
-#tank.h0 {  background-color: rgb(200,0,0); }
-#tank.h1 {  background-color: rgb(180,20,20); }
-#tank.h2 {  background-color: rgb(160,40,40); }
-#tank.h3 {  background-color: rgb(140,60,60); }
-#tank.h4 {  background-color: rgb(120,80,80); }
-#tank.h5 {  background-color: rgb(100,100,100); }
-#tank.h6 {  background-color: rgb(80,120,120); }
-#tank.h7 {  background-color: rgb(60,140,140); }
-#tank.h8 {  background-color: rgb(40,160,160); }
-#tank.h9 {  background-color: rgb(20,200,200); }
+.h0 {  background-color: rgb(200,0,0); }
+.h1 {  background-color: rgb(180,20,20); }
+.h2 {  background-color: rgb(160,40,40); }
+.h3 {  background-color: rgb(140,60,60); }
+.h4 {  background-color: rgb(120,80,80); }
+.h5 {  background-color: rgb(100,100,100); }
+.h6 {  background-color: rgb(80,120,120); }
+.h7 {  background-color: rgb(60,140,140); }
+.h8 {  background-color: rgb(40,160,160); }
+.h9 {  background-color: rgb(20,200,200); }

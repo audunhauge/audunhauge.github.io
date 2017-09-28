@@ -76,8 +76,8 @@ class Movable extends Sprite {
   py: number;
   ax: number;
   ay: number;
-  hits: number;
   alive: boolean;
+  score:number;
 
   constructor(div, x, y, w, h, rot, velocity) {
     super(div, x, y, w, h); // konstruer spriten først
@@ -89,7 +89,26 @@ class Movable extends Sprite {
     this.y += velocity * Math.sin(vinkel);
     this.alive = true;
     this.isA = "moveable";
-    this.hits = 0; // count collisions
+    this.score = 0; 
+  }
+
+  /**
+   * Default ignore - just check alive
+   */
+  get ignore() {
+    return !this.alive;
+  }
+
+  /**
+   * Default no effect other than collide
+   */
+  effectOn(other: Movable) {
+    return false;
+  }
+
+  die() {
+    this.alive = false;
+    this.div.classList.add("hidden");
   }
 
   static get damping() {
@@ -167,16 +186,20 @@ class Movable extends Sprite {
     let damping = Movable.damping;
     for (let i = 0, l = bodies.length; i < l; i++) {
       let body1 = bodies[i];
-      if (!body1.alive) continue;
+      if (body1.ignore) continue;
       for (let j = i + 1; j < l; j++) {
         let body2 = bodies[j];
-        if (!body2.alive) continue;
+        if (body2.ignore) continue;
         let x = body1.x - body2.x;
         let y = body1.y - body2.y;
         let slength = x * x + y * y;
         let length = Math.sqrt(slength);
         let target = body1.radius + body2.radius;
         if (length < target) {
+          let skip = false;
+          skip = skip || body1.effectOn(body2); // default no effect
+          skip = skip || body2.effectOn(body1); // changed for skudd and tank
+          if (skip) continue;
           let v1x = body1.x - body1.px;
           let v1y = body1.y - body1.py;
           let v2x = body2.x - body2.px;
@@ -187,8 +210,6 @@ class Movable extends Sprite {
           body1.y -= y * factor * 0.5;
           body2.x += x * factor * 0.5;
           body2.y += y * factor * 0.5;
-          body1.hits++;
-          body2.hits++;
           if (preserve_impulse) {
             let f1 = damping * (x * v1x + y * v1y) / slength;
             let f2 = damping * (x * v2x + y * v2y) / slength;
@@ -211,8 +232,36 @@ class Movable extends Sprite {
 
 class Blink extends Movable {
   /**
-     *  Legger til egenskaper som er spesifikk for Blink
-     */
+   *  Legger til egenskaper som er spesifikk for Blink
+   */
+  hitpoints: number;
+
+  constructor(div, x, y, w, h, rot, velocity) {
+    super(div, x, y, w, h, rot, velocity);
+    this.hitpoints = 3;
+    this.isA = "blink";
+  }
+
+  effectOn(other: Movable) {
+    if (other.isA === "skudd") {
+      this.takeDamage();
+      other.score = 1;  // counted by tank
+      other.die();
+    }
+    return false;
+  }
+
+  takeDamage() {
+    this.hitpoints--;
+    let p = this.hitpoints;
+    this.div.classList.remove(..."h0,h1,h2,h3,h4,h5,h6,h7,h8,h9".split(","));
+    this.div.classList.add("h" + p);
+    if (this.hitpoints < 0) {
+      this.die();
+      // setTimeout(this.respawn, 1000);
+    }
+  }
+
   respawn() {
     let xpos, ypos, vx, vy;
     if (Math.random() > 0.5) {
@@ -247,6 +296,8 @@ class Blink extends Movable {
     this.y = ypos + vy;
     this.x = xpos + vx;
     this.alive = true;
+    this.hitpoints = 3;
+    this.div.classList.remove("hidden");
   }
 }
 
@@ -259,6 +310,15 @@ class Tank extends Movable {
     this.hitpoints = 100;
     this.reload = 0;
     this.isA = "tank";
+  }
+
+  effectOn(other: Movable) {
+    if (other.isA === "skudd") return true;
+    if (other.isA === "blink") {
+      this.takeDamage();
+      this.score -= 2;
+    }
+    return false;
   }
 
   throttle(delta) {
@@ -285,8 +345,9 @@ class Tank extends Movable {
     skudd.y = this.y;
     skudd.px = skudd.x - vx;
     skudd.py = skudd.y - vy;
-
+    this.score += 10 * skudd.score;  // will be 1 if a target has been hit
     skudd.alive = true;
+    skudd.score = 0;
     skudd.render();
     skudd.div.classList.remove("hidden");
   }
@@ -315,62 +376,9 @@ class Tank extends Movable {
   }
 }
 
-/**
- * Sjekker kollisjon mellom to objekter
- * Brukes for kollisjon mellom tank og blinker
- * Og mellom skudd og blinker
- * @param {*} me 
- * @param {*} bodies 
- * @param {*} damage 
- */
-function collide(
-  me: Movable,
-  bodies: Array<Movable>,
-  damage: (b: Movable) => void
-) {
-  let damping = Movable.damping;
-  let hit = false;
-  for (let body of bodies) {
-    if (!body.alive) continue;
-    let x = me.x - body.x;
-    let y = me.y - body.y;
-    let slength = x * x + y * y;
-    let length = Math.sqrt(slength);
-    let target = me.radius + body.radius;
-    if (length < target) {
-      hit = true;
-      damage(body);
-      let v1x = me.x - me.px;
-      let v1y = me.y - me.py;
-      let v2x = body.x - body.px;
-      let v2y = body.y - body.py;
-
-      let factor = (length - target) / length;
-      me.x -= x * factor * 0.5;
-      me.y -= y * factor * 0.5;
-      body.x += x * factor * 0.5;
-      body.y += y * factor * 0.5;
-      if (true) {
-        let f1 = damping * (x * v1x + y * v1y) / slength;
-        let f2 = damping * (x * v2x + y * v2y) / slength;
-
-        v1x += f2 * x - f1 * x;
-        v2x += f1 * x - f2 * x;
-        v1y += f2 * y - f1 * y;
-        v2y += f1 * y - f2 * y;
-
-        me.px = me.x - v1x;
-        me.py = me.y - v1y;
-        body.px = body.x - v2x;
-        body.py = body.y - v2y;
-      }
-    }
-  }
-  return hit;
-}
-
 function setup() {
   let antallBlinker = 5;
+  let poeng = 0;
 
   let friction = 0.03;
   let power = friction;
@@ -383,13 +391,13 @@ function setup() {
 
   let divTank = document.getElementById("tank");
   let divSkudd = document.getElementById("skudd");
+  let spanPoeng = document.querySelector("#poeng span");
 
   // her lager vi alle blinkene
   for (let i = 0; i < antallBlinker; i++) {
     let divBlink = document.createElement("div");
     divBlink.className = "sprite blink";
     let blink = new Blink(divBlink, 0, 0, 30, 30, 0, 2);
-    blink.isA = "blink";
     blink.respawn(); // plasser tilfeldig langs kant
     let divMain = document.getElementById("main");
     if (divMain !== null) {
@@ -398,13 +406,14 @@ function setup() {
     manyThings.push(blink);
   }
 
+
   let tank = new Tank(divTank, 250, 250, 26, 26, 0, 2);
   let skudd = new Movable(divSkudd, 260, 260, 10, 10, 0, 20);
   skudd.alive = false;
   skudd.isA = "skudd";
 
-  //manyThings.push(tank);
-  //manyThings.push(skudd);
+  manyThings.push(tank);
+  manyThings.push(skudd);
 
   tank.render();
 
@@ -428,37 +437,13 @@ function setup() {
       thing.inertia();
       thing.edge(box);
       thing.render();
-      if (!thing.alive && thing.isA === "blink") {
-        let blink: Blink = (thing: any);
-        blink.respawn();
-      }
     }
-    skudd.inertia();
-    skudd.edge(box);
-    skudd.render();
-    if (
-      collide(skudd, manyThings, (b: Movable) => {
-        b.alive = false;
-      })
-    ) {
-      skudd.alive = false;
-      skudd.div.classList.add("hidden");
-    }
-
     power = friction;
-
     styrSpillet();
-
-    tank.inertia();
-    tank.edge(box);
-    tank.render();
     tank.friction(power);
     tank.accelerate(1);
-    if (collide(tank, manyThings, () => {})) {
-      tank.takeDamage();
-    }
-
     Movable.collide(manyThings);
+    spanPoeng.innerHTML = String(tank.score);
   }
 
   function styrSpillet() {
@@ -473,7 +458,6 @@ function setup() {
     if (keys[36] === 1) {
       power = tank.throttle(0.5);
     }
-
     if (keys[39] === 1) {
       tank.roter(3);
     }
