@@ -199,10 +199,6 @@ function setup() {
         manyBlinks.push(blinkSprite);
     }
 
-
-
-
-
     let tank = new Tank(divTank, 250, 250, 50, 50, 0, 2);
     let skudd = new Movable(divSkudd, 260, 260, 10, 10, 0, 20);
 

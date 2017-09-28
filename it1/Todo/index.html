@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://get.mavo.io/mavo.js"></script>
+    <link rel="stylesheet" href="https://get.mavo.io/mavo.css">
+    <link rel="stylesheet" href="todo.css">
+</head>
+
+<body>
+
+    <div mv-app="mavoTest" mv-storage="local">
+        <div id="tittel">
+            <span property="firstName">Audun</span>
+            <span property="last_name">Hauge</span>
+        </div>
+        <div id="innhold">
+            <h4>Gjøremål</h4>
+            <ul>
+                <li property="week" mv-multiple>
+                    10.10
+                    <ul>
+                        <li property="todo" mv-multiple>Lekser</li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+
+
+
+    </div>
+
+</body>
+
+</html>
