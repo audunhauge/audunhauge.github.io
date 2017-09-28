@@ -153,6 +153,16 @@ class Movable extends Sprite {
     }
   }
 
+  /**
+   * Kollisjon mellom alle blinkene
+   * Dobbel løkke slik at blink nr 1
+   *   sjekker kollisjon med blink 2,3, ...
+   *   Nr 2 sjekker mot 3,4, ...
+   *     Nr 3 sjekker mot 4,5, ...
+   *      osv
+   * @param {*} bodies 
+   * @param {*} preserve_impulse 
+   */
   static collide(bodies: Array<Movable>, preserve_impulse = true) {
     let damping = Movable.damping;
     for (let i = 0, l = bodies.length; i < l; i++) {
@@ -266,7 +276,7 @@ class Tank extends Movable {
   }
 
   skyt(skudd: Movable) {
-    this.reload = 15; // tanks kan ikke snu/skyte på xx frames
+    this.reload = 25; // tanks kan ikke snu/skyte på xx frames
     let angle = this.rot;
     let vinkel = angle * Math.PI / 180;
     let vx = 20 * Math.cos(vinkel);
@@ -305,6 +315,14 @@ class Tank extends Movable {
   }
 }
 
+/**
+ * Sjekker kollisjon mellom to objekter
+ * Brukes for kollisjon mellom tank og blinker
+ * Og mellom skudd og blinker
+ * @param {*} me 
+ * @param {*} bodies 
+ * @param {*} damage 
+ */
 function collide(
   me: Movable,
   bodies: Array<Movable>,
@@ -444,7 +462,8 @@ function setup() {
   }
 
   function styrSpillet() {
-    // if (tank.reload > 0) return;
+    tank.reload--;
+    if (tank.reload > 0) return;
     if (keys[32] === 1) {
       tank.skyt(skudd);
     }
