@@ -3,12 +3,14 @@
     width: 800px;
     height: 600px;
     background: rgba(160,0,0,0.04);
+    overflow: hidden;
 }
 
 .blink {
     background: green;
     width: 30px;
     height: 30px;
+    border-radius: 50%;
 }
 
 .sprite {
@@ -21,9 +23,10 @@
 #tank {  
     left: 10%;
     top: 10%;
-    width: 50px;
-    height: 26px;
+    width: 34px;
+    height: 27px;
     background: blue;
+    transform-origin: 13px 13px;
 }
 
 #tank::after {
@@ -31,8 +34,8 @@
     color:rgba(0,0,0,0);
     position: absolute;
     left: 7px;
-    top: 3px;
-    width: 19px;
+    top: 4px;
+    width: 21px;
     height: 18px;
     background-color: pink;
 }
@@ -45,7 +48,7 @@
     top: 11px;
     width: 27px;
     height: 3px;
-    background-color: yellow;
+    background-color: black;
 }
 
 #skudd {
