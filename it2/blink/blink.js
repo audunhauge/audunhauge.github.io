@@ -396,7 +396,7 @@ function setup() {
 
   function gameEngine(e) {
     for (let thing of manyThings) {
-      thing.inertia(1);
+      thing.inertia();
       thing.edge(box);
       thing.render();
       if (!thing.alive && thing.isA === "blink") {
@@ -404,7 +404,7 @@ function setup() {
         blink.respawn();
       }
     }
-    skudd.inertia(1);
+    skudd.inertia();
     skudd.edge(box);
     skudd.render();
     if (collide(skudd, manyThings, b => {
@@ -418,7 +418,7 @@ function setup() {
 
     styrSpillet();
 
-    tank.inertia(1.1);
+    tank.inertia();
     tank.edge(box);
     tank.render();
     tank.friction(power);

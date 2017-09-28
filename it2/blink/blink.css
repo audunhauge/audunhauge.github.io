@@ -6,6 +6,19 @@
     overflow: hidden;
 }
 
+#poeng {
+    position: absolute;
+    left: 810px;
+    top: 10px;
+    width: 6em;
+    height: 2em;
+    background-color: darkolivegreen;
+    color: aliceblue;
+    border-radius: 0.5em;
+    text-align: center;
+    padding-top: 0.8em;
+}
+
 .blink {
     background: green;
     width: 30px;
