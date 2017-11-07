@@ -39,10 +39,10 @@ function toggleSignIn() {
           alert(errorMessage);
         }
         console.log(error);
-        document.getElementById('quickstart-sign-in').disabled = false;
+        document.getElementById('sign-in').disabled = false;
       });
     }
-    document.getElementById('quickstart-sign-in').disabled = true;
+    document.getElementById('sign-in').disabled = true;
   }
   
   function handleSignUp() {
@@ -69,31 +69,7 @@ function toggleSignIn() {
     });
   }
 
-  /**
-   * Sends an email verification to the user.
-   */
-  function sendEmailVerification() {
-    firebase.auth().currentUser.sendEmailVerification().then(function() {
-      alert('Email Verification Sent!');
-    });
-  }
-
-  function sendPasswordReset() {
-    var email = document.getElementById('email').value;
-    firebase.auth().sendPasswordResetEmail(email).then(function() {
-      alert('Password Reset Email Sent!');
-    }).catch(function(error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      if (errorCode == 'auth/invalid-email') {
-        alert(errorMessage);
-      } else if (errorCode == 'auth/user-not-found') {
-        alert(errorMessage);
-      }
-      console.log(error);
-    });
-  }
-
+  
   /**
    * initApp handles setting up UI event listeners and registering Firebase auth listeners:
    *  - firebase.auth().onAuthStateChanged: This listener is called when the user is signed in or
@@ -102,7 +78,7 @@ function toggleSignIn() {
   function initApp() {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        
+        document.getElementById('login').classList.add("hidden");
         document.getElementById('status').classList.remove("hidden");  
         var displayName = user.displayName;
         var email = user.email;
@@ -137,17 +113,15 @@ function toggleSignIn() {
         function startGame() {
           document.getElementById('main').classList.remove("hidden"); 
           document.querySelector('.spinner').classList.add("hidden");
+          document.querySelector('#status').classList.add("hidden");
           civ();
         }
  
-       
-        
       } else {
+        // bruker må logge inn eller registrere seg
         document.getElementById('login').classList.remove("hidden");
-        document.getElementById('sign-in-status').textContent = 'Signed out';
         document.getElementById('sign-in').textContent = 'Sign in';
-        document.getElementById('account-details').textContent = 'null';
-      
+        document.querySelector('#status').classList.add("hidden");
       }
     
       document.getElementById('sign-in').disabled = false;
