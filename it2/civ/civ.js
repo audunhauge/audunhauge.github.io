@@ -106,33 +106,58 @@ function civ() {
     function move(e) {
         if (wait) return;
         let dx = 0, dy = 0;
+        let nx, ny;
         wait = true;
         switch (e.keyCode) {
             case 38:  // opp
-                py = (py + H - 1) % H;
-                dx = hexW / 2; dy = hexD;
+                ny = (py + H - 1 + 4) % H;
+                nx = (px + W - 0 + 8) % W;
+                if (brett[nx][ny] !== SEA) {
+                    py = (py + H - 1) % H;
+                    dx = hexW / 2; dy = hexD;
+                }
                 break;
             case 40: // ned
-                py = (py + 1) % H;
-                dx = -hexW / 2; dy = -hexD;
+                ny = (py + H + 1 + 4) % H;
+                nx = (px + W - 0 + 8) % W;
+                if (brett[nx][ny] !== SEA) {
+                    py = (py + 1) % H;
+                    dx = -hexW / 2; dy = -hexD;
+                }
                 break;
             case 37:  // venstre
-                px = (px + W - 1) % W;
-                dx = hexW; dy = 0;
+                ny = (py + H + 0 + 4) % H;
+                nx = (px + W - 1 + 8) % W;
+                if (brett[nx][ny] !== SEA) {
+                    px = (px + W - 1) % W;
+                    dx = hexW; dy = 0;
+                }
                 break;
             case 39:   // høyre
-                px = (px + 1) % W;
-                dx = -hexW; dy = 0;
+                ny = (py + H + 0 + 4) % H;
+                nx = (px + W + 1 + 8) % W;
+                if (brett[nx][ny] !== SEA) {
+                    px = (px + 1) % W;
+                    dx = -hexW; dy = 0;
+                }
                 break;
             case 65:  // a - ned til venstre
-                px = (px + W - 1) % W;
-                py = (py + 1) % H;
-                dx = 50; dy = -85;
+                ny = (py + H + 1 + 4) % H;
+                nx = (px + W - 1 + 8) % W;
+                if (brett[nx][ny] !== SEA) {
+                    px = (px + W - 1) % W;
+                    py = (py + 1) % H;
+                    dx = 50; dy = -85;
+                }
                 break;
             case 83:  // s - opp til høyre
-                px = (px + 1) % W;
-                py = (py + H - 1) % H;
-                dx = -50; dy = 85;
+                ny = (py + H - 1 + 4) % H;
+                nx = (px + W + 1 + 8) % W;
+                if (brett[nx][ny] !== SEA) {
+                    px = (px + 1) % W;
+                    py = (py + H - 1) % H;
+                    dx = -50; dy = 85;
+                }
                 break;
             default:
                 wait = false;
