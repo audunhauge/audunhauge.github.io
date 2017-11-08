@@ -17,6 +17,10 @@
   
 }
 
+#minimap {
+    border:solid green 1px;
+}
+
 div.hidden {
     display: none;
 }
@@ -75,6 +79,12 @@ div.spinner div {
     background-position-x: -4px;
     background-position-y: -4px;
 } 
+
+.hex.plain {
+    background-position-x: 52px;
+    background-position-y: -91px;
+} 
+  
   
 .hex.sea {
     background-position-x: 578px;

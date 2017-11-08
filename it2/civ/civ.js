@@ -3,36 +3,35 @@
 function civ() {
     let divMain = document.getElementById("main");
     let divBoard = document.getElementById("board");
-    let terrain = "sea,grass,swamp,forest,hill,mountain,desert".split(",");
+    let ctx = document.getElementById("minimap").getContext("2d");
+    let terrain = "sea,grass,plain,swamp,forest,hill,mountain,desert".split(",");
+    let colors = "blue,green,yellow,sandybrown,teal,olive,darkgray,orange".split(",");
 
 
 
-    const W = 50;   // antall brikker i bredden
-    const H = 30;    // antall brikker i høyden
+    const W = 150;   // antall brikker i bredden
+    const H = 90;    // antall brikker i høyden
     const HexH = 115;  // høde bredde på hex-tile
     const hexW = 100;
     const hexD = 115 * 17 / 23;  // forskyvning i høyde mellom rader
 
-    let brett = [];
+    let brett;
     let board = [];
-    let px = 30;
-    let py = 30;
-    /*
-    for (let i = 0; i < W; i++) {
-        brett[i] = [];
-        for (let j = 0; j < H; j++) {
-            let type;
-            if (i === 0 || i + 1 === W || j === 0 || j + 1 === W) {
-                type = terrain.length - 1;
-            } else {
-                type = Math.floor(Math.random() * (terrain.length - 1));
-            }
-            brett[i][j] = type;
-        }
-    }
-    */
+    let islands;
 
-    brett = build(W,H);
+
+    [brett, islands] = build(W, H);
+
+    myland = islands[0];
+    let t;
+    let px = myland.x;
+    let py = myland.y;
+    do {
+        px++;
+        t = brett[px][py]
+    } while (t === MOUNTAIN || t === SEA);
+    px = (px + W - 8) % W;
+    py = (py + H - 4) % H;
 
     for (let i = 0; i < 17; i++) {
         board[i] = [];
@@ -48,6 +47,8 @@ function civ() {
 
 
 
+
+
     function render(px, py) {
         for (let i = 0; i < 17; i++) {
             for (let j = 0; j < 9; j++) {
@@ -56,7 +57,19 @@ function civ() {
                 t.className = "hex " + terrain[tile];
             }
         }
+        minimap();
+        ctx.strokeStyle = "white";
+        ctx.strokeRect((px + 6) * 4 + 4 * (py / 2), (py + 1) * 4, 28, 28);
+    }
 
+    function minimap() {
+        brett.forEach((e, x) => e.forEach((e, y) => {
+            let px = (x + Math.floor(y / 2)) % W;
+            let py = y;
+            let color = colors[brett[x][y]];
+            ctx.fillStyle = color;
+            ctx.fillRect(px * 4, py * 4, 4, 4);
+        }));
     }
 
     render(px, py);
