@@ -11,10 +11,26 @@
        50% 100%, 
        0% 75%, 
        0 23%);
-  color:blue;
-  text-align: center;
+}
 
-  
+
+div.unit {
+    position:absolute;
+    background-image: url(units.png);   
+    background-size: 911px; 
+    width:100px;
+    height: 115px; 
+    clip-path: polygon(50% 0%, 
+    100% 25%, 
+    100% 75%, 
+    50% 100%, 
+    0% 75%, 
+    0 23%);
+}
+
+div.unit.setler {
+    background-position-x: -298px;
+    background-position-y: -604px;  
 }
 
 #minimap {

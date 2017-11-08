@@ -18,6 +18,9 @@ function civ() {
     let brett;
     let board = [];
     let islands;
+    let units = [];
+    // fetch uits from firebase
+
 
 
     [brett, islands] = build(W, H);
@@ -33,6 +36,9 @@ function civ() {
     px = (px + W - 8) % W;
     py = (py + H - 4) % H;
 
+    // just a test to see if we can render a unit
+    units.push({ x: px, y: py, type: "setler" });
+
     for (let i = 0; i < 17; i++) {
         board[i] = [];
         for (let j = 0; j < 9; j++) {
@@ -44,6 +50,12 @@ function civ() {
             board[i][j] = t;
         }
     }
+
+    let u = document.createElement('div');
+    u.className = "unit setler";
+    u.style.top = (-hexD + 4 * hexD) + "px";
+    u.style.left = (-hexW * 7 + 8 * hexW + hexW * 4 / 2) + "px";
+    divMain.appendChild(u);
 
 
 
@@ -57,9 +69,21 @@ function civ() {
                 t.className = "hex " + terrain[tile];
             }
         }
+        renderUnits();
         minimap();
+        drawFrame();
+
+    }
+
+    function renderUnits() {
+        units.forEach(e => {
+
+        });
+    }
+
+    function drawFrame() {
         ctx.strokeStyle = "white";
-        ctx.strokeRect((px + 6) * 4 + 4 * (py / 2), (py + 1) * 4, 28, 28);
+        ctx.strokeRect(((px + 6) * 4 + 4 * (py / 2)) % (W * 4), ((py + 1) * 4) % (H * 4), 28, 28);
     }
 
     function minimap() {
@@ -121,7 +145,7 @@ function civ() {
                 { left: "0px", top: "0px" },
                 { left: dx + "px", top: dy + "px" }
             ], {
-                duration: 250,
+                duration: 180,
             }
         )
 
