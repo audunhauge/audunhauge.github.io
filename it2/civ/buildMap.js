@@ -8,6 +8,9 @@ const FOREST = 4;
 const HILL = 5;
 const MOUNTAIN = 6;
 
+const FREQ = "6665555544444443322222222111111111111";
+// we pick from this list to choose terrain
+
 /**
  * lager et kart for civ
  * prøver å lage øyer med hav rundt
@@ -22,28 +25,30 @@ function build(w, h) {
 
     // generate random number of islands
     // x,y is pos, r is radius
+    const LAND = 4;   //  1 = small islands  50 = large islands
+    const MINIMUM = 1;  // 1 = few islands 10 = many islands
     let size = w * w * h * h;
     let logSize = Math.floor(Math.log(size));
-    let islandCount = roll(Math.floor(logSize / 3 + 1), logSize + 1);
+    let islandCount = MINIMUM + roll(Math.floor(logSize / 3 + 1), logSize + 1);
     let islands = Array(islandCount).fill(0);
-    let maxR = Math.min(w / 3, logSize + 2);
+    let maxR = Math.min(w / 4, logSize + 2);
     let minR = Math.floor(logSize / 5) + 1;
     // space the islands
-    let m = Math.min(w,h);
+    let m = Math.min(w, h);
     let sqr = Math.floor(m / (Math.sqrt(islandCount) + 1));
-    let dx = 0;
-    let dy = sqr;
+    let dx = -Math.floor(sqr/2);
+    let dy = Math.floor(sqr/2);
 
-    islands = islands.map((e) => {  
-        dx += sqr; 
+    islands = islands.map((e) => {
+        dx += sqr;
         if (dx > m) {
             dx = sqr;
-            dy += sqr;  
+            dy += sqr;
             if (dy > m) {
                 dy = sqr;
             }
         }
-        return { x: dx + roll(1,5), y: dy + roll(1,5), r: roll(minR, maxR) }  
+        return { x: dx + roll(1, 5), y: dy + roll(1, 5), r: roll(minR, maxR) }
     });
 
     // remove islands of the map
@@ -54,7 +59,7 @@ function build(w, h) {
 
     // stand on each island and throw stones
     islands.forEach(e => {
-        let iter = Math.min(90, e.r * e.r);
+        let iter = Math.min(LAND * logSize, e.r * e.r);
         for (let i = 0; i < iter; i++) {
             let p = throwStone(e);
             let x = (p.x + w) % w;
@@ -65,7 +70,9 @@ function build(w, h) {
             if (theMap[x][y] === SEA) {
                 // close to island === mountain
                 // far away === grass
-                let t = 3 + Math.floor(Math.random() * 9 * (1 - p.r / e.r));
+                let pos = Math.random()*FREQ.length;
+                let t = +FREQ.charAt(pos); 
+                //let t = 3 + Math.floor(Math.random() * 9 * (1 - p.r / e.r));
                 theMap[x][y] = Math.min(MOUNTAIN, t);
             }
         }
@@ -79,7 +86,7 @@ function build(w, h) {
             let adjacent = getNeighbours(x, y);
             let m = Math.max(...adjacent);
             if (adjacent.length > 1 && m > GRASS) {
-                theMap[x][y] = m - roll(1, m - 1);
+                theMap[x][y] = m - 1; // roll(1, m - 1);
             }
         }
     }))

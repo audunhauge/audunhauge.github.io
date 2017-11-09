@@ -3,14 +3,15 @@
 function civ() {
     let divMain = document.getElementById("main");
     let divBoard = document.getElementById("board");
-    let ctx = document.getElementById("minimap").getContext("2d");
+    let cvsMiniMap = document.getElementById("minimap");
+    let ctx = cvsMiniMap.getContext("2d");
     let terrain = "sea,grass,plain,swamp,forest,hill,mountain,desert".split(",");
     let colors = "blue,green,yellow,sandybrown,teal,olive,darkgray,orange".split(",");
 
 
 
-    const W = 55;   // antall brikker i bredden
-    const H = 55;    // antall brikker i høyden
+    const W = 125;   // antall brikker i bredden
+    const H = 125;    // antall brikker i høyden
     const HexH = 115;  // høde bredde på hex-tile
     const hexW = 100;
     const hexD = 115 * 17 / 23;  // forskyvning i høyde mellom rader
@@ -21,18 +22,26 @@ function civ() {
     let units = [];
     // fetch uits from firebase
 
+    cvsMiniMap.width = W * 4;
+    cvsMiniMap.height = H * 4;
+
 
 
     [brett, islands] = build(W, H);
 
+    // finner en startposisjon for min spiller
+    // dette må endres når vi skifter til multiplayer
     myland = islands[0];
     let t;
     let px = myland.x;
     let py = myland.y;
+    // bør ha en sperre her så vi ikke kommer i uendelig løkke
     do {
-        px++;
+        px = (px + 1) % W;
         t = brett[px][py]
     } while (t === MOUNTAIN || t === SEA);
+
+
     px = (px + W - 8) % W;
     py = (py + H - 4) % H;
 

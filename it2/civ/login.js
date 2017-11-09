@@ -1,6 +1,7 @@
 
 function setup() {
 
+    document.getElementById("board").innerHTML = "Loading ...";
     var config = {
         apiKey: "AIzaSyBsSmSbBvjGwUKapak-USd6oUBnkoVE0ls",
         authDomain: "civz-7871d.firebaseapp.com",
