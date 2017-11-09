@@ -118,6 +118,7 @@ function civ() {
         let nx, ny;
         wait = true;
         switch (e.keyCode) {
+            case 87:
             case 38:  // opp
                 ny = (py + H - 1 + 4) % H;
                 nx = (px + W - 0 + 8) % W;
@@ -126,6 +127,7 @@ function civ() {
                     dx = hexW / 2; dy = hexD;
                 }
                 break;
+            case 88:
             case 40: // ned
                 ny = (py + H + 1 + 4) % H;
                 nx = (px + W - 0 + 8) % W;
@@ -134,6 +136,7 @@ function civ() {
                     dx = -hexW / 2; dy = -hexD;
                 }
                 break;
+            case 65:
             case 37:  // venstre
                 ny = (py + H + 0 + 4) % H;
                 nx = (px + W - 1 + 8) % W;
@@ -142,6 +145,7 @@ function civ() {
                     dx = hexW; dy = 0;
                 }
                 break;
+            case 68:
             case 39:   // høyre
                 ny = (py + H + 0 + 4) % H;
                 nx = (px + W + 1 + 8) % W;
@@ -150,7 +154,7 @@ function civ() {
                     dx = -hexW; dy = 0;
                 }
                 break;
-            case 65:  // a - ned til venstre
+            case 90:  // z - ned til venstre
                 ny = (py + H + 1 + 4) % H;
                 nx = (px + W - 1 + 8) % W;
                 if (brett[nx][ny] !== SEA) {
@@ -159,7 +163,7 @@ function civ() {
                     dx = 50; dy = -85;
                 }
                 break;
-            case 83:  // s - opp til høyre
+            case 69:  // e - opp til høyre
                 ny = (py + H - 1 + 4) % H;
                 nx = (px + W + 1 + 8) % W;
                 if (brett[nx][ny] !== SEA) {
