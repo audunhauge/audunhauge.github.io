@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="civ.css">
+    <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
+    <script src="login.js"></script>
+    <script src="buildMap.js"></script>
+    <script src="civ.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Civz</title>
+
+
+</head>
+
+<body>
+    <div id="login" class="hidden">
+        <p>Enter an email and password below and either sign in to an existing account or sign up</p>
+
+        <input type="text" id="email" name="email" placeholder="Email">
+        <input type="password" id="password" name="password" placeholder="Password">
+
+        <button id="sign-in" name="signin">Sign In</button>
+
+        <button id="sign-up" name="signup">Sign Up</button>
+
+
+        <!-- Container where we'll display the user details -->
+    </div>
+
+    <div id="status" class="hidden">
+
+        <button id="signout" name="signout">Sign out</button>
+        <button id="start">Start game</button>
+        <div id="games">
+
+        </div>
+        <div id="nations">
+
+        </div>
+    </div>
+
+    <div id="main" class="hidden">
+        <div id="board">
+
+        </div>
+        <div id="frame"></div>
+    </div>
+
+    <canvas id="minimap" class="idden" width="650" height="400">
+
+    </canvas>
+
+    <div class="spinner">
+        <div></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setup();
+        });
+    </script>
+</body>
+
+</html>

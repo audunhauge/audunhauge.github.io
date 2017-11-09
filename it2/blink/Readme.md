@@ -11,14 +11,14 @@
 * touch .flowconfig
 * flow init
 
-I vs-code må du gjøre fÃ¸lgende:
+I vs-code må du gjøre følgende:
    code -> preferences -> settings
       "javascript.validate.enable": false,
      "flow.path" : "/usr/local/bin/flow"
 (gitt at   which flow   sier /usr/local ... )
  
-Du mÃ¥ ogsÃ¥ installere flow som en extension
-  sÃ¸k pÃ¥ vscode-flow og installer
+Du må også installere flow som en extension
+  søk på vscode-flow og installer
  
-Du mÃ¥ ogsÃ¥ ofte ta omstart pÃ¥ vscode
-og slÃ¥ av andre lintere (slik som jshint)
+Du må også ofte ta omstart på vscode
+og slå av andre lintere (slik som jshint)

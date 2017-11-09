@@ -1,0 +1,136 @@
+.hex {
+  position:absolute;
+  background-image: url(hex.png);   
+  background-size: 316px; 
+  width:100px;
+  height: 115px;
+  background-color: teal; 
+  clip-path: polygon(50% 0%, 
+       100% 25%, 
+       100% 75%, 
+       50% 100%, 
+       0% 75%, 
+       0 23%);
+}
+
+
+div.unit {
+    position:absolute;
+    background-image: url(units.png);   
+    background-size: 911px; 
+    width:100px;
+    height: 115px; 
+    clip-path: polygon(50% 0%, 
+    100% 25%, 
+    100% 75%, 
+    50% 100%, 
+    0% 75%, 
+    0 23%);
+}
+
+div.unit.setler {
+    background-position-x: -298px;
+    background-position-y: -604px;  
+}
+
+#minimap {
+    border:solid green 1px;
+}
+
+div.hidden {
+    display: none;
+}
+
+#main {
+    position: relative;
+    width:693px;
+    height: 622px;
+    border:solid gray 1px;
+    overflow: hidden;
+}
+
+#frame {
+    position: absolute;
+    left:0;
+    top:0;
+    width:603px;
+    height: 532px;
+    border: solid 45px gray;
+}
+
+
+#board {
+    position: absolute;
+    top:0;
+    left:0;
+    width:692px;
+    height: 622px;
+    border:solid gray 1px;
+}
+
+
+
+@keyframes walk {
+    0% { left: 500px; }
+    100% { left:1000px;}
+}
+
+div.spinner div {
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: solid gray 5px;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    animation: spinner 800ms linear infinite;
+}
+  
+@keyframes spinner {
+    0% { transform: rotate(0deg); }
+    100% {transform: rotate(360deg); }
+}
+
+.hex.grass {
+    background-position-x: -4px;
+    background-position-y: -4px;
+} 
+
+.hex.plain {
+    background-position-x: 52px;
+    background-position-y: -91px;
+} 
+  
+  
+.hex.sea {
+    background-position-x: 578px;
+    background-position-y: -398px;
+}
+
+.hex.hill {
+    background-position-x: -528px;
+    background-position-y: -6px;
+} 
+  
+.hex.swamp {
+    background-position-x: 522px;
+    background-position-y: -5px;
+}
+.hex.mountain {
+    background-position-x: -475px;
+    background-position-y: -396px;
+} 
+  
+.hex.forest {
+    background-position-x:  205px;
+    background-position-y: -793px;
+}
+.hex.desert {
+    background-position-x: -529px;
+    background-position-y: -490px;
+} 
+  
+.hex.snow {
+    background-position-x: 629px;
+    background-position-y: -489px;
+}
