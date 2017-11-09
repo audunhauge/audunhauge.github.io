@@ -9,8 +9,8 @@ function civ() {
 
 
 
-    const W = 150;   // antall brikker i bredden
-    const H = 90;    // antall brikker i høyden
+    const W = 55;   // antall brikker i bredden
+    const H = 55;    // antall brikker i høyden
     const HexH = 115;  // høde bredde på hex-tile
     const hexW = 100;
     const hexD = 115 * 17 / 23;  // forskyvning i høyde mellom rader

@@ -22,11 +22,32 @@ function build(w, h) {
 
     // generate random number of islands
     // x,y is pos, r is radius
-    let islandCount = roll(5, 18);
+    let size = w * w * h * h;
+    let logSize = Math.floor(Math.log(size));
+    let islandCount = roll(Math.floor(logSize / 3 + 1), logSize + 1);
     let islands = Array(islandCount).fill(0);
-    let maxR = Math.min(w, h) / 2;
-    let minR = Math.max(4, maxR - islandCount);
-    islands = islands.map((e) => ({ x: roll(1, w - 1), y: roll(1, h - 1), r: roll(minR, maxR) }));
+    let maxR = Math.min(w / 3, logSize + 2);
+    let minR = Math.floor(logSize / 5) + 1;
+    // space the islands
+    let m = Math.min(w,h);
+    let sqr = Math.floor(m / (Math.sqrt(islandCount) + 1));
+    let dx = 0;
+    let dy = sqr;
+
+    islands = islands.map((e) => {  
+        dx += sqr; 
+        if (dx > m) {
+            dx = sqr;
+            dy += sqr;  
+            if (dy > m) {
+                dy = sqr;
+            }
+        }
+        return { x: dx + roll(1,5), y: dy + roll(1,5), r: roll(minR, maxR) }  
+    });
+
+    // remove islands of the map
+    islands = islands.filter(e => e.x < w && e.y < h);
 
     // place initial mountain at island seed
     islands.forEach(e => { theMap[e.x][e.y] = MOUNTAIN })
@@ -64,7 +85,7 @@ function build(w, h) {
     }))
 
 
-    if (islandCount < 12) {
+    if (islandCount < 12 && logSize > 8) {
         // do it twice to grow some more land
         // create land around high ground (mountain -> hills -> forrest -> swamp -> grass)
         theMap.forEach((e, x) => e.forEach((e, y) => {
