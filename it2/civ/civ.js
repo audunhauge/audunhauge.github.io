@@ -9,8 +9,8 @@ function civ() {
 
 
 
-    const W = 55;   // antall brikker i bredden
-    const H = 55;    // antall brikker i høyden
+    const W = 155;   // antall brikker i bredden
+    const H = 155;    // antall brikker i høyden
     const HexH = 115;  // høde bredde på hex-tile
     const hexW = 100;
     const hexD = 115 * 17 / 23;  // forskyvning i høyde mellom rader
@@ -37,7 +37,7 @@ function civ() {
     py = (py + H - 4) % H;
 
     // just a test to see if we can render a unit
-    units.push({ x: px, y: py, type: "setler" });
+    units.push({ x: px, y: py, type: "warrior" });
 
     for (let i = 0; i < 17; i++) {
         board[i] = [];
@@ -52,7 +52,7 @@ function civ() {
     }
 
     let u = document.createElement('div');
-    u.className = "unit setler";
+    u.className = "unit warrior";
     u.style.top = (-hexD + 4 * hexD) + "px";
     u.style.left = (-hexW * 7 + 8 * hexW + hexW * 4 / 2) + "px";
     divMain.appendChild(u);
@@ -112,7 +112,9 @@ function civ() {
             case 38:  // opp
                 ny = (py + H - 1 + 4) % H;
                 nx = (px + W - 0 + 8) % W;
-                if (brett[nx][ny] !== SEA) {
+                if (brett[nx][ny] !== SEA &&
+                    brett[nx][ny] !== MOUNTAIN
+                    ) {
                     py = (py + H - 1) % H;
                     dx = hexW / 2; dy = hexD;
                 }
@@ -120,7 +122,9 @@ function civ() {
             case 40: // ned
                 ny = (py + H + 1 + 4) % H;
                 nx = (px + W - 0 + 8) % W;
-                if (brett[nx][ny] !== SEA) {
+                if (brett[nx][ny] !== SEA &&
+                    brett[nx][ny] !== MOUNTAIN
+                    ) {
                     py = (py + 1) % H;
                     dx = -hexW / 2; dy = -hexD;
                 }
@@ -128,7 +132,9 @@ function civ() {
             case 37:  // venstre
                 ny = (py + H + 0 + 4) % H;
                 nx = (px + W - 1 + 8) % W;
-                if (brett[nx][ny] !== SEA) {
+                if (brett[nx][ny] !== SEA &&
+                    brett[nx][ny] !== MOUNTAIN
+                    ) {
                     px = (px + W - 1) % W;
                     dx = hexW; dy = 0;
                 }
@@ -136,7 +142,9 @@ function civ() {
             case 39:   // høyre
                 ny = (py + H + 0 + 4) % H;
                 nx = (px + W + 1 + 8) % W;
-                if (brett[nx][ny] !== SEA) {
+                if (brett[nx][ny] !== SEA &&
+                    brett[nx][ny] !== MOUNTAIN
+                    ) {
                     px = (px + 1) % W;
                     dx = -hexW; dy = 0;
                 }
@@ -144,7 +152,9 @@ function civ() {
             case 65:  // a - ned til venstre
                 ny = (py + H + 1 + 4) % H;
                 nx = (px + W - 1 + 8) % W;
-                if (brett[nx][ny] !== SEA) {
+                if (brett[nx][ny] !== SEA &&
+                    brett[nx][ny] !== MOUNTAIN
+                    ) {
                     px = (px + W - 1) % W;
                     py = (py + 1) % H;
                     dx = 50; dy = -85;
@@ -153,7 +163,9 @@ function civ() {
             case 83:  // s - opp til høyre
                 ny = (py + H - 1 + 4) % H;
                 nx = (px + W + 1 + 8) % W;
-                if (brett[nx][ny] !== SEA) {
+                if (brett[nx][ny] !== SEA &&
+                    brett[nx][ny] !== MOUNTAIN
+                    ) {
                     px = (px + 1) % W;
                     py = (py + H - 1) % H;
                     dx = -50; dy = 85;

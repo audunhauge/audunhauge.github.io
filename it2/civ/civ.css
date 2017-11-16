@@ -28,6 +28,11 @@ div.unit {
     0 23%);
 }
 
+div.unit.warrior {
+    background-position-x: 0px;
+    background-position-y: -204px;  
+}
+
 div.unit.setler {
     background-position-x: -298px;
     background-position-y: -604px;  
