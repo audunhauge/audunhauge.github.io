@@ -3,14 +3,15 @@
 function civ() {
     let divMain = document.getElementById("main");
     let divBoard = document.getElementById("board");
-    let ctx = document.getElementById("minimap").getContext("2d");
+    let cvsMiniMap = document.getElementById("minimap");
+    let ctx = cvsMiniMap.getContext("2d");
     let terrain = "sea,grass,plain,swamp,forest,hill,mountain,desert".split(",");
     let colors = "blue,green,yellow,sandybrown,teal,olive,darkgray,orange".split(",");
 
 
 
-    const W = 155;   // antall brikker i bredden
-    const H = 155;    // antall brikker i høyden
+    const W = 125;   // antall brikker i bredden
+    const H = 125;    // antall brikker i høyden
     const HexH = 115;  // høde bredde på hex-tile
     const hexW = 100;
     const hexD = 115 * 17 / 23;  // forskyvning i høyde mellom rader
@@ -21,18 +22,26 @@ function civ() {
     let units = [];
     // fetch uits from firebase
 
+    cvsMiniMap.width = W * 4;
+    cvsMiniMap.height = H * 4;
+
 
 
     [brett, islands] = build(W, H);
 
+    // finner en startposisjon for min spiller
+    // dette må endres når vi skifter til multiplayer
     myland = islands[0];
     let t;
     let px = myland.x;
     let py = myland.y;
+    // bør ha en sperre her så vi ikke kommer i uendelig løkke
     do {
-        px++;
+        px = (px + 1) % W;
         t = brett[px][py]
     } while (t === MOUNTAIN || t === SEA);
+
+
     px = (px + W - 8) % W;
     py = (py + H - 4) % H;
 
@@ -109,6 +118,7 @@ function civ() {
         let nx, ny;
         wait = true;
         switch (e.keyCode) {
+            case 87:
             case 38:  // opp
                 ny = (py + H - 1 + 4) % H;
                 nx = (px + W - 0 + 8) % W;
@@ -119,6 +129,7 @@ function civ() {
                     dx = hexW / 2; dy = hexD;
                 }
                 break;
+            case 88:
             case 40: // ned
                 ny = (py + H + 1 + 4) % H;
                 nx = (px + W - 0 + 8) % W;
@@ -129,6 +140,7 @@ function civ() {
                     dx = -hexW / 2; dy = -hexD;
                 }
                 break;
+            case 65:
             case 37:  // venstre
                 ny = (py + H + 0 + 4) % H;
                 nx = (px + W - 1 + 8) % W;
@@ -139,6 +151,7 @@ function civ() {
                     dx = hexW; dy = 0;
                 }
                 break;
+            case 68:
             case 39:   // høyre
                 ny = (py + H + 0 + 4) % H;
                 nx = (px + W + 1 + 8) % W;
@@ -149,7 +162,7 @@ function civ() {
                     dx = -hexW; dy = 0;
                 }
                 break;
-            case 65:  // a - ned til venstre
+            case 90:  // z - ned til venstre
                 ny = (py + H + 1 + 4) % H;
                 nx = (px + W - 1 + 8) % W;
                 if (brett[nx][ny] !== SEA &&
@@ -160,7 +173,7 @@ function civ() {
                     dx = 50; dy = -85;
                 }
                 break;
-            case 83:  // s - opp til høyre
+            case 69:  // e - opp til høyre
                 ny = (py + H - 1 + 4) % H;
                 nx = (px + W + 1 + 8) % W;
                 if (brett[nx][ny] !== SEA &&
