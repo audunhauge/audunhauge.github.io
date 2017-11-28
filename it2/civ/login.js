@@ -108,6 +108,10 @@ function toggleSignIn() {
         ref.once("value").then(function (snapshot) {
             let nations = snapshot.val(); 
             let names = Object.keys(nations);
+            names.forEach( n => {
+              let nation = new Nation(n, nations[n]);
+              
+            })
             document.getElementById('nations').innerHTML = names;
         });
         

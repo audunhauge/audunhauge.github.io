@@ -13,7 +13,7 @@
  * p.overlap(q) er sann dersom rektangel P(x,y,w,h) overlapper Q(x,y,w,h)
  */
 class Sprite {
-  div: any;
+  div:   any;
   x: number;
   y: number;
   w: number;
