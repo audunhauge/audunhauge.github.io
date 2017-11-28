@@ -7,9 +7,9 @@ function setup() {
         projectId: "civz-7871d",
         storageBucket: "civz-7871d.appspot.com",
         messagingSenderId: "324948067446"
-    };
+      };
     firebase.initializeApp(config);
-    let divListe = document.getElementById("liste");
+    let spanKunde = document.getElementById("kundevelger");
     let divDyr = document.getElementById("dyr");
 
     let ref = firebase.database().ref("kunde");
@@ -18,7 +18,7 @@ function setup() {
         let kundene = snapshot.val();
         if (kundene) {
             let dropBox = makeDrop(kundene);
-            divListe.innerHTML = dropBox;
+            spanKunde.innerHTML = dropBox;
         }
     });
 
