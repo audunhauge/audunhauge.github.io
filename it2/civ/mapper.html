@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="civ.css">
+    <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
+    <script src="nations.js"></script>
+    <script src="login.js"></script>
+    <script src="seedrnd.js"></script>
+    <script src="buildMap.js"></script>
+    <script src="mapper.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Civz</title>
+
+
+</head>
+
+<body>
+    <div id="login" class="hidden">
+        <p>Enter an email and password below and either sign in to an existing account or sign up</p>
+
+        <input type="text" id="email" name="email" placeholder="Email">
+        <input type="password" id="password" name="password" placeholder="Password">
+
+        <button id="sign-in" name="signin">Sign In</button>
+
+        <button id="sign-up" name="signup">Sign Up</button>
+
+
+        <!-- Container where we'll display the user details -->
+    </div>
+
+    <div id="status" class="hidden">
+
+        <button id="start">Make map</button>
+        <button id="rnd">New random number</button>
+        <br>Width <input type="number" id="width" value="150">
+        <br>Height <input type="number" id="height" value="150">
+        <br>Landmass (1=small 50=large islands)<input type="number" id="land" value="10">
+        <br>Number ~ of islands <input type="number" id="size" value="2">
+        <p>
+           Starting seed for this map <input id="seed" value="">
+           Leave empty to get random map
+        </p>
+        <!--  Disse beholdes slik at login.js ikke blir lei seg
+          Kan dermed bruke samme kode som spillet - skjuler bare ting
+          som ikke trengs i map-editoren
+        -->
+        <div id="games" class="hidden">
+            <button id="signout" name="signout">Sign out</button>
+        </div>
+        <div id="nations" class="hidden">
+
+        </div>
+    </div>
+
+    <div id="main" class="hidden">
+        <div id="board">
+
+        </div>
+        <div id="frame"></div>
+    </div>
+
+    <canvas id="minimap" class="idden" width="650" height="400">
+
+    </canvas>
+
+    <div class="spinner hidden">
+        <div></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setup();
+        });
+    </script>
+</body>
+
+</html>

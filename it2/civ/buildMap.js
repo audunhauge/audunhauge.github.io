@@ -8,8 +8,7 @@ const FOREST = 4;
 const HILL = 5;
 const MOUNTAIN = 6;
 
-const FREQ = "6665555544444443322222222111111111111";
-// we pick from this list to choose terrain
+
 
 /**
  * lager et kart for civ
@@ -18,15 +17,16 @@ const FREQ = "6665555544444443322222222111111111111";
  * @param {int} w 
  * @param {int} h 
  */
-function build(w, h) {
+function build(w, h, _LAND=4, _MINIMUM = 1, _FREQ = "6665555544444443322222222111111111111") {
     // fill map with ocean/sea
     let theMap = Array(w).fill(0);
     theMap = theMap.map(e => Array(h).fill(0));
 
     // generate random number of islands
     // x,y is pos, r is radius
-    const LAND = 4;   //  1 = small islands  50 = large islands
-    const MINIMUM = 1;  // 1 = few islands 10 = many islands
+    const LAND = _LAND;   //  1 = small islands  50 = large islands
+    const MINIMUM = _MINIMUM;  // 1 = few islands 10 = many islands
+    const FREQ = _FREQ;  // we pick from this list to choose terrain
     let size = w * w * h * h;
     let logSize = Math.floor(Math.log(size));
     let islandCount = MINIMUM + roll(Math.floor(logSize / 3 + 1), logSize + 1);
@@ -34,18 +34,18 @@ function build(w, h) {
     let maxR = Math.min(w / 4, logSize + 2);
     let minR = Math.floor(logSize / 5) + 1;
     // space the islands
-    let m = Math.min(w, h);
+    let m = Math.floor((w+h)/2);
     let sqr = Math.floor(m / (Math.sqrt(islandCount) + 1));
     let dx = -Math.floor(sqr/2);
     let dy = Math.floor(sqr/2);
 
     islands = islands.map((e) => {
         dx += sqr;
-        if (dx > m) {
+        if (dx > w) {
             dx = sqr;
             dy += sqr;
-            if (dy > m) {
-                dy = sqr;
+            if (dy > h) {
+                dy = h - math.floor(sqr/2);
             }
         }
         return { x: dx + roll(1, 5), y: dy + roll(1, 5), r: roll(minR, maxR) }

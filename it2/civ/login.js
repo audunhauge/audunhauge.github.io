@@ -101,6 +101,7 @@ function toggleSignIn() {
             let gamelist = snapshot.val(); 
             let names = Object.keys(gamelist);
             document.getElementById('games').innerHTML = names;
+            document.querySelector('.spinner').classList.add("hidden");
         });
 
         // list of nations to play
@@ -118,7 +119,6 @@ function toggleSignIn() {
         // start the game
         function startGame() {
           document.getElementById('main').classList.remove("hidden"); 
-          document.querySelector('.spinner').classList.add("hidden");
           document.querySelector('#status').classList.add("hidden");
           civ();
         }
