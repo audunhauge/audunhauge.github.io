@@ -1,4 +1,5 @@
 
+
 function setup() {
 
     document.getElementById("board").innerHTML = "Loading ...";
