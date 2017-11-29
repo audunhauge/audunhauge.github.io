@@ -14,6 +14,17 @@
 }
 
 
+#games div {
+    width: 20em;
+    padding: 1em;
+    margin: 0.5em;
+    color: green;
+    border: solid gray 1px;
+}
+#games div p {
+    color: brown;
+}
+
 div.unit {
     position:absolute;
     background-image: url(units.png);   

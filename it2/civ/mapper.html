@@ -33,18 +33,33 @@
 
     <div id="status" class="hidden">
         <form id="params">
-            <button type="button" id="start">Make map</button>
-            <button type="button" id="rnd">New random number</button>
-            <br>Width
-            <input type="number" id="width" value="150">
-            <br>Height
-            <input type="number" id="height" value="150">
-            <br>Island radius (5=small 50=large islands)
-            <input type="number" id="radius" value="25">
-            <br>Landmass (1=sparse 50=solid islands)
-            <input type="number" id="land" value="10">
-            <br>Number ~ of islands
-            <input type="number" id="size" value="2">
+            <p>
+                <button type="button" id="start">Make map</button>
+                <p>
+                    Save map as
+                    <input id="filename" value="NewWorld">
+                    <button type="button" disabled id="save">Save the World</button>
+                </p>
+            </p>
+            <p>
+                <br>Width
+                <input type="number" id="width" value="150">
+                <br>Height
+                <input type="number" id="height" value="150">
+                <br>Island radius (5=small 50=large islands)
+                <input type="number" id="radius" value="25">
+                <br>Landmass (1=sparse 10=solid islands) (may need larger number if radius is large)
+                <input type="number" id="land" value="10">
+                <br>Number ~ of islands
+                <input type="number" id="size" value="2">
+            </p>
+
+            <p>Tileset to use
+                <br> 0=sea 1=grass 2=plain 3=swamp 4=forest 5=hill 6=mountain
+                <br> alter frequency of a tile to change likelyhood of it being chosen
+                <input id="freq" value="65544333221">
+            </p>
+
             <p>
                 Starting seed for this map
                 <input id="seed" value=""> Leave empty to get random map

@@ -1,4 +1,4 @@
-
+// @flow
 
 function setup() {
 
@@ -95,13 +95,18 @@ function toggleSignIn() {
         
         let database = firebase.database();
 
+        let params = { seed:Math.random() };
+        let gamelist = {};
+
         // list of games to join
         let ref = database.ref("gamelist");
         ref.once("value").then(function (snapshot) {
-            let gamelist = snapshot.val(); 
+            gamelist = snapshot.val(); 
             let names = Object.keys(gamelist);
-            document.getElementById('games').innerHTML = names;
+            let theGames = names.map(g => new Game(g,gamelist[g]));
+            document.getElementById('games').innerHTML = theGames.map(g => g.render()).join("");
             document.querySelector('.spinner').classList.add("hidden");
+            document.getElementById('games').addEventListener("click", useMap);
         });
 
         // list of nations to play
@@ -115,12 +120,21 @@ function toggleSignIn() {
             })
             document.getElementById('nations').innerHTML = names;
         });
+
+        function useMap(e) {
+          let t = e.target;
+          if (t.className === "startgame") {
+            let name = t.id;
+            params = gamelist[name];
+            startGame();
+          }
+        }
         
         // start the game
         function startGame() {
           document.getElementById('main').classList.remove("hidden"); 
           document.querySelector('#status').classList.add("hidden");
-          civ();
+          civ(params);
         }
  
       } else {

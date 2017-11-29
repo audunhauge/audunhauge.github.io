@@ -1,6 +1,6 @@
-// flow
+// @flow
 
-function civ() {
+function civ(params) {
     let divMain = document.getElementById("main");
     let divBoard = document.getElementById("board");
     let cvsMiniMap = document.getElementById("minimap");
@@ -10,8 +10,8 @@ function civ() {
 
 
 
-    const W = 125;   // antall brikker i bredden
-    const H = 125;    // antall brikker i høyden
+    const W = params.wi || 150;   // antall brikker i bredden
+    const H = params.hi || 150;    // antall brikker i høyden
     const HexH = 115;  // høde bredde på hex-tile
     const hexW = 100;
     const hexD = 115 * 17 / 23;  // forskyvning i høyde mellom rader
@@ -25,13 +25,16 @@ function civ() {
     cvsMiniMap.width = W * 4;
     cvsMiniMap.height = H * 4;
 
+    let rr = Math.random;
 
+    Math.seedrandom(params.seed);
 
-    [brett, islands] = build(W, H);
+    [brett, islands] =  build(W, H, params.land, params.size, params.radius, params.freq);
 
     // finner en startposisjon for min spiller
     // dette må endres når vi skifter til multiplayer
-    myland = islands[0];
+    let idx = Math.floor(rr() * islands.length);
+    myland = islands[idx];
     let t;
     let px = myland.x;
     let py = myland.y;
@@ -108,6 +111,17 @@ function civ() {
     render(px, py);
 
     document.addEventListener("keyup", move);
+    document.addEventListener("contextmenu", mouseMove);
+
+
+    function mouseMove(e) {
+        let t = e.target.className;
+        if (t.includes("hex")
+           || t.includes("frame") ) {
+          event.preventDefault();
+        }
+    }
+
 
     let wait = false;
     let facing = "right"
