@@ -17,13 +17,14 @@ const MOUNTAIN = 6;
  * @param {int} w 
  * @param {int} h 
  */
-function build(w, h, _LAND=4, _MINIMUM = 1, _FREQ = "6665555544444443322222222111111111111") {
+function build(w, h, _LAND = 4, _MINIMUM = 1, _RADIUS = 12, _FREQ = "6665555544444443322222222111111111111") {
     // fill map with ocean/sea
     let theMap = Array(w).fill(0);
     theMap = theMap.map(e => Array(h).fill(0));
 
     // generate random number of islands
     // x,y is pos, r is radius
+    const RADIUS = _RADIUS;
     const LAND = _LAND;   //  1 = small islands  50 = large islands
     const MINIMUM = _MINIMUM;  // 1 = few islands 10 = many islands
     const FREQ = _FREQ;  // we pick from this list to choose terrain
@@ -31,13 +32,13 @@ function build(w, h, _LAND=4, _MINIMUM = 1, _FREQ = "666555554444444332222222211
     let logSize = Math.floor(Math.log(size));
     let islandCount = MINIMUM + roll(Math.floor(logSize / 3 + 1), logSize + 1);
     let islands = Array(islandCount).fill(0);
-    let maxR = Math.min(w / 4, logSize + 2);
-    let minR = Math.floor(logSize / 5) + 1;
+    let maxR = RADIUS + roll(3,9);
+    let minR = Math.max(1,RADIUS - roll(3,9));
     // space the islands
-    let m = Math.floor((w+h)/2);
-    let sqr = Math.floor(m / (Math.sqrt(islandCount) + 1));
-    let dx = -Math.floor(sqr/2);
-    let dy = Math.floor(sqr/2);
+    let m = Math.floor((w + h) / 2);
+    let sqr = 3 + Math.floor(m / (Math.sqrt(islandCount)));
+    let dx = -Math.floor(sqr / 1.7);
+    let dy = Math.floor(sqr / 2.2);
 
     islands = islands.map((e) => {
         dx += sqr;
@@ -45,7 +46,7 @@ function build(w, h, _LAND=4, _MINIMUM = 1, _FREQ = "666555554444444332222222211
             dx = sqr;
             dy += sqr;
             if (dy > h) {
-                dy = h - math.floor(sqr/2);
+                dy = h - Math.floor(sqr / 2);
             }
         }
         return { x: dx + roll(1, 5), y: dy + roll(1, 5), r: roll(minR, maxR) }
@@ -70,8 +71,8 @@ function build(w, h, _LAND=4, _MINIMUM = 1, _FREQ = "666555554444444332222222211
             if (theMap[x][y] === SEA) {
                 // close to island === mountain
                 // far away === grass
-                let pos = Math.random()*FREQ.length;
-                let t = +FREQ.charAt(pos); 
+                let pos = Math.random() * FREQ.length;
+                let t = +FREQ.charAt(pos);
                 //let t = 3 + Math.floor(Math.random() * 9 * (1 - p.r / e.r));
                 theMap[x][y] = Math.min(MOUNTAIN, t);
             }

@@ -32,17 +32,24 @@
     </div>
 
     <div id="status" class="hidden">
-
-        <button id="start">Make map</button>
-        <button id="rnd">New random number</button>
-        <br>Width <input type="number" id="width" value="150">
-        <br>Height <input type="number" id="height" value="150">
-        <br>Landmass (1=small 50=large islands)<input type="number" id="land" value="10">
-        <br>Number ~ of islands <input type="number" id="size" value="2">
-        <p>
-           Starting seed for this map <input id="seed" value="">
-           Leave empty to get random map
-        </p>
+        <form id="params">
+            <button type="button" id="start">Make map</button>
+            <button type="button" id="rnd">New random number</button>
+            <br>Width
+            <input type="number" id="width" value="150">
+            <br>Height
+            <input type="number" id="height" value="150">
+            <br>Island radius (5=small 50=large islands)
+            <input type="number" id="radius" value="25">
+            <br>Landmass (1=sparse 50=solid islands)
+            <input type="number" id="land" value="10">
+            <br>Number ~ of islands
+            <input type="number" id="size" value="2">
+            <p>
+                Starting seed for this map
+                <input id="seed" value=""> Leave empty to get random map
+            </p>
+        </form>
         <!--  Disse beholdes slik at login.js ikke blir lei seg
           Kan dermed bruke samme kode som spillet - skjuler bare ting
           som ikke trengs i map-editoren

@@ -8,31 +8,41 @@ Math.seedrandom(rr());
 
 
 
-
-
-
 function civ() {
 
+    document.getElementById("rnd").addEventListener("click", nuRand);
+    document.getElementById("params").addEventListener("input", make);
+    document.getElementById("start").removeEventListener("click", civ);
+    document.getElementById("start").addEventListener("click", make);
     let divStatus = document.getElementById("status");
     let divMain = document.getElementById("main");
     let divBoard = document.getElementById("board");
+    divMain.classList.add("hidden");
+    divBoard.classList.add("hidden");
+    divStatus.classList.remove("hidden");
+
+    function nuRand() {
+        let seed = rr();
+        document.getElementById("seed").value = seed;
+        make();
+    }
+
+
+}
+
+function make() {
+
+  
     let cvsMiniMap = document.getElementById("minimap");
     let ctx = cvsMiniMap.getContext("2d");
     let terrain = "sea,grass,plain,swamp,forest,hill,mountain,desert".split(",");
     let colors = "blue,green,yellow,sandybrown,teal,olive,darkgray,orange".split(",");
 
-    document.getElementById("rnd").addEventListener("click", nuRand);
-
-    function nuRand() {
-        let seed = rr();
-        document.getElementById("seed").value = seed;
-    }
-
-
     let wi = +document.getElementById("width").value;
     let hi = +document.getElementById("height").value;
     let land = +document.getElementById("land").value;
     let size = +document.getElementById("size").value;
+    let radius = +document.getElementById("radius").value;
     let seed = document.getElementById("seed").value;
 
     if (seed === "") {
@@ -57,16 +67,14 @@ function civ() {
     let units = [];
     // fetch uits from firebase
 
-    divMain.classList.add("hidden");
-    divBoard.classList.add("hidden");
-    divStatus.classList.remove("hidden");
+    
 
     cvsMiniMap.width = W * 4;
     cvsMiniMap.height = H * 4;
 
 
 
-    [brett, islands] = build(W, H,land,size);
+    [brett, islands] = build(W, H, land, size, radius);
 
     function minimap() {
         brett.forEach((e, x) => e.forEach((e, y) => {
