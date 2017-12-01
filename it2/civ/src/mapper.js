@@ -1,12 +1,13 @@
-
+// @flow
 
 // main func called civ so we can reuse scaffolding of game
 // login.js to make a map editor
 
 
-var rr = Math.random; // original random generator
+var rr = Math.random;   // original random generator
 
 Math.seedrandom(rr());
+
 
 function mapper() {
 
@@ -19,7 +20,7 @@ function mapper() {
     let divGames = document.getElementById("games");
     divMain.classList.add("hidden");
     divBoard.classList.add("hidden");
-
+   
     divStatus.classList.remove("hidden");
 
     make();
@@ -34,8 +35,8 @@ function mapper() {
     }
 
     function saveTheWorld() {
-        let database = firebase.database();
-        let filename = document.getElementById("filename").value;
+        let database = firebase.database();     
+        let filename = document.getElementById("filename").value;   
         let wi = +document.getElementById("width").value;
         let hi = +document.getElementById("height").value;
         let land = +document.getElementById("land").value;
@@ -43,14 +44,20 @@ function mapper() {
         let radius = +document.getElementById("radius").value;
         let seed = document.getElementById("seed").value;
         let freq = document.getElementById("freq").value;
-        let ref = database.ref("gamelist/" + filename);
-        ref.set({ wi, hi, land, size, radius, freq, seed }).catch(err => {
+        let ref = database.ref("gamelist/" + filename );
+        ref.set({wi,hi,land,size,radius,freq,seed}).catch(err => {
             // ignoring error - can be rebuilt from roomreg
         });
+
+
     }
+
+
 }
 
+
 function make() {
+
 
     let cvsMiniMap = document.getElementById("minimap");
     let ctx = cvsMiniMap.getContext("2d");
@@ -73,11 +80,13 @@ function make() {
         Math.seedrandom(seed);
     }
 
-    const W = wi; // antall brikker i bredden
-    const H = hi; // antall brikker i høyden
-    const HexH = 115; // høde bredde på hex-tile
+
+
+    const W = wi;   // antall brikker i bredden
+    const H = hi;    // antall brikker i høyden
+    const HexH = 115;  // høde bredde på hex-tile
     const hexW = 100;
-    const hexD = 115 * 17 / 23; // forskyvning i høyde mellom rader
+    const hexD = 115 * 17 / 23;  // forskyvning i høyde mellom rader
 
     let brett;
     let board = [];
@@ -86,8 +95,11 @@ function make() {
     // fetch uits from firebase
 
 
+
     cvsMiniMap.width = W * 4;
     cvsMiniMap.height = H * 4;
+
+
 
     [brett, islands] = build(W, H, land, size, radius, freq);
 
@@ -102,4 +114,5 @@ function make() {
     }
 
     minimap();
+
 }

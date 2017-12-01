@@ -9,6 +9,8 @@ const FOREST = 5;
 const HILL = 6;
 const MOUNTAIN = 7;
 
+
+
 /**
  * lager et kart for civ
  * prøver å lage øyer med hav rundt
@@ -24,22 +26,22 @@ function build(w, h, _LAND = 4, _MINIMUM = 1, _RADIUS = 12, _FREQ = "776655443")
     // generate random number of islands
     // x,y is pos, r is radius
     const RADIUS = _RADIUS;
-    const LAND = _LAND; //  1 = small islands  50 = large islands
-    const MINIMUM = _MINIMUM; // 1 = few islands 10 = many islands
-    const FREQ = _FREQ; // we pick from this list to choose terrain
+    const LAND = _LAND;   //  1 = small islands  50 = large islands
+    const MINIMUM = _MINIMUM;  // 1 = few islands 10 = many islands
+    const FREQ = _FREQ;  // we pick from this list to choose terrain
     let size = w * w * h * h;
     let logSize = Math.floor(Math.log(size));
     let islandCount = MINIMUM + roll(Math.floor(logSize / 3 + 1), logSize + 1);
     let islands = Array(islandCount).fill(0);
-    let maxR = RADIUS + roll(3, 9);
-    let minR = Math.max(1, RADIUS - roll(3, 9));
+    let maxR = RADIUS + roll(3,9);
+    let minR = Math.max(1,RADIUS - roll(3,9));
     // space the islands
     let m = Math.floor((w + h) / 2);
-    let sqr = 3 + Math.floor(m / Math.sqrt(islandCount));
+    let sqr = 3 + Math.floor(m / (Math.sqrt(islandCount)));
     let dx = -Math.floor(sqr / 1.7);
     let dy = Math.floor(sqr / 2.2);
 
-    islands = islands.map(e => {
+    islands = islands.map((e) => {
         dx += sqr;
         if (dx > w) {
             dx = sqr;
@@ -48,16 +50,14 @@ function build(w, h, _LAND = 4, _MINIMUM = 1, _RADIUS = 12, _FREQ = "776655443")
                 dy = h - Math.floor(sqr / 2);
             }
         }
-        return { x: dx + roll(1, 5), y: dy + roll(1, 5), r: roll(minR, maxR) };
+        return { x: dx + roll(1, 5), y: dy + roll(1, 5), r: roll(minR, maxR) }
     });
 
     // remove islands of the map
     islands = islands.filter(e => e.x < w && e.y < h);
 
     // place initial mountain at island seed
-    islands.forEach(e => {
-        theMap[e.x][e.y] = MOUNTAIN;
-    });
+    islands.forEach(e => { theMap[e.x][e.y] = MOUNTAIN })
 
     // stand on each island and throw stones
     islands.forEach(e => {
@@ -80,6 +80,7 @@ function build(w, h, _LAND = 4, _MINIMUM = 1, _RADIUS = 12, _FREQ = "776655443")
         }
     });
 
+
     // create land around high ground (mountain -> hills -> forrest -> swamp -> grass)
     theMap.forEach((e, x) => e.forEach((e, y) => {
         if (e === OCEAN) {
@@ -90,7 +91,8 @@ function build(w, h, _LAND = 4, _MINIMUM = 1, _RADIUS = 12, _FREQ = "776655443")
                 theMap[x][y] = m - 1; // roll(1, m - 1);
             }
         }
-    }));
+    }))
+
 
     if (islandCount < 12 && logSize > 8) {
         // do it twice to grow some more land
@@ -103,9 +105,9 @@ function build(w, h, _LAND = 4, _MINIMUM = 1, _RADIUS = 12, _FREQ = "776655443")
                     theMap[x][y] = m - roll(1, m - 1);
                 }
             }
-        }));
+        }))
     }
-
+    
     // add sea tiles around land
     theMap.forEach((e, x) => e.forEach((e, y) => {
         if (e === OCEAN) {
@@ -116,7 +118,8 @@ function build(w, h, _LAND = 4, _MINIMUM = 1, _RADIUS = 12, _FREQ = "776655443")
                 theMap[x][y] = SEA;
             }
         }
-    }));
+    }))
+
 
     function getNeighbours(x, y) {
         n = [];
@@ -128,6 +131,9 @@ function build(w, h, _LAND = 4, _MINIMUM = 1, _RADIUS = 12, _FREQ = "776655443")
         n.push(theMap[(x + 1) % w][(y + h - 1) % h]);
         return n.filter(e => e > 0);
     }
+
+
+
 
     return [theMap, islands];
 }
@@ -142,6 +148,7 @@ function roll(lo, hi) {
     return Math.floor(Math.random() * diff) + lo;
 }
 
+
 /**
  * We stand on an island and throw a stone in random direction
  * The landing is within the island radius
@@ -155,5 +162,5 @@ function throwStone(island) {
         x = roll(-r, r);
         y = roll(-r, r);
     } while (x * x + y * y > R);
-    return { x: island.x + x, y: island.y + y, r: Math.sqrt(x * x + y * y) };
+    return { x: island.x + x, y: island.y + y, r: Math.sqrt(x * x + y * y) }
 }

@@ -13,6 +13,10 @@
        0 23%);
 }
 
+#games {
+    display: flex;
+   flex-wrap: wrap;
+}
 
 #games div {
     width: 20em;
@@ -53,7 +57,8 @@ div.unit.setler {
     border:solid green 1px;
 }
 
-div.hidden {
+#games.hidden,
+.hidden {
     display: none;
 }
 
@@ -123,6 +128,27 @@ div.spinner div {
     background-position-y: -398px;
 }
 
+.hex.ocean {
+    background-position-x: 578px;
+    background-position-y: -398px;
+}
+
+.hex.ocean::after {
+    content: " ";
+    position:absolute;
+    width:100px;
+    height: 115px;
+    background-color: rgba(0, 0, 240, 0.3); 
+    clip-path: polygon(50% 0%, 
+         100% 25%, 
+         100% 75%, 
+         50% 100%, 
+         0% 75%, 
+         0 23%);
+}
+
+
+
 .hex.hill {
     background-position-x: -528px;
     background-position-y: -6px;
@@ -145,6 +171,7 @@ div.spinner div {
     background-position-x: -529px;
     background-position-y: -490px;
 } 
+
   
 .hex.snow {
     background-position-x: 629px;
