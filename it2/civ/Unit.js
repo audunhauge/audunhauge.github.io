@@ -15,6 +15,8 @@ class Item {
 
     render(div) {
         // div.style.backgroundImage = 'url("units.png")';  set in css
+        // multiply by 100 because 64 * 911/586 ~ 100
+        // the image is scaled from 586 to 911 pixels
         div.style.backgroundPositionX = `-${ this.ix * 100 }px`;
         div.style.backgroundPositionY = `-${ this.iy * 100 }px`;
     }
