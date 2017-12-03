@@ -5,11 +5,14 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="civ.css">
     <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
+    <script src="Tiles.js"></script>
     <script src="nations.js"></script>
     <script src="Unit.js"></script>
     <script src="login.js"></script>
     <script src="seedrnd.js"></script>
     <script src="buildMap.js"></script>
+    <script src="SortedHash.js"></script>
+    <script src="Astar.js"></script>
     <script src="civ.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Civz</title>
@@ -47,8 +50,11 @@
         </div>
         <div class="frame" id="frame"></div>
     </div>
+    <div id="controls">
+        <button id="turn" type="button">End turn</button>
+    </div>
 
-    <canvas id="minimap" class="hidden" width="650" height="400">
+    <canvas id="minimap" class="hhidden" width="650" height="400">
 
     </canvas>
 

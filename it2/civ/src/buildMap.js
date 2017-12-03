@@ -1,13 +1,12 @@
+// @flow
 
 
-const OCEAN = 0;
-const SEA = 1;
-const GRASS = 2;
-const PLAIN = 3;
-const SWAMP = 4;
-const FOREST = 5;
-const HILL = 6;
-const MOUNTAIN = 7;
+declare class Tile {
+    static tiles: any;
+}
+
+const { OCEAN, SEA, GRASS, PLAIN, SWAMP, FOREST, HILL, MOUNTAIN } = Tile.tiles;
+
 
 
 
@@ -20,8 +19,8 @@ const MOUNTAIN = 7;
  */
 function build(w, h, _LAND = 4, _MINIMUM = 1, _RADIUS = 12, _FREQ = "776655443") {
     // fill map with ocean
-    let theMap = Array(w).fill(0);
-    theMap = theMap.map(e => Array(h).fill(0));
+    let buffer = new ArrayBuffer(w * h);
+    let theMap = new Uint8Array(buffer);
 
     // generate random number of islands
     // x,y is pos, r is radius
@@ -33,8 +32,8 @@ function build(w, h, _LAND = 4, _MINIMUM = 1, _RADIUS = 12, _FREQ = "776655443")
     let logSize = Math.floor(Math.log(size));
     let islandCount = MINIMUM + roll(Math.floor(logSize / 3 + 1), logSize + 1);
     let islands = Array(islandCount).fill(0);
-    let maxR = RADIUS + roll(3,9);
-    let minR = Math.max(1,RADIUS - roll(3,9));
+    let maxR = RADIUS + roll(3, 9);
+    let minR = Math.max(1, RADIUS - roll(3, 9));
     // space the islands
     let m = Math.floor((w + h) / 2);
     let sqr = 3 + Math.floor(m / (Math.sqrt(islandCount)));
@@ -57,7 +56,7 @@ function build(w, h, _LAND = 4, _MINIMUM = 1, _RADIUS = 12, _FREQ = "776655443")
     islands = islands.filter(e => e.x < w && e.y < h);
 
     // place initial mountain at island seed
-    islands.forEach(e => { theMap[e.x][e.y] = MOUNTAIN })
+    islands.forEach(e => { theMap[e.x + w * e.y] = MOUNTAIN })
 
     // stand on each island and throw stones
     islands.forEach(e => {
@@ -66,69 +65,70 @@ function build(w, h, _LAND = 4, _MINIMUM = 1, _RADIUS = 12, _FREQ = "776655443")
             let p = throwStone(e);
             let x = (p.x + w) % w;
             let y = (p.y + h) % h;
-            if (!theMap[x]) {
-                console.log(x, y);
-            }
-            if (theMap[x][y] === OCEAN) {
+            if (theMap[x + w * y] === OCEAN) {
                 // close to island === mountain
                 // far away === grass
                 let pos = Math.random() * FREQ.length;
                 let t = +FREQ.charAt(pos);
                 //let t = 3 + Math.floor(Math.random() * 9 * (1 - p.r / e.r));
-                theMap[x][y] = Math.min(MOUNTAIN, t);
+                theMap[x + w * y] = Math.min(MOUNTAIN, t);
             }
         }
     });
 
 
     // create land around high ground (mountain -> hills -> forrest -> swamp -> grass)
-    theMap.forEach((e, x) => e.forEach((e, y) => {
-        if (e === OCEAN) {
-            // check in 6 directions
-            let adjacent = getNeighbours(x, y);
-            let m = Math.max(...adjacent);
-            if (adjacent.length > 1 && m > GRASS) {
-                theMap[x][y] = m - 1; // roll(1, m - 1);
+
+    for (let x = 0; x < w; x++) {
+        for (let y = 0; y < h; y++) {
+            let e = theMap[x + y * w];
+            if (e === OCEAN) {
+                // check in 6 directions
+                let adjacent = getNeighbours(x, y);
+                let m = Math.max(...adjacent);
+                if (adjacent.length > 1 && m > GRASS) {
+                    theMap[x + w * y] = m - 1; // roll(1, m - 1);
+                }
             }
         }
-    }))
+    }
 
 
     if (islandCount < 12 && logSize > 8) {
         // do it twice to grow some more land
         // create land around high ground (mountain -> hills -> forrest -> swamp -> grass)
-        theMap.forEach((e, x) => e.forEach((e, y) => {
-            if (e === OCEAN) {
-                // check in 6 directions
-                let m = Math.max(...getNeighbours(x, y));
-                if (m > GRASS) {
-                    theMap[x][y] = m - roll(1, m - 1);
+        for (let x = 0; x < w; x++) {
+            for (let y = 0; y < h; y++) {
+                let e = theMap[x + y * w];
+                if (e === OCEAN) {
+                    // check in 6 directions
+                    let m = Math.max(...getNeighbours(x, y));
+                    if (m > GRASS) {
+                        theMap[x + w * y] = m - roll(1, m - 1);
+                    }
                 }
             }
-        }))
+        }
     }
-    
+
     // add sea tiles around land
-    theMap.forEach((e, x) => e.forEach((e, y) => {
-        if (e === OCEAN) {
-            // check in 6 directions
-            let adjacent = getNeighbours(x, y);
-            let m = Math.max(...adjacent);
-            if (m > SEA) {
-                theMap[x][y] = SEA;
+    for (let x = 0; x < w; x++) {
+        for (let y = 0; y < h; y++) {
+            let e = theMap[x + y * w];
+            if (e === OCEAN) {
+                // check in 6 directions
+                let adjacent = getNeighbours(x, y);
+                let m = Math.max(...adjacent);
+                if (m > SEA) {
+                    theMap[x + w * y] = SEA;
+                }
             }
         }
-    }))
+    }
 
 
     function getNeighbours(x, y) {
-        n = [];
-        n.push(theMap[(x + w - 1) % w][y]);
-        n.push(theMap[(x + 1) % w][y]);
-        n.push(theMap[x][(y + 1) % h]);
-        n.push(theMap[x][(y + h - 1) % h]);
-        n.push(theMap[(x + w - 1) % w][(y + 1) % h]);
-        n.push(theMap[(x + 1) % w][(y + h - 1) % h]);
+        let n = neighbours(x, y, w, h).map(([x,y]) => theMap[x+w*y]);
         return n.filter(e => e > 0);
     }
 
@@ -163,4 +163,15 @@ function throwStone(island) {
         y = roll(-r, r);
     } while (x * x + y * y > R);
     return { x: island.x + x, y: island.y + y, r: Math.sqrt(x * x + y * y) }
+}
+
+function neighbours(x, y, w, h) {
+    n = [];
+    n.push([(x + w - 1) % w, y]);
+    n.push([(x + 1) % w, y]);
+    n.push([x, (y + 1) % h]);
+    n.push([x, (y + h - 1) % h]);
+    n.push([(x + w - 1) % w, (y + 1) % h]);
+    n.push([(x + 1) % w, (y + h - 1) % h]);
+    return n;
 }

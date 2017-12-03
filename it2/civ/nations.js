@@ -15,7 +15,7 @@ class Nation {
   }
 
   render() {
-    let s = `<div id="${ this.name }>${ name }</div>`;
+    let s = `<div id="${this.name}>${name}</div>`;
   }
 }
 
@@ -35,11 +35,11 @@ class Game {
   render() {
     return `
     <div>
-      <h4>${ this.name }</h4>
-        <p>${ this.describe }
-          <br>Width:${ this.wi } Height:${ this.hi }
+      <h4>${this.name}</h4>
+        <p>${this.describe}
+          <br>Width:${this.wi} Height:${this.hi}
         </p>
-        <button class="startgame" type="button" id="${ this.name }">Play ${ this.name }</button>
+        <button class="startgame" type="button" id="${this.name}">Play ${this.name}</button>
     </div>
     `;
   }

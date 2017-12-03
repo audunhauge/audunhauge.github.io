@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="civ.css">
     <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
     <script src="nations.js"></script>
+    <script src="Tiles.js"></script>
     <script src="login.js"></script>
     <script src="seedrnd.js"></script>
     <script src="buildMap.js"></script>
@@ -32,7 +33,7 @@
     </div>
 
     <div id="status" class="hidden">
-        <form id="params">
+        <form id="params" onsubmit="return false">
             <p>
                 <button type="button" id="mapper">Make map</button>
                 <p>
@@ -93,7 +94,7 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             setup();
         });
     </script>

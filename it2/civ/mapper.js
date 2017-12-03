@@ -1,5 +1,3 @@
-
-
 // main func called civ so we can reuse scaffolding of game
 // login.js to make a map editor
 
@@ -92,14 +90,18 @@ function make() {
     [brett, islands] = build(W, H, land, size, radius, freq);
 
     function minimap() {
-        brett.forEach((e, x) => e.forEach((e, y) => {
-            let px = (x + Math.floor(y / 2)) % W;
-            let py = y;
-            let color = colors[brett[x][y]];
-            ctx.fillStyle = color;
-            ctx.fillRect(px * 4, py * 4, 4, 4);
-        }));
+        for (let x = 0; x < W; x++) {
+            for (let y = 0; y < H; y++) {
+                let e = brett[x + y * W];
+                let px = (x + Math.floor(y / 2)) % W;
+                let py = y;
+                let color = colors[e];
+                ctx.fillStyle = color;
+                ctx.fillRect(px * 4, py * 4, 4, 4);
+            }
+        }
     }
 
     minimap();
+    return false;
 }
