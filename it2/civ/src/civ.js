@@ -212,7 +212,7 @@ function civ(params) {
         if (me) {
             me.div.classList.add("focus");
         }
-        unmoved = units.length;
+        unmoved = units.filter(e => !e.waiting).length;
     }
 
 
@@ -244,6 +244,7 @@ function civ(params) {
     function command(e) {
         if (e.keyCode === 13) {
             endTurn(null);
+            return;
         }
         if (e.keyCode === 9) {
             event.preventDefault();
@@ -306,6 +307,8 @@ function civ(params) {
                 myId = t.dataset.idx;   // div has idx stored in dataset
                 me = units[myId];  // valid idx - me != undefined
                 me.div.classList.add("focus");
+                me.waiting = false;
+                me.done = this.moves === 0;
                 scrollFromTo(px + 8, py + 4, me.x, me.y, () => {
                     if (me) {  // flowtype thinks me can be null - I disagree
                         px = me.x - 8;

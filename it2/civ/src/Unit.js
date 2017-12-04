@@ -29,9 +29,9 @@ const UnitDATA = {
 }
 
 const COMMANDS = {
-    settler:"bg",   // build, go
-    normal:"g",   // go
-    explorer:"ge", // go, explore 
+    settler:"bgw",   // build, go, wait
+    normal:"bgw",   // build, go, wait
+    explorer:"gew", // go, explore, wait
 }
 const KeyCODE = {};
 [..."abcdefghijklmnopqrstuvwxyz"].forEach( (e,i) => KeyCODE[i+65] = e);
@@ -77,6 +77,7 @@ class Item {
 class Unit extends Item {
     name: string;
     moves:number;
+    waiting:boolean;
     done:boolean;
     udata:any;
     cando:string;
@@ -95,9 +96,10 @@ class Unit extends Item {
         this.name = name;
         this.moves = 0;
         this.done = false;
+        this.waiting = false;
         this.info = info;
         this.udata = UnitDATA[type];
-        this.cando = COMMANDS[name] || COMMANDS[type];
+        this.cando = COMMANDS[name] || COMMANDS[type] || "g";
     }
 
     facing(dx, dy) {
@@ -126,12 +128,17 @@ class Unit extends Item {
         let k = KeyCODE[key];
         if (this.cando.includes(k)) {
             console.log(this.name," does a ",k);
+            switch(k) {
+                case "w":
+                  this.done = true;
+                  this.waiting = true;
+            }
         }
     }
 
     newTurn() {
         this.moves = this.udata.move;
-        this.done = false;
+        this.done = this.waiting;
     }
 
     static get Units() {

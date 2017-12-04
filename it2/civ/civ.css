@@ -26,6 +26,12 @@ div.unit {
 
 div.unit.focus {
     background-color: rgba(175, 216, 210, 0.192);
+    animation: blink 400ms alternate infinite;
+}
+
+@keyframes blink {
+    0% { background-color:rgba(175, 216, 210, 0.192); }
+    100% { background-color:rgba(175, 216, 210, 0.492); }
 }
 
 div.unit.tired {
