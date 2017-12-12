@@ -8,6 +8,9 @@
 }
 
 .star {
+  position: relative;
+  top: 0px;
+  left: 0px;
   width: 10px;
   height: 10px;
   background-color: #FFFFD2;
@@ -15,6 +18,7 @@
 }
 
 #snow {
+    position: relative;
     width: 100%;
     height: 100em;
     background-image: url("snow-hills.jpg");
@@ -25,15 +29,29 @@
 
 #santa {
     position: absolute;
-    left: -200px;
+    left: -250px;
     top:50px;
-    width: 50px;
-    height: 20px;
-    background-color: red;
-    animation: drive 3s alternate infinite;
+    width: 250px;
+    height: 180px;
+    animation: drive 5s 1s linear infinite; 
+    background-image: url("santa.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position-y: 0px;
 }
 
 @keyframes drive {
-    0% { left: -200px; }
-   100% { left: 120%; } 
+    0% { left: -250px; }
+   100% { left: 150vw; } 
+}
+
+.pakke {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 8px;
+    height: 30px;
+    background-color: red;
+    border-left: solid green 21px;
+    border-right: solid green 21px;
 }
