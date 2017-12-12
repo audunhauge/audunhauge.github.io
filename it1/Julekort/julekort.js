@@ -13,6 +13,7 @@ function setup() {
         let pakke = document.createElement('div');
         pakke.className = "pakke";
         pakke.style.left = e.screenX + "px";
-        pakke.style.top = e.screenX + "px";
+        pakke.style.top = (e.screenY - 50) + "px";
+        divSky.appendChild(pakke);
     }
 }
