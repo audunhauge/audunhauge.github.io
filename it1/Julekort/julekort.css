@@ -54,4 +54,11 @@
     background-color: red;
     border-left: solid green 21px;
     border-right: solid green 21px;
+    animation: drop 1s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes drop {
+  0% { top: 100px;    }
+  100% { top: 80vh;     }
 }
