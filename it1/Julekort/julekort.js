@@ -7,7 +7,7 @@ function setup() {
         stjerne.style.top = -80 + Math.floor(Math.random() * 160) + "px";
     });
 
-    divSanta.addEventListener("click" , dropGifts);
+    divSanta.addEventListener("click", dropGifts);
 
     function dropGifts(e) {
         let pakke = document.createElement('div');
@@ -16,4 +16,19 @@ function setup() {
         pakke.style.top = (e.screenY - 50) + "px";
         divSky.appendChild(pakke);
     }
+
+    function makeSnow() {
+        for (let i = 0; i < 254; i++) {
+            let snow = document.createElement('div');
+            snow.className = "snow";
+            snow.style.left = Math.random() * 100 + "vw";
+            snow.style.animationDelay = Math.random() * 5000 + "ms";
+            let radius = Math.random() * 10 + 1;
+            snow.style.width = radius + "px";
+            snow.style.height = radius + "px";
+            divSky.appendChild(snow);
+        }
+    }
+
+    makeSnow();
 }

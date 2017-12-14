@@ -88,7 +88,11 @@
     </div>
 
     <script>
-       setup();
+        var sound = new Howl({
+            src: ['santa.mp3']
+        });
+        setup();
+        sound.play();
     </script>
 
 </body>

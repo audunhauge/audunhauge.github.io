@@ -15,12 +15,26 @@
   height: 10px;
   background-color: #FFFFD2;
   border-radius: 50%;
+  animation: blink 1s alternate linear infinite;
+}
+
+@keyframes blink {
+    0% { 
+        background-color: #fafa1a; 
+        width: 10px;
+        height: 10px;
+    }
+    100% { 
+         background-color: rgb(239, 238, 212); 
+         width: 2px;
+         height: 2px;
+    }
 }
 
 #snow {
     position: relative;
     width: 100%;
-    height: 100em;
+    height: 100vh;
     background-image: url("snow-hills.jpg");
     background-size: 1282px;
     background-repeat: no-repeat;
@@ -59,6 +73,23 @@
 }
 
 @keyframes drop {
-  0% { top: 100px;    }
-  100% { top: 80vh;     }
+    0% { top: 100px;    }
+    100% { top: 80vh;     }
+  }
+
+@keyframes dale {
+  0% { top: 0px;    }
+  100% { top: 90vh;     }
+}
+
+.snow {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: white;
+    animation: dale 5s linear infinite;
+    animation-fill-mode: forwards;
 }
