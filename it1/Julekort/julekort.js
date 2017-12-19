@@ -31,4 +31,20 @@ function setup() {
     }
 
     makeSnow();
+
+
+    function cannonSnow() {
+        for (let i = 0; i < 44; i++) {
+            let snow = document.createElement('div');
+            snow.className = "powder";
+            // snow.style.left = Math.random() * 10 + "vw";
+            snow.style.animationDelay = Math.random() * 5000 + "ms";
+            let radius = Math.random() * 10 + 1;
+            snow.style.width = radius + "px";
+            snow.style.height = radius + "px";
+            divSky.appendChild(snow);
+        }
+    }
+
+    cannonSnow();
 }

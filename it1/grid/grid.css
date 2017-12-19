@@ -1,0 +1,11 @@
+main {
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-column-gap: 15px;
+    grid-gap: 5px;
+    grid-auto-rows: minmax(60px,auto);
+}
+
+article {
+    background-color: green;
+}

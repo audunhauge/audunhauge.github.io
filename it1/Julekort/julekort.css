@@ -31,6 +31,17 @@
     }
 }
 
+#kanon {
+    position: absolute;
+    left: 20px;
+    bottom: -170px;
+    width: 20em;
+    height: 20em;
+    background-image: url("kanon.png");
+    background-size: 100px;
+    background-repeat: no-repeat;
+}
+
 #snow {
     position: relative;
     width: 100%;
@@ -82,6 +93,7 @@
   100% { top: 90vh;     }
 }
 
+.powder,
 .snow {
     position: absolute;
     left: 0px;
@@ -93,3 +105,22 @@
     animation: dale 5s linear infinite;
     animation-fill-mode: forwards;
 }
+.powder {
+    top: 300px;
+    animation: fyke 5s linear infinite;
+}
+
+
+@keyframes fyke {
+    0% { left: 80px;   top:300px; }
+    10% { left: 90px;   top:350px; }
+    20% { left: 110px;   top:360px; }
+    30% { left: 120px;   top:370px; }
+    40% { left: 140px;   top:400px; }
+    50% { left: 150px;   top:420px; }
+    60% { left: 160px;   top:430px; }
+    70% { left: 170px;   top:440px; }
+    80% { left: 180px;   top:460px; }
+    90% { left: 190px;   top:480px; }
+    100% { left: 200px; top: 500px;    }
+  }
