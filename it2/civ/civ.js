@@ -96,6 +96,10 @@ function civ(params) {
     let me = units[0];
     let unmoved = units.length;
 
+    // starting game
+
+    nextUnit();
+
     function render(px, py) {
         liftFog();
         for (let i = 0; i < 17; i++) {
@@ -190,11 +194,19 @@ function civ(params) {
     }
 
     function nextUnit() {
-        myId = (myId + 1) % units.length;
-        let newMe = units[myId];
+        let newMe;
         units.forEach(e => {
             e.div.classList.remove("focus");
         });
+        let awake = units.filter(e => e.isActive);
+        if (awake.length) {
+            do {
+                myId = (myId + 1) % units.length;
+                newMe = units[myId];
+            } while (!newMe.isActive);
+        } else {
+            return;
+        }
         newMe.div.classList.add("focus");
         let ox, oy;
         if (me === null) {
@@ -222,7 +234,8 @@ function civ(params) {
             nextUnit();
         } else {
             if (me) {
-                me.doCommand(e.keyCode);
+                me.doCommand(e.keyCode, nextUnit);
+                // let me. decide to execute next unit
             }
         }
     }
@@ -273,7 +286,7 @@ function civ(params) {
                 myId = t.dataset.idx; // div has idx stored in dataset
                 me = units[myId]; // valid idx - me != undefined
                 me.div.classList.add("focus");
-                me.waiting = false;
+                me.sleeping = false;
                 me.done = this.moves === 0;
                 scrollFromTo(px + 8, py + 4, me.x, me.y, () => {
                     if (me) {

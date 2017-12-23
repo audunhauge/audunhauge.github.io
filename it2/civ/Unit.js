@@ -17,9 +17,10 @@ const UnitDATA = {
 };
 
 const COMMANDS = {
-    settler: "bgw", // build, go, wait
-    normal: "bgw", // build, go, wait
-    explorer: "gew" };
+    settler: "bgws", // build, go, wait,sleep
+    normal: "bgws", // build, go, wait,sleep
+    explorer: "gews" // go, explore, wait,sleep
+};
 const KeyCODE = {};
 [..."abcdefghijklmnopqrstuvwxyz"].forEach((e, i) => KeyCODE[i + 65] = e);
 // keyCode = { 65:"a",66:"b" ...}
@@ -50,8 +51,8 @@ class Item {
         let y = this.y - py;
         div.style.top = -hexD + y * hexD + "px";
         div.style.left = -hexW * 7 + x * hexW + hexW * y / 2 + "px";
-        div.style.backgroundPositionX = `-${ this.ix * 100.7 }px`;
-        div.style.backgroundPositionY = `-${ this.iy * 100 }px`;
+        div.style.backgroundPositionX = `-${this.ix * 100.7}px`;
+        div.style.backgroundPositionY = `-${this.iy * 100}px`;
     }
 }
 
@@ -67,10 +68,11 @@ class Unit extends Item {
         this.name = name;
         this.moves = 0;
         this.done = false;
-        this.waiting = false;
+        this.sleeping = false;
+        this.fortified = false;
         this.info = info;
         this.udata = UnitDATA[type];
-        this.cando = COMMANDS[name] || COMMANDS[type] || "g";
+        this.cando = COMMANDS[name] || COMMANDS[type] || "gws";
     }
 
     facing(dx, dy) {
@@ -78,7 +80,7 @@ class Unit extends Item {
         if (dx == 0) {
             s = dy;
         }
-        this.div.style.transform = `scaleX(${ -s })`;
+        this.div.style.transform = `scaleX(${-s})`;
     }
 
     // t is terrain type number
@@ -95,21 +97,34 @@ class Unit extends Item {
         this.done = this.moves === 0;
     }
 
-    doCommand(key) {
+    get isActive() {
+        return !(this.done || this.sleeping || this.fortified);
+    }
+
+    doCommand(key, next) {
         let k = KeyCODE[key];
         if (this.cando.includes(k)) {
             console.log(this.name, " does a ", k);
             switch (k) {
                 case "w":
+                    // wait 1 turn
                     this.done = true;
-                    this.waiting = true;
+                    next();
+                    return;
+                case "s":
+                    // sleep until enemy  or click
+                    this.done = true;
+                    this.sleeping = true;
+                    next();
+                    return;
             }
         }
+        return; // can't do that
     }
 
     newTurn() {
         this.moves = this.udata.move;
-        this.done = this.waiting;
+        this.done = false;
     }
 
     static get Units() {

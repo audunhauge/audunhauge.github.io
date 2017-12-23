@@ -20,21 +20,21 @@ const UNITNAMES = (
 const MOVECOST = "32112234";  // ocean,sea,grass,plain,swamp,forest,hill,mountain
 
 const UnitDATA = {
-    normal: { terrain: "00111110", move:1 },
-    boat:   { terrain:  "01000000", move:4 },
-    ship:   { terrain: "11000000", move:6 },
-    horse:  { terrain: "00111110", move:3 },
-    wagon:  { terrain: "00110100", move:2 },
-    explorer: { terrain: "01111111", move:2 },
+    normal: { terrain: "00111110", move: 1 },
+    boat: { terrain: "01000000", move: 4 },
+    ship: { terrain: "11000000", move: 6 },
+    horse: { terrain: "00111110", move: 3 },
+    wagon: { terrain: "00110100", move: 2 },
+    explorer: { terrain: "01111111", move: 2 },
 }
 
 const COMMANDS = {
-    settler:"bgw",   // build, go, wait
-    normal:"bgw",   // build, go, wait
-    explorer:"gew", // go, explore, wait
+    settler: "bgws",   // build, go, wait,sleep
+    normal: "bgws",   // build, go, wait,sleep
+    explorer: "gews", // go, explore, wait,sleep
 }
 const KeyCODE = {};
-[..."abcdefghijklmnopqrstuvwxyz"].forEach( (e,i) => KeyCODE[i+65] = e);
+[..."abcdefghijklmnopqrstuvwxyz"].forEach((e, i) => KeyCODE[i + 65] = e);
 // keyCode = { 65:"a",66:"b" ...}
 
 const OFFSET = {};
@@ -76,31 +76,33 @@ class Item {
 
 class Unit extends Item {
     name: string;
-    moves:number;
-    waiting:boolean;
-    done:boolean;
-    udata:any;
-    cando:string;
+    moves: number;
+    sleeping: boolean;
+    fortified: boolean;
+    done: boolean;
+    udata: any;
+    cando: string;
     info: {
         type: string;
         facing: string;
     };
 
-    constructor(name:string, info) {
+    constructor(name: string, info) {
         if (!OFFSET[name]) {
             name = "explorer"; // the given name is invalid - you get an explorer
         }
         let { ix, iy } = OFFSET[name];
-        let { x, y, klass, type="normal" } = info;
+        let { x, y, klass, type = "normal" } = info;
         super({ x, y, ix, iy, klass });
         this.name = name;
         this.moves = 0;
         this.done = false;
-        this.waiting = false;
+        this.sleeping = false;
+        this.fortified = false;
         this.info = info;
         this.udata = UnitDATA[type];
-        this.cando = COMMANDS[name] || COMMANDS[type] || "g";
-    }
+        this.cando = COMMANDS[name] || COMMANDS[type] || "gws";
+    } 
 
     facing(dx, dy) {
         let s = dx;
@@ -111,34 +113,45 @@ class Unit extends Item {
     }
 
     // t is terrain type number
-    canMove(t:number) {
+    canMove(t: number) {
         if (this.done) return false;  // turn used up
         // if (this.moves < 1) return false; // not enuf moves left
         return this.udata.terrain.charAt(t) !== "0";
     }
 
-    moveMe(t:number) {
+    moveMe(t: number) {
         // assumes move is allowed - do accounting
         let cost = +MOVECOST.charAt(t);
-        this.moves = Math.max(0,this.moves-cost);
+        this.moves = Math.max(0, this.moves - cost);
         this.done = this.moves === 0;
     }
 
-    doCommand(key) {
+    get isActive() {
+        return !(this.done || this.sleeping || this.fortified);
+    }
+
+    doCommand(key, next) {
         let k = KeyCODE[key];
         if (this.cando.includes(k)) {
-            console.log(this.name," does a ",k);
-            switch(k) {
-                case "w":
-                  this.done = true;
-                  this.waiting = true;
+            console.log(this.name, " does a ", k);
+            switch (k) {
+                case "w":  // wait 1 turn
+                    this.done = true;
+                    next();
+                    return;
+                case "s": // sleep until enemy  or click
+                    this.done = true;
+                    this.sleeping = true;
+                    next();
+                    return;
             }
         }
+        return; // can't do that
     }
 
     newTurn() {
         this.moves = this.udata.move;
-        this.done = this.waiting;
+        this.done = false;
     }
 
     static get Units() {
