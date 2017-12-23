@@ -1,0 +1,48 @@
+#back {
+    background-color: rgb(2, 2, 85);
+    width: 100vw;
+    height: 100vh;
+}
+
+#sky {
+    position: relative;
+    background: 
+      linear-gradient( rgba(1, 2, 51, 0.608), 
+                       rgba(0, 0, 255, 0.758));
+    width: 100vw;
+    height: 50vh;
+}
+
+#ground {
+    background-image: url("snow-hills.jpg");
+    width: 100vw;
+    height: 50vh;
+    background-position-y: -600px;
+}
+
+#santa {
+    width: 100px;
+    height: 30px;
+    top: 5em;
+    left: -500px;
+    position: absolute;
+    background-color: red;
+    border:solid white 3px;
+    animation: fly 4s linear infinite;
+}
+
+.pakke {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 8px;
+  height: 40px;
+  background-color: yellow;
+  border-left: solid 16px red;
+  border-right: solid 16px red;
+}
+
+@keyframes fly {
+    0%      { left : -110px;}
+    100%  { left: 120vw; }
+}

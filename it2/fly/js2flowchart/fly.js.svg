@@ -1,0 +1,746 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                width="766" height="1771">
+                
+            <g>
+                <rect x="50" y="80"
+            width="174.8" height="30"
+            style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                    
+                <line x1="60" y1="80" x2="60" y2="110"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                <line x1="214.8" y1="80" x2="214.8" y2="110"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+             
+                <title>function setup()</title>
+            <text x="75" y="100"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="75" y="100">function setup()</tspan>
+            </text>
+                
+            </g>
+                <g>
+                   <rect x="87" y="128.5"
+            width="365.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>let selFra = document.getElementById(&apos;fra&apos;)</title>
+            <text x="102" y="148.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="102" y="148.5">let selFra = document.getElementById(&apos;fra&apos;)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="87" y="177"
+            width="365.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>let selTil = document.getElementById(&apos;til&apos;)</title>
+            <text x="102" y="197"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="102" y="197">let selTil = document.getElementById(&apos;til&apos;)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="87" y="225.5"
+            width="412.2" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>let inpAntall = document.getElementById(&apos;antall&apos;)</title>
+            <text x="102" y="245.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="102" y="245.5">let inpAntall = document.getElementById(&apos;antall&apos;)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="87" y="274"
+            width="443.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>let chkLeiebil = document.getElementById(&apos;leiebil&apos;)</title>
+            <text x="102" y="294"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="102" y="294">let chkLeiebil = document.getElementById(&apos;leiebil&apos;...</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="87" y="322.5"
+            width="443.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>let btnBestill = document.getElementById(&apos;bestill&apos;)</title>
+            <text x="102" y="342.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="102" y="342.5">let btnBestill = document.getElementById(&apos;bestill&apos;...</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="87" y="371"
+            width="443.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>let divMelding = document.getElementById(&apos;melding&apos;)</title>
+            <text x="102" y="391"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="102" y="391">let divMelding = document.getElementById(&apos;melding&apos;...</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="87" y="419.5"
+            width="154.8" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>let priser = {*}</title>
+            <text x="102" y="439.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="102" y="439.5">let priser = {*}</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="124" y="468"
+            width="139.2" height="30"
+            rx="2" ry="2"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>undefined: {*}</title>
+            <text x="139" y="488"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="139" y="488">undefined: {*}</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="161" y="516.5"
+            width="108" height="30"
+            rx="2" ry="2"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>&quot;SVG&quot;: 399</title>
+            <text x="176" y="536.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="176" y="536.5">&quot;SVG&quot;: 399</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="161" y="565"
+            width="108" height="30"
+            rx="2" ry="2"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>&quot;BGO&quot;: 410</title>
+            <text x="176" y="585"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="176" y="585">&quot;BGO&quot;: 410</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="161" y="613.5"
+            width="108" height="30"
+            rx="2" ry="2"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>&quot;HAU&quot;: 180</title>
+            <text x="176" y="633.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="176" y="633.5">&quot;HAU&quot;: 180</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="124" y="662"
+            width="139.2" height="30"
+            rx="2" ry="2"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>undefined: {*}</title>
+            <text x="139" y="682"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="139" y="682">undefined: {*}</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="161" y="710.5"
+            width="100.2" height="30"
+            rx="2" ry="2"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>&quot;BGO&quot;: 50</title>
+            <text x="176" y="730.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="176" y="730.5">&quot;BGO&quot;: 50</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="161" y="759"
+            width="100.2" height="30"
+            rx="2" ry="2"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>&quot;HAU&quot;: 10</title>
+            <text x="176" y="779"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="176" y="779">&quot;HAU&quot;: 10</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="124" y="807.5"
+            width="139.2" height="30"
+            rx="2" ry="2"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>undefined: {*}</title>
+            <text x="139" y="827.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="139" y="827.5">undefined: {*}</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="161" y="856"
+            width="92.4" height="30"
+            rx="2" ry="2"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>&quot;HAU&quot;: 5</title>
+            <text x="176" y="876"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="176" y="876">&quot;HAU&quot;: 5</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="87" y="904.5"
+            width="178.2" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>let leiepris = 1000</title>
+            <text x="102" y="924.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="102" y="924.5">let leiepris = 1000</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="87" y="953"
+            width="443.4" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>btnBestill.addEventListener(&apos;click&apos;, bestillFlight)</title>
+            <text x="102" y="973"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="102" y="973">btnBestill.addEventListener(&apos;click&apos;, bestillFlight...</tspan>
+            </text>
+                   
+                   
+                </g>
+            <g>
+                <rect x="87" y="1016.5"
+            width="237.2" height="30"
+            style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                    
+                <line x1="97" y1="1016.5" x2="97" y2="1046.5"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                <line x1="314.2" y1="1016.5" x2="314.2" y2="1046.5"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+             
+                <title>function bestillFlight()</title>
+            <text x="112" y="1036.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="112" y="1036.5">function bestillFlight()</tspan>
+            </text>
+                
+            </g>
+                <g>
+                   <rect x="124" y="1065"
+            width="201.6" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>let fra = selFra.value</title>
+            <text x="139" y="1085"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="139" y="1085">let fra = selFra.value</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="124" y="1113.5"
+            width="201.6" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>let til = selTil.value</title>
+            <text x="139" y="1133.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="139" y="1133.5">let til = selTil.value</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="124" y="1162"
+            width="123.6" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>let pris = 0</title>
+            <text x="139" y="1182"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="139" y="1182">let pris = 0</tspan>
+            </text>
+                   
+                   
+                </g><g>
+            <rect x="154" y="1225.5"
+            width="317.4" height="30"
+            rx="3" ry="3"
+            style="fill:#ce93d8; stroke:#444; stroke-width:1" />                
+            <polygon points="124,1240.5 154,1210.5 184,1240.5 154,1270.5"
+            style="fill:#ce93d8; stroke:#444; stroke-width:1" />
+            <title>(priser[fra] &amp;&amp; priser[fra][til])</title>
+            <text x="199" y="1245.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="199" y="1245.5">(priser[fra] &amp;&amp; priser[fra][til])</tspan>
+            </text>
+            
+            <text x="146.2" y="1245.5"
+        font-family="monospace" font-size="13" fill="#222">if</text> <text x="161.8" y="1272.45"
+        font-family="monospace" font-size="13" fill="#222">+</text> <text x="475.29999999999995" y="1238.55"
+        font-family="monospace" font-size="13" fill="#222">-</text>
+        </g>
+                <g>
+                   <rect x="174" y="1280.5"
+            width="209.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>pris = priser[fra][til]</title>
+            <text x="189" y="1300.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="189" y="1300.5">pris = priser[fra][til]</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="531.4" y="1280.5"
+            width="209.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>pris = priser[til][fra]</title>
+            <text x="546.4" y="1300.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="546.4" y="1300.5">pris = priser[til][fra]</tspan>
+            </text>
+                   
+                   
+                </g><g>
+            <rect x="154" y="1345.5"
+            width="395.4" height="30"
+            rx="3" ry="3"
+            style="fill:#ce93d8; stroke:#444; stroke-width:1" />                
+            <polygon points="124,1360.5 154,1330.5 184,1360.5 154,1390.5"
+            style="fill:#ce93d8; stroke:#444; stroke-width:1" />
+            <title>(Number.isInteger(inpAntall.valueAsNumber))</title>
+            <text x="199" y="1365.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="199" y="1365.5">(Number.isInteger(inpAntall.valueAsNumber))</tspan>
+            </text>
+            
+            <text x="146.2" y="1365.5"
+        font-family="monospace" font-size="13" fill="#222">if</text> <text x="161.8" y="1392.45"
+        font-family="monospace" font-size="13" fill="#222">+</text> 
+        </g>
+                <g>
+                   <rect x="174" y="1400.5"
+            width="271.79999999999995" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>pris *= inpAntall.valueAsNumber</title>
+            <text x="189" y="1420.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="189" y="1420.5">pris *= inpAntall.valueAsNumber</tspan>
+            </text>
+                   
+                   
+                </g><g>
+            <rect x="154" y="1465.5"
+            width="216" height="30"
+            rx="3" ry="3"
+            style="fill:#ce93d8; stroke:#444; stroke-width:1" />                
+            <polygon points="124,1480.5 154,1450.5 184,1480.5 154,1510.5"
+            style="fill:#ce93d8; stroke:#444; stroke-width:1" />
+            <title>(chkLeiebil.checked)</title>
+            <text x="199" y="1485.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="199" y="1485.5">(chkLeiebil.checked)</tspan>
+            </text>
+            
+            <text x="146.2" y="1485.5"
+        font-family="monospace" font-size="13" fill="#222">if</text> <text x="161.8" y="1512.45"
+        font-family="monospace" font-size="13" fill="#222">+</text> 
+        </g>
+                <g>
+                   <rect x="174" y="1520.5"
+            width="154.8" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>pris += leiepris</title>
+            <text x="189" y="1540.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="189" y="1540.5">pris += leiepris</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="124" y="1570.5"
+            width="435.59999999999997" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>divMelding.innerHTML = `Din flight 
+    fra ${fra} 
+    til ${til} 
+    koster ${pris} kr.`</title>
+            <text x="139" y="1590.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="139" y="1590.5">divMelding.innerHTML = `Din flight 
+    fra ${fra}...</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="161" y="1619"
+            width="53.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>fra</title>
+            <text x="176" y="1639"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="176" y="1639">fra</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="161" y="1667.5"
+            width="53.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>til</title>
+            <text x="176" y="1687.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="176" y="1687.5">til</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="161" y="1716"
+            width="61.2" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>pris</title>
+            <text x="176" y="1736"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="176" y="1736">pris</tspan>
+            </text>
+                   
+                   
+                </g>
+            <g>
+               <rect x="25" y="13.75"
+            width="216.6" height="24"
+            style="fill:#fff59d; stroke:#444; stroke-width:1" />
+               <circle cx="25" cy="25" r="15"
+        style="fill:#fff59d; stroke:#444; stroke-width:1" />
+               <title>Program: source module</title>
+            <text x="55" y="30"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="55" y="30">Program: source module</tspan>
+            </text>
+            </g>
+            <g>
+               <path d="M25, 40 L25 91 Q25 95
+                29 95
+                L42 95 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 92 L50, 95 L42, 98 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 110 L68.5 139.5 Q68.5 143.5
+                72.5 143.5
+                L79 143.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M79, 140.5 L87, 143.5 L79, 146.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 110 L68.5 188 Q68.5 192
+                72.5 192
+                L79 192 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M79, 189 L87, 192 L79, 195 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 110 L68.5 236.5 Q68.5 240.5
+                72.5 240.5
+                L79 240.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M79, 237.5 L87, 240.5 L79, 243.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 110 L68.5 285 Q68.5 289
+                72.5 289
+                L79 289 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M79, 286 L87, 289 L79, 292 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 110 L68.5 333.5 Q68.5 337.5
+                72.5 337.5
+                L79 337.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M79, 334.5 L87, 337.5 L79, 340.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 110 L68.5 382 Q68.5 386
+                72.5 386
+                L79 386 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M79, 383 L87, 386 L79, 389 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 110 L68.5 430.5 Q68.5 434.5
+                72.5 434.5
+                L79 434.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M79, 431.5 L87, 434.5 L79, 437.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M105.5, 449.5 L105.5 479 Q105.5 483
+                109.5 483
+                L124 483 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M142.5, 498 L142.5 527.5 Q142.5 531.5
+                146.5 531.5
+                L161 531.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M142.5, 498 L142.5 576 Q142.5 580
+                146.5 580
+                L161 580 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M142.5, 498 L142.5 624.5 Q142.5 628.5
+                146.5 628.5
+                L161 628.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M105.5, 449.5 L105.5 673 Q105.5 677
+                109.5 677
+                L124 677 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M142.5, 692 L142.5 721.5 Q142.5 725.5
+                146.5 725.5
+                L161 725.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M142.5, 692 L142.5 770 Q142.5 774
+                146.5 774
+                L161 774 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M105.5, 449.5 L105.5 818.5 Q105.5 822.5
+                109.5 822.5
+                L124 822.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M142.5, 837.5 L142.5 867 Q142.5 871
+                146.5 871
+                L161 871 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M68.5, 110 L68.5 915.5 Q68.5 919.5
+                72.5 919.5
+                L79 919.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M79, 916.5 L87, 919.5 L79, 922.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 110 L68.5 964 Q68.5 968
+                72.5 968
+                L79 968 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M79, 965 L87, 968 L79, 971 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 110 L68.5 1027.5 Q68.5 1031.5
+                72.5 1031.5
+                L79 1031.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M79, 1028.5 L87, 1031.5 L79, 1034.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M105.5, 1046.5 L105.5 1076 Q105.5 1080
+                109.5 1080
+                L116 1080 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M116, 1077 L124, 1080 L116, 1083 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M105.5, 1046.5 L105.5 1124.5 Q105.5 1128.5
+                109.5 1128.5
+                L116 1128.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M116, 1125.5 L124, 1128.5 L116, 1131.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M105.5, 1046.5 L105.5 1173 Q105.5 1177
+                109.5 1177
+                L116 1177 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M116, 1174 L124, 1177 L116, 1180 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M105.5, 1046.5 L105.5 1236.5 Q105.5 1240.5
+                109.5 1240.5
+                L116 1240.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M116, 1237.5 L124, 1240.5 L116, 1243.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M154, 1270.5 L154 1291.5 Q154 1295.5
+                158 1295.5
+                L166 1295.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M166, 1292.5 L174, 1295.5 L166, 1298.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M471.4, 1240.5 L507.4 1240.5  Q511.4 1240.5
+                511.4 1244.5
+                L511.4 1287.5 Q511.4 1295.5
+                515.4 1295.5
+                L523.4 1295.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M523.4, 1292.5 L531.4, 1295.5 L523.4, 1298.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M105.5, 1046.5 L105.5 1356.5 Q105.5 1360.5
+                109.5 1360.5
+                L116 1360.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M116, 1357.5 L124, 1360.5 L116, 1363.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M154, 1390.5 L154 1411.5 Q154 1415.5
+                158 1415.5
+                L166 1415.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M166, 1412.5 L174, 1415.5 L166, 1418.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M105.5, 1046.5 L105.5 1476.5 Q105.5 1480.5
+                109.5 1480.5
+                L116 1480.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M116, 1477.5 L124, 1480.5 L116, 1483.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M154, 1510.5 L154 1531.5 Q154 1535.5
+                158 1535.5
+                L166 1535.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M166, 1532.5 L174, 1535.5 L166, 1538.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M105.5, 1046.5 L105.5 1581.5 Q105.5 1585.5
+                109.5 1585.5
+                L116 1585.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M116, 1582.5 L124, 1585.5 L116, 1588.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M142.5, 1600.5 L142.5 1630 Q142.5 1634
+                146.5 1634
+                L153 1634 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M153, 1631 L161, 1634 L153, 1637 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M142.5, 1600.5 L142.5 1678.5 Q142.5 1682.5
+                146.5 1682.5
+                L153 1682.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M153, 1679.5 L161, 1682.5 L153, 1685.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M142.5, 1600.5 L142.5 1727 Q142.5 1731
+                146.5 1731
+                L153 1731 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M153, 1728 L161, 1731 L153, 1734 Z" 
+        fill="#333" />
+            </g>
+            </svg>

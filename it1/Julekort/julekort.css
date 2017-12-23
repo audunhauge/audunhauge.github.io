@@ -1,0 +1,126 @@
+#sky {
+  width: 100%;
+  height: 50%;
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  grid-gap: 40px;
+  grid-auto-rows: minmax(40px, auto);
+}
+
+.star {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  width: 10px;
+  height: 10px;
+  background-color: #FFFFD2;
+  border-radius: 50%;
+  animation: blink 1s alternate linear infinite;
+}
+
+@keyframes blink {
+    0% { 
+        background-color: #fafa1a; 
+        width: 10px;
+        height: 10px;
+    }
+    100% { 
+         background-color: rgb(239, 238, 212); 
+         width: 2px;
+         height: 2px;
+    }
+}
+
+#kanon {
+    position: absolute;
+    left: 20px;
+    bottom: -170px;
+    width: 20em;
+    height: 20em;
+    background-image: url("kanon.png");
+    background-size: 100px;
+    background-repeat: no-repeat;
+}
+
+#snow {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url("snow-hills.jpg");
+    background-size: 1282px;
+    background-repeat: no-repeat;
+    background-position-y: 0px;
+}
+
+#santa {
+    position: absolute;
+    left: -250px;
+    top:50px;
+    width: 250px;
+    height: 180px;
+    animation: drive 5s 1s linear infinite; 
+    background-image: url("santa.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position-y: 0px;
+}
+
+@keyframes drive {
+    0% { left: -250px; }
+   100% { left: 150vw; } 
+}
+
+.pakke {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 8px;
+    height: 30px;
+    background-color: red;
+    border-left: solid green 21px;
+    border-right: solid green 21px;
+    animation: drop 1s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes drop {
+    0% { top: 100px;    }
+    100% { top: 80vh;     }
+  }
+
+@keyframes dale {
+  0% { top: 0px;    }
+  100% { top: 90vh;     }
+}
+
+.powder,
+.snow {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: white;
+    animation: dale 5s linear infinite;
+    animation-fill-mode: forwards;
+}
+.powder {
+    top: 300px;
+    animation: fyke 5s linear infinite;
+}
+
+
+@keyframes fyke {
+    0% { left: 80px;   top:300px; }
+    10% { left: 90px;   top:350px; }
+    20% { left: 110px;   top:360px; }
+    30% { left: 120px;   top:370px; }
+    40% { left: 140px;   top:400px; }
+    50% { left: 150px;   top:420px; }
+    60% { left: 160px;   top:430px; }
+    70% { left: 170px;   top:440px; }
+    80% { left: 180px;   top:460px; }
+    90% { left: 190px;   top:480px; }
+    100% { left: 200px; top: 500px;    }
+  }
