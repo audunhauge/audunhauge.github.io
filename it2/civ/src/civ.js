@@ -360,7 +360,7 @@ function civ(params) {
                 if (me.canMove(tt)) {
                     me.moveMe(tt);    // apply cost
                     wait = true;
-                    me.facing(deltaX, deltaY); me
+                    me.facing(deltaX, deltaY);
                     px = (px - deltaX + W) % W;
                     py = (py - deltaY + H) % H;
                     let dx = hexW * deltaX + 50 * deltaY;
