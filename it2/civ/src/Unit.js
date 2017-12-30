@@ -74,6 +74,72 @@ class Item {
     }
 }
 
+class Town extends Item {
+    name: string;
+    size: number;
+    workers: number;
+    farmers: number;
+    buildings: Array<string>;
+    prod: number;
+    food: number;
+    pop: number;
+    tiles: Array<any>;
+    status: string;
+    constructor(info) {
+        let { ix, iy } = OFFSET["town1"];
+        let { x, y, klass, type = "normal" } = info;
+        super({ x, y, ix, iy, klass });
+        this.size = 1;
+        this.name = "Oslo";
+        this.workers = 1;
+        this.farmers = 1;
+        this.buildings = [];
+        this.prod = 0;
+        this.pop = 1000;
+        this.food = 2000;
+        this.status = "ok";
+    }
+
+    doCommand(key, div) {
+        let k = KeyCODE[key];
+        switch (k) {
+            case "i":  // inspect, inventory
+                if (this.status === "ok") {
+                    this.inspect(div);
+                }
+                break;
+        }
+
+        return;
+    }
+
+    inspect(div) {
+        this.status = "inspect";
+        let that = this;
+        let box = document.createElement('div');
+        box.className = "city-info";
+        div.appendChild(box);
+        box.innerHTML = `
+        <ul>
+          <li>pop: ${this.pop}
+          <li>size: ${this.size}
+          <li>workers: ${this.workers}
+          <li>prod: ${this.prod}
+          <li>food: ${this.food}
+          <li>building: ${this.buildings.join()}
+        </ul>
+        `;
+
+        
+        // $FlowFixMe
+        box.addEventListener("click", remove);
+        function remove(e) {
+            div.removeChild(box);
+            that.status = "ok";
+        }
+    }
+}
+
 class Unit extends Item {
     name: string;
     moves: number;
@@ -102,7 +168,7 @@ class Unit extends Item {
         this.info = info;
         this.udata = UnitDATA[type];
         this.cando = COMMANDS[name] || COMMANDS[type] || "gws";
-    } 
+    }
 
     facing(dx, dy) {
         let s = dx;
@@ -110,6 +176,10 @@ class Unit extends Item {
             s = dy;
         }
         this.div.style.transform = `scaleX(${-s})`;
+    }
+
+    build() {
+        return;
     }
 
     // t is terrain type number
@@ -144,6 +214,8 @@ class Unit extends Item {
                     this.sleeping = true;
                     next();
                     return;
+                case "b":
+                    this.build();
             }
         }
         return; // can't do that
@@ -156,5 +228,18 @@ class Unit extends Item {
 
     static get Units() {
         return UNITNAMES;
+    }
+}
+
+class Settler extends Unit {
+
+    builder: (any) => any;
+    constructor(info, builder) {
+        super("settler", info);
+        this.builder = builder;
+    }
+
+    build() {
+        this.builder(this);
     }
 }
