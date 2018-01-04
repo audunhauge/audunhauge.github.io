@@ -166,7 +166,7 @@ function throwStone(island) {
 }
 
 function neighbours(x, y, w, h) {
-    n = [];
+    let n = [];
     n.push([(x + w - 1) % w, y]);
     n.push([(x + 1) % w, y]);
     n.push([x, (y + 1) % h]);

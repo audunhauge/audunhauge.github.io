@@ -15,6 +15,8 @@
     color: brown;
 }
 
+
+div.town,
 div.unit {
     position: absolute;
     background-image: url(units.png);
@@ -24,6 +26,7 @@ div.unit {
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0 23%);
 }
 
+div.town.focus,
 div.unit.focus {
     background-color: rgba(175, 216, 210, 0.192);
     animation: blink 400ms alternate infinite;
@@ -181,4 +184,15 @@ div.spinner div {
 .hex.snow {
     background-position-x: 629px;
     background-position-y: -489px;
+}
+
+div.city-info {
+    position: absolute;
+    width: 500px;
+    height: 350px;
+    left: 70px;
+    top:160px;
+    border: solid gray 2px;
+    background-color: rgba(0, 128, 0, 0.452);
+
 }

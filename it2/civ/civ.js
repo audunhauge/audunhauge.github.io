@@ -27,6 +27,8 @@ function civ(params) {
     let board = [];
     let islands;
     let units = [];
+    let towns = [];
+
     // fetch uits from firebase
 
     let buffer = new ArrayBuffer(W * H);
@@ -84,7 +86,10 @@ function civ(params) {
     divMain.appendChild(u);
     */
 
-    units.push(new Unit("settler", { x: px + 8, y: py + 4, type: "explorer", klass: "unit gametile" }));
+    units.push(new Settler({
+        x: px + 8, y: py + 4,
+        type: "explorer", klass: "unit gametile"
+    }, buildCity));
     units.push(new Unit("farmer1", { x: px + 8 - 1, y: py + 4 + 1, klass: "unit gametile" }));
     units.push(new Unit("horse1", { x: px + 8 - 2, y: py + 4 + 1, type: "horse", klass: "unit gametile" }));
 
@@ -95,6 +100,13 @@ function civ(params) {
     let myId = 0;
     let me = units[0];
     let unmoved = units.length;
+
+    let town; // set if a town is selected
+
+
+    // starting game
+
+    nextUnit();
 
     function render(px, py) {
         liftFog();
@@ -111,6 +123,7 @@ function civ(params) {
                 t.py = (py + j) % H;
             }
         }
+        renderTowns();
         renderUnits();
         minimap();
         drawFrame();
@@ -135,6 +148,12 @@ function civ(params) {
 
     function renderUnits() {
         units.forEach(e => {
+            e.render(px, py);
+        });
+    }
+
+    function renderTowns() {
+        towns.forEach(e => {
             e.render(px, py);
         });
     }
@@ -186,15 +205,27 @@ function civ(params) {
         if (me) {
             me.div.classList.add("focus");
         }
+        if (town) {
+            town.div.classList.remove("focus");
+        }
+        town = null;
         unmoved = units.filter(e => !e.waiting).length;
     }
 
     function nextUnit() {
-        myId = (myId + 1) % units.length;
-        let newMe = units[myId];
+        let newMe;
         units.forEach(e => {
             e.div.classList.remove("focus");
         });
+        let awake = units.filter(e => e.isActive);
+        if (awake.length) {
+            do {
+                myId = (myId + 1) % units.length;
+                newMe = units[myId];
+            } while (!newMe.isActive);
+        } else {
+            return;
+        }
         newMe.div.classList.add("focus");
         let ox, oy;
         if (me === null) {
@@ -222,9 +253,39 @@ function civ(params) {
             nextUnit();
         } else {
             if (me) {
-                me.doCommand(e.keyCode);
+                me.doCommand(e.keyCode, nextUnit);
+                // let me. decide to activate next unit
+            } else if (town) {
+                town.doCommand(e.keyCode, divBoard);
             }
         }
+    }
+
+    function buildCity(u) {
+        // check if leagal terrain
+        let terrainType = brett[u.x + u.y * W];
+        if (terrainType < GRASS || terrainType > HILL) {
+            // illegal terrain
+            return;
+        }
+        // first remove unit from units
+        units = units.filter(e => e !== u);
+        units.forEach((e, i) => e.div.dataset.idx = i);
+        // restore correct idx
+        u.div.parentNode.removeChild(u.div);
+        let info = {
+            x: u.x,
+            y: u.y,
+            klass: "gametile town"
+        };
+        let newTown = new Town(info);
+        divBoard.appendChild(newTown.div);
+        newTown.render(px, py);
+        towns.push(newTown);
+        newTown.div.dataset.idx = towns.length - 1;
+        // so we can find it by clicking on tile
+        me = null;
+        return;
     }
 
     function scrollFromTo(ax, ay, bx, by, cb) {
@@ -257,6 +318,9 @@ function civ(params) {
     function selectItem(e) {
         let t = e.target;
         let tn = t.className;
+        if (town) {
+            town.div.classList.remove("focus");
+        }
         if (tn.includes("hex")) {
             if (me !== null) {
                 me.div.classList.remove("focus");
@@ -268,18 +332,28 @@ function civ(params) {
                 render(px, py);
             });
         } else {
-            if (tn.includes("unit")) {
-                // clicked on a unit
-                myId = t.dataset.idx; // div has idx stored in dataset
-                me = units[myId]; // valid idx - me != undefined
-                me.div.classList.add("focus");
-                me.waiting = false;
-                me.done = this.moves === 0;
-                scrollFromTo(px + 8, py + 4, me.x, me.y, () => {
-                    if (me) {
-                        // flowtype thinks me can be null - I disagree
-                        px = me.x - 8;
-                        py = me.y - 4;
+            if (tn.includes("unit") || tn.includes("town")) {
+                // clicked on a unit or town
+                // both have idx stored on tile
+                let alias = {};
+                if (tn.includes("unit")) {
+                    myId = t.dataset.idx; // div has idx stored in dataset
+                    me = units[myId]; // valid idx - me != undefined
+                    me.sleeping = false;
+                    me.done = me.moves < 1;
+                    if (!me.done) me.div.classList.add("focus");
+                    alias = me;
+                } else {
+                    me = null; // no unit selected
+                    let tidx = t.dataset.idx;
+                    town = towns[tidx];
+                    town.div.classList.add("focus");
+                    alias = town;
+                }
+                scrollFromTo(px + 8, py + 4, alias.x, alias.y, () => {
+                    if (alias) {
+                        px = alias.x - 8;
+                        py = alias.y - 4;
                         render(px, py);
                     }
                 });
@@ -311,7 +385,7 @@ function civ(params) {
                 if (me.canMove(tt)) {
                     me.moveMe(tt); // apply cost
                     wait = true;
-                    me.facing(deltaX, deltaY);me;
+                    me.facing(deltaX, deltaY);
                     px = (px - deltaX + W) % W;
                     py = (py - deltaY + H) % H;
                     let dx = hexW * deltaX + 50 * deltaY;
