@@ -1,4 +1,9 @@
 function setup() {
+    var sound = new Howl({
+        src: ['santa.mp3']
+    });
+    sound.play();
+
     let divSky = document.getElementById("sky");
     let divSanta = document.getElementById("santa");
     let stars = divSky.querySelectorAll(".star");

@@ -1,0 +1,48 @@
+body {
+    color: blue;
+    font-size: 1.2em;
+}
+
+#main {
+    color:pink;
+}
+
+div#main { 
+    color: green;
+}
+
+span {
+    color:black;
+}
+
+span:nth-child(2) {
+    color:yellow;
+}
+
+.tore {
+    color:red;
+}
+
+li:nth-child(odd) {
+    color:green;
+}
+
+#main {
+    white-space: nowrap;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 60px;
+    width: 80px;
+    background-color: rgba(0, 128, 0, 0.32);
+    /*overflow: hidden;*/
+    text-overflow: ellipsis;
+}
+
+#bilde {
+    background-image: url("bilde.jpg");
+    background-repeat: no-repeat;
+    background-size: 450px;
+    
+}
+

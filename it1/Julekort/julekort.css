@@ -13,6 +13,7 @@
   left: 0px;
   width: 10px;
   height: 10px;
+  margin-left:0px;
   background-color: #FFFFD2;
   border-radius: 50%;
   animation: blink 1s alternate linear infinite;
@@ -20,15 +21,33 @@
 
 @keyframes blink {
     0% { 
+        margin-left: -3px;
         background-color: #fafa1a; 
-        width: 10px;
-        height: 10px;
+        width: 4px;
+        height: 4px;
     }
     100% { 
          background-color: rgb(239, 238, 212); 
          width: 2px;
          height: 2px;
+         margin-left:2px;
     }
+}
+
+#dark {
+    position: absolute;
+    top:0px;
+    left:0px;
+    background-color: rgba(0, 0, 0, 0.477);
+    width: 100vw;
+    height: 100vh;
+    animation: nightfall 10s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes nightfall {
+    0% {  background-color: rgba(0, 0, 0, 0.0);}
+   100% {  background-color: rgba(0, 0, 0, 0.677);}
 }
 
 #kanon {
@@ -83,13 +102,15 @@
     animation-fill-mode: forwards;
 }
 
-@keyframes drop {
-    0% { top: 100px;    }
-    100% { top: 80vh;     }
+@keyframes dale {
+    0% { top: 100px;   margin-left:200px; }
+    10% { top: 200px;   margin-left:10px; }
+    20% { top: 300px;   margin-left:0px; }
+    100% { top: 80vh;  margin-left:-300px;  }
   }
 
-@keyframes dale {
-  0% { top: 0px;    }
+@keyframes drop {
+  10% { top: 0px;    }
   100% { top: 90vh;     }
 }
 
@@ -97,7 +118,6 @@
 .snow {
     position: absolute;
     left: 0px;
-    top: 0px;
     width: 5px;
     height: 5px;
     border-radius: 50%;
@@ -105,22 +125,27 @@
     animation: dale 5s linear infinite;
     animation-fill-mode: forwards;
 }
+
+.snow {
+    margin-left:30px;
+    top:0;
+}
 .powder {
-    top: 300px;
+    bottom: 100px;
     animation: fyke 5s linear infinite;
 }
 
 
 @keyframes fyke {
-    0% { left: 80px;   top:300px; }
-    10% { left: 90px;   top:350px; }
-    20% { left: 110px;   top:360px; }
-    30% { left: 120px;   top:370px; }
-    40% { left: 140px;   top:400px; }
-    50% { left: 150px;   top:420px; }
-    60% { left: 160px;   top:430px; }
-    70% { left: 170px;   top:440px; }
-    80% { left: 180px;   top:460px; }
-    90% { left: 190px;   top:480px; }
-    100% { left: 200px; top: 500px;    }
+    0% { left:   5vw;    bottom:100px; }
+    10% { left:  10vw;    bottom:150px; }
+    20% { left: 20vw;    bottom:260px; }
+    30% { left: 30vw;   bottom:370px; }
+    40% { left: 40vw;   bottom:400px; }
+    50% { left: 50vw;   bottom:420px; }
+    60% { left: 60vw;   bottom:350px; }
+    70% { left: 70vw;   bottom:300px; }
+    80% { left: 80vw;   bottom:260px; }
+    90% { left: 90vw;   bottom:180px; }
+   100% { left: 100vw; bottom: 100px;    }
   }
