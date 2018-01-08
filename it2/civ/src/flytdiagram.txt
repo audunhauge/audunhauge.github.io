@@ -1,0 +1,30 @@
+@startuml
+
+title Studietid registrering
+
+
+start
+
+if (Elev er validert) then (nei)
+  :les inn OTP;
+  :lagre autid;
+endif
+
+: les inn kode;
+if (gyldig kode) then (ja)
+  if (allered registrert) then (ja)
+    : Melding - registret;
+  else (nei)
+    :sjekk gyldighet;
+    if (gyldig) then (ja)
+      :lagre registrering;
+    else (nei)
+      : melding(ugyldig);
+    endif
+  endif  
+else (nei)
+  :  melding(ugyldig);
+endif
+stop
+
+@enduml
