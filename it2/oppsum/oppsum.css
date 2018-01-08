@@ -1,3 +1,33 @@
-#main {
-    color:green;
+#storpeter {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("petersburg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: 2s;
 }
+#ex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url("newyork.jpg");
+   background-repeat: no-repeat;
+   background-size: cover;
+   transition: 2s;
+}
+#ex div {
+    width: 600px;
+    height: 200px;
+    background: rgba(0, 128, 0, 0.363);
+    margin: 1em;   
+}
+#ex div:nth-child(1) {
+   border: solid red 1px;
+}
+#ex div:nth-child(2) {
+    border: solid blue 1px;
+ }
+ #ex div:nth-child(3) {
+    border: solid green 1px;
+ }
