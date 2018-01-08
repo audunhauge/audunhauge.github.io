@@ -11,25 +11,40 @@
 </head>
 
 <body>
-  <div id="main">
-    <div id="ex">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    <div id="storpeter" class="hidden"></div>   
-    <div id="nuyok" class="hidden"></div>   
-    <div id="roma" class="hidden">
-        <video width="500"  controls>
-          <source src="roma.mp4" type="video/mp4">
-        </video>
-    </div>
-   
-  </div>
-   
+    <div id="main">
+        <div id="ex">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
 
-  
+        <div id="storpeter" class="hidden"></div>
+        <!-- viser bare et større bilde av petrsbrg -->
 
+        <div id="nuyok" class="hidden">
+            Hva heter den høyeste bygningen på bildet?
+            <select name="bygg" id="bygg" >
+                <option value="2">..Velg riktig navn..</option>
+                <option value="0">Twin towers</option>
+                <option value="0">Empire state</option>
+                <option value="1">Big tower</option>
+            </select>
+            <p></p>
+            <button type="button">Tilbake</button>
+        </div>
+        <!-- mini quiz -->
+
+        <!-- spill av video - merk at autoplay ikke virker lenger -->
+        <div id="roma" class="hidden">
+            <video width="480" controls poster="roma.jpg">
+                <source src="roma.ogv" type="video/ogg"> Your browser doesn't support HTML5 video tag.
+            </video>
+            <p>
+                <button type="button">Tilbake</button>
+            </p>
+        </div>
+
+    </div>
     <script>
         setup();
     </script>

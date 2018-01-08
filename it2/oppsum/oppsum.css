@@ -16,10 +16,15 @@
     background-image: url("petersburg.jpg");
 }
 
+#nuyok {
+    background-image: url("newyork.jpg");
+}
+
 #nuyok.hidden,
 #roma.hidden,
 #storpeter.hidden,
-#ex.hidden {
+#ex.hidden,
+.hidden {
     opacity:0;
     z-index:-1;
 }
