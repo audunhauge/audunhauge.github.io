@@ -1,20 +1,24 @@
 // @ts-check
 
 function setup() {
-    let inpForbruk = document.getElementById("forbruk");
-    let inpTank = document.getElementById("tank");
-    let btnBeregn = document.getElementById("beregn");
-    let spnRekkevidde = document.getElementById("rekkevidde");
+   let divPeter = document.getElementById("peter");
+   let divEx = document.getElementById("ex");
+   let divStorPeter = document.getElementById("storpeter");
 
-    btnBeregn.addEventListener("click", beregnRekkevidde);
+    divPeter.addEventListener("click", visStorPeter);
 
-    function beregnRekkevidde(e) {
+    divStorPeter.addEventListener("click", visLillePeter);
+
+    function visStorPeter(e) {
         // @ts-ignore
-        let forbruk = inpForbruk.valueAsNumber;
+       divEx.style.display = "none";
+       divStorPeter.style.display = "block";
+    }
+
+    function visLillePeter(e) {
         // @ts-ignore
-        let tank = inpTank.valueAsNumber;
-        let rekkevidde = tank / forbruk;
-        spnRekkevidde.innerHTML = rekkevidde.toFixed(2);
+       divEx.style.display = "flex";
+       divStorPeter.style.display = "none";
     }
     
 }
