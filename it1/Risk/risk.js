@@ -8,6 +8,7 @@ function setup() {
         messagingSenderId: "217937368827"
       };
       firebase.initializeApp(config);
+
       let database = firebase.database();
       let land = database.ref("land");
       land.on("child_added", visLand)
@@ -16,5 +17,5 @@ function setup() {
 function visLand(snapshot) {
     let land = snapshot.key;
     let divMain = document.getElementById("main");
-    divMain.innerHTML += `<p>${land}</p>`
+    divMain.innerHTML += `<div>${land}</div>`
 }
