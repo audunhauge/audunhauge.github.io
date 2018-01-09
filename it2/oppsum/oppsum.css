@@ -1,33 +1,76 @@
+#roma,
+#nuyok,
 #storpeter {
-    display: none;
+    position: absolute;
+    left: 0;
+    top:0;
     width: 100vw;
     height: 100vh;
-    background-image: url("petersburg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    opacity: 1;
     transition: 2s;
 }
-#ex {
+
+#storpeter {
+    background-image: url("petersburg.jpg");
+}
+
+#nuyok {
+    background-image: url("newyork.jpg");
+}
+
+#nuyok.hidden,
+#roma.hidden,
+#storpeter.hidden,
+#ex.hidden,
+.hidden {
+    opacity:0;
+    z-index:-1;
+}
+
+#main {
     display: flex;
     flex-direction: column;
+    align-content: center;
     align-items: center;
-    background-image: url("newyork.jpg");
-   background-repeat: no-repeat;
-   background-size: cover;
-   transition: 2s;
+}
+#ex {
+  position: relative;
+  width: 80vw;
+  height: 80vh;
+  max-width: 750px;
+  max-height: 600px;
+  background-color: rgba(0, 0, 255, 0.527);
+  border: solid green 2px;
+  opacity: 1;
+  transition: 2s;
 }
 #ex div {
-    width: 600px;
-    height: 200px;
-    background: rgba(0, 128, 0, 0.363);
+    position: absolute; 
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 200px;
+    height: 150px;
     margin: 1em;   
 }
 #ex div:nth-child(1) {
+   transform: rotate(12deg);
+   top: 20px;
+   left: 20px;
+   background-image: url("smallburg.jpg"); 
    border: solid red 1px;
 }
 #ex div:nth-child(2) {
-    border: solid blue 1px;
+   transform: rotate(-5deg);
+   top: 250px;
+   left: 250px;
+   background-image: url("roma.jpg");
+   border: solid blue 1px;
  }
  #ex div:nth-child(3) {
+    top: 20px;
+    left: 320px;
+    background-image: url("nuyok.jpg");
     border: solid green 1px;
  }
