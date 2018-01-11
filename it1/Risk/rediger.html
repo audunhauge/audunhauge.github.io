@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,22 +10,40 @@
     <script src="rediger.js"></script>
     <title>Rediger Risk</title>
 </head>
+
 <body>
     <div id="main">
-        <form>
-           <br>Land <input id="land" type="text">
-           <br>Region <input id="region" type="text">
-           <p> 
-               <button type="button" 
-               id="lagre">
-               Legg til land</button>
-           </p>
-        </form>
-
+        <div>
+            <h4>Rediger land</h4>
+            <form>
+                <br>Land
+                <input id="land" type="text">
+                <br>Region
+                <input id="region" type="text">
+                <p>
+                    <button type="button" id="lagreland">
+                        Legg til land</button>
+                </p>
+            </form>
+        </div>
+        <div>
+            <h4>Rediger Kort</h4>
+            <form>
+                <br>Kort (region)
+                <input id="kort" type="text">
+                <br>Antall
+                <input id="antallnye" type="number">
+                <p>
+                    <button type="button" id="lagrekort">
+                        Legg til land</button>
+                </p>
+            </form>
+        </div>
     </div>
 
-     <script>
+    <script>
         setup();
     </script>
 </body>
+
 </html>

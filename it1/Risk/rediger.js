@@ -6,21 +6,36 @@ function setup() {
         projectId: "risk-b1fc9",
         storageBucket: "",
         messagingSenderId: "217937368827"
-      };
-      firebase.initializeApp(config);
+    };
+    firebase.initializeApp(config);
 
-      let database = firebase.database();
+    let database = firebase.database();
 
-     let inpLand = document.getElementById("land");
-     let inpRegion = document.getElementById("region");
+    let inpLand = document.getElementById("land");
+    let inpRegion = document.getElementById("region");
 
-     let btnLagre = document.getElementById("lagre");
-     btnLagre.addEventListener("click", lagreData);
+    let btnLagreLand = document.getElementById("lagreland");
+    btnLagreLand.addEventListener("click", lagreLand);
 
-     function lagreData(e) {
-         let land = inpLand.value;
-         let region = inpRegion.value;
-         let ref = database.ref("land/" + land);
-         ref.set( { kortid }); 
-     }
+    let inpKort = document.getElementById("kort");
+    let inpAntallNye = document.getElementById("antallnye");
+
+    let btnLagreKort = document.getElementById("lagrekort");
+    btnLagreKort.addEventListener("click", lagreKort);
+
+    function lagreLand(e) {
+        let land = inpLand.value;
+        let kortid = inpRegion.value;
+        let ref = database.ref("land/" + land);
+        ref.set({ kortid });
+    }
+
+    function lagreKort(e) {
+        let kort = inpKort.value;
+        let antallnye = inpAntallNye.value;
+        let ref = database.ref("kort/" + kort);
+        ref.set({ antallnye });
+    }
+
+
 }
