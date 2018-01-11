@@ -11,5 +11,16 @@ function setup() {
 
       let database = firebase.database();
 
-     
+     let inpLand = document.getElementById("land");
+     let inpRegion = document.getElementById("region");
+
+     let btnLagre = document.getElementById("lagre");
+     btnLagre.addEventListener("click", lagreData);
+
+     function lagreData(e) {
+         let land = inpLand.value;
+         let region = inpRegion.value;
+         let ref = database.ref("land/" + land);
+         ref.set( { kortid }); 
+     }
 }
