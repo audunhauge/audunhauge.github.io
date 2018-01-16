@@ -1,0 +1,11 @@
+#main form div {
+    width: 18em;
+    display: grid;
+    grid-template-columns: 4fr 5fr;
+    grid-gap: 1em;
+    margin: 2px;
+}
+
+#main form div div {
+    white-space: nowrap;
+}
