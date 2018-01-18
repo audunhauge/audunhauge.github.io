@@ -4,7 +4,7 @@
     height: 112px;
     left: 0px;
     top:0px;
-    background-image: url("walking.png");
+    background-image: url("walking2.png");
     background-position-x: 0; 
     opacity: 1; 
 }
@@ -14,7 +14,7 @@
 }
 
 #fig1 {
-    background-position-y: calc( -112px * 2 );
+    background-position-y: calc( -118px * 2 );
     animation: legs 1s steps(8) infinite,
        walk 18s linear forwards;
 }
