@@ -16,10 +16,11 @@
     top: 10px;
     width: 49vw;
 }
+
 #sonic {
     position: absolute;
     right: 10px;
-    top:10px;
+    top: 10px;
     width: 49vw;
     height: 100vh;
 }
@@ -29,30 +30,60 @@
     width: 256px;
     height: 256px;
     left: 0px;
-    top:0px;
-    transform: scaleX(-1);
+    top: 0px;
     background-image: url("spritestrip.png");
     background-position-x: 0px;
     background-position-y: 0px;
 }
 
 #sprite {
-  animation:  step 800ms  infinite steps(6),
-  walk 3s infinite alternate linear,
-  flipper 6s infinite;
+    animation: step 800ms infinite steps(6), 
+    walk 3s alternate infinite linear, 
+    flipper 6s infinite linear;
+}
+
+
+/*
+  Step vil dele avstanden (1536) i 6 like deler
+  Siden hver sprite er 256px, må lengden være 6*256=1536
+  Du kan få raskere fotarbeid ved å endre 800ms til
+  et lavere tall
+*/
+
+@keyframes step {
+    100% {
+        background-position-x: -1536px;
+    }
 }
 
 @keyframes walk {
-    0% { left:0px; top: 0px;}
-  100% { left:30vw; top: 60vh;}
+    0% {
+        left: 0px;
+        top: 0px;
+    }
+    100% {
+        left: 30vw;
+        top: 60vh;
+    }
 }
 
-@keyframes step {
-   100% { background-position-x: -1536px;}
-}
+
+/*
+  Snu retning på sprite ca midt i animasjonen.
+  Denne varer dobbelt så lenge som walk
+*/
+
 @keyframes flipper {
-    0% { transform: scaleX(1);}
-    50%  { transform: scaleX(1);}
-    50.2% { transform: scaleX(-1);}
-    100% { transform: scaleX(-1);}
+    0% {
+        transform: scaleX(1);
+    }
+    50% {
+        transform: scaleX(1);
+    }
+    50.1% {
+        transform: scaleX(-1);
+    }
+    100% {
+        transform: scaleX(-1);
+    }
 }

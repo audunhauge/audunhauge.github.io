@@ -1,0 +1,14 @@
+@startuml
+:start;
+if (test) then (true)
+  :do stuff;
+else (false)
+  :other;
+endif 
+:stop;
+
+while (element) is (defined)
+  :les;
+endwhile
+:go;
+@enduml

@@ -1,0 +1,81 @@
+#main {
+    position: relative;
+}
+
+.fig {
+    position: absolute;
+    left: 0;
+    top: calc(100vh - 120px);
+    width: 113px;
+    height: 113px;
+    background-image: url("waalkin.png");
+    background-position-x: 0;
+    opacity: 1;
+}
+
+#fig1 {
+    background-position-y: -224px; 
+    animation: legs 1000ms steps(8) infinite,
+    walk 4s linear;
+    animation-fill-mode: forwards;
+}
+
+#fig2 {
+    background-position-y: calc(-112px * 8 ); 
+    left: 70vw;
+    opacity: 0;
+    animation: legs 1000ms 4s steps(8),
+         noshow 4s linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes noshow {
+    99.9% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+
+/* 
+  Figuren skal forsvinne på siste frame
+  Derfor er opacity 1 til 99.99 og 0 på 100%
+*/
+@keyframes walk {
+    99.9% {
+        left: 70vw;
+        opacity: 1;
+    }
+    100% {
+        left: 70vw;
+        opacity: 0;
+    }
+}
+
+@keyframes legs {
+    100% {
+        background-position-x: -894px;
+    }
+}
+
+#boks {
+    position: absolute;
+    left: 75vw;
+    top: calc(100vh - 50px);
+    width: 30px;
+    height: 30px;
+    border: solid gray 1px;
+    border-radius: 3px;
+    animation: lifted 2s 4s forwards;
+}
+
+@keyframes lifted {
+    30% {top: calc(100vh - 50px); left:75vw;}
+    70% {top: calc(100vh - 90px); left:74.5vw;}
+    100% { top: calc(100vh - 100px); left: 74vw;}
+}
+
