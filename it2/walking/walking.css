@@ -3,7 +3,7 @@
     width: 112px;
     height: 112px;
     left: 0px;
-    top:0px;
+    top: calc(100vh - 130px);
     background-image: url("walking2.png");
     background-position-x: 0; 
     opacity: 1; 
@@ -14,9 +14,27 @@
 }
 
 #fig1 {
-    background-position-y: calc( -118px * 2 );
+    background-position-y: calc( -112px * 2 - 12px );
+}
+
+#fig11 {
+    background-position-y: calc( -112px * 2 - 12px );
     animation: legs 1s steps(8) infinite,
-       walk 18s linear forwards;
+       walk 4s linear forwards;
+}
+
+
+#fig2 {
+    left: 80vw;
+    background-position-y: calc( -112px * 8 - 12px  );
+    animation: legs 3s 4s steps(8),
+       wait 4s linear;
+}
+
+@keyframes wait {
+    0% { opacity: 0; }
+    99.9% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 @keyframes legs {
@@ -26,4 +44,23 @@
 @keyframes walk {
     99.9% { left: 80vw; opacity: 1; } 
     100% { left: 80vw; opacity: 0; }
+}
+
+.boks {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: solid gray 1px;
+    border-radius: 3px;
+    left:64px;
+    top:27px;
+}
+
+.hidden {
+    opacity:0;
+}
+
+#boks {
+    left: 670px;
+    top: calc(100vh - 60px);
 }
