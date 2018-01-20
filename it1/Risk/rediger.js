@@ -1,3 +1,5 @@
+// @ts-check
+
 function setup() {
     var config = {
         apiKey: "AIzaSyBlPjI5glXQ6ilEg9EVVPQS1lFh_Bsfa7c",
@@ -35,6 +37,23 @@ function setup() {
         let antallnye = inpAntallNye.value;
         let ref = database.ref("kort/" + kort);
         ref.set({ antallnye });
+    }
+
+    let inpBruker = document.getElementById("bruker");
+    let inpAlder = document.getElementById("alder");
+    let inpFarge = document.getElementById("farge");
+    let inpNavn = document.getElementById("navn");
+
+    let btnLagreSpiller = document.getElementById("lagrespiller");
+    btnLagreSpiller.addEventListener("click", lagreSpiller);
+
+    function lagreSpiller(e) {
+        let brukernavn = inpBruker.value;
+        let alder = inpAlder.value;
+        let farge = inpFarge.value;
+        let navn = inpNavn.value;
+        let ref = database.ref("spiller/" + brukernavn);
+        ref.set({ alder, farge, navn });
     }
 
 

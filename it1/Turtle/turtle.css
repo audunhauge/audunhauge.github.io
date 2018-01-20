@@ -1,0 +1,19 @@
+#turtle {
+    position: absolute;
+    left: -200px;
+    top: 40vh;
+    background-image: url("Doggy.png");
+    width: 184px;
+    height: 100px;
+    background-position-x: 0;
+    animation: run 800ms steps(9) infinite,
+        move 5s linear infinite;
+}
+
+@keyframes run {
+  100% { background-position-x: -1656px; }
+}
+
+@keyframes move {
+    100% { left: 153vw; }
+}
