@@ -1,8 +1,8 @@
 @startuml
 :start;
 floating note left: husk å starte debugger
-:regn ut pris<
-: finn verdi;
+:finn verdi<
+:summer verdier;
 :beregn()|
 if (test) then (yes)
   :dostuff;
