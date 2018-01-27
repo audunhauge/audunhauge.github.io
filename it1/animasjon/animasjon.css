@@ -1,0 +1,72 @@
+/* main skal dekke nesten hele skjermen */
+#main {
+    width: 98vw;
+    height: 98vh;
+  }
+  
+  #himmel {  /* øverst på skjermen */
+    position: relative;
+    height: 60%;
+    background-color:rgb(104, 104, 241);  /* lys blå */
+  }
+  
+  #jord { /* nederst på skjermen */
+    overflow: hidden;
+    position: relative;
+    height: 38%;
+    background-color: rgb(207, 153, 90);
+  }
+
+  #sol {
+      position: absolute;
+      /* metoden under garanterer at solen står midt på himmelen 
+        uansett hvordan bruker endrer størrelse på displayet */
+      top: calc(50% - 20px);
+      left: calc(50% - 20px);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: yellow;
+      animation: blink 1s alternate linear infinite;
+      /* kjør blink animasjon, den skal vare i 1s, 
+         alternere (fram og tilbake) 
+         endringen skal være linear (jevn)
+         og gjentas i all evighet */
+  }
+
+  @keyframes blink {
+    100% { transform: scale(0.87); }
+  }
+
+  #person {
+      position: absolute;
+      left: calc(50% - 56px);
+      top: 30px;
+      width: 112px;
+      height: 112px;
+      background-image: url("puppet.png");
+      background-position-x: 0;
+      background-position-y: calc(-112px * 2);
+      animation: walk 1s steps(8) infinite;
+  }
+
+  @keyframes walk {
+      100% { background-position-x: calc( -112px * 8 ); }
+  }
+
+  #kaktus {
+    position: absolute;
+    opacity: 0;
+    top : 30px;
+    left: 100%;
+    width: 68px;
+    height: 90px;
+    background-image: url("cactus.png");
+    transition: left 9s linear;
+    will-change: left;
+  }
+
+  #kaktus.ut {
+      left: -100px;
+      opacity: 1;
+  }

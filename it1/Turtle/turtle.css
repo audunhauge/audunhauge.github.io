@@ -1,13 +1,13 @@
 #turtle {
     position: absolute;
-    left: -200px;
+    left: 200px;
     top: 40vh;
     background-image: url("Doggy.png");
     width: 184px;
     height: 100px;
     background-position-x: 0;
     animation: run 800ms steps(9) infinite,
-        move 5s linear infinite;
+          move 15s linear infinite; 
 }
 
 @keyframes run {
