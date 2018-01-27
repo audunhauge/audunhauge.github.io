@@ -1,50 +1,68 @@
 function setup() {
     let divFig1 = document.querySelector("#fig1");
-    let divBoks = document.querySelector("#boks");
+    let divBoks = document.querySelector("#boks1");
 
-    let move = divFig1.animate(
-        [
-            { left: "0px" },
-            { left: "600px" },
-        ],
-        {
-            duration: 4000,
-            iterations: 1,
-            fill: "forwards"
-        }
-    )
-    divFig1.style.backgroundPositionY = "calc( -112px * 2 - 12px  )";
-    // start with walk animation from sprite-sheet
-
-    let sprite = [
-        { backgroundPositionX: "0px", offset: 0 },
-        { backgroundPositionX: "-894px", offset: 1 }
+    let moveFrames = [
+        { left: "0vw" },
+        { left: "600px" }
     ];
-    let options = {
-        easing: "steps(8)",
+    let moveSettings = {
+        duration: 12000,
+        iterations: 1,
+        fill: "forwards"
+    }
+
+    let move = divFig1.animate(moveFrames, moveSettings);
+
+    let stepFrames = [
+        { backgroundPositionX: "0px" },
+        { backgroundPositionX: "-894px" } 
+    ];
+    let stepSettings = {
         duration: 800,
         iterations: Infinity,
+        easing: "steps(8)"
     }
+    let step = divFig1.animate(stepFrames, stepSettings);
 
-    let walk = divFig1.animate(sprite, options)
+    move.onfinish = ferdigMove;
 
+    function ferdigMove(e) {
+        step.cancel();
+        divFig1.style.backgroundPositionY =  "calc( -112px * 8 - 12px  )";
+        stepSettings.iterations = 1;
+        stepSettings.duration = 2200;
+        let bend = divFig1.animate(stepFrames, stepSettings);
+        bend.play();
 
-    move.onfinish = (e) => {
-        console.log("fine");
-        // change to bend animation
-        walk.pause();
-        options.duration = 1200;
-        options.iterations = 1;
-        walk.cancel();
-        let bend = divFig1.animate(sprite, options)
-        divFig1.style.backgroundPositionY = "calc( -112px * 8 - 12px  )";
-        let liftbox = divBoks.animate(
-            [ { top: "calc(100vh - 60px)"}, {top:"calc(100vh - 110px)"}],
-            { duration: 500, fill:"forwards", delay:700, easing:"ease-out"}
-        )
-        liftbox.onfinish = (e) => {
-            divBoks.classList.add("hidden");
-            divFig1.querySelector(".boks").classList.remove("hidden");
+        let liftFrames = [
+            { top: "calc(100vh - 60px)" },
+            { top: "calc(100vh - 100px)" } 
+        ];
+        let liftSettings = {
+            duration: 2200,
+            delay: 1200,
+            iterations: 1,
+            fill: "forwards",
+            easing: "ease-out"
         }
+        let lift = divBoks.animate(liftFrames, liftSettings);
+        lift.onfinish = gaaTilbake;
     }
+
+    function gaaTilbake() {
+        divBoks.parentNode.removeChild(divBoks);
+        let divBoks2 = document.getElementById("boks2");
+        divBoks2.style.opacity = 1;
+        divFig1.style.transform = "scaleX(-1)";
+        divFig1.style.backgroundPositionY =  "calc( -112px * 6 - 12px  )";
+        divFig1.style.transition = "none";
+        divFig1.style.transform = "scaleX(1)";
+        divBoks2.style.left = "20px";
+        step.play();
+        move.playbackRate = -1;
+        move.play();
+
+    }
+
 }

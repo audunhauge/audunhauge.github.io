@@ -15,36 +15,9 @@
 
 #fig1 {
     background-position-y: calc( -112px * 2 - 12px );
+    transition: transform 1s;
 }
 
-#fig11 {
-    background-position-y: calc( -112px * 2 - 12px );
-    animation: legs 1s steps(8) infinite,
-       walk 4s linear forwards;
-}
-
-
-#fig2 {
-    left: 80vw;
-    background-position-y: calc( -112px * 8 - 12px  );
-    animation: legs 3s 4s steps(8),
-       wait 4s linear;
-}
-
-@keyframes wait {
-    0% { opacity: 0; }
-    99.9% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-@keyframes legs {
-    100% { background-position-x: -894px;}
-}
-
-@keyframes walk {
-    99.9% { left: 80vw; opacity: 1; } 
-    100% { left: 80vw; opacity: 0; }
-}
 
 .boks {
     position: absolute;
@@ -60,7 +33,13 @@
     opacity:0;
 }
 
-#boks {
+#boks1 {
     left: 670px;
     top: calc(100vh - 60px);
+}
+
+#boks2 {
+    left:66px;
+    top: 25px;
+    opacity: 0;
 }
