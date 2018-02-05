@@ -1,0 +1,22 @@
+Hvordan klippe opp DogRun.png i biter
+og montere sammen som vanrett rad.
+
+- DogRun er 552*300 og er tile 3x3
+- hver sprite i DogRun er 184x100
+
+Denne kommandoen klipper DogRun opp i 9 bilder.
+
+    convert DogRun.png -crop 184x100  +repage dog_%02d.png
+
+-crop 184x100       :=      er dimensjon på hver sprite
++repage             :=      begynn på ny linje
+
+Denne kommandoen limer sammen disse  bildene    
+
+    montage dog_0[0-8].png -geometry 184x100 -tile 9x1 -background none dogger.png
+
+-tile 9x1           :=      9 bilder i bredden x 1 i høyden
+-background none    :=      ikke bruk bakgrunnsfarge (orginalen er transparant)
+-geometry 184x100   :=      hver bit skal være så stor
+
+resultatet er dogger.png som er 1656 x 100

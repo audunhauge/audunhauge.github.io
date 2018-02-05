@@ -19,7 +19,7 @@ declare class Settler {
 }
 
 declare class Town {
-    constructor(info: any): any;
+    constructor(info: any, getLand: (t:Town) => any): any;
 }
 
 declare class Tile {
@@ -317,7 +317,7 @@ function civ(params) {
             y: u.y,
             klass: "gametile town"
         }
-        let newTown = new Town(info);
+        let newTown = new Town(info, getLand);
         divBoard.appendChild(newTown.div);
         newTown.render(px, py);
         towns.push(newTown);
@@ -325,6 +325,10 @@ function civ(params) {
         // so we can find it by clicking on tile
         me = null;
         return;
+    }
+
+    function getLand(town:Town) {
+       
     }
 
     function scrollFromTo(ax, ay, bx, by, cb) {
@@ -363,7 +367,7 @@ function civ(params) {
         let t = e.target;
         let tn = t.className;
         if (town) {
-            town.div.classList.remove("focus"); 
+            town.div.classList.remove("focus");
         }
         if (tn.includes("hex")) {
             if (me !== null) {

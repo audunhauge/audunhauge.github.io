@@ -1,0 +1,22 @@
+@startuml
+:start;
+floating note left: husk å starte debugger
+:finn verdi<
+:summer verdier;
+:beregn()|
+if (test) then (yes)
+  :dostuff;
+else
+  :something else;
+  note right: her er vi
+endif
+:i=0;
+while (i<10)
+  :read data;
+  :generate diagrams;
+  :i++;
+endwhile
+
+:end;
+
+@enduml

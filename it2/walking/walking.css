@@ -1,0 +1,45 @@
+.fig {
+    position: absolute;
+    width: 112px;
+    height: 112px;
+    left: 0px;
+    top: calc(100vh - 130px);
+    background-image: url("walking2.png");
+    background-position-x: 0; 
+    opacity: 1; 
+}
+
+#main {
+    position: relative;
+}
+
+#fig1 {
+    background-position-y: calc( -112px * 2 - 12px );
+    transition: transform 1s;
+}
+
+
+.boks {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: solid gray 1px;
+    border-radius: 3px;
+    left:64px;
+    top:27px;
+}
+
+.hidden {
+    opacity:0;
+}
+
+#boks1 {
+    left: 670px;
+    top: calc(100vh - 60px);
+}
+
+#boks2 {
+    left:66px;
+    top: 25px;
+    opacity: 0;
+}

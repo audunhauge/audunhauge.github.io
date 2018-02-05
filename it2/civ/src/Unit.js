@@ -77,28 +77,30 @@ class Item {
 class Town extends Item {
     name: string;
     size: number;
-    workers: number;
-    farmers: number;
+    workers: Array<Object>;
     buildings: Array<string>;
     prod: number;
     food: number;
     pop: number;
     tiles: Array<any>;
     status: string;
-    constructor(info) {
+    getLand: (t:Town) => any;
+    constructor(info, getLand) {
         let { ix, iy } = OFFSET["town1"];
         let { x, y, klass, type = "normal" } = info;
         super({ x, y, ix, iy, klass });
         this.size = 1;
         this.name = "Oslo";
-        this.workers = 1;
-        this.farmers = 1;
+        this.workers = [];
         this.buildings = [];
         this.prod = 0;
         this.pop = 1000;
         this.food = 2000;
         this.status = "ok";
+        getLand(this);
     }
+
+    
 
     doCommand(key, div) {
         let k = KeyCODE[key];
@@ -123,7 +125,7 @@ class Town extends Item {
         <ul>
           <li>pop: ${this.pop}
           <li>size: ${this.size}
-          <li>workers: ${this.workers}
+          <li>workers: ${this.workers.length}
           <li>prod: ${this.prod}
           <li>food: ${this.food}
           <li>building: ${this.buildings.join()}

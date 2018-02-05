@@ -278,7 +278,7 @@ function civ(params) {
             y: u.y,
             klass: "gametile town"
         };
-        let newTown = new Town(info);
+        let newTown = new Town(info, getLand);
         divBoard.appendChild(newTown.div);
         newTown.render(px, py);
         towns.push(newTown);
@@ -287,6 +287,8 @@ function civ(params) {
         me = null;
         return;
     }
+
+    function getLand(town) {}
 
     function scrollFromTo(ax, ay, bx, by, cb) {
         let deltaX = ax - bx;
