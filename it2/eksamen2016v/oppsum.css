@@ -21,6 +21,7 @@
     color:white;
     padding:2em;
     font-size: 1.3em;
+    background-size: contain;
 }
 
 #nuyok.hidden,
@@ -32,6 +33,21 @@
     z-index:-1;
 }
 
+#main,
+#roma {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+#roma div {
+    width: 50vw;
+    /*border: solid red 1px;*/
+    margin-top:3em;
+}
+
+
 #nuyok div {
     position: absolute;
     top: 3em;
@@ -41,12 +57,9 @@
     color:white;
 }
 
-#main {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
-}
+
+
+
 #ex {
   position: relative;
   width: 80vw;
