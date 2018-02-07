@@ -1,0 +1,116 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <script src="../lib/howler.min.js"></script>
+    <style>
+        #elefant {
+            position: absolute; 
+            left: -800px;
+        }
+        
+        #spurv {
+            position:absolute; 
+            left:-500px;
+        }
+        #melding {
+            border:solid lawngreen 2px;
+            width:300px;
+            margin-left:50px;
+            padding:5px;
+            text-align: center;    
+        }
+        
+        .vismeg {
+          animation: roll 5s;
+        }
+        
+        @keyframes roll {
+          40% { left: 30px;}
+          80% { left: 30px;}
+         100% { left: -800px; } 
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <p> &nbsp; </p>
+    <div id="personalia">
+        <form class="pure-form pure-form-aligned">
+            <div class="pure-control-group">
+                <label for="navn">Navn</label>
+                <input id="navn" type="text" placeholder="fornavn etternavn">
+            </div>
+            <div class="pure-control-group">
+                <label for="alder">Alder</label>
+                <input id="alder" min=17 max=90 type="number" placeholder="17..90">
+            </div>
+            <div class="pure-control-group">
+                <label for="vekt">Vekt</label>
+                <input id="vekt" min=20 max=290 type="number" placeholder="20..290">
+            </div>
+            <div class="pure-control-group">
+                <label for="hoyde">Høyde</label>
+                <input id="hoyde" min=10 max=250 type="number" placeholder="10..290">
+            </div>
+            <div class="pure-control-group">
+                <label for="bmi">BMI</label>
+                <output id="bmi"><i>velg gyldige verdier</i></output>
+            </div>
+            <div class="pure-controls">
+                <div id="beregn" class="pure-button pure-button-primary">Beregn</div>
+            </div>
+            
+            
+        </form>
+        <div id="melding"></div>
+        <img id="elefant" src="elefant.png">
+        <img id="spurv" src="sparrow.png">
+    </div>
+    <script>
+       var lagre = document.querySelector("#beregn");
+       lagre.addEventListener("click",beregn);
+       var soundeffect  = new Howl({
+          urls: ['sound.mp3'],
+          sprite: { elefant: [0, 1500], spurv: [2000, 4200] }
+      });
+       
+       function respond(navn1,alder1,hoyde1,vekt1) {
+            var bmi = vekt1/(hoyde1*hoyde1);
+            var melding = "";
+            var bilde = "";
+            var norm = " helt ok.";
+            if (! isNaN(bmi))  {
+                if (bmi > 25) {
+                    norm = " litt høyt.";
+                    bilde = "elefant";
+                } else if (bmi < 18.5) {
+                    norm = " noe lavt.";
+                    bilde = "spurv";
+                } else {
+                    
+                }    
+                if (bilde) {
+                    soundeffect.play(bilde);
+                    document.querySelector("#" + bilde).classList.add("vismeg");
+                    setTimeout( () => document.querySelector("#" + bilde).classList.remove("vismeg"), 5000);
+                }
+                document.querySelector("#bmi").innerHTML = bmi.toFixed(2);
+                melding = "Hei " + navn1 + ", du er " + alder1
+                  + " år.<p> Du har en bmi på "
+                  + bmi.toFixed(2) + ".<br> Det er " + norm;
+                document.querySelector("#melding").innerHTML = melding;
+            }
+       }
+       
+       function beregn() {
+             var navn = document.querySelector("#navn").value;
+             var alder = +document.querySelector("#alder").valueAsNumber;
+             var hoyde = +document.querySelector("#hoyde").valueAsNumber/100;
+             var vekt = +document.querySelector("#vekt").valueAsNumber;
+             respond(navn,alder,hoyde,vekt);
+       }
+    </script>
+</body>
+</html>

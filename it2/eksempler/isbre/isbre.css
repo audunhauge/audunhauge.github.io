@@ -1,0 +1,53 @@
+#main {
+  position: relative;
+  color: black;
+}
+
+#isbre {
+  position: absolute;
+  background-image: url("isbre.png");
+  background-size: contain;
+  background-color: blue;
+  left: 0px;
+  top: 50%;
+  width: 600px;
+  height: 200px;
+  animation: slide_out 5s ease-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slide_out {
+  100% { left: -620px; }
+}
+
+.blomst {
+  position: absolute;
+  width: 4px;
+  height: 0px;
+  background-image: url("blomst.png");
+  background-color: green;
+  transition: 3s;
+}
+
+#b1 {
+  left:230px;
+  top: 60px;
+}
+
+#b2 {
+  left:130px;
+  top: 160px;
+}
+
+#b3 {
+  left:430px;
+  top: 60px;
+}
+
+
+
+.blomst.spirer {
+  height: 60px;
+  width: 20px;
+  transform: translate(-8px, -60px);
+}

@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="sykkel.css">
+    <script src="../lib/util.js"></script>
+    <script src="../lib/howler.min.js"></script>
+    <script src="../lib/ramda.min.js"></script>
+    <script src="salesman.js"></script>
+    <script src="sykkel.js"></script>
+  </head>
+  <body>
+    <div id="kart">
+      <canvas id="overlay" width="599" height="735"></canvas>
+      <div title="Halden" class="merke" id="halden"></div>
+      <div title="Askim" class="merke" id="askim"></div>
+      <div title="Fredrikstad"  class="merke" id="fredrikstad"></div>
+      <div title="Moss"  class="merke" id="moss"></div>
+      <div title="Ørje"  class="merke" id="orje"></div>
+    </div>
+    <div id="skjema">
+      <button id="nytur">Lag ny tur</button>
+       <button id="simple">Forenkle</button>
+      <div id="turliste">
+      </div>
+    </div>
+    <img id="kartgif" src="stortkartostfold.gif">
+    <script>
+      setup();
+    </script>
+  </body>
+</html>

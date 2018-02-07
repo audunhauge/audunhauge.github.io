@@ -1,0 +1,42 @@
+<html>
+ <head>
+     <meta charset="UTF-8">
+     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+ </head>
+ <body>
+     <div id="personalia">
+      <p>
+      <form class="pure-form pure-form-aligned" 
+            forklaring="oppdaterer ffor, kjører respond som beregner og viser totalpris"
+            oninput="ffor.value = forbruk.valueAsNumber;respond(forbruk.valueAsNumber,mil.valueAsNumber,pris.valueAsNumber);">
+        <div class="pure-control-group">
+          <label for="mil">Antall sjømil</label>
+          <input id="mil" type="number" placeholder="1..10">
+        </div>
+        <div class="pure-control-group">
+          <label for="pris">Pris/liter</label>
+          <input id="pris" min=7 max=20
+                 type="number" placeholder="7..20">
+        </div>
+        <div class="pure-control-group">
+          <label for="forbruk">Forbruk</label>
+          <input id="forbruk" type="range" placeholder="0.5..20" min=0.5 max=20 step=0.2>
+          <output for="forbruk" name="ffor">10</output>
+        </div>
+        <div class="pure-control-group">
+          <label for="total">Totalpris</label>
+          <output  id="total"><i>velg gyldige verdier</i></output>
+        </div>
+      </form>
+    </div>
+    
+    <script>
+       function respond(forbruk,mil,pris) {
+            var total = mil*pris*forbruk;
+            if (! isNaN(total))  {
+                document.querySelector("#total").innerHTML = total.toFixed(2) + " kr";
+            }
+       }
+    </script>
+ </body>
+</html>

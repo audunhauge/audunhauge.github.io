@@ -1,0 +1,66 @@
+#skjema form {
+  display: flex;
+  flex-flow: row wrap;
+  width: 25em;
+  justify-content: space-around;
+  margin:3em;
+}
+
+form .inputDiv {
+  flex: 1 1 45%;
+  display: flex;
+  margin-right:1em;
+  padding-top:10px;
+}
+
+form  .inputDiv label {
+   flex: 1 1 30%; 
+}
+
+#tabell  table {
+  width: 35em;
+  border-collapse: collapse;
+  counter-reset: liga;
+  margin:3em;
+}
+
+#tabell  caption {
+  color: green;
+  font-size: 1.4em;
+  background-color: #dde;
+}
+
+#tabell  tr th {
+  background-color: #bad;
+  padding:2px;
+}
+
+#tabell  tr:nth-child(2n+2) {
+  background-color: #aca;
+}
+
+#tabell  tr td {
+  padding:2px;
+  text-align: center;
+}
+
+#tabell  tr:nth-child(n) td:nth-child(1):before {
+  counter-increment: liga;
+  content: counter(liga);
+  color:blue;
+  font-size:0.9em;
+  display:inline-block;
+  position:absolute;
+  left:2em;
+}
+
+#tabell  tr td:nth-child(1) {
+  background-color: rgba(30,30,30,0.1);
+  padding:2px;
+  font-size: 1.1em;
+  text-transform: uppercase;
+}
+
+
+
+

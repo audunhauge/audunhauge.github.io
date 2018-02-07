@@ -1,0 +1,116 @@
+/*-- klasser --*/
+.mybutton, .butt {
+    position:absolute;    
+    border: solid grey 1px;
+    border-radius: 4px;
+    background: lightblue;
+    text-align: center;
+    box-shadow: 2px 2px 1px 1px rgba(12,44,77,0.16);
+    outline:none;   /* remove outline around selected button */
+}
+.mybutton:hover , .butt:hover {
+    background: cadetblue;
+}
+.mybutton:active, .butt:hover:active {
+    box-shadow:none;
+    transform: translate(2px,2px);
+}
+ 
+ 
+ 
+.mybutton {
+    width:2em;
+}
+
+.mytext {
+    position:absolute;
+    width:170px;
+    text-align: center;
+}
+/*   editor - styling for div og textarea */
+#tinyed {
+    position: absolute;
+    top:200px;
+}
+/*     kontainer divs   inneholder datoer og ukedager */
+ 
+ #ukedager,#datoer {
+     position: absolute;
+     width:170px;
+     left:50px;
+     top:90px;
+ }
+ 
+ #datoer {
+    top:110px; 
+ }
+ 
+ /* styling for dager og ukedager, styling for valgt dag, idag, dager med notat */
+ 
+ div.notat {
+  background-image:
+    radial-gradient(     rgba(100,250,100,0.5),  white   );
+ }
+ 
+ div.dag, div.dato {
+     width:19px;
+     float:left;
+     padding-left:5px;
+     font-size:0.7em;
+     text-align: center;
+     position:relative;
+ }
+ 
+ .chosen:after, .today:after {
+     content:"";
+     display:block;
+     position:absolute;
+     width: 13px;
+     height: 13px;
+     left:7px;
+     top:-1px;
+     border:solid rgba(200,0,0,0.5) 1px;
+     border-radius: 8px;
+ }
+ 
+ .skip.chosen:after {
+     border:none;
+ }
+ 
+ .today:after {
+    border:solid rgba(0,190,0,0.5) 1px; 
+ }
+ 
+ .chosen.today:after {
+     border:solid green 1px; 
+ }
+ 
+ div.dato.skip {
+     background:none;
+     color:white;
+ }
+/*  plassering av knapper på stagen */
+#prev_year {
+    left:20px;
+    top:20px;
+}
+#next_year {
+    left:220px;
+    top:20px;
+}
+#prev_month {
+    left:20px;
+    top:45px;
+}
+#next_month {
+    left:220px;
+    top:45px;
+}
+#year {
+    left:50px;
+    top:20px;
+}
+#month {
+    left:50px;
+    top:45px;
+}
