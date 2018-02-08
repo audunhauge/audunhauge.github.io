@@ -1,0 +1,37 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    
+    <style>
+       #square {
+        width: 50px;
+        height: 50px;
+        background-color: green;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+      }
+    </style>
+</head>
+<body>
+   <div id="square">
+   </div>
+   <script>
+      var square = document.getElementById('square');
+      var pos = { x: 0, y: 0 };
+      document.addEventListener('mousemove', function (e) {
+        pos.x = e.clientY - 25;
+        pos.y = e.clientX - 25;
+      })
+      function render(timestamp) {
+        // timestamp brukes ikke her
+        // men den kan brukes til å sjekk tiden siden
+        // sist animering og justere framerate
+        square.style.top = pos.x + 'px';
+        square.style.left = pos.y + 'px';
+        window.requestAnimationFrame(render);
+      }
+      window.requestAnimationFrame(render);    
+    </script>
+</body>
+

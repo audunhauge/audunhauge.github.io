@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="video.css">
+    <script src="../lib/util.js"></script>
+    <script src="video.js"></script>
+  </head>
+  <body>
+    <h1> Viser bruk av video</h1>
+    <div id="video">
+      <!-- Ta vekk autoplay dersom du ikke vil spille av med en gang -->
+      <video id="vid" autoplay >
+        <source  src="skjema.mp4">
+      </video>
+      <button id="stopp" type="button">Stopp video</button>
+    </div>
+    <script>
+      setup();
+    </script>
+  </body>
+</html>

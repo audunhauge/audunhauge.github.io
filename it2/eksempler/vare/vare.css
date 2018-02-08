@@ -1,0 +1,40 @@
+#main {
+    margin: 3em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+#main > div {
+    min-height: 3em;
+    margin: 5px;
+}
+#vareliste {    
+    min-width: 11em;
+    width: 30%;
+}
+#dialog {
+    width: 20%;
+}
+#handlekorg {
+    min-width:11em;
+    width: 40%;
+}
+div.kjop {
+    margin: 3px;
+    display: flex;
+    justify-content: space-between;
+}
+.kjop div  {
+    width:22%;
+}
+#handlekorg div.kjop div:first-child {
+    width:6%;
+}
+/* pris og totalpris vises høyrejustert */
+#handlekorg div.kjop div:nth-child(2n+3), #handlekorg div.kjop div:nth-child(2n+4) {
+    text-align:right;
+}
+div.total {
+    margin:2em;
+    text-align: center;
+}

@@ -1,0 +1,19 @@
+div.scroll {
+    position: relative;
+    display: inline-block;
+    width: 8em;
+    height: 1em;
+    overflow: hidden;
+}
+
+div.scroll span {
+  white-space: nowrap;
+  position: relative;
+  left: 0;
+  animation: roll 42s linear infinite;
+}
+
+@keyframes roll {
+    0% { left: 0; }
+  100% { left: -3000px; }
+}

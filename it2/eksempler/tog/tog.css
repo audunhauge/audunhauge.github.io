@@ -1,0 +1,68 @@
+#banner {
+  position: relative;
+  background-image: url('backscroll.png');
+  width: 800px;
+  height: 294px;
+  animation: scroll 12s ease-out;
+  overflow: hidden;
+  text-align: center;
+  color: green;
+}
+
+
+
+#train {
+  display: flex;
+  position: absolute;
+  bottom: 0px;
+  left: 200px;
+  width: 360px;
+  height: 132px;
+  background-image: url('train.png');
+  background-size: contain;  /* skaler bildet slik at det passer i ramma */
+  animation: enter_stage 5s ease-in-out;
+}
+
+.wheels {
+  width: 46px;
+  height: 46px;
+  background-image: url('wheel.png');
+  background-size: cover;
+  margin-top: 85px;
+  margin-left: 17px;
+ 
+  animation:   roll 1s 3 linear      /* rask rulling */
+             , roll 2s linear 3s     /* vanlig rulling */
+             , roll 3s 2 linear 5s   /* sein rulling */
+             , roll 4s ease-out 8s;  /* avsluttende rulling */
+             /* Legg merke til at vi kan oppgi flere animasjoner etterhverandre;
+                alle bruker roll, men med forskjellig avspillingshastighet.
+                Merk at den 1. og 3. animasjonen gjentas 3 og 2 ganger. 
+                Merk at de påfølgende animasjonene venter (3s,5s,8s) på at
+                de tidligere skal bli ferdige */
+            
+}
+.wheels:nth-child(1) {
+  margin-left: 48px;
+}
+.wheels:nth-child(3) {
+  margin-left: 68px;
+}
+.wheels:nth-child(4) {
+  margin-left: 14px;
+}
+
+/************ keyframes ************/
+
+@keyframes scroll {
+  100% { background-position: 852px; }
+}
+
+@keyframes roll {
+  100% { transform: rotate(-360deg); }
+}
+
+@keyframes enter_stage {
+  0% { left: 820px;}
+  100% { left: 200px; }
+}

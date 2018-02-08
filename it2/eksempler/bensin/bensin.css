@@ -1,0 +1,37 @@
+#skjema form {
+  display: flex;
+  flex-flow: row wrap;
+  width: 25em;
+  justify-content: space-around;
+  margin:3em;
+}
+
+form .inputDiv {
+  flex: 1 1 45%;
+  display: flex;
+  margin-right:1em;
+  padding-top:10px;
+}
+
+form  .inputDiv label {
+   flex: 1 1 30%; 
+}
+
+form  .inputDiv input {
+   flex: 1 1 40%; 
+}
+
+form .inputDiv button {
+  flex: 1 1 50%;
+}
+
+#tidvis {
+  width:20em;
+  height: 4em;
+  background-color: #ddd;
+  border-radius: 0.5em;
+  border: solid gray 1px;
+  margin: 2em;
+  padding: 1em;
+  text-align: center;
+}

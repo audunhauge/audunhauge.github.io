@@ -1,0 +1,35 @@
+#kart {
+  width:599px;
+  height: 735px; 
+  position: relative;
+}
+
+.merke {
+  position: absolute;
+  left:20px;
+  top:20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  border:solid blue 2px;
+  background: rgba(250,250,250,0.6);
+  box-shadow: 2px 2px rgba(0,0,0,0.5);
+}
+
+#askim          {  left:259px;  top:155px;}
+#fredrikstad    {  left:145px;  top:444px;}
+#halden         {  left:340px;  top:528px;}
+#moss           {  left:48px;   top:265px;}
+#orje           {  left:460px;  top:248px;}
+
+#overlay {
+  position: relative;
+  left:0;
+  top:0;
+  width:599px;
+  height: 735px;
+}
+
+#kartgif {
+  opacity: 0;
+}

@@ -1,0 +1,82 @@
+
+/* make waves */
+#wave {
+  background: linear-gradient(120deg, white 15%, lightskyblue, white);
+  position: absolute;
+  width:50px;
+  height: 20px;
+  left: 8px;
+  bottom: -1px;
+  animation: wave 1s linear infinite alternate; 
+}
+
+
+
+@keyframes wave {
+  0% { -webkit-clip-path: polygon(1% 99%, 6% 90%, 14% 82%, 23% 76%, 33% 75%, 41% 76%, 50% 80%, 57% 85%, 64% 89%, 70% 94%, 78% 95%, 83% 91%, 89% 87%, 95% 90%, 100% 99%);  
+     height: 20px;
+   }  
+  100% {-webkit-clip-path: polygon(1% 100%, 8% 98%, 16% 97%, 21% 93%, 25% 88%, 30% 84%, 35% 78%, 40% 74%, 46% 72%, 54% 77%, 60% 82%, 66% 89%, 75% 93%, 84% 98%, 100% 99%); 
+    height: 5px;
+   }
+}
+
+/* ship */
+#skip {
+  position: absolute;
+  left:300px;
+  top: 220px;
+  width: 400px;
+  height: 100px;
+  background-image: url("ship.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: sailAway 44s linear infinite;
+}
+
+@keyframes sailAway {
+  0% { left: 101%; }
+  100% { left: -400px;}
+  
+}
+
+#sea {
+  width: 100%;
+  height: 700px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: linear-gradient(white, lightskyblue 37%, lightsteelblue 39%, lightcyan 40%, blue);
+}
+
+.smoke {
+  position: absolute;
+  left:170px;
+  top: -9px;
+  width: 30px;
+  height: 40px;
+  background-image: url("steam.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0;
+}
+
+#smoke1 {
+  animation: fadeAway 9s linear infinite;
+}
+
+#smoke2 {
+  animation: fadeAway 9s 3s linear infinite;
+}
+
+#smoke3 {
+  animation: fadeAway 9s 6s linear infinite;
+}
+
+
+@keyframes fadeAway {
+  10% { opacity: 0.9; top: -20px; left: 178px;}
+  25% { opacity: 0.8; top: -40px; left: 185px;}
+  60% { opacity: 0.3; top: -120px; left: 195px;}
+  100% { opacity: 0; top: -220px; left: 225px;}
+}

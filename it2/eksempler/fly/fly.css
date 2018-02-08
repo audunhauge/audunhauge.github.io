@@ -1,0 +1,13 @@
+#banner {
+  width: 900px;
+  height: 200px;
+  background-image: url(fly.png);
+  background-repeat: no-repeat;
+  animation: flyInnOgUt 8s ease-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes flyInnOgUt {
+  0%   { background-position: -300px; }
+  100% { background-position: 1000px; }
+}
