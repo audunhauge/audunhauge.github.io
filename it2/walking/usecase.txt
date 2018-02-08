@@ -2,13 +2,6 @@
 
 title "Comments - Sequence Diagram"
 
-'This is a single line comment
-
-/'
-This is a multi-
-line comment
-'/
-
 actor User
 boundary "Web GUI" as GUI
 control "Shopping Cart" as SC
