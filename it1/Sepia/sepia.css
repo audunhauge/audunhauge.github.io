@@ -1,0 +1,66 @@
+#bilder {
+    display: flex;
+}
+
+.bilde {
+    background-size: contain;
+    background-position: center;
+    min-height: 200px;
+    background-repeat: no-repeat;
+    filter: blur(2px) sepia(80%);
+    flex: 1;
+    transition: 6s;
+}
+
+.bilde:hover {
+    filter: blur(0) sepia(0%);
+    flex: 5;
+}
+
+div.bilde:nth-child(1) {
+    background-image: url("bilder/b1.jpg");
+}
+
+div.bilde:nth-child(2) {
+    background-image: url("bilder/b2.jpg");
+}
+
+div.bilde:nth-child(3) {
+    background-image: url("bilder/b3.jpg");
+}
+
+div.bilde:nth-child(4) {
+    background-image: url("bilder/b4.jpg");
+}
+
+div.bilde:nth-child(5) {
+    background-image: url("bilder/b1.jpg");
+}
+
+div.bilde:nth-child(6) {
+    background-image: url("bilder/b2.jpg");
+}
+
+div.bilde:nth-child(7) {
+    background-image: url("bilder/b3.jpg");
+}
+
+div.bilde:nth-child(8) {
+    background-image: url("bilder/b4.jpg");
+}
+
+div.bilde:nth-child(9) {
+    background-image: url("bilder/b1.jpg");
+}
+
+div.bilde:nth-child(10) {
+    background-image: url("bilder/b2.jpg");
+}
+
+div.bilde:nth-child(11) {
+    background-image: url("bilder/b3.jpg");
+}
+
+div.bilde:nth-child(12) {
+    background-image: url("bilder/b4.jpg");
+}
