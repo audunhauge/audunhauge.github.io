@@ -82,6 +82,7 @@
     background-size: 100%;
     background-repeat: no-repeat;
     background-position-y: 0px;
+    filter: drop-shadow(16px 16px 20px blue);
 }
 
 @keyframes drive {

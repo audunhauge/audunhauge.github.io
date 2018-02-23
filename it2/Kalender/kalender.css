@@ -1,0 +1,41 @@
+#kalender {
+    position: relative;
+    border: solid green 1px;
+    width: 20em;
+    height: 15em;
+}
+#kalender button {
+    background-color: lightblue;
+    width: 2em;
+    height: 1.5em;
+    border: solid gray 1px;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px gray;
+}
+#kalender div span {
+    padding: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#kalender div:nth-of-type(2) span {
+    width: 4em;
+    text-align: center;
+}
+div.hidden {
+    opacity: 0;
+}
+div.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#datoer,
+#ukedager {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+div.dato,
+#ukedager div {
+    width: 35px;
+    text-align: center;
+}
