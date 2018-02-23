@@ -5,12 +5,16 @@
     <meta charset="UTF-8">
     <script src="https://get.mavo.io/mavo.js"></script>
     <link rel="stylesheet" href="https://get.mavo.io/mavo.css">
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
     <link rel="stylesheet" href="todo.css">
+    <script src="todo.js"></script>
+    <script src="mavo-firebase.js"></script>
+
 </head>
 
 <body>
 
-    <div mv-app="mavoTest" mv-storage="local">
+    <div mv-app="mavoTest" mv-storage="firebase">
         <div id="tittel">
             <span property="firstName">Audun</span>
             <span property="last_name">Hauge</span>
@@ -27,10 +31,11 @@
             </ul>
 
         </div>
-
-
-
     </div>
+    <script>
+      setup();
+    </script>
+
 
 </body>
 

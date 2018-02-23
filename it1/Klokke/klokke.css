@@ -1,0 +1,46 @@
+#klokke {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: solid black 3px;
+}
+
+#center {
+    position: absolute;
+    left: 100px;
+    top: 100px;
+    border-radius: 50%;
+    width: 2px;
+    height: 2px;
+    background-color: red;
+
+}
+
+#sekunder {
+    position: absolute;
+    left: 100px;
+    top: calc((200px - 5px) / 2);
+    width: 98px;
+    height: 5px;
+    background-color: gray;
+    animation: turn 60s steps(60) infinite;
+    transform-origin: 1px 3px;
+    transform: rotate(0deg);
+}
+
+@keyframes turn {
+    100% { transform: rotate(360deg)}
+}
+
+.tall {
+    position: absolute;
+    left: 100px;
+    top: calc((200px - 4px) / 2);
+    width: 95px;
+    height: 4px;
+    transform-origin: 0px 2px;
+    transform: rotate(0deg);
+    text-align: right;
+    border-right: solid 4px blue;
+}

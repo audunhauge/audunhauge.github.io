@@ -1,0 +1,20 @@
+#frame {
+    position: absolute;
+    left:0;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    width: calc(184px * 8);
+    animation: scroll 8s steps(8) infinite;
+}
+
+#box {
+    position: relative;
+    width: 184px;
+    height: 184px;   
+    border: solid red 1px;
+    overflow: hidden;
+}
+
+@keyframes scroll {
+  100% { left: calc(-184px * 8) }
+}
