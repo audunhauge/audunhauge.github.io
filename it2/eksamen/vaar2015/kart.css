@@ -1,0 +1,13 @@
+#kart {
+    background-image: url("kart.gif");
+    background-position: center;
+    background-size: contain;
+    width: 599px;
+    height: 735px;
+}
+
+#merker {
+    width: 599px;
+    height: 735px;
+    border: solid green 1px;
+}
