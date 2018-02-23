@@ -3,18 +3,32 @@
 
 <head>
     <meta charset="UTF-8">
-    <script src="https://get.mavo.io/mavo.js"></script>
+   
     <link rel="stylesheet" href="https://get.mavo.io/mavo.css">
     <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
     <link rel="stylesheet" href="todo.css">
+    <script src="https://get.mavo.io/mavo.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+    <script>
+        var config = {
+        apiKey: "AIzaSyBlPjI5glXQ6ilEg9EVVPQS1lFh_Bsfa7c",
+        authDomain: "risk-b1fc9.firebaseapp.com",
+        databaseURL: "https://risk-b1fc9.firebaseio.com",
+        projectId: "risk-b1fc9",
+        storageBucket: "risk-b1fc9.appspot.com",
+        messagingSenderId: "217937368827"
+    };
+    firebase.initializeApp(config);
+    </script>
     <script src="todo.js"></script>
     <script src="mavo-firebase.js"></script>
-
+    
 </head>
 
 <body>
-
-    <div mv-app="mavoTest" mv-storage="firebase">
+    <div mv-app="mavoTest" 
+         mv-unauthenticated-permissions="read edit save" 
+         mv-storage="firebase">
         <div id="tittel">
             <span property="firstName">Audun</span>
             <span property="last_name">Hauge</span>
@@ -29,14 +43,13 @@
                     </ul>
                 </li>
             </ul>
-
         </div>
     </div>
+    <button id="lagre">Lagre til Firebase</button>
+    <button id="lese">Lese fra Firebase</button>
     <script>
-      setup();
+        setup();
     </script>
-
-
 </body>
 
 </html>

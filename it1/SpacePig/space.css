@@ -1,0 +1,24 @@
+#space {
+    display: grid;
+    grid-template-columns: 16fr 12fr 8fr 7fr 6fr 5fr 4fr 
+    3fr 2fr 1fr 2fr 3fr 4fr 5fr 6fr 7fr 8fr 12fr 16fr;
+    grid-gap: 10px;
+    background-color: darkblue;
+}
+div.ani {
+    background-image: url("b1.jpg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 90px;
+    animation: fly 8s infinite alternate;
+    transform: scale(1) rotate(0turn);
+}
+
+@keyframes fly {
+    100% { transform: scale(1.2) rotate(1turn)}
+}
+
+div.ani:hover {
+    animation-play-state: paused;
+}

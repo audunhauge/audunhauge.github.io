@@ -1,0 +1,40 @@
+#kart {
+    background-image: url("kart.gif");
+    background-position: center;
+    background-size: contain;
+    width: 599px;
+    height: 735px;
+    position: relative;
+}
+
+#info {
+    position: absolute;
+    left:0;
+    top:0;
+    width: 599px;
+    height: 735px;    
+    opacity:0;
+    background-color: green;
+}
+
+#merker {
+    width: 599px;
+    height: 735px;
+    border: solid green 1px;
+}
+
+.by {
+    position: absolute;
+    left:0;
+    top:0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(220,220,250,0.5);
+    border: solid blue 1px;
+    box-shadow: 3px 3px 3px black;
+}
+
+#info.show {
+    opacity:1;
+}

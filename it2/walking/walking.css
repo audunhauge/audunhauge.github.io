@@ -3,7 +3,7 @@
     width: 112px;
     height: 112px;
     left: 0px;
-    top: calc(100vh - 130px);
+    top: calc(100% - 130px);
     background-image: url("walking2.png");
     background-position-x: 0; 
     opacity: 1; 
@@ -11,6 +11,10 @@
 
 #main {
     position: relative;
+    left: 100px;
+    top: 10px;
+    width: 800px;
+    height: 300px;
 }
 
 #fig1 {
@@ -35,7 +39,7 @@
 
 #boks1 {
     left: 670px;
-    top: calc(100vh - 60px);
+    top: calc(100% - 60px);
 }
 
 #boks2 {
