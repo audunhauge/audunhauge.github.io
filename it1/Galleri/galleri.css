@@ -1,0 +1,70 @@
+#galleri {
+    position: relative;
+    width: 90vw;
+    height: 90vh;
+    border: solid green 1px;
+}
+
+.bilde {
+    position: absolute;
+    width: calc(90vw - 50px);
+    height: calc(90vh - 50px);
+    left: 25px;
+    top: 25px;
+    background-position: center;
+    background-size: cover;
+    opacity: 0;
+    z-index: 1;
+    transition: 1s;
+}
+
+#b1 {
+    background-image: url("deer.jpg");
+}
+
+#b2 {
+    background-image: url("eagle.jpg");
+}
+
+#b3 {
+    background-image: url("fox.jpg");
+}
+
+#b4 {
+    background-image: url("koala.jpeg");
+}
+
+#b5 {
+    background-image: url("tiger.jpg");
+}
+
+#r1:checked~#b1 {
+    opacity: 1;
+}
+
+#r2:checked~#b2 {
+    opacity: 1;
+}
+
+#r3:checked~#b3 {
+    opacity: 1;
+}
+
+#r4:checked~#b4 {
+    opacity: 1;
+}
+
+#r5:checked~#b5 {
+    opacity: 1;
+}
+
+#galleri input {
+    position: relative;
+    z-index: 9;
+    margin-top: 80vh;
+    background-color: rgba(20, 20, 90, 0.3);
+}
+
+#r1 {
+    margin-left: calc((90vw - 100px) / 2);
+}

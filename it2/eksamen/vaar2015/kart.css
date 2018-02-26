@@ -7,14 +7,25 @@
     position: relative;
 }
 
+#kart h1 {
+    text-align: center;
+    color: white;
+    text-shadow: 
+    4px 4px 4px black,6px 6px 12px green;
+}
+
 #info {
+    display: none;
     position: absolute;
-    left:0;
-    top:0;
-    width: 599px;
-    height: 735px;    
-    opacity:0;
+    left:25vw;
+    top:25vh;
+    width: 50vw;
+    height: 50vh;    
     background-color: green;
+}
+
+#kart.hidden {
+    opacity:0;
 }
 
 #merker {
@@ -36,5 +47,5 @@
 }
 
 #info.show {
-    opacity:1;
+    display:block;
 }
