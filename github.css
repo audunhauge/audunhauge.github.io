@@ -9,19 +9,32 @@
     flex-wrap: wrap;
 }
 
-ul li a {
-    display: block;
+div.info {
+    text-align: left;
+    color: darkmagenta;
+}
+
+div.info h2 {
+    text-align: center;
+}
+
+ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+ul li {
     position: relative;
     width: 20em;
-    height: 2em;
+    min-height: 2em;
     background: var(--link-bg);
     border: 1px solid gray;
-    padding: 0.1em;
+    padding: 5px;
     padding-top: 0.8em;
     margin: 0.3em;
     text-align: center;
     border-radius: 0.5em;
-    color: da
+    color: darkolivegreen;
 }
 
 ul li a:after {
@@ -35,7 +48,7 @@ ul li {
     display: block;
 }
 
-h4 {
+h3 {
     color: var(--heading);
     display: block;
     width: 20em;

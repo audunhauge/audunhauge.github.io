@@ -1,20 +1,25 @@
 #bilder {
+    height: 600px;
     display: flex;
+    align-items: center;
+    align-content: center;
 }
 
 .bilde {
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     min-height: 200px;
     background-repeat: no-repeat;
-    filter: blur(2px) sepia(80%);
+    filter: sepia(80%);
     flex: 1;
-    transition: 6s;
+    transition: 2s;
 }
 
 .bilde:hover {
-    filter: blur(0) sepia(0%);
+    filter: sepia(0%);
     flex: 5;
+    min-height: 600px;
+    background-size: contain;
 }
 
 div.bilde:nth-child(1) {
