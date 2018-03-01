@@ -1,4 +1,4 @@
-
+// @ts-check
 
 /**
  * Sprite - Et element som skal vises på skjermen, gitt plassering,w,h og rotasjon
@@ -56,7 +56,6 @@ class Sprite {
 /**
  *  en Movable er en Sprite som kan bevege seg
  *  konstrueres som en sprite, men må ta med rot og velocity
- *  En movable p har p.flytt() og p.roter() som metoder
  */
 class Movable extends Sprite {
 
@@ -128,26 +127,33 @@ class Movable extends Sprite {
     this.render();
   }
 
+  // sjekker at this er innenfor box 
+  // dersom utenfor plasseres this innenfor
+  // dermed gis impuls slik at this beveger seg innover
+  // merk at testen avsluttes ved første kant som overskrides
+  // i rekkefølge venstre,høyre,topp,bunn
+  // Ved neste timeframe oppdages da evt overlapp med kant nr to
+  // dersom vi har truffet et hjørne
   edge(box) {
     let damping = Movable.damping;
     let radius = this.radius;
     let x = this.x;
     let y = this.y;
-
-    if (x - radius < 0) {
+    
+    if (x - radius < box.x) {  // utenfor box venstre kant
       let vx = (this.px - this.x) * damping;
       this.x = radius;
       this.px = this.x - vx;
-    } else if (x + radius > box.w) {
+    } else if (x + radius > box.w) {  // utenfor høyre kant
       let vx = (this.px - this.x) * damping;
       this.x = box.w - radius;
       this.px = this.x - vx;
     }
-    if (y - radius < 0) {
+    if (y - radius < box.y) {  // utenfor top av box
       let vy = (this.py - this.y) * damping;
       this.y = radius;
       this.py = this.y - vy;
-    } else if (y + radius > box.h) {
+    } else if (y + radius > box.h) {  // utenfor bunn av box
       let vy = (this.py - this.y) * damping;
       this.y = box.h - radius;
       this.py = this.y - vy;
@@ -223,6 +229,11 @@ class Blink extends Movable {
    *  Legger til egenskaper som er spesifikk for Blink
    */
 
+  die() {
+    super.die();
+    Blink.antall --;
+  }
+
 
   effectOn(other) {
     if (other.isA === "skudd") {
@@ -282,6 +293,7 @@ class Blink extends Movable {
     this.div.classList.remove("hidden");
   }
 }
+
 
 class Tank extends Movable {
 
@@ -352,8 +364,10 @@ class Tank extends Movable {
 }
 
 function setup() {
-  let antallBlinker = 5;
+  let antallBlinker = 1;
   let poeng = 0;
+
+  Blink.antall = antallBlinker;
 
   let friction = 0.03;
   let power = friction;
@@ -391,7 +405,7 @@ function setup() {
 
   tank.render();
 
-  setInterval(gameEngine, 40);
+  let ge = setInterval(gameEngine, 40);
 
   window.addEventListener("keydown", registrerKey);
   window.addEventListener("keyup", cancelKey);
@@ -418,6 +432,13 @@ function setup() {
     tank.accelerate(1);
     Movable.collide(manyThings);
     spanPoeng.innerHTML = String(tank.score);
+    if (Blink.antall < 1 ) {
+      let msg = document.createElement("div");
+      let divMain = document.getElementById("main");
+      msg.innerHTML = "<h4>Veldig Bra</h4>";
+      clearInterval(ge);
+      divMain.appendChild(msg);
+    }
   }
 
   function styrSpillet() {
