@@ -18,12 +18,12 @@ div.info h2 {
     text-align: center;
 }
 
-ul {
+#main > div > ul {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
 
-ul li {
+#main > div > ul > li {
     position: relative;
     width: 20em;
     min-height: 2em;
@@ -37,14 +37,14 @@ ul li {
     color: darkolivegreen;
 }
 
-ul li a:after {
+#main > div > ul > li a:after {
     content: attr(data-icon);
     position: absolute;
     right: 1.2em;
     top: 0.5em;
 }
 
-ul li {
+#main > div > ul > li {
     display: block;
 }
 
