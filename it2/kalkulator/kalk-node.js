@@ -6,31 +6,56 @@ const cos = m.cos;
 const tan = m.tan;
 const sqrt = m.sqrt;
 
-
-let stdin = process.openStdin();
-
-stdin.addListener("data", function (d) {
-    let raw = d.toString().trim();
-    let expression = "";
-    let f = "";
-    for (let b of raw) {
-        // logikk som sjekker om du har xx
-        // og skifter til x*x
-        if (f === b && b >= "a" && b <= "z" ) {
-          expression += "*";
-        }
-        // sjekk om vi har 3x 4y 12a ...
-        if (f >= "0" && f <= "9" && b >= "a" && b <= "z") {
-           expression += "*";
-        }
-        expression += b;
-        f = b;
+function solvequad(a, b, c) {
+    // exp assumed to be on the form "axx+bx+c"
+    // solve roots if possible
+    let d = b * b - 4 * a * c;
+    if (d >= 0) {
+        let sd = Math.sqrt(d);
+        return { solvable: true, x1: (-b + sd) / (2 * a), x2: (-b - sd) / (2 * a) }
     }
-    let value;
-    try {
-        value = eval(expression);
-    } catch (error) {
-       console.log(error.message);
-    }
-    console.log(expression, "=", value);
+    return { solvable: false }
+}
+
+function completer(line) {
+  const completions = 'solve integrate derive quit'.split(' ');
+  const hits = completions.filter((c) => c.startsWith(line));
+  // show all completions if none found
+  return [hits.length ? hits : completions, line];
+}
+
+
+const readline = require('readline');
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+  prompt: 'Kalk: ',
+  completer,
+  removeHistoryDuplicates:true
+});
+
+rl.prompt();
+
+let t;
+
+rl.on('line', (line) => {
+  let s = line.trim();
+  let p = s.substr(0,5);
+  switch (p) {
+    case 'quit':
+      process.exit(0);
+      break;  
+    default:
+      try {
+         t = eval(s);
+         console.log(t);
+      } catch(err) {
+          console.log(s," gave error ", err.message);
+      }
+      break;
+  }
+  rl.prompt();
+}).on('close', () => {
+  console.log('Have a great day!');
+  process.exit(0);
 });
