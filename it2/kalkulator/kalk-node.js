@@ -6,6 +6,10 @@ const cos = m.cos;
 const tan = m.tan;
 const sqrt = m.sqrt;
 
+const _number = (Object.getOwnPropertyNames(Number).map(e => 'Number.' + e)).concat(
+    Object.getOwnPropertyNames(Math).map(e => 'Math.' + e)
+);
+
 function solvequad(a, b, c) {
     // exp assumed to be on the form "axx+bx+c"
     // solve roots if possible
@@ -18,6 +22,10 @@ function solvequad(a, b, c) {
 }
 
 function completer(line) {
+  const _num = _number.filter( c => c.startsWith(line));
+  if (_num.length) {
+      return [_num,line];
+  }
   const completions = 'solve integrate derive quit'.split(' ');
   const hits = completions.filter((c) => c.startsWith(line));
   // show all completions if none found
