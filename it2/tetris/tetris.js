@@ -164,11 +164,11 @@ class Board {
         // found a full line, copy all lines above down 1, clear top line
         for (let yi = y - 1; yi > 0; yi--) {
           for (let xi = 1; xi < 11; xi++) {
-              c[yi+1][xi] = c[yi][xi];
+            c[yi + 1][xi] = c[yi][xi];
           }
         }
         for (let xi = 1; xi < 11; xi++) {
-            c[0][xi] = 0;
+          c[0][xi] = 0;
         }
         y++;  // back up to check dropped line
       }
@@ -229,9 +229,9 @@ function setup() {
       t.y++;
     } else {
       if (t.y < 0) {
-          gameOver();
-          clearInterval(timer);
-          return;
+        gameOver();
+        clearInterval(timer);
+        return;
       }
       b.merge(t); // merge tetrino onto board
       b.complete();
@@ -247,7 +247,7 @@ function setup() {
   }
 
   function gameOver() {
-      document.getElementById("main").innerHTML = "Game over";
+    document.getElementById("main").innerHTML = "Game over";
   }
 }
 
