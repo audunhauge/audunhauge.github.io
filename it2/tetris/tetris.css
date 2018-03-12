@@ -40,3 +40,13 @@
 .tetromino.T {
     background-color: purple;
 }
+
+#score {
+    position: absolute;
+    right: 30px;
+    top:100px;
+    width: 12em;
+    height: 2em;
+    background-color: blue;
+    color: white;
+}

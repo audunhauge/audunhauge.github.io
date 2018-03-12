@@ -16,3 +16,7 @@
 @keyframes walk {
     100% { top:500px; left:500px; }
 }
+
+#score {
+    position: absolute;
+}

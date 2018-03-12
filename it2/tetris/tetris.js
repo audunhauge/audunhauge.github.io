@@ -77,6 +77,9 @@ class Tetrino {
           if (py >= 0 && d[py] && px >= 0) {
             if (d[py][px]) {
               return false;
+              // the position is already taken
+              // moving here would result in a collide
+              // thus the move is illegal
             }
           }
         }
@@ -157,11 +160,13 @@ class Board {
    * Iterate bottum up - skipping lowest line ( list of 9s )
    */
   complete() {
+    let linecount = 0;  // count completed lines
     let c = this.cells;
     for (let y = c.length - 2; y > 0; y--) {
       let line = c[y].slice(1, -1);
       if (line.every(e => e > 0)) {
         // found a full line, copy all lines above down 1, clear top line
+        linecount++;
         for (let yi = y - 1; yi > 0; yi--) {
           for (let xi = 1; xi < 11; xi++) {
             c[yi + 1][xi] = c[yi][xi];
@@ -173,6 +178,7 @@ class Board {
         y++;  // back up to check dropped line
       }
     }
+    return linecount;  // number of complete lines
   }
 
   /**
@@ -195,9 +201,11 @@ class Board {
 
 function setup() {
   let divBrett = document.getElementById("brett");
+  let divScore = document.getElementById("score");
   let b = new Board(divBrett);
   let tname = "T";
   let t = new Tetrino(tname);
+  let score = 0;
 
   let timer = setInterval(gameEngine, 800);
   document.addEventListener("keydown", respondToUser);
@@ -234,7 +242,11 @@ function setup() {
         return;
       }
       b.merge(t); // merge tetrino onto board
-      b.complete();
+      let lines = b.complete();
+      if (lines) {
+        score += 2 ** (lines - 1);
+        divScore.innerHTML = String(score);
+      }
       tname = "IOJLSZT"
         .replace(tname, "")
         .charAt(Math.floor(Math.random() * 6));
