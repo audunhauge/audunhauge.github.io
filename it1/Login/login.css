@@ -1,0 +1,13 @@
+header ul li {
+    display: block;
+    position: relative;
+}
+header ul {
+    padding: 0;
+    margin:0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background-color: gray;
+    color:white;
+    padding: 3px 20px 3px 20px;
+}
