@@ -1,0 +1,42 @@
+#brett {
+  display: grid;
+  grid-template-columns: repeat(12,1fr);
+  width: calc(22px * 12);    
+  border: solid gray 1px;
+
+}
+
+.tetromino {
+    width:20px;
+    height: 20px;
+    background-color: whitesmoke;
+    margin: 1px;
+}
+
+.tetromino.I {
+    background-color: lightskyblue;
+}
+
+.tetromino.O {
+    background-color: yellow;
+}
+
+.tetromino.J {
+    background-color: blue;
+}
+
+.tetromino.L {
+    background-color: orange;
+}
+
+.tetromino.S {
+    background-color: green;
+}
+
+.tetromino.Z {
+    background-color: red;
+}
+
+.tetromino.T {
+    background-color: purple;
+}
