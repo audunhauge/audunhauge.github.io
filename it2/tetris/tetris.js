@@ -3,6 +3,21 @@
 import { Tetrino} from './Tetrino.js';
 import { Board } from './Board.js';
 
+const things = 12;
+
+/**
+ * 
+ * @param {int} a gives b
+ * @param {int} b resolves a
+ */
+function test(a,b) {
+
+}
+
+
+/**
+ * Starts the game
+ */
 function setup() {
   let divBrett = document.getElementById("brett");
   let divScore = document.getElementById("score");
@@ -14,6 +29,10 @@ function setup() {
   let timer = setInterval(gameEngine, 800);
   document.addEventListener("keydown", respondToUser);
 
+  /**
+   * Responds to user key-press
+   * @param {Event} e 
+   */
   function respondToUser(e) {
     t.render(b, true); // wipe tetrino from board
     switch (e.keyCode) {
@@ -35,7 +54,11 @@ function setup() {
     }
     t.render(b);  // render tetrino onto board
   }
-
+ 
+  /**
+   * Invoked by setInterval - moves tetrinos
+   * @param {Event} e 
+   */
   function gameEngine(e) {
     if (t.legalMove(b, 0, 1, 0)) {
       t.y++;
