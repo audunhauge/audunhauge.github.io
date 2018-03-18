@@ -1,0 +1,70 @@
+#hovedside {
+    display : grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#hovedside > div {
+  background-size: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 220px;
+  height: 220px;
+  border:solid 1px gray;
+}
+
+#hovedside >div:nth-of-type(1) {    background-image: url("../media/ap.png"); }
+#hovedside >div:nth-of-type(2) {    background-image: url("../media/frp.jpg"); }
+#hovedside >div:nth-of-type(3) {    background-image: url("../media/hoyre.png"); }
+#hovedside >div:nth-of-type(4) {    background-image: url("../media/krf.jpg"); }
+#hovedside >div:nth-of-type(5) {    background-image: url("../media/mdg.png"); }
+#hovedside >div:nth-of-type(6) {    background-image: url("../media/pir.png"); }
+#hovedside >div:nth-of-type(7) {    background-image: url("../media/raudt.png"); }
+#hovedside >div:nth-of-type(8) {    background-image: url("../media/sp.png"); }
+#hovedside >div:nth-of-type(9) {    background-image: url("../media/sv.jpg"); }
+#hovedside >div:nth-of-type(10) {    background-image: url("../media/venstre.png"); }
+
+#slide {
+    background-image: url("bildegalleri01.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 320px;
+    animation: slide 6s ease  infinite ;
+    width: 100vw;
+    height: 100vh;
+}
+
+@keyframes slide {
+    0% { background-image: url("../media/bildegalleri01.jpg");}
+   28% { background-image: url("../media/bildegalleri01.jpg");}
+   33%  { background-image: url("../media/bildegalleri02.jpg");}
+   60%  { background-image: url("../media/bildegalleri02.jpg");}
+   66%  { background-image: url("../media/bildegalleri03.jpg");}
+   95%  { background-image: url("../media/bildegalleri03.jpg");}
+}
+
+#partiene {
+    position: absolute;
+    left:0;
+    top: 0;
+}
+
+#partiene > div {
+    position: absolute;
+    left: -120vw;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: whitesmoke;
+}
+
+#partiene > div.show {
+    left:0;
+}
+
+video {
+    width: 500px;
+    height: 200px;
+    margin-left: calc(50vw - 250px);
+    margin-top: calc(50vh - 100px);
+}
+
