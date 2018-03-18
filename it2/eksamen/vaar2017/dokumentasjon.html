@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dokumentasjon</title>
+</head>
+<body>
+    <h2>Pseudokode for oppg.3</h2>
+    <pre><code id="pseudo">
+        lag eventlistener for knappen beregn
+        når bruker klikker på beregn:
+          hent alle vindverdier inn i en array (querySelectorAll)
+          la produksjon bli (.map konverteringsfunksjonen vind2watt over vindverdier)
+          .map 6*x over watt-verdiene (nå har vi produksjon for hver periode)
+          .reduce s+x, 0 over periodene (nå har vi totalproduksjonen)
+          vis resultatet i outWt (output watt timer)
+    </code></pre>
+
+    <h4>Litt om koden</h4>
+    Jeg bruker array funksjonene .map og .reduce. 
+    Disse er kjente funksjoner og .reduce((s,v) => s+v,0) er en standard klisje
+    som brukes til å summere verdier i en array.
+
+    <br>
+    Koden er da veldig lesbar dersom man kjenner disse standard-verktøyene.
+    Litt tung for personer som ikke er vant med dem.
+    <p>
+        Alternativt kan koden skrives med standard for-løkker.
+    </p>
+</body>
+</html>

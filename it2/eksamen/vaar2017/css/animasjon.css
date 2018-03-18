@@ -1,0 +1,134 @@
+#propell {
+  position: absolute;
+  background-image: url("../media/vindmolle.png");
+  clip-path: polygon(
+    0% 80%,
+    0% 95%,
+    50% 62%,
+    55% 62%,
+    99% 89%,
+    99% 80%,
+    55% 50%,
+    55% 0%,
+    40% 0
+  );
+  background-size: 300px;
+  background-position-x: center;
+  background-position-y: 0;
+  background-repeat: no-repeat;
+  width: 300px;
+  height: 300px;
+  left: calc(400px - 150px + 16px);
+  top: calc(300px - 165px);
+  transform: rotate(0turn);
+  transform-origin: 150px 171px;
+}
+
+#mast {
+  position: absolute;
+  background-image: url("../media/vindmolle.png");
+  background-size: 300px;
+  background-position-x: center;
+  background-position-y: -187px;
+  background-repeat: no-repeat;
+  width: 32px;
+  height: 401px;
+  left: 400px;
+  top: 300px;
+}
+
+#bilde {
+  position: relative;
+}
+
+@keyframes idle {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+#center {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: red;
+  top: 171px;
+  left: 150px;
+}
+
+#propell.bris {
+  animation: idle 8s linear infinite;
+}
+
+#propell.kuling {
+  animation: idle 1s linear infinite;
+}
+
+#tre {
+    position: absolute;
+    background-image: url("../media/standard_bjoerk.jpg");
+    background-size: 200px;
+    background-position-x: 84px;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+    left: 550px;
+    top: 300px;
+    transform: rotate(-1deg);
+    transform-origin: 150px 198px;
+    transition: 2s;
+}
+
+#tre.bris {
+    animation: svai1 1s alternate infinite;
+}
+
+#tre.kuling {
+    animation: svai2 1.5s alternate infinite;
+}
+
+@keyframes svai1 {
+    100% {
+      transform: rotate(1.5deg);
+    }
+}
+
+@keyframes svai2 {
+    100% {
+      transform: rotate(13deg);
+    }
+}
+
+#hus {
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    left: 800px;
+    top: 340px;
+    background-color: red;
+}
+
+#hus:after {
+    position: absolute;
+    content: "";
+    width: 200px;
+    height: 50px;
+    left: -25px;
+    top: -100px;
+    border: solid 30px rgba(0,0,0,0);
+    border-bottom: 30px solid green;
+}
+
+#test { 
+    position: absolute;
+    bottom: 20px;
+    opacity: 0.1;
+}
+
+#test:hover {
+    opacity: 1;
+}
+
+
+.ok { color:green};
+.nope { color:red;}
