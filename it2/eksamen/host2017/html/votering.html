@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/Passord.js"></script>
+    <script src="../js/votering.js"></script>
+    <link rel="stylesheet" href="../css/votering.css">
+    <title>Votering</title>
+</head>
+
+<body>
+
+    <div id="login">
+        <h1>Registrering</h1>
+        Skriv inn passord
+        <input id="pwd" type="password">
+        <br>
+        <button id="dologin" type="button">Log inn</button>
+        <p>
+            <button disabled type="button" id="vis">Vis resultat</button>
+        </p>
+        <div id="melding"></div>
+    </div>
+
+    <div class="hidden" id="votering">
+        <h1>Votering</h1>
+        Velg parti og trykk Voter
+        <select name="parti" id="valg">
+            <option value="a">a</option>
+            <option value="h">h</option>
+            <option value="v">v</option>
+            <option value="sp">sp</option>
+            <option value="sv">sv</option>
+            <option value="frp">frp</option>
+            <option value="krf">krf</option>
+            <option value="mdg">mdg</option>
+            <option value="raudt">raudt</option>
+            <option value="pir">pir</option>
+        </select>
+        <button type="button" id="stem">Voter</button>
+        <div id="bekreft" class="hidden">
+            Bekreft din stemme på
+            <span id="valgt"></span>
+            eller stem på nytt.
+            <button id="bekreftelse" type="button">Bekreft</button>
+            <div class="hidden" id="avgjort">
+                Du stemte på
+                <span id="dittParti"></span>
+                Din stemme er registrert.
+                <br>Vent litt ...
+            </div>
+        </div>
+    </div>
+
+    <div class="hidden" id="resultat">
+        <h1>Resultat</h1>
+        <div id="results"></div>
+        <table id="compare">
+            <thead>
+                <tr>
+                    <th>Partinavn</th>
+                    <th>Valg 2013</th>
+                    <th>Skolevalg Nå</th>
+                    <th>Prosentpoeng endring</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        setup();
+    </script>
+</body>
+
+</html>

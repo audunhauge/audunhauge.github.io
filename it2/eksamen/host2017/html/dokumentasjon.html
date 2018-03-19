@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dokumentasjon</title>
+</head>
+
+<body>
+    <article>
+        <h2>Flyt-diagram</h2>
+        Flyt-diagram for hele appen
+        <pre>
+            <code>
+            // denne koden generer et automatisk flyt-diagram
+             @startuml
+             title Partiblokker               
+                    
+            start
+            :lag skjema;
+                  
+            repeat 
+              :les verdier;
+              :beregn sum;
+              :finn største blokk;
+              :tegn søyler;
+            repeat while (Vent på brukerdata)
+        
+            stop        
+            @enduml
+                    
+        </code>
+    </pre>
+        <div>
+            <img src="../media/Partiblokker.png" alt="flyt-diagram">
+        </div>
+    <h2>Flyt-diagram for visBlokker</h2>
+    <pre><code>
+        // denne koden generer et automatisk flyt-diagram
+        @startuml
+        title visBlokker
+
+        start
+        :hent alle input;
+        :konverter til Array;
+        :tell opp rød-grønn;
+        :tell opp borgerlig;
+        :tell opp andre;
+        if (borg > rg)
+          :biggest = borg;
+        else
+          :biggest = rg;
+        endif
+        :vis biggest;
+        :tegn stolper;
+        stop        
+        @enduml
+    
+    </code></pre>
+    <div><img src="../media/visBlokker.png" alt="flyt-diagram"></div>
+
+    </article>
+    <article>
+        <h2>Testplan</h2>
+        <ul>
+            <li>Sjekk at en bare kan skrive inn prosenter mellom 0 og 100
+                <br>Koden mangler sjekker foreløpig
+            </li>
+            <li>Sjekk at koden summerer riktig for hver blokk
+                <br>Manuell sjekk viser at det stemmer
+                <br>En test i koden sjekker om tellopp virker PASSED
+                <br>En test i koden sjekker om søyler lages riktig PASSED
+            </li>
+            <li>Sjekk at melding endres når største blokk endres (fra borgerlig til rød-grønn)
+               <br>Manuell test viser at det er i orden
+            </li>
+        </ul>
+    </article>
+    <div>
+        <h2>Test funksjoner i blokker.js</h2>
+        Jeg har lagt inn testene under i blokker.js. 
+        De kjøres hver gang skjema lastes og skriver ut testdata i console
+        <div>
+            <pre><code>
+    assert(
+      tellOpp(
+        [
+        { dataset: { id: "a" }, value: 12 },
+        { dataset: { id: "b" }, value: 33 },
+        { dataset: { id: "c" }, value: 6 }
+        ],
+        ["a", "b"]
+      ) === 45,
+      "opptelling blokk 1"
+    );
+    
+    assert(
+      tellOpp(
+        [
+        { dataset: { id: "a" }, value: 12 },
+        { dataset: { id: "b" }, value: 33 },
+        { dataset: { id: "c" }, value: 6 }
+        ],
+        ["c"]
+      ) === 6,
+      "opptelling blokk 2"
+    );
+    
+    assert(
+      lageSoyle(3, "blue").style.backgroundColor === "blue",
+      "lagSoyle er blå"
+    );
+    
+    assert(
+      lageSoyle(3, "blue").style.backgroundColor !== "red",
+      "lagSoyle er ikke rød"
+    );
+    
+    assert(
+      lageSoyle(33, "blue").style.width === "99px",
+      "lagSoyle har riktig lengde"
+    );
+            </code></pre>
+        </div>
+    <h3>Test resultat</h3>
+    <pre><code>
+            PASSED opptelling blokk 1
+            PASSED opptelling blokk 2
+            PASSED lagSoyle er blå
+            PASSED lagSoyle er ikke rød
+            PASSED lagSoyle har riktig lengde
+    </code></pre>
+    </div>
+</body>
+
+</html>

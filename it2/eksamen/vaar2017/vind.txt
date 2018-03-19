@@ -1,0 +1,56 @@
+Navn
+m/s
+Virkning på land
+Virkning til sjøs
+Stille
+0 - 0,2
+Røyken stiger rett opp.
+Speilblank (havblikk).
+Flau vind
+0,3 - 1,5
+Røyken driver i vindens retning.
+Små krusninger, ikke skum
+Svak vind
+1,6 - 3,3
+Smått løv settes i bevegelse
+korte småbølger
+Lett bris
+3,4 - 5,4
+Løv og småkvist rører seg, lette flagg strekkes.
+Bølgekammene begynner å toppe seg, litt skum.
+Laber bris
+5,5 - 7,9
+Kvister og smågreiner røres, støv virvles opp.
+Lengre bølger, en del skumskavler
+Frisk bris
+8 - 10,7
+Mindre løvtrær svaier, bølgekammer på innsjøer.
+Middelstore, lange bølger med lange skumskavler.
+Liten kuling
+10,8 - 13,8
+Store greiner rører seg, det hviner i telegraftrådene.
+Store bølger begynner å dannes, skumskavlene er større overalt.
+Stiv kuling
+13,9 - 17,1
+Hele trær rører seg, tungt å gå mot vinden.
+Sjøen tårner seg opp, skummet blåser i strimer med vindretningen.
+Sterk kuling
+17,2 - 20,7
+Kvister brekker, tungt å gå mot vinden.
+Middels høye bølger av større lengde, sjørokk driver i strimer med vinden.
+Liten storm
+20,8 - 24,4
+Store trær svaier og hiver, takstein kan blåse ned.
+Høye bølger, tette skumstrimler, sjøen begynner å "rulle".
+Full storm
+24,5 - 28,4
+Sjelden inne i landet, trær rykkes opp, stor skade på hus.
+Meget høye bølger, havflaten hvit av skum, tung og støtende rulling.
+Sterk storm
+28,5 - 32,6
+Meget sjelden, følges av store ødeleggelser
+Ualminnelige høye bølger, sjøen er fullstendig dekket av lange, hvite skumflak, sjørokket nedsetter synsvidden.
+Orkan
+32,7-
+Forekommer meget sjelden, følges av store ødeleggelser.
+Luften er fylt av skum og sjørokk som nedsetter oversikten betydelig, sjøen er fullstendig hvit av drivende skum.

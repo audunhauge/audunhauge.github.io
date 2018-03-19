@@ -1,0 +1,45 @@
+.hidden {
+    display:none;
+}
+
+#melding {
+    padding: 12px;
+    color:red;
+}
+
+.fade {
+    opacity: 1;
+    animation: fade 3s ease    forwards;
+}
+
+@keyframes fade {
+    100% { opacity: 0;}
+}
+
+#compare {
+    border-collapse: collapse;
+}
+
+#compare th {
+  text-align: center;
+  padding: 3px;
+  background-color:antiquewhite;
+}
+#compare td {
+    text-align: center;
+}
+
+#compare th:nth-child(odd) {
+    background-color: gainsboro;
+}
+
+#compare tr:nth-child(odd) {
+    background-color: lightblue;
+}
+
+td[data-sgn="-1"] {
+    color:red;
+}
+td[data-sgn="1"] {
+    color:green;
+}
