@@ -5,6 +5,15 @@ class Test {
         this.bad = [];
     }
 
+
+    nassert(fu,test, msg) {
+        if (test) {
+            this.good.push(fu.name + ":" +msg);
+        } else {
+            this.bad.push(fu.name + ":" +msg);
+        }
+    }
+
     assert(test, msg) {
         if (test) {
             this.good.push(msg);

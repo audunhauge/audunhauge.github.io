@@ -27,7 +27,7 @@ function setup() {
 
    // run tests
 
-   t.assert(add(1,2) === 3,"add 1+2");
+   t.nassert(add,add(1,2)=== 3,"1+2=3");
    t.assert(add(-1,2) === 1,"add -1+2");
    t.assert(add(0,0) === 0,"add 0+02");
    t.assert(add(0.1,0.2) === 0.3,"add 0.1+0.2");
