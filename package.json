@@ -4,6 +4,8 @@
   "description": "it1 og it2",
   "main": "git.js",
   "dependencies": {
+    "esdoc": "^1.0.4",
+    "esdoc-standard-plugin": "^1.0.0",
     "markdown": "^0.5.0"
   },
   "devDependencies": {},

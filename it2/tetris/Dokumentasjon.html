@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dokumentasjon</title>
+</head>
+
+<body>
+    <article>
+        <h1>Tetris</h1>
+        <h2>Planlegging</h2>
+        <h3>Kravspesifikasjon</h3>
+        <h4>Overordna beskrivelse</h4>
+        Vi skal lage et spill - Tetris.
+        <p>
+            I tetris skal tetrominoer falle ned fra himmelen og stables. Dersom en linje (som er 10 ruter bred) er helt full - da skal
+            alle brikker (hver tetromino består av fire brikker) på linja fjernes, og alle brikker over skal falle ned en
+            linje.
+        </p>
+        <p>
+            For hver linje får du ett poeng, men dersom du fyller flere med en brikke - så får du 2,4,8 for de andre linjene (utover
+            den første).
+        </p>
+
+        <h4>Kravliste</h4>
+        <ul>
+            <li>Vi skal ha tetrominoene IOJLSZT</li>
+            <li>Hver tetromino skal ha sin distinkte farge</li>
+            <li>Poengviser oppe til høyre</li>
+            <li>Forhåndsvisning av "neste" brikke</li>
+            <li>Spillet er over når neste brikke ikke får plass</li>
+            <li>Hastighet øker for hver 10 linje</li>
+        </ul>
+        <h3>Design og utforming</h3>
+        <h4>Beskrivelse</h4>
+        Tetris skal vises som et brett på 10 ruter i bredden og 20 i høyden.
+        <ul>
+            <li>O Firkanten skal være gul</li>
+            <li>I Linja lysblå</li>
+            <li>S skal være grønn</li>
+            <li>Z skal være rød</li>
+            <li>L er orange</li>
+            <li>J er blå</li>
+            <li>T er lilla</li>
+        </ul>
+        <h4>Wireframe</h4>
+        <img src="wireframe.png" alt="Wireframe">
+        <h3>Systemspesifikasjon</h3>
+        <h4>Pseudokode</h4>
+        <pre>
+           <code>
+            OPPSTART
+              generer alle tetrominoene (IOSZJLT)
+              lag brett (10x20)
+              velg en start-brikke (en av IOSZJLT)
+              plasser brikken på brettet
+              start spill-motoren (setInterval)
+              legg inn eventlistener på taster
+              (trengs av brukerkommandoer)
+            SPILLMOTOR
+              utfør brukerkommandoer
+              flytt brikken ned
+              sjekk kollisjon
+           </code>
+        </pre>
+        <h4>Flytdiagram</h4>
+          <img src="tetris.svg" width="300">
+    </article>
+</body>
+
+</html>
