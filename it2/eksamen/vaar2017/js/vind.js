@@ -1,10 +1,9 @@
 // @flow
 
 function setup() {
-
   // vis test-data på sida
-  document.getElementById("test").innerHTML = '<h1>Test-data</h1>' + testData.join("");
-
+  document.getElementById("test").innerHTML =
+    "<h1>Test-data</h1>" + testData.join("");
 
   let selVind = document.getElementById("vind");
   let divPropell = document.getElementById("propell");
@@ -47,7 +46,7 @@ function setup() {
     lydeffekt[vind]();
   }
 
-   // OPPGAVE 2
+  // OPPGAVE 2
 
   function beregnVind() {
     let styrke = inpVindstyrke.valueAsNumber;
@@ -90,10 +89,10 @@ function setup() {
 
 /**  rene funksjoner - uten side-effekter */
 
-let powerprod = (vindstyrker) => {
-    let produksjon = vindstyrker.map(e => vind2watt(e) * 6);
-    return produksjon.reduce((s, p) => s + p, 0);  // summer produksjonen
-}
+let powerprod = vindstyrker => {
+  let produksjon = vindstyrker.map(e => vind2watt(e) * 6);
+  return produksjon.reduce((s, p) => s + p, 0); // summer produksjonen
+};
 
 let vind2watt = fart => {
   let grenser = [0, 2.5, 3.4, 5.5, 8, 10.8, 13.9, 15, 100];
@@ -102,10 +101,9 @@ let vind2watt = fart => {
   return powerList[idx] || 0;
 };
 
-
 /** Tester - sjekker at vind2watt virker */
 
-const testData = [];  // vises på websida
+const testData = []; // vises på websida
 
 assert(vind2watt(2) === 0, "vind2watt 2 = 0");
 assert(vind2watt(3) === 2, "vind2watt 3 = 2");
@@ -115,20 +113,24 @@ assert(vind2watt(7.99) === 60, "vind2watt 7.99 = 60");
 assert(vind2watt(8) === 150, "vind2watt 8 = 150");
 
 /** sjekker at powerprod virker */
-assert(powerprod([0,0,0,0]) === 0, "powerprod ingen vind");
-assert(powerprod([3,3,3,3]) === 2*4*6, "powerprod 3m/s");
-assert(powerprod([3,4,6,8]) === 2*6+10*6+60*6+150*6, "powerprod 3,4,6,8m/s");
-assert(powerprod([6,8,11,14]) === 60*6+150*6+400*6+500*6, "powerprod 6,8,11,14m/s");
-assert(powerprod([1,2,2,24]) === 0, "powerprod 1,2,2,24m/s");
-
-
+assert(powerprod([0, 0, 0, 0]) === 0, "powerprod ingen vind");
+assert(powerprod([3, 3, 3, 3]) === 2 * 4 * 6, "powerprod 3m/s");
+assert(
+  powerprod([3, 4, 6, 8]) === 2 * 6 + 10 * 6 + 60 * 6 + 150 * 6,
+  "powerprod 3,4,6,8m/s"
+);
+assert(
+  powerprod([6, 8, 11, 14]) === 60 * 6 + 150 * 6 + 400 * 6 + 500 * 6,
+  "powerprod 6,8,11,14m/s"
+);
+assert(powerprod([1, 2, 2, 24]) === 0, "powerprod 1,2,2,24m/s");
 
 function assert(test, msg) {
   if (test) {
-    testData.push(`<div><span class="ok">PASSED</span> ${msg}</div>`)
-    console.log("%cPASSED","color:green", msg);
+    testData.push(`<div><span class="ok">PASSED</span> ${msg}</div>`);
+    console.log("%cPASSED", "color:green", msg);
   } else {
-    testData.push(`<div><span class="nope">FAILED</span> ${msg}</div>`)  
-    console.log("%cFAILED","color:red", msg);
+    testData.push(`<div><span class="nope">FAILED</span> ${msg}</div>`);
+    console.log("%cFAILED", "color:red", msg);
   }
 }
