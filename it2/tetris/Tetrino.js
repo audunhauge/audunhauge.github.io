@@ -28,7 +28,7 @@ export class Tetrino {
       this.rot = 0; // initial rotation
       this.class = name;
       this.x = 3; // starting x
-      this.y = -3;
+      this.y = -1;
     }
   
     /**

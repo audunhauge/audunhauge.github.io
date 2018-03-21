@@ -1,0 +1,28 @@
+body {
+    display: grid;
+    grid-template-columns: 1fr,1fr;
+}
+
+#meny {
+  position: relative;
+  grid-column: 1/2;
+  background-color: blue;
+  height: 5em;
+}
+
+#soek {
+    position: absolute;
+    right: 1em;
+    top:1em;
+}
+#soek input {
+    border-radius: 5px;
+    margin: 1px solid gray;
+    border-style: none;
+}
+
+#resultat {
+    min-height: 3em;
+    background-color: red;
+}
+
