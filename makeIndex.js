@@ -64,6 +64,7 @@ let index = `
 
 index += '<div><h3>IT1</h3><ul>' + makeIndex("it1", "IT1") + '</ul></div>';
 index += '<div><h3>IT2</h3><ul>' + makeIndex("it2", "IT2") + '</ul></div>';
+index += '<div><h3>Eksamen IT2</h3><ul>' + makeIndex("eksamen_it2", "Eksamen IT2") + '</ul></div>';
 
 index += `
     </div>
