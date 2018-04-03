@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="h4.js"></script>
+    <title>hack4</title>
+</head>
+
+<body>
+    <h1>Hackme stage 5</h1>
+    Hacker challenge
+    <form id="hack">
+        Skriv inn passord for å komme til neste oppgave
+        <p>
+            <label for="pwd">
+                <input type="password" id="pwd">
+            </label>
+        </p>
+        <p>
+            <label for="submit">
+                <button type="button" id="doit">Hackme</button>
+            </label>
+        </p>
+        <p>
+            <label id="msg"></label>
+        </p>
+    </form>
+    <script>
+        let state = +localStorage.getItem("state");
+        if (state == undefined || state < 4) {
+            window.location.href = "hackme3.html";
+        }
+        let btnDoit = document.getElementById("doit");
+        btnDoit.addEventListener("click", doit);
+        localStorage.removeItem("state");
+        function doit() {
+            let pwd = document.getElementById("pwd").value;
+            if (pwd === "hei⁢ho") {
+                localStorage.setItem("state", 5);
+                window.location.href = "hackme6.html";
+            } else {
+                document.getElementById("msg").innerHTML = "Feil";
+            }
+        }    
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hacin1</title>
+</head>
+<body>
+    <h1>Oppgave 1</h1>
+    Hacker challenge
+    <form  id="hack">
+        Skriv inn passord for å komme til neste oppgave
+        <p>
+            <label for="pwd"><input type="password" id="pwd"></label>
+        </p>
+        <p>
+            <label for="submit"><button type="button" id="doit">Hackme</button></label>
+        </p>
+        <p>
+            <label id="msg"></label>
+        </p>
+    </form>
+    <script>
+        let btnDoit = document.getElementById("doit");
+        btnDoit.addEventListener("click", doit);
+        localStorage.removeItem("state");
+        function doit() {
+            let pwd = document.getElementById("pwd").value;
+            if (pwd === "yesir") {
+                localStorage.setItem("state",1);
+                window.location.href = "hackme2.html";
+            } else {
+                document.getElementById("msg").innerHTML = "Feil";
+            }
+        }    
+    </script>
+</body>
+</html>
