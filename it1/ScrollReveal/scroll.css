@@ -1,0 +1,22 @@
+html,
+body {
+  height: 100%;
+}
+
+.photo-before,
+.photo-after {
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+}
+
+.photo-before {
+    background-image: url(../Sepia/bilder/b1.jpg);
+  }
+  
+  .photo-after {
+    background-image: url(../Sepia/bilder/b2.jpg);
+    border-top: 1px solid #ccc;
+  }
