@@ -3,20 +3,25 @@ body {
   height: 100%;
 }
 
-.photo-before,
-.photo-after {
-  background-attachment: fixed;
-  background-position: center center;
-  background-repeat: no-repeat;
-  height: 100%;
-  width: 100%;
+div p.art {
+    display: inline-block;
+    min-width: 5em;
+    min-height: 8em;
+    background-color: whitesmoke;
+    padding: 1em;
+    margin: 5px;
+    border: solid 1px gray;
 }
 
-.photo-before {
-    background-image: url(../Sepia/bilder/b1.jpg);
-  }
-  
-  .photo-after {
-    background-image: url(../Sepia/bilder/b2.jpg);
-    border-top: 1px solid #ccc;
-  }
+#before {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+
+#bilde {
+    height: 100vh;
+    background-image: url("../Sepia/bilder/b1.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+}
