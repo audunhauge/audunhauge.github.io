@@ -1,10 +1,7 @@
 // @flow
 
 function setup() {
-  // vis test-data på sida
-  document.getElementById("test").innerHTML =
-    "<h1>Test-data</h1>" + testData.join("");
-
+  
   let selVind = document.getElementById("vind");
   let divPropell = document.getElementById("propell");
   let divTre = document.getElementById("tre");
@@ -85,6 +82,9 @@ function setup() {
     // henter inn vindstyrke for periodene.
     outWt.value = powerprod(vindstyrker);
   }
+
+  // vis resultat av tester
+  Test.summary("#test");
 }
 
 /**  rene funksjoner - uten side-effekter */
@@ -103,34 +103,13 @@ let vind2watt = fart => {
 
 /** Tester - sjekker at vind2watt virker */
 
-const testData = []; // vises på websida
 
-assert(vind2watt(2) === 0, "vind2watt 2 = 0");
-assert(vind2watt(3) === 2, "vind2watt 3 = 2");
-assert(vind2watt(4) === 10, "vind2watt 4 = 10");
-assert(vind2watt(5.5) === 60, "vind2watt 5.5 = 60");
-assert(vind2watt(7.99) === 60, "vind2watt 7.99 = 60");
-assert(vind2watt(8) === 150, "vind2watt 8 = 150");
-
-/** sjekker at powerprod virker */
-assert(powerprod([0, 0, 0, 0]) === 0, "powerprod ingen vind");
-assert(powerprod([3, 3, 3, 3]) === 2 * 4 * 6, "powerprod 3m/s");
-assert(
-  powerprod([3, 4, 6, 8]) === 2 * 6 + 10 * 6 + 60 * 6 + 150 * 6,
-  "powerprod 3,4,6,8m/s"
-);
-assert(
-  powerprod([6, 8, 11, 14]) === 60 * 6 + 150 * 6 + 400 * 6 + 500 * 6,
-  "powerprod 6,8,11,14m/s"
-);
-assert(powerprod([1, 2, 2, 24]) === 0, "powerprod 1,2,2,24m/s");
-
-function assert(test, msg) {
-  if (test) {
-    testData.push(`<div><span class="ok">PASSED</span> ${msg}</div>`);
-    console.log("%cPASSED", "color:green", msg);
-  } else {
-    testData.push(`<div><span class="nope">FAILED</span> ${msg}</div>`);
-    console.log("%cFAILED", "color:red", msg);
-  }
-}
+expect(vind2watt,2).to.be(0);
+expect(vind2watt,3).to.be(2);
+expect(vind2watt,4).to.be(10);
+expect(vind2watt,5.5).to.be(60);
+expect(vind2watt,7.99).to.be(60);
+expect(vind2watt,8).to.be(150);
+expect(powerprod,[0,0,0,0]).to.be(0);
+expect(powerprod,[3,3,3,3]).to.be(2*4*6);
+expect(powerprod,[3,4,6,8]).to.be(2*6+10*6+60*6+150*6);
