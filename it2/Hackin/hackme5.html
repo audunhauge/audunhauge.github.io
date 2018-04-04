@@ -38,7 +38,9 @@
         localStorage.removeItem("state");
         function doit() {
             let pwd = document.getElementById("pwd").value;
-            if (pwd === "hei⁢ho") {
+            let e = "o";  let c = "i⁢";  let d = "h";
+            let a = "h";  let b = "e";
+            if (pwd === a+b+c+d+e) {
                 localStorage.setItem("state", 5);
                 window.location.href = "hackme6.html";
             } else {
