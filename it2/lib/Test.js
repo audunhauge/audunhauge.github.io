@@ -2,6 +2,8 @@
 const results = [];
 const PASS = '<span style="color:green">PASSED</span> ';
 const FAIL = '<span style="color:red">FAILED</span> ';
+const MSG_ = '<span style="color:blue">';
+const _MSG = '</span> ';
 
 class Test {
   constructor(fu, args) {
@@ -20,6 +22,10 @@ class Test {
 
   be(val) {
     if (!this.alive) return this;
+    if (this.name === "string") {
+      results.push(MSG_ + this.fu + _MSG);
+      return;
+    }
     if (this.fu === val || this.val === val) {
       results.push(
         PASS + this.name + "(" + this.args + ")" + this.msg + " === " + val

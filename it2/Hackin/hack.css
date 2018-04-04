@@ -1,0 +1,36 @@
+
+#hack3,
+#hack2,
+#hack1 {
+    position: relative;
+    width: 300px;
+    height: 100px;
+}
+
+#hack3::after,
+#hack2::after,
+#hack1::after {
+    content: " ";
+  position: absolute;
+  opacity: 0.0;
+  left:0;
+  top:40px;
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: red;
+  animation: roll 2s linear infinite alternate ;
+}
+
+#hack2::after {
+    background-color: blue;
+}
+#hack3::after {
+    background-color: green;
+}
+
+@keyframes roll {
+    50% { left: 130px; opacity:0.9;}
+    100% { left: 260px; opacity:0.0; }
+}
+

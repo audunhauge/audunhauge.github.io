@@ -96,7 +96,7 @@
         expect(t,"Tetrino").to.have("class").eq("T");
         expect(t.legalMove(board,1,1,0),"Kan flytte tetrino").to.be(true);
 
-        // tester plassering på brett og telling av rader
+        expect("Tester plassering på brett og telling av rader").be();
         t.y = 4;
         expect(t.y,"Y posisjon").to.be(4);
         expect(t.legalMove(board,0,0,1),"Kan rotere tetrino").to.be(true);
@@ -116,6 +116,7 @@
         t.render(board); // viser tetrino på brettet
         expect(t.legalMove(board,0,0,1),"Kan ikke rotere tetrino").to.be(false);
         board.merge(t);
+        expect("Sjekker at vi har en full rad").be();
         expect(board.complete(),"Fulle rader").to.be(1);
 
         Test.summary("#test");
