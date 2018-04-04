@@ -1,7 +1,7 @@
 // @flow
 
-import { Tetrino } from './Tetrino.js';
-import { Board } from './Board.js';
+//import { Tetrino } from './Tetrino.js';
+//import { Board } from './Board.js';
 
 const things = 12;
 
@@ -21,7 +21,7 @@ function test(a,b) {
 function setup() {
   let divBrett = document.getElementById("brett");
   let divScore = document.getElementById("score");
-  let board = new Board(divBrett);
+  let board = new Board(divBrett); 
   let tname = "T";
   let tetrino = new Tetrino(tname);
   let score = 0;
@@ -95,7 +95,7 @@ function setup() {
   }
 }
 
-setup();
+// setup();
 
 /** Pure functions */
 

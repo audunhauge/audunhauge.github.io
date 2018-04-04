@@ -5,7 +5,8 @@ const FAIL = '<span style="color:red">FAILED</span> ';
 
 class Test {
   constructor(fu, args) {
-    this.fu = fu;
+    this.fu = typeof fu === "function" ? fu(...args) : fu;
+    this.name = fu.name || typeof fu;
     this.args = args;
     this.alive = true;
     this.msg = "";
@@ -19,13 +20,13 @@ class Test {
 
   be(val) {
     if (!this.alive) return this;
-    if (this.fu(...this.args) === val || this.val === val) {
+    if (this.fu === val || this.val === val) {
       results.push(
-        PASS + this.fu.name + "(" + this.args + ")" + this.msg + " === " + val
+        PASS + this.name + "(" + this.args + ")" + this.msg + " === " + val
       );
     } else {
       results.push(
-        FAIL + this.fu.name + "(" + this.args + ")" + this.msg + " !== " + val
+        FAIL + this.name + "(" + this.args + ")" + this.msg + " !== " + val
       );
     }
   }
@@ -41,32 +42,32 @@ class Test {
 
   looklike(val) {
     if (!this.alive) return this;
-    log(this.fu(...this.args) == val, this, " looks like ", val);
+    log(this.fu == val, this, " looks like ", val);
   }
 
   approx(val, epsilon = Number.EPSILON) {
     if (!this.alive) return this;
-    log(Math.abs(this.fu(...this.args) - val) < epsilon, this, " ≃ ", val + " ±"+epsilon);
+    log(Math.abs(this.fu - val) < epsilon, this, " ≃ ", val + " ±"+epsilon);
   }
 
   gt(val) {
     if (!this.alive) return this;
-    log(this.fu(...this.args) > val, this, "<", val);
+    log(this.fu > val, this, "<", val);
   }
 
   lt(val) {
     if (!this.alive) return this;
-    log(this.fu(...this.args) < val, this, "<", val);
+    log(this.fu < val, this, "<", val);
   }
 
   have(val) {
     if (!this.alive) return this;
-    if (this.fu(...this.args)[val] !== undefined) {
+    if (this.fu[val] !== undefined) {
       this.msg += ".has." + val;
-      this.val = this.fu(...this.args)[val];
+      this.val = this.fu[val];
       return this;
     } else {
-      results.push(FAIL + this.fu.name + "(" + this.args + ") ! has." + val);
+      results.push(FAIL + this.name + "(" + this.args + ") ! has." + val);
       this.alive = false;
       return this;
     }
@@ -83,11 +84,11 @@ class Test {
 function log(test, obj, logick, val) {
   if (test) {
     results.push(
-      PASS + obj.fu.name + "(" + obj.args + ")" + logick + obj.msg + val
+      PASS + obj.name + "(" + obj.args + ")" + logick + obj.msg + val
     );
   } else {
     results.push(
-      FAIL + obj.fu.name + "(" + obj.args + ")" + "!" + logick + obj.msg + val
+      FAIL + obj.name + "(" + obj.args + ")" + "!" + logick + obj.msg + val
     );
   }
 }

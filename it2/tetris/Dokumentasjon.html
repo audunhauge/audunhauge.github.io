@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dokumentasjon</title>
+    <link rel="stylesheet" href="tetris.css">
+    <script src="Board.js"></script>
+    <script src="Tetrino.js"></script>
+    <script src="../lib/Test.js"></script>
 </head>
 
 <body>
@@ -67,8 +70,56 @@
            </code>
         </pre>
         <h4>Flytdiagram</h4>
-          <img src="tetris.svg" width="300">
+        <img src="tetris.svg" width="300">
     </article>
+    <article>
+        <h3>Testing</h3>
+        <h4>Resultat av testing</h4>
+        <div id="test">
+
+        </div>
+        <h4>Rendering av spillebrettet</h4>
+        Under skal du se et spillebrett med 12x21 ruter.
+        <div id="brett">
+
+        </div>
+    </article>
+
+    <script>
+        // tester noen enkle egenskaper
+        let divBrett = document.getElementById("brett");
+        let board = new Board(divBrett);
+        let tname = "T";
+        let t = new Tetrino(tname);
+        expect(board.cells,"Størrelse på brett").to.have("length").eq(21);
+        expect(board.complete(),"Fulle rader").to.be(0);
+        expect(t,"Tetrino").to.have("class").eq("T");
+        expect(t.legalMove(board,1,1,0),"Kan flytte tetrino").to.be(true);
+
+        // tester plassering på brett og telling av rader
+        t.y = 4;
+        expect(t.y,"Y posisjon").to.be(4);
+        expect(t.legalMove(board,0,0,1),"Kan rotere tetrino").to.be(true);
+        t.x = 1;
+        t.render(board); // viser tetrino på brettet
+        board.merge(t);
+        t.x = 4;
+        expect(t.legalMove(board,-1,0,0),"Kan ikke flytte tetrino").to.be(false);
+        t.render(board); // viser tetrino på brettet
+        board.merge(t);
+        t.x = 7;
+        t.render(board); // viser tetrino på brettet
+        board.merge(t);
+        t.x = 9;
+        t.y = 3;
+        t.rotate(1)
+        t.render(board); // viser tetrino på brettet
+        expect(t.legalMove(board,0,0,1),"Kan ikke rotere tetrino").to.be(false);
+        board.merge(t);
+        expect(board.complete(),"Fulle rader").to.be(1);
+
+        Test.summary("#test");
+    </script>
 </body>
 
 </html>

@@ -22,7 +22,8 @@ function rotate(arr, w) {
   }
 
 
-export class Tetrino {
+// export 
+class Tetrino {
     constructor(name) {
       this.cells = this.makeShape(name);
       this.rot = 0; // initial rotation
