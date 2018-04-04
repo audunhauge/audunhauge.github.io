@@ -12,7 +12,7 @@
 <body>
     <h1>Hackme stage 2</h1>
     Hacker challenge
-    <div id="hack2"></div>
+    <div id="hacker"></div>
     <form  id="hack">
         Skriv inn passord for å komme til neste oppgave
         <p>
@@ -27,6 +27,9 @@
     </form>
 
     <script>
+
+        document.querySelector("html").style.setProperty("--color", "blue");
+
         let state = +localStorage.getItem("state");
         if (state == undefined || state < 1) {
             window.location.href = "hackme1.html";

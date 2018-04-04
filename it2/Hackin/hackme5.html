@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="h4.js"></script>
+    <link rel="stylesheet" href="hack.css">
     <title>hack4</title>
 </head>
 
 <body>
     <h1>Hackme stage 5</h1>
     Hacker challenge
+    <div id="hacker"></div>
     <form id="hack">
         Skriv inn passord for å komme til neste oppgave
         <p>
@@ -29,6 +31,7 @@
         </p>
     </form>
     <script>
+         document.querySelector("html").style.setProperty("--color", "yellow");
         let state = +localStorage.getItem("state");
         if (state == undefined || state < 4) {
             window.location.href = "hackme3.html";
