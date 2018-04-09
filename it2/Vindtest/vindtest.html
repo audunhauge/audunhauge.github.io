@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../lib/Test.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="resultat"></div>
+
+    <script>
+      function kraft(vind) {
+          if (vind < 2.5) return 0;
+          if (vind < 3.4) return 2;
+          if (vind < 5.5) return 10;
+          if (vind < 8) return 60;
+          if (vind < 10.8) return 150;
+          if (vind < 13.9) return 400;
+          if (vind < 15) return 500;
+          return 0;
+      }
+
+      expect(kraft,0).to.be(0);
+      expect(kraft,3).to.be(2);
+      expect(kraft,3.5).to.be(10);
+      expect(kraft,5.7).to.be(60);
+      expect(kraft,19).to.be(0);
+      Test.summary("#resultat");
+
+    
+    </script>
+    
+</body>
+</html>

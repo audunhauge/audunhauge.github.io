@@ -1,0 +1,30 @@
+body {
+    counter-reset: oppgave;
+}
+
+div.oppgave {
+    counter-reset: deloppgave;
+    margin: 5px;
+    padding:10px;
+    color: darkgreen;
+}
+
+div.oppgave::before {
+    display: block;
+    font-size: 1.3em;
+    padding-bottom: 10px;
+    color: blue;
+    counter-increment: oppgave;
+    content: " Oppgave " counter(oppgave) ;
+}
+
+div.oppgave > p::before {
+    font-size: 0.9em;
+    color: green;
+    counter-increment: deloppgave;
+    content: counter(deloppgave, lower-alpha) ") ";
+}
+div.oppgave > p {
+    margin-left: 1em;
+    color: gray;
+}

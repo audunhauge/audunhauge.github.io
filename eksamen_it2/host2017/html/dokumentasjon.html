@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/Test.js"></script>
+    <script src="../js/blokker.js"></script>
     <title>Dokumentasjon</title>
 </head>
 
@@ -36,8 +38,8 @@
         <div>
             <img src="../media/Partiblokker.png" alt="flyt-diagram">
         </div>
-    <h2>Flyt-diagram for visBlokker</h2>
-    <pre><code>
+        <h2>Flyt-diagram for visBlokker</h2>
+        <pre><code>
         // denne koden generer et automatisk flyt-diagram
         @startuml
         title visBlokker
@@ -59,7 +61,9 @@
         @enduml
     
     </code></pre>
-    <div><img src="../media/visBlokker.png" alt="flyt-diagram"></div>
+        <div>
+            <img src="../media/visBlokker.png" alt="flyt-diagram">
+        </div>
 
     </article>
     <article>
@@ -74,14 +78,13 @@
                 <br>En test i koden sjekker om søyler lages riktig PASSED
             </li>
             <li>Sjekk at melding endres når største blokk endres (fra borgerlig til rød-grønn)
-               <br>Manuell test viser at det er i orden
+                <br>Manuell test viser at det er i orden
             </li>
         </ul>
     </article>
     <div>
         <h2>Test funksjoner i blokker.js</h2>
-        Jeg har lagt inn testene under i blokker.js. 
-        De kjøres hver gang skjema lastes og skriver ut testdata i console
+        Jeg har lagt inn testene under i blokker.js. De kjøres hver gang skjema lastes og skriver ut testdata i console
         <div>
             <pre><code>
     assert(
@@ -124,15 +127,15 @@
     );
             </code></pre>
         </div>
-    <h3>Test resultat</h3>
-    <pre><code>
-            PASSED opptelling blokk 1
-            PASSED opptelling blokk 2
-            PASSED lagSoyle er blå
-            PASSED lagSoyle er ikke rød
-            PASSED lagSoyle har riktig lengde
-    </code></pre>
+        <h3>Test resultat</h3>
+        <div id="resulat">
+        </div>
     </div>
+    <script>
+      expect(lageSoyle,33,"blue").to.have("style").defined;
+      expect(lageSoyle,33,"blue").to.have("style").have("width").eq(99);
+      Test.summary("#resulat");
+    </script>
 </body>
 
 </html>

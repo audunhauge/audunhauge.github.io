@@ -25,6 +25,10 @@ function setup() {
       // klikk på et partilogo
       let id = party = e.target.dataset.parti;
       let divParti = document.getElementById(id);
+      if (divParti === undefined) {
+        console.log("Finner ikke div for ",id);
+        return;
+      }
       divParti.classList.add("show");
       if (partyCode.start[party]) {
         partyCode.start[party]();   // oppstartskode for visning dette partiet
