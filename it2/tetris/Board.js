@@ -1,4 +1,5 @@
-export class Board {
+// export 
+class Board {
     constructor(div) {
       this.div = div;
       this.cells = [];

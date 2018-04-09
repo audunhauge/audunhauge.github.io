@@ -1,2 +1,4 @@
-# Just a simple readme
-read me please
+# Dokumentasjon
+Dokumentasjon av tetris.
+Inneholder tester - flytdiagram
+og wireframe

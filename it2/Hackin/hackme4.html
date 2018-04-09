@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="h4.js"></script>
+    <link rel="stylesheet" href="hack.css">
+    <title>hack4</title>
+</head>
+
+<body>
+    <h1>Hackme stage 4</h1>
+    Hacker challenge
+    <div id="hacker"></div>
+    <form  id="hack">
+        Skriv inn passord for å komme til neste oppgave
+        <p>
+            <label for="pwd"><input type="password" id="pwd"></label>
+        </p>
+        <p>
+            <label for="submit"><button type="button" id="doit">Hackme</button></label>
+        </p>
+        <p>
+            <label id="msg"></label>
+        </p>
+    </form>
+
+    <script>
+       document.querySelector("html").style.setProperty("--color", "orange");
+       setup();
+    </script>
+</body>
+
+</html>

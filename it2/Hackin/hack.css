@@ -1,0 +1,33 @@
+:root {
+  --color: red;
+}
+
+#hacker {
+  position: relative;
+  width: 300px;
+  height: 100px;
+}
+
+#hacker::after {
+  content: " ";
+  position: absolute;
+  opacity: 0;
+  left: 0;
+  top: 40px;
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--color);
+  animation: roll 2s linear infinite alternate;
+}
+
+@keyframes roll {
+  50% {
+    left: 130px;
+    opacity: 0.9;
+  }
+  100% {
+    left: 260px;
+    opacity: 0;
+  }
+}
