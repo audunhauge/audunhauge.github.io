@@ -132,9 +132,14 @@
         </div>
     </div>
     <script>
-      expect(lageSoyle,33,"blue").to.have("style").defined;
-      expect(lageSoyle,33,"blue").to.have("style").have("width").eq(99);
-      Test.summary("#resulat");
+        expect(lageSoyle, 33, "blue").to.have("style").defined;
+        expect(tellOpp, [
+            { dataset: { id: "a" }, value: 12 },
+            { dataset: { id: "b" }, value: 33 },
+            { dataset: { id: "c" }, value: 6 }
+        ],
+            ["c"]).to.be(6);
+        Test.summary("#resulat");
     </script>
 </body>
 

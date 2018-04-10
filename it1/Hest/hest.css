@@ -1,0 +1,30 @@
+#hest {
+    opacity: 0;
+    position: absolute;
+    left:80px;
+    top:58px;
+    width: 50px;
+    height: 25px;
+    background-image: url("hest1.png");
+    background-repeat: no-repeat;
+}
+
+#hest.started {
+    animation: walk 5s linear 3.9s;
+}
+
+@keyframes walk {
+    0% { opacity: 1; left: 80px;}
+    100% { opacity: 1; left: 400px; }
+}
+
+video.started {
+    opacity: 1;
+    animation: fade 4.1s linear forwards;
+}
+
+@keyframes fade {
+  99% { opacity: 1;}
+  100% { opacity: 0;}
+}
+

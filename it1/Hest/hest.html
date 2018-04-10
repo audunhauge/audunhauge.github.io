@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="hest.css">
+    <title>Hest animasjon</title>
+</head>
+<body>
+    <video src="hest.mp4"></video>
+    <div id="hest"></div>
+
+    <script>
+      document.querySelector("body").addEventListener("click", start);
+      function start() {
+          let vid = document.querySelector("video");
+          vid.play();
+          vid.className = "started";
+          let hest = document.querySelector("#hest");
+          hest.className = "started";
+      }
+    </script>
+
+</body>
+</html>
