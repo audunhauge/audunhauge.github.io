@@ -16,6 +16,28 @@ class Test {
     this.not = false;
   }
 
+  get is() {
+    this.msg += " is";
+    return this;
+  }
+  get it() {
+    this.msg += ". It";
+    return this;
+  }
+
+  a(type) {
+    if (!this.alive) return this;
+    if (typeof this.val === type) {
+      results.push(
+        PASS + this.name + "(" + this.args + ")" + this.msg + " a " + type
+      );
+    } else {
+      results.push(
+        FAIL + this.name + "(" + this.args + ")" + this.msg + " not a " + type
+      );
+    }
+  }
+
   get to() {
     return this;
   }
@@ -28,11 +50,11 @@ class Test {
     }
     if (this.fu === val || this.val === val) {
       results.push(
-        PASS + this.name + "(" + this.args + ")" + this.msg + " === " + val
+        PASS + this.name + "(" + this.args + ")" + this.msg + " equal " + val
       );
     } else {
       results.push(
-        FAIL + this.name + "(" + this.args + ")" + this.msg + " !== " + val
+        FAIL + this.name + "(" + this.args + ")" + this.msg + " not equal " + val
       );
     }
   }
@@ -53,7 +75,7 @@ class Test {
 
   approx(val, epsilon = Number.EPSILON) {
     if (!this.alive) return this;
-    log(Math.abs(this.fu - val) < epsilon, this, " ≃ ", val + " ±"+epsilon);
+    log(Math.abs(this.fu - val) < epsilon, this, " ≃ ", val + " ±" + epsilon);
   }
 
   gt(val) {
@@ -66,14 +88,25 @@ class Test {
     log(this.fu < val, this, "<", val);
   }
 
-  have(val) {
+  have(values) {
     if (!this.alive) return this;
-    if (this.fu[val] !== undefined) {
-      this.msg += ".has." + val;
-      this.val = this.fu[val];
+    let p, present;
+    if (typeof values === "string") {
+      // sjekk om vi har .. expect(fu,1,2).to.have("cells.length").eq(12)
+      // values er her "cells.length" - splitter på punktum
+      let vlist = values.split(".");
+      p = this.fu;
+      present = vlist.every(e => p[e] !== undefined ? (p = p[e], true) : false);
+    } else {
+      p = this.fu[values];
+      present = p !== undefined;
+    }
+    if (present) {
+      this.msg += " has [" + values  + "]";
+      this.val = p;
       return this;
     } else {
-      results.push(FAIL + this.name + "(" + this.args + ") ! has." + val);
+      results.push(FAIL + this.name + "(" + this.args + ") does not have " + values);
       this.alive = false;
       return this;
     }
