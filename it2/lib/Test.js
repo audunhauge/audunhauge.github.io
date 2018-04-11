@@ -80,7 +80,7 @@ class Test {
 
   gt(val) {
     if (!this.alive) return this;
-    log(this.fu > val, this, "<", val);
+    log(this.fu > val, this, ">", val);
   }
 
   lt(val) {
@@ -90,19 +90,21 @@ class Test {
 
   have(values) {
     if (!this.alive) return this;
-    let p, present;
+    let p, present, msg;
     if (typeof values === "string") {
       // sjekk om vi har .. expect(fu,1,2).to.have("cells.length").eq(12)
       // values er her "cells.length" - splitter på punktum
       let vlist = values.split(".");
       p = this.fu;
+      msg = " has " + values;
       present = vlist.every(e => p[e] !== undefined ? (p = p[e], true) : false);
     } else {
       p = this.fu[values];
       present = p !== undefined;
+      msg = " has [" + values + "]";  // most likely a numeric index
     }
     if (present) {
-      this.msg += " has [" + values  + "]";
+      this.msg += msg;
       this.val = p;
       return this;
     } else {
