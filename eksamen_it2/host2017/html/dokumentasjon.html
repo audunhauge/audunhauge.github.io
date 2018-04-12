@@ -16,6 +16,7 @@
         Flyt-diagram for hele appen
         <pre>
             <code>
+            <!--
             // denne koden generer et automatisk flyt-diagram
              @startuml
              title Partiblokker               
@@ -32,6 +33,7 @@
         
             stop        
             @enduml
+            -->
                     
         </code>
     </pre>
@@ -40,7 +42,9 @@
         </div>
         <h2>Flyt-diagram for visBlokker</h2>
         <pre><code>
+        <!--
         // denne koden generer et automatisk flyt-diagram
+      
         @startuml
         title visBlokker
 
@@ -59,6 +63,7 @@
         :tegn stolper;
         stop        
         @enduml
+        -->
     
     </code></pre>
         <div>
@@ -74,71 +79,39 @@
             </li>
             <li>Sjekk at koden summerer riktig for hver blokk
                 <br>Manuell sjekk viser at det stemmer
-                <br>En test i koden sjekker om tellopp virker PASSED
-                <br>En test i koden sjekker om søyler lages riktig PASSED
+                <br>Resultat av automatiske tester vises <a href="#res">under</a>.
             </li>
             <li>Sjekk at melding endres når største blokk endres (fra borgerlig til rød-grønn)
                 <br>Manuell test viser at det er i orden
             </li>
         </ul>
     </article>
-    <div>
-        <h2>Test funksjoner i blokker.js</h2>
-        Jeg har lagt inn testene under i blokker.js. De kjøres hver gang skjema lastes og skriver ut testdata i console
-        <div>
-            <pre><code>
-    assert(
-      tellOpp(
-        [
-        { dataset: { id: "a" }, value: 12 },
-        { dataset: { id: "b" }, value: 33 },
-        { dataset: { id: "c" }, value: 6 }
-        ],
-        ["a", "b"]
-      ) === 45,
-      "opptelling blokk 1"
-    );
-    
-    assert(
-      tellOpp(
-        [
-        { dataset: { id: "a" }, value: 12 },
-        { dataset: { id: "b" }, value: 33 },
-        { dataset: { id: "c" }, value: 6 }
-        ],
-        ["c"]
-      ) === 6,
-      "opptelling blokk 2"
-    );
-    
-    assert(
-      lageSoyle(3, "blue").style.backgroundColor === "blue",
-      "lagSoyle er blå"
-    );
-    
-    assert(
-      lageSoyle(3, "blue").style.backgroundColor !== "red",
-      "lagSoyle er ikke rød"
-    );
-    
-    assert(
-      lageSoyle(33, "blue").style.width === "99px",
-      "lagSoyle har riktig lengde"
-    );
-            </code></pre>
-        </div>
-        <h3>Test resultat</h3>
+    <div id="res">
+        <h2> Test funksjoner i blokker.js</h2>
+
+        <h3>Test-resultat</h3>
         <div id="resulat">
         </div>
     </div>
     <script>
-        expect(lageSoyle, 33, "blue").to.have("style").defined;
+        expect(lageSoyle, 33, "blue").to.have("style.backgroundColor").eq("blue");
+        expect(lageSoyle, 33, "blue").to.have("style.width").eq("99px");
+        expect(lageSoyle, 33, "blue").to.have("className").eq("soyle");
+
         expect(tellOpp, [
             { dataset: { id: "a" }, value: 12 },
             { dataset: { id: "b" }, value: 33 },
             { dataset: { id: "c" }, value: 6 }
-        ],
-            ["c"]).to.be(6);
+        ], ["c"]).to.be(6);
+
+
+
+        expect(tellOpp, [
+            { dataset: { id: "a" }, value: 12 },
+            { dataset: { id: "b" }, value: 33 },
+            { dataset: { id: "c" }, value: 6 }
+        ], ["a", "b"]).to.be(45);
+
         Test.summary("#resulat");
     </script>
 </body>
