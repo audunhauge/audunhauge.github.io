@@ -2,74 +2,85 @@
 function setup() {
 
     const MAXFART = 12;
-
     let bird = document.getElementById("bird");
-
     let above = document.getElementById("above");
     let below = document.getElementById("below");
 
     document.addEventListener("keydown", girFartTilFuggel);
 
-    let ypos = 150;
-    let xpos = window.innerWidth / 2 - 50;
-    let fart = 0;
+    bird.ypos = 150;
+    bird.xpos = window.innerWidth / 2 - 50;
+    bird.fart = 0;
 
-    let posA = window.innerWidth;
-    let posB = window.innerWidth;
+    above.xpos = window.innerWidth;
+    below.xpos = window.innerWidth;
 
-    let topA = 0;
-    let heightA = 150;
+    const GAP = 180;
+    const SPENN = window.innerHeight - GAP;
+
 
     let poeng = 0;
     let divPoeng = document.getElementById("poeng");
 
+    let top;
 
-
-    function girFartTilFuggel(event) {
-        fart = fart + 10;
+    function giHoydeTilSoyler() {
+        top = Math.floor(Math.random() * SPENN);
+        above.style.height = top + "px";
+        below.style.height = (window.innerHeight - GAP - top) + "px";
     }
 
-    setInterval(flyttPaaTing, 40);
+    giHoydeTilSoyler();
+
+    function girFartTilFuggel(event) {
+        bird.fart = bird.fart + 10;
+    }
+
+    let timer = setInterval(flyttPaaTing, 40);
 
     function flyttPaaTing() {
-        ypos = ypos - fart;
-        fart = fart - 1;
-        if (fart > MAXFART) { fart = MAXFART; }
-        if (fart < -MAXFART) { fart = -MAXFART; }
-        if (ypos < 0) {
-            ypos = 0;
-            fart = 0;
+        bird.ypos = bird.ypos - bird.fart;
+        bird.fart = bird.fart - 1;
+        if (bird.fart > MAXFART) { bird.fart = MAXFART; }
+        if (bird.fart < -MAXFART) { bird.fart = -MAXFART; }
+        if (bird.ypos < 0) {
+            bird.ypos = 0;
+            bird.fart = 0;
         }
-        if (ypos > window.innerHeight - 200) {
-            ypos = window.innerHeight - 200;
-            fart = 0;
+        if (bird.ypos > window.innerHeight - 200) {
+            bird.ypos = window.innerHeight - 200;
+            bird.fart = 0;
         }
-        bird.style.top = ypos + "px";
+        bird.style.top = bird.ypos + "px";
 
-        posA = posA - 5;
-        if (posA < 0) {
-            posA = window.innerWidth;
+        above.xpos = above.xpos - 5;
+        if (above.xpos < 0) {
+            above.xpos = window.innerWidth;
             poeng = poeng + 10;
             visPoeng();
+            giHoydeTilSoyler();
         }
-        above.style.left = posA + "px";
+        above.style.left = above.xpos + "px";
 
-        posB = posB - 5;
-        if (posB < 0) {
-            posB = window.innerWidth;
+        below.xpos = below.xpos - 5;
+        if (below.xpos < 0) {
+            below.xpos = window.innerWidth;
         }
-        below.style.left = posB + "px";
+        below.style.left = below.xpos + "px";
 
-        if (xpos > posA - 100 &&
-            xpos < posA + 30 &&
-            ypos < 150
+        if (bird.xpos > above.xpos - 100 &&
+            bird.xpos < above.xpos + 30 &&
+            bird.ypos < top
         ) {
+            clearInterval(timer);
             poeng = poeng * 0.9;
             visPoeng();
         }
-        if (xpos > posB - 100 &&
-            xpos < posB + 30 &&
-            ypos > window.innerHeight - 250
+
+        
+        if (bird.xpos > below.xpos - 100 &&
+            bird.xpos < below.xpos + 30 &&
+            bird.ypos > window.innerHeight - GAP - top
         ) {
             poeng = poeng * 0.9;
             visPoeng();

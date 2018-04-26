@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../it2/lib/Test.js"></script>
+    <script src="oppg2b.js"></script>
+    <title>Oppg2b</title>
+</head>
+
+<body>
+    <datalist id="aar">
+        <option value="1915"></option>
+        <option value="1950"></option>
+        <option value="1970"></option>
+        <option value="1980"></option>
+        <option value="1990"></option>
+        <option value="2000"></option>
+    </datalist>
+    <datalist id="treslag">
+        <option value="furu"></option>
+        <option value="gran"></option>
+        <option value="lauvtre"></option>
+    </datalist>
+    <form id="gui">
+        <div id="aar1">
+            <label for="">År 1
+                <input id="aar1" list="aar">
+            </label>
+
+
+        </div>
+        <div id="aar2">
+            <label for="">År 2
+                <input id="aar2" list="aar">
+            </label>
+
+
+        </div>
+        <div id="treslag">
+            <label for="">Velg treslag
+                <input id="tre" list="treslag">
+            </label>
+        </div>
+        <button id="beregn" type="button">Beregn</button>
+    </form>
+    <div id="resultat"></div>
+
+    <script>
+        setup();
+    </script>
+
+</body>
+
+</html>
