@@ -20,6 +20,9 @@ function setup() {
     let topA = 0;
     let heightA = 150;
 
+    let poeng = 0;
+    let divPoeng = document.getElementById("poeng");
+
 
 
     function girFartTilFuggel(event) {
@@ -46,6 +49,8 @@ function setup() {
         posA = posA - 5;
         if (posA < 0) {
             posA = window.innerWidth;
+            poeng = poeng + 10;
+            visPoeng();
         }
         above.style.left = posA + "px";
 
@@ -59,11 +64,21 @@ function setup() {
             xpos < posA + 30 &&
             ypos < 150
         ) {
-            document.querySelector("body").innerHTML = "game over";
+            poeng = poeng * 0.9;
+            visPoeng();
         }
+        if (xpos > posB - 100 &&
+            xpos < posB + 30 &&
+            ypos > window.innerHeight - 250
+        ) {
+            poeng = poeng * 0.9;
+            visPoeng();
+        }
+
     }
 
-
-
+    function visPoeng() {
+        divPoeng.innerHTML = "Poeng:" + poeng.toFixed(2);
+    }
 
 }
