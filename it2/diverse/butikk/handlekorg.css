@@ -1,0 +1,97 @@
+#main {
+	margin: 3em;
+	display: flex;
+	/*justify-content: space-between;*/
+	flex-wrap: wrap;
+}
+
+#main > div {
+	min-height: 3em;
+	background: #fffcfc;
+	margin: 1em;
+	margin-top:2em;
+	padding: 5px;
+	border-radius:5px;
+	box-shadow: 4px 4px rgba(30,30,30,0.3);
+	border: solid gray 1px;
+}
+
+form.simple {
+  padding: 1em;	
+}
+
+h2 {
+	width:100%;
+	text-align: center;
+}
+
+
+
+form.simple div  {
+	display:flex;
+	justify-content: space-between;
+}
+
+form.simple div label {
+	width:30%;
+	display:block;
+	margin: 5px;
+}
+
+form.simple div input,
+form.simple div button,
+form.simple div select
+ {
+	width:60%;
+	display:block;
+	margin: 5px;
+}
+
+form.simple div button {
+	margin:auto;
+	margin-top:5px;
+}
+
+div.kjop {
+	margin: 3px;
+	display: flex;
+	justify-content: space-between;
+}
+.kjop div  {
+	width:22%;
+}
+
+div.salg {
+	width:22%;
+	min-width: 135px;
+}
+
+#dialog {
+	width: 20%;
+	min-width: 12em;
+}
+
+#handlekorg {
+	width: 22%;
+	min-width: 12em;
+}
+
+#vareliste {
+	width: 45%;
+	min-width: 12em;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#handlekorg div.kjop div:first-child {
+	width:6%;
+}
+
+/* formater tallfelt */
+#handlekorg div.kjop div:nth-child(2n+3), #handlekorg div.kjop div:nth-child(2n+4) {
+	text-align:right;
+}
+div.total {
+	margin:2em;
+	text-align: center;
+}
