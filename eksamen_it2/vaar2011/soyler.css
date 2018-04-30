@@ -1,0 +1,12 @@
+div.soyle {
+    width: 20px;
+    height: 20px;
+    background-color: blue;
+    margin: 4px;
+    color:white;
+    padding: 2px;
+}
+
+div.soyle.valgt {
+    background-color: green;
+}
