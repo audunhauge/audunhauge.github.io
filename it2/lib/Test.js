@@ -1,4 +1,4 @@
-// @flow
+// 
 const results = [];
 const PASS = '<span style="color:green">PASSED</span> ';
 const FAIL = '<span style="color:red">FAILED</span> ';
@@ -50,11 +50,11 @@ class Test {
     }
     if (this.fu === val || this.val === val) {
       results.push(
-        PASS + this.name + "(" + this.args + ")" + this.msg + " equal " + val
+        PASS + this.name + "(" + JSON.stringify(this.args) + ")" + this.msg + " equal " + val
       );
     } else {
       results.push(
-        FAIL + this.name + "(" + this.args + ")" + this.msg + " not equal " + val
+        FAIL + this.name + "(" + JSON.stringify(this.args) + ")" + this.msg + " not equal " + val
       );
     }
   }
@@ -70,22 +70,22 @@ class Test {
 
   looklike(val) {
     if (!this.alive) return this;
-    log(this.fu == val, this, " looks like ", val);
+    log(this.fu == val|| this.val == val, this, " looks like ", val);
   }
 
   approx(val, epsilon = Number.EPSILON) {
     if (!this.alive) return this;
-    log(Math.abs(this.fu - val) < epsilon, this, " ≃ ", val + " ±" + epsilon);
+    log(Math.abs(this.fu - val) < epsilon || this.val - val < epsilon, this, " ≃ ", " " + val + " ±" + epsilon);
   }
 
   gt(val) {
     if (!this.alive) return this;
-    log(this.fu > val, this, ">", val);
+    log(this.fu > val || this.val > val, this, ">", val);
   }
 
   lt(val) {
     if (!this.alive) return this;
-    log(this.fu < val, this, "<", val);
+    log(this.fu < val || this.val < val, this, "<", val);
   }
 
   have(values) {
@@ -125,11 +125,11 @@ class Test {
 function log(test, obj, logick, val) {
   if (test) {
     results.push(
-      PASS + obj.name + "(" + obj.args + ")" + logick + obj.msg + val
+      PASS + obj.name + "(" + JSON.stringify(obj.args) + ")" + logick + obj.msg + val
     );
   } else {
     results.push(
-      FAIL + obj.name + "(" + obj.args + ")" + "!" + logick + obj.msg + val
+      FAIL + obj.name + "(" + JSON.stringify(obj.args) + ")" + "!" + logick + obj.msg + val
     );
   }
 }

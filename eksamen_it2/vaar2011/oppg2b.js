@@ -1,3 +1,4 @@
+// @ts-check
 function setup() {
 
     let ingenValgt = true;
@@ -6,8 +7,10 @@ function setup() {
     const treVolum = {
         furu: [12, 16, 20, 33, 44, 56],
         gran: [13, 17, 25, 31, 48, 66],
-        lauv: [2, 3, 4, 5, 6, 7]
+        lauv: [6, 3, 4, 5, 6, 7]
     }
+
+    const aarsTall = [1915, 1940, 1950, 1980, 1990, 2000];
 
     let divSoyler = document.getElementById("soyler");
     let divOppsummering = document.getElementById("oppsummering");
@@ -15,8 +18,9 @@ function setup() {
     inpTre.addEventListener("change", visVerdier);
 
     function visVerdier(e) {
+        divOppsummering.innerHTML = "";  // fjerner forrige oppsummering
         let tre = inpTre.value;
-        let soyler = tegnSoyler(treVolum[tre], klikkMeg);
+        let soyler = tegnSoyler(treVolum[tre],aarsTall, klikkMeg);
         divSoyler.innerHTML = "";
         for (let s of soyler) {
             divSoyler.appendChild(s);
@@ -32,25 +36,29 @@ function setup() {
         gamle.forEach(e => e.classList.remove("valgt"));
         let valgte = soyler.filter(e => e.classList.contains("valgt"));
         if (valgte.length === 2) {
+            let [a,b] = valgte; // trenger årstall fra søylene
             let oppsum = lagOppsummering(valgte);
+            let okmink = oppsum.diff >= 0 ? "økning" : "nedgang";
             divOppsummering.innerHTML = `
-            Endringen er på ${oppsum.diff}
-            <br>Det tilsvarer ${(oppsum.prosent*100).toFixed(1)}`;
+            Fra ${a.dataset.aar} til ${b.dataset.aar} er
+            endringen på ${oppsum.diff} kubikkmeter.
+            <br>Det tilsvarer en ${okmink} på ${(oppsum.prosent*100).toFixed(1)} %`;
         }
     }
 
-    Test.summary();
-
+    Test.summary("#test");
 }
+
 
 /**
  * Lager en oppsumering av forskjell i volum for to år
  * @param {Array} valgte 
+ * @returns { {diff:number, prosent:number} }
  */
 function lagOppsummering(valgte) {
     let [a, b] = valgte;
     let diff = b.dataset.volum - a.dataset.volum;
-    let prosent = diff / a.dataset.volum;
+    let prosent = Math.abs(diff) / a.dataset.volum;
     return { diff, prosent };
 }
 
@@ -67,18 +75,24 @@ expect(lagOppsummering, [
     {dataset:{volum:2}}
 ]).to.have("prosent").eq(1);
 expect(lagOppsummering, [
+    {dataset:{volum:9}},
+    {dataset:{volum:12}}
+]).to.have("prosent").approx(0.33,0.01);
+expect(lagOppsummering, [
     {dataset:{volum:8}},
     {dataset:{volum:10}}
 ]).to.have("prosent").eq(0.25);
 
 
+
 /**
 * Tegner søyler for tallverdier
-* @param {Array} verdier inneholder tall som vi skal lage søyler av
+* @param {Array} verdier inneholder tall som bestemmer bredden til hver søyle
+* @param {Array} aarsTall ledetekst (årstall) for søylene
+* @param {EventHandlerNonNull} noenKlikkerMeg event-handler for klikk på søylen
 * @returns {Array} array med søyle-diver
 */
-function tegnSoyler(verdier, noenKlikkerMeg) {
-    const aarsTall = [1915, 1940, 1950, 1980, 1990, 2000];
+function tegnSoyler(verdier, aarsTall, noenKlikkerMeg) {
     let ret = [];
     //for (let v of verdier) {
     for (let i = 0; i < verdier.length; i++) {
@@ -89,7 +103,7 @@ function tegnSoyler(verdier, noenKlikkerMeg) {
         s.className = "soyle";
         s.dataset.aar = aar;
         s.dataset.volum = v;
-        s.innerHTML = aar + " " + v + " m<sup>3</sup>";
+        s.innerHTML =  v + " m<sup>3</sup>";
         s.style.width = (v * 3 + 140) + "px";
         ret.push(s);
     }
@@ -101,3 +115,4 @@ expect(tegnSoyler, [1, 2]).to.have("length").eq(2);
 expect(tegnSoyler, [1, 2]).to.have("0.className").eq("soyle");
 expect(tegnSoyler, [1, 2]).to.have("0.style.width").eq("143px");
 expect(tegnSoyler, [1, 2]).to.have("1.style.width").eq("146px");
+expect(tegnSoyler, [1, 2, 3]).to.have("length").eq(3);
