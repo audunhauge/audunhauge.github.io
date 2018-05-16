@@ -13,7 +13,6 @@ class Test {
     this.alive = true;
     this.msg = "";
     this.val = undefined;
-    this.not = false;
   }
 
   get is() {
@@ -29,11 +28,11 @@ class Test {
     if (!this.alive) return this;
     if (typeof this.val === type) {
       results.push(
-        PASS + this.name + "(" + this.args + ")" + this.msg + " a " + type
+        PASS + showArgs(this) + this.msg + " a " + type
       );
     } else {
       results.push(
-        FAIL + this.name + "(" + this.args + ")" + this.msg + " not a " + type
+        FAIL + showArgs(this) + this.msg + " not a " + type
       );
     }
   }
@@ -50,11 +49,11 @@ class Test {
     }
     if (this.fu === val || this.val === val) {
       results.push(
-        PASS + this.name + "(" + JSON.stringify(this.args) + ")" + this.msg + " equal " + val
+        PASS + showArgs(this) + this.msg + " equal " + val
       );
     } else {
       results.push(
-        FAIL + this.name + "(" + JSON.stringify(this.args) + ")" + this.msg + " not equal " + val
+        FAIL + showArgs(this) + this.msg + " not equal " + val
       );
     }
   }
@@ -70,7 +69,7 @@ class Test {
 
   looklike(val) {
     if (!this.alive) return this;
-    log(this.fu == val|| this.val == val, this, " looks like ", val);
+    log(this.fu == val || this.val == val, this, " looks like ", val);
   }
 
   approx(val, epsilon = Number.EPSILON) {
@@ -108,7 +107,7 @@ class Test {
       this.val = p;
       return this;
     } else {
-      results.push(FAIL + this.name + "(" + this.args + ") does not have " + values);
+      results.push(FAIL + showArgs(this) + " does not have " + values);
       this.alive = false;
       return this;
     }
@@ -122,14 +121,19 @@ class Test {
   }
 }
 
+function showArgs(o) {
+  return o.name + "(" + JSON.stringify(o.args) + ")";
+}
+
+
 function log(test, obj, logick, val) {
   if (test) {
     results.push(
-      PASS + obj.name + "(" + JSON.stringify(obj.args) + ")" + logick + obj.msg + val
+      PASS + showArgs(obj) + logick + obj.msg + val
     );
   } else {
     results.push(
-      FAIL + obj.name + "(" + JSON.stringify(obj.args) + ")" + "!" + logick + obj.msg + val
+      FAIL + showArgs(obj) + "!" + logick + obj.msg + val
     );
   }
 }
