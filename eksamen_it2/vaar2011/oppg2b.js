@@ -50,6 +50,7 @@ function setup() {
 }
 
 
+
 /**
  * Lager en oppsumering av forskjell i volum for to år
  * @param {Array} valgte 
