@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/museum.css">
-    <script src="js/Test.js"></script>
-    <script src="js/museum.js"></script>
+    <link rel="stylesheet" href="../css/museum.css">
+    <script src="../js/Test.js"></script>
+    <script src="../js/museum.js"></script>
     <title>Muesum Oppgave 1</title>
 </head>
 <body>
@@ -17,14 +17,25 @@
         <div>
             Velg kurs fra kombo-boksen og skriv inn info.
             Trykk så på lagre
+            
         </div>
       <form id="registrer">
+            Velg kurs <select name="kursvalg" id="kursvalg">
+                    <option >Oldtiden</option>
+                    <option >Antikken</option>
+                    <option >Sparta</option>
+                    <option >Athen</option>
+                    <option >Roma</option>
+                </select>
           <div><label for="navn">Navn: <input id="navn" type="text"></label></div>
           <div><label for="adresse">Adresse: <input id="adresse" type="text"></label></div>
           <div><label for="epost">Epost: <input id="epost" type="text"></label></div>
           <div><label for="tlf">Tlf: <input id="tlf" type="text"></label></div>
           <div><button id="lagre" type="button" disabled="disabled">Lagre</button></div>
       </form>
+      <div id="deltakerliste">
+
+      </div>
 
     </div>
     <div id="foredrag"></div>
