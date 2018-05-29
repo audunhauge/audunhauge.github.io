@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="skjema.js"></script>
+    <link rel="stylesheet" href="skjema.css">
+    <title>Skjema</title>
+</head>
+<body>
+    <!--
+        - Engelsk
+        - Geografi
+        - Historie Vg3
+        - Kroppsøving Vg3
+        - Naturfag
+        - Matematikk Vg1, Vg2 (eller x fag)
+        - Norsk hovedmål, skriftlig Vg3
+        - Norsk sidemål, skriftlig Vg3
+        - Norsk, muntlig Vg3
+        - Religion og etikk
+        - Samfunnsfag i videregående opplæring
+        - minimum 6 programfag
+        - minimum 5 eksamener 
+    -->
+    <form id="registrer">
+    <div class="felles">
+      <div><label >Engelsk<input type="text"></label></div>
+      <div><label >Geografi<input type="text"></label></div>
+      <div><label >Historie<input type="text"></label></div>
+      <div><label >Kroppsøving<input type="text"></label></div>
+      <div><label >Naturfag<input type="text"></label></div>
+      <div><label >Matematikk<input type="text"></label></div>
+      <div><label >Norsk hovedmål<input type="text"></label></div>
+      <div><label >Norsk sidemål<input type="text"></label></div>
+      <div><label >Norsk muntlig<input type="text"></label></div>
+      <div><label >Religion<input type="text"></label></div>
+      <div><label >Samfunnsfag<input type="text"></label></div>
+    </div>
+    <div class="programfag">
+        <div><label>Fagnavn</label><label for="">Karakter</label></div>
+        <div><input type="text"><input type="text"></div>
+        <div><input type="text"><input type="text"></div>
+        <div><input type="text"><input type="text"></div>
+        <div><input type="text"><input type="text"></div>
+        <div><input type="text"><input type="text"></div>
+        <div><input type="text"><input type="text"></div>
+    </div>
+    <div class="eksamen">
+            <div><label>Eksamen</label><label for="">Karakter</label></div>
+            <div><input type="text"><input type="text"></div>
+            <div><input type="text"><input type="text"></div>
+            <div><input type="text"><input type="text"></div>
+            <div><input type="text"><input type="text"></div>
+            <div><input type="text"><input type="text"></div>
+            <div><input type="text"><input type="text"></div>
+        </div>
+        <div id="tillegg"><label>Tilleggspoeng: </label><input type="number"></div>
+    </form>
+    <div id="oppsummering"></div>
+    <div id="sortert"></div>
+    <div id="poeng"></div>
+
+    <script>
+      setup();
+    </script>
+</body>
+</html>

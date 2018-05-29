@@ -1,0 +1,33 @@
+#brett {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 500px;
+    height: 500px;
+    background-color: whitesmoke;
+    border: solid gray 1px;
+}
+
+#poeng {
+    position: absolute;
+    left: 550px;
+    top: 10px;
+    width: 2em;
+    height: 1.5em;
+    border: gray solid 1px;
+}
+#poeng:after {
+    position: absolute;
+    right: -3em;
+    content: "Poeng";
+}
+
+div.player {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border: gray solid 1px; 
+}
