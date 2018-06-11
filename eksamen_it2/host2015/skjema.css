@@ -1,0 +1,19 @@
+body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.programfag {
+    color:green;
+}
+.felles {
+    color: blue;
+}
+.eksamen {
+    color: red;
+}
+
+input.feil {
+    background-color: red;
+    color:white;
+}
