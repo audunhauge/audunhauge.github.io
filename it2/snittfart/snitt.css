@@ -1,0 +1,24 @@
+.ball {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+#main {
+    position: relative;
+}
+
+.cold.ball {
+    background-color: blue;
+}
+
+.warm.ball {
+    background-color: red;
+}
+
+.soyle {
+    width: 20px;
+    height: 2px;
+    background-color: blue;
+}
