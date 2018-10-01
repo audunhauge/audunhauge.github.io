@@ -16,9 +16,7 @@ function setup() {
     let inpSjanger = document.getElementById("sjanger");
     let inpUtgiv = document.getElementById("utgiv");
     let btnLagre = document.getElementById("lagre");
-
     btnLagre.addEventListener("click", lagreData);
-
     function lagreData() {
         let isbn = inpISBN.value;
         let tittel = inpTittel.value;
@@ -34,32 +32,46 @@ function setup() {
 
 function bokliste() {
     let divMain = document.getElementById("main");
-    let s = "";
-    let books = filtrer(bib.books,"sjanger","historie");
-    books.forEach(
-        book => {
-            s += "<div><h4>" + book.tittel + "</h4><div>";
-            s += `<label>Forfatter</label><label>${book.forfatter}</label>`;
-            s += `<label>ISBN</label><label>${book.isbn}</label>`;
-            s += `<label>Utgitt</label><label>${book.utgiv}</label>`;
-            s += `<label>Sjanger</label><label>${book.sjanger}</label>`;
-            s += "</div></div>";
+    let inpSjanger = document.getElementById("sjanger");
+
+    inpSjanger.addEventListener("change", oppdaterListe);
+
+    oppdaterListe();
+
+
+    function oppdaterListe() {
+        let s = ""; let books;
+        let sjanger = inpSjanger.value || "historie";
+        if (sjanger === "alle") {
+            books = filtrer(bib.books, "sjanger", (e,v) => true );
+        } else {
+            books = filtrer(bib.books, "sjanger", sjanger);
         }
-    );
-    divMain.innerHTML = s;
+        books.forEach(
+            book => {
+                s += "<div><h4>" + book.tittel + "</h4><div>";
+                s += `<label>Forfatter</label><label>${book.forfatter}</label>`;
+                s += `<label>ISBN</label><label>${book.isbn}</label>`;
+                s += `<label>Utgitt</label><label>${book.utgiv}</label>`;
+                s += `<label>Sjanger</label><label>${book.sjanger}</label>`;
+                s += "</div></div>";
+            }
+        );
+        divMain.innerHTML = s;
+    }
 }
 
-function filtrer(liste,egenskap,test) {
-    if (!Array.isArray(liste) ) {
+function filtrer(liste, egenskap, test) {
+    if (!Array.isArray(liste)) {
         // try to make an array
         try {
             liste = Object.keys(liste).map(k => liste[k]);
-        } catch(e) {
-            liste = [];  
+        } catch (e) {
+            liste = [];
         }
     }
     if (typeof test === "function") {
-        return liste.filter(e => test(e[egenskap]));
+        return liste.filter(e => test(e,egenskap));
     }
     return liste.filter(e => e[egenskap] === test);
 }
