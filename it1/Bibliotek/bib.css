@@ -1,0 +1,50 @@
+form {
+    margin-top: 1.2cm;
+    position: relative;
+    width: 25em;
+    max-width: 85%;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid gray 1px;
+    background-color: gainsboro;
+}
+
+form > label {
+    display: grid;
+    grid-template-columns: 7fr 2fr;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid gray 1px;
+    background-color: whitesmoke;
+}
+
+form::after {
+    color:blue;
+    content: attr(data-info);
+    position: absolute;
+    right: 20px;
+    top: -20px;
+}
+
+#main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#main > div {
+    background-color: whitesmoke;
+    border: solid teal 1px;
+    border-radius: 5px;
+    width: 16em;
+    padding: 5px;
+}
+#main > div h4 {
+    text-align: center;
+    color: blue;
+}
+
+#main > div > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
