@@ -1,0 +1,10 @@
+div.mydivs {
+    display:grid;
+    grid-template-columns: repeat(5, 1fr) ;
+}
+
+div.mydivs > div {
+    height: 100px;
+    background-color: rgba(120,30,40,0.6);
+    margin: 2em;
+}

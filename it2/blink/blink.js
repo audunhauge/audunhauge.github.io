@@ -218,6 +218,12 @@ class Movable extends Sprite {
   }
 }
 
+
+/**
+ * Merk at klasser ikke kan ha static vars (variable på klassen)
+ * Legger til egenskapen Blink.antall etter at klassen er laga
+ * Det blir da en klasse-variabel - sort of
+ */
 class Blink extends Movable {
 
   constructor(div, x, y, w, h, rot, velocity) {

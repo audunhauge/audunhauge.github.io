@@ -1,0 +1,10 @@
+div.sqra, div.sqrb {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: red;
+}
+
+div.sqrb {
+    background-color: blue;
+}
