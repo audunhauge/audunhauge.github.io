@@ -1,0 +1,28 @@
+form {
+    position: relative;
+    background-color: darkgray;
+    border: solid gray 1px;
+    border-radius: 5px;
+    margin-top: 1.5cm;
+    width: 25em;
+    max-width: 80%;
+    padding: 10px;
+}
+
+form::after {
+  content: attr(data-tittel);
+  position: absolute;
+  top: -20px;
+  right: 20px;
+  color: blue;
+}
+
+form > label {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    padding: 5px;
+    background-color: gainsboro;
+    border-radius: 5px;
+    border: solid gray 1px;
+    margin: 3px;
+}

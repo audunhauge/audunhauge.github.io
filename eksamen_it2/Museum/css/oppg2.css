@@ -1,0 +1,41 @@
+#velg > div {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 4fr 5fr;
+  margin: 5px;
+}
+#velg > div > div {
+  padding: 3px;
+  margin: 2px;
+}
+
+#velg > div:nth-child(odd) {
+  background-color: rgba(211, 211, 211, 0.411);
+}
+
+#velg > div:nth-child(n + 3) > div:nth-child(1) {
+  background-color: lightgreen;
+  text-align: center;
+}
+
+#velg > div.heading {
+  background-color: blue;
+  color: white;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+#kvittering {
+  margin: 2em;
+  width: 54em;
+  border: solid gray 1px;
+  padding: 1em;
+  background-color: aliceblue;
+}
+
+input.riktig {
+    background-color: green;
+    color: white;
+}
+input.feil {
+    background-color: red;
+}
