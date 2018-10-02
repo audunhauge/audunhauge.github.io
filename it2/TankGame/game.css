@@ -1,0 +1,148 @@
+#board {
+    position: relative;
+    left: 20px;
+    width: 500px;
+    /*  */
+    height: 500px;
+    background-color: white;
+    border: solid red 1px;
+}
+
+#melding {
+    color: red;
+    font-size:1.5em;
+    position: absolute;
+    left: calc(50% - 50px);
+    top: calc(50% - 90px);
+}
+
+.skudd {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 8px;
+  height: 2px;
+  background-color: green;
+}
+
+.startbutton {
+    position: absolute;
+    left: calc(50% - 25px);
+    top: calc(50% - 8px);
+}
+
+#reg {
+  top: calc(50% + 28px);
+}
+
+.tanks.intro1 {
+  animation: walk-about 15s linear infinite;
+}
+
+.tanks.intro2 {
+  animation: walk-about 15s linear  infinite 7.5s;
+}
+
+.go_away {
+  animation: goLeft 1s;
+  animation-fill-mode: forwards;
+}
+
+.hidden {
+  display: none;
+}
+
+.come_here {
+  animation: goLeft 1s reverse;
+  animation-fill-mode: forwards;
+}
+
+#registrer {
+  position: absolute;
+  left:-500px;
+  top:100px;
+  margin: 30px;
+}
+
+@keyframes goLeft {
+  0% { left:20px; }
+  100% { left: -600px; }
+}
+
+
+@keyframes walk-about {
+  0% {  visibility: visible;
+        top: 30px;
+        left: 30px; 
+        transform: rotate(90deg);
+      }
+  25% { top: 445px;
+        left: 30px; 
+        transform: rotate(90deg);
+      }
+  28% { transform: rotate(0deg);}
+  50% { top: 445px; 
+        left: 445px;
+        transform: rotate(0deg);
+      }
+  52% { transform: rotate(-90deg); }
+  75% { top: 30px; 
+        left: 445px;
+        transform: rotate(-90deg);
+      }
+  78% { transform: rotate(-180deg); }
+  97% { transform: rotate(-180deg);
+       top: 30px;
+       left: 30px;
+   }
+  100% { transform: rotate(-270deg); 
+         top: 30px;
+         left: 30px;
+  }
+  
+}
+
+.tanks {
+    position: absolute;
+    width: 30px;
+    height: 13px;
+    background-color: blue;
+    box-shadow: 2px 2px 2px rgba(10,10,10,0.4);
+    border-bottom: solid 2px #008;
+    border-radius: 2px;
+    visibility: hidden;
+}
+
+.tanks:after {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 1px;
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: #79b;
+    box-shadow: 2px 2px 2px rgba(10,10,10,0.4);
+    border-radius: 2px;
+}
+
+.tanks:before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 6px;
+    display: block;
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(to top, #00c,#99c);
+    box-shadow: 1px 1px 1px rgba(10,10,10,0.2);
+}
+
+.tanks.active {
+  visibility: visible;
+}
+
+
+.tanks.damaged {
+    width: 20px;
+}

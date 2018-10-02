@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="game.css">
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="RigidBody.js"></script>
+  <script src="Tank.js"></script>
+  <script src="Skudd.js"></script>
+  <script src="Player.js"></script>
+  <script src="game.js"></script>
+  <script src="playgame.js"></script>
+</head>
+
+<body>
+  <div id="main">
+    <div id="board">
+      <div id="melding">
+        Skyt fiendens tanks.
+      </div>
+    </div>
+    <div id="registrer">
+      <form>
+        <br>
+        <label> Navn
+          <input id="navn" type="text" placeholder="fornavn etternavn">
+        </label>
+        <br>
+        <label> Alder
+          <input id="alder" type="number" min=12 max=90>
+        </label>
+        <br>
+        <label> Farge
+          <input id="farge" type="color">
+        </label>
+        <br>
+        <br>
+        <button type="button" id="lagre">Lagre</button>
+      </form>
+    </div>
+    
+
+  </div>
+  <script>
+    setup();
+  </script>
+</body>
+
+</html>

@@ -10,6 +10,7 @@ if (localStorage.getItem("bibliotek")) {
 }
 
 function setup() {
+    let divAntall = document.getElementById("antall");
     let inpISBN = document.getElementById("isbn");
     let inpTittel = document.getElementById("tittel");
     let inpForfatter = document.getElementById("forfatter");
@@ -17,6 +18,8 @@ function setup() {
     let inpUtgiv = document.getElementById("utgiv");
     let btnLagre = document.getElementById("lagre");
     btnLagre.addEventListener("click", lagreData);
+    divAntall.innerHTML = String(Object.keys(bib.books).length);
+
     function lagreData() {
         let isbn = inpISBN.value;
         let tittel = inpTittel.value;
@@ -24,9 +27,16 @@ function setup() {
         let sjanger = inpSjanger.value;
         let utgiv = inpUtgiv.value;
 
+        inpISBN.value = "";
+        inpTittel.value = "";
+        inpForfatter.value = "";
+        inpSjanger.itemValue = "";
+        inpUtgiv.value = "";
+
         let bokData = { isbn, tittel, forfatter, sjanger, utgiv };
         bib.books[isbn] = bokData;
         localStorage.setItem("bibliotek", JSON.stringify(bib));
+        divAntall.innerHTML = String(Object.keys(bib.books).length);
     }
 }
 

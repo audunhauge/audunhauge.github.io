@@ -29,15 +29,34 @@ form::after {
 
 #main {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 }
 
 #main > div {
+    position: relative;
     background-color: whitesmoke;
     border: solid teal 1px;
+    border-left: solid teal 5px;
     border-radius: 5px;
-    width: 16em;
+    width: 12em;
+    height: 16em;
     padding: 5px;
+    box-shadow: 5px 4px 6px gray;
+}
+
+#main > div::after {
+  z-index: -1;
+  content: "";
+  display: block;
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  border: solid teal 1px;
+  border-left: solid teal 5px;
+  border-radius: 5px;
+  width: 12em;
+  height: 16em;
+  padding: 5px;
 }
 #main > div h4 {
     text-align: center;
@@ -47,4 +66,12 @@ form::after {
 #main > div > div {
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+
+#antall {
+    position: absolute;
+    top: 30px;
+    left: 16em;
+    width: 5em;
+    height: 2em;
 }
