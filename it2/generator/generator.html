@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="generer.css">
+    <script src="generer.js"></script>
+    <title>Generator</title>
+</head>
+
+<body>
+    <div id="side1">
+        <h1>Skjemagenerator</h1>
+        <p>
+            <select name="backend" id="backend">
+                <option value="localStorage">localStorage</option>
+                <option value="firebase">Firebase</option>
+                <option value="postgres">Postgres</option>
+            </select>
+        </p>
+        <p>
+            <textarea name="sql" id="sql" cols="50" rows="20"></textarea>
+        </p>
+        <button id="generer" type="button">Generer</button>
+    </div>
+    <div id="side2" class="hidden">
+        <h1>Lag disse filene i prosjektmappa di</h1>
+        <p>
+            Kopier og lim inn
+        </p>
+        <div id="ramme">
+            <div class="faner">bok.html</div>
+            <div class="faner">bok.js</div>
+            <div class="faner">database.js</div>
+            <div class="faner">database.css</div>
+            <div id="visning">
+                
+            </div>
+        </div>
+    </div>
+    <script>
+       setup();
+    </script>
+</body>
+
+</html>

@@ -48,7 +48,6 @@ function bokliste() {
 
     oppdaterListe();
 
-
     function oppdaterListe() {
         let s = ""; let books;
         let sjanger = inpSjanger.value || "historie";
@@ -59,7 +58,8 @@ function bokliste() {
         }
         books.forEach(
             book => {
-                s += "<div><h4>" + book.tittel + "</h4><div>";
+                let klasse = book.sjanger;
+                s += `<div class="${klasse}"><h4>` + book.tittel + "</h4><div>";
                 s += `<label>Forfatter</label><label>${book.forfatter}</label>`;
                 s += `<label>ISBN</label><label>${book.isbn}</label>`;
                 s += `<label>Utgitt</label><label>${book.utgiv}</label>`;
