@@ -2,6 +2,10 @@
 
 let bib = {
     books: {},
+    forfatter:{},
+    forlag:{},
+    eksemplar:{},
+    utlaan:{},
 }
 
 if (localStorage.getItem("bibliotek")) {
