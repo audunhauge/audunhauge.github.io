@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+<!--
+@startuml
+
+title "Bruker lager database-skjema"
+
+actor User
+boundary "Web GUI" as GUI
+control "Velg database" as SC
+entity Kodegenerator as KO
+
+
+User -> GUI : Lim inn sql
+GUI -> SC : sql
+SC -> KO : {array,backend}
+KO -> User : {HTML,js,class,css}
+@enduml
+-->
+
+</body>
+</html>

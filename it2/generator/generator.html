@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="generer.css">
+    <script src="sql2class.js"></script>
     <script src="generer.js"></script>
     <title>Generator</title>
 </head>
@@ -26,22 +27,30 @@
         <button id="generer" type="button">Generer</button>
     </div>
     <div id="side2" class="hidden">
+        <h1>Velg tabell</h1>
+        <label for="tabell">Tabell:</label>
+        <select name="tabell" id="tabell">
+
+        </select>
+    </div>
+    <div id="side3" class="hidden">
         <h1>Lag disse filene i prosjektmappa di</h1>
         <p>
             Kopier og lim inn
         </p>
         <div id="ramme">
-            <div class="faner">bok.html</div>
-            <div class="faner">bok.js</div>
-            <div class="faner">database.js</div>
-            <div class="faner">database.css</div>
-            <div id="visning">
-                
-            </div>
+            <div data-t="html" class="faner">bok.html</div>
+            <div data-t="js" class="faner">bok.js</div>
+            <div data-t="db" class="faner active">database.js</div>
+            <div data-t="css" class="faner">database.css</div>
+            <div id="html" class="kode hidden"></div>
+            <div id="js" class="kode hidden"></div>
+            <div id="db" class="kode "></div>
+            <div id="css" class="kode hidden"></div>
         </div>
     </div>
     <script>
-       setup();
+        setup();
     </script>
 </body>
 
