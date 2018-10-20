@@ -134,6 +134,7 @@ function setup() {
     let divDB = document.getElementById("db");
     let divHTML = document.getElementById("html");
     let divCSS = document.getElementById("css");
+    let divJs = document.getElementById("js");
 
     let sql, s, td, tabell;
 
@@ -176,6 +177,7 @@ function setup() {
         divDB.innerHTML = "<p>" + s.join("</p><p>") + "</p>";
         divHTML.innerHTML = "<pre>" + html1 + makeForm(tabell, td[tabell]) + html2 + "</pre>";
         divCSS.innerHTML = "<pre>" + css + "</pre>";
+        divJs.innerHTML = "<pre>" + makeCode(tabell, td[tabell]) + "</pre>";
 
 
     }
