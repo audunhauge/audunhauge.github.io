@@ -1,0 +1,87 @@
+form {
+    margin-top: 1.2cm;
+    position: relative;
+    width: 25em;
+    max-width: 85%;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid gray 1px;
+    background-color: gainsboro;
+}
+
+form > label {
+    display: grid;
+    grid-template-columns: 7fr 2fr;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid gray 1px;
+    background-color: whitesmoke;
+}
+
+form::after {
+    color:blue;
+    content: attr(data-info);
+    position: absolute;
+    right: 20px;
+    top: -20px;
+}
+
+#main {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+#main > div {
+    position: relative;
+    background-color: whitesmoke;
+    border: solid teal 1px;
+    border-left: solid teal 10px;
+    border-radius: 5px;
+    width: 12em;
+    height: 16em;
+    padding: 5px;
+    box-shadow: 5px 4px 6px gray;
+    margin: 1em;
+}
+
+#main > div.romaner {
+    background-color: lightcoral;
+}
+
+#main > div.historie {
+    background-color: blue;
+}
+
+
+#main > div::after {
+  z-index: -1;
+  content: "";
+  display: block;
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  border: solid teal 1px;
+  border-left: solid teal 5px;
+  border-radius: 5px;
+  width: 12em;
+  height: 16em;
+  padding: 5px;
+}
+#main > div h4 {
+    text-align: center;
+    color: blue;
+}
+
+#main > div > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#antall {
+    position: absolute;
+    top: 30px;
+    left: 16em;
+    width: 5em;
+    height: 2em;
+}

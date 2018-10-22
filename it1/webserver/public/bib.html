@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bibliotek</title>
+    <link rel="stylesheet" href="bib.css">
+    <script src="bib.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>
+            Registrer bøker 
+        </h1>
+        <div id="antall"></div>
+        <p>
+            <a href="bokliste.html">Vis boklister</a>
+        </p>
+    </header>
+    <form id="registrer" data-info="Registrer bok">
+        <label for="isbn">ISBN <input type="text" id="isbn"></label>
+        <label for="tittel">Tittel <input type="text" id="tittel"></label>
+        <label for="forfatter">Forfatter <input type="text" id="forfatter"></label>
+        <label for="sjanger">Sjanger
+            <select name="sjanger" id="sjanger">
+                <option value="romaner">Romaner</option>
+                <option value="historie">Historie</option>
+                <option value="biografi">Biografier</option>
+                <option value="andre">Andre</option>
+            </select>
+        </label>
+        <label for="sider">Antall sider <input type="number" id="sider"></label>
+        <button type="button" id="lagre">Lagre bok</button>
+    </form>
+    <script>
+        setup();
+    </script>
+</body>
+
+</html>
