@@ -8,7 +8,7 @@ let autokeys = {
 }
 
 class Bok {
-    constructor({ bokid, isbn, tittel, sjanger, utgitt, forfatterid, forlagid, sider }) {
+    constructor({ bokid=1, isbn, tittel, sjanger, utgitt=1, forfatterid=1, forlagid=1, sider }) {
         this.bokid = bokid;
         this.isbn = isbn;
         this.tittel = tittel;
@@ -68,15 +68,15 @@ async function setup() {
         inpSjanger.itemValue = "";
         inpSider.value = "";
 
-        let bokData = new Bok(isbn, tittel, sjanger, sider);
-        let key = bokData.bokID;
-        bib.books[key] = bokData;
-        divAntall.innerHTML = String(Object.keys(bib.books).length);
-        // oppdater databasen med alle endringer
-        // NB dette er ikke en god løsning (denne modellen er bare for å illustrere virkemåte)
-        // HELE databasen lagres på nytt for HVER ENESTE endring
-        localStorage.setItem("bibliotek", JSON.stringify(bib));
-        localStorage.setItem("bibliotek_auto", JSON.stringify(autokeys));
+        let bokData = new Bok({isbn, tittel, sjanger, sider});
+        bokData.bokid = 2;
+        let key = bokData.bokid;
+        bib.bok[key] = bokData;
+        divAntall.innerHTML = String(Object.keys(bib.bok).length);
+        upsert('insert into bok (bokid,tittel,isbn,forfatterid,forlagid,sider,sjanger,utgitt)'+ 
+        'values ( $[bokid],$[tittel],$[isbn],$[forfatterid],$[forlagid],1,$[sjanger],1)', bokData);
+
+        
     }
 }
 
@@ -111,10 +111,7 @@ async function bokliste() {
     }
 }
 
-function makeSelect(tname, tdata) {
 
-
-}
 
 function filtrer(liste, egenskap, test) {
     if (!Array.isArray(liste)) {
@@ -131,8 +128,19 @@ function filtrer(liste, egenskap, test) {
     return liste.filter(e => e[egenskap] === test);
 }
 
+function upsert(sql="", data) {
+    let init = {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify({ sql,data }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+    fetch("runsql", init);
+} 
 
-/*  forsøk på database */
+
 async function select(sql = "select * from bok") {
     let init = {
         method: "POST",
@@ -145,9 +153,4 @@ async function select(sql = "select * from bok") {
     const response = await fetch("runsql", init);
     let res = await response.json();
     return res;
-    /*
-        .then(r => r.json())
-        .then(data => { if (cb) cb(data); })
-        .catch(e => console.log("Dette virka ikke.", e));
-    */
 }

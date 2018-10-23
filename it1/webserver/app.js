@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 
 // Define routes.
 app.get("/", function (req, res) {
-  res.send({msg:"ok"});
+  res.send({ msg: "ok" });
 });
 
 app.post("/runsql", function (req, res) {
@@ -29,17 +29,18 @@ app.listen(3000, function () {
   console.log(`Quiz server started on port ${PORT}`);
 });
 
-async function runsql(res, data) {
+async function runsql(res, obj) {
   let results;
-  let sql = data.sql;
+  let sql = obj.sql;
+  let data = obj.data;
   await db.many(
-    sql
+    sql,data
   )
     .then(data => {
       results = data;
     })
     .catch(error => {
-      console.log("ERROR:", error); // print error;
+      console.log("ERROR:", sql, ":", error.message); // print error;
       results = {};
     });
   res.send({ results });

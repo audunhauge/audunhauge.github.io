@@ -1,0 +1,32 @@
+.snake {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border: solid gray 1px;
+    top: 0;
+    left: 0;
+}
+
+#snake {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background-image: url("snake.png");
+    background-position: center;
+    background-size: 200px 200px;
+    height: 200px;
+    width: 200px;
+    background-repeat: no-repeat;
+    transform: scaleX(-1);
+    animation: crawl 10s linear infinite;
+}
+
+@keyframes crawl {
+    0% { left: 0px; top: 0px;  transform: scaleX(-1);}
+    29.9% { left: 500px; top: 0px;  transform: scaleX(-1);}
+    30% { left: 500px; top: 0px;  transform: scaleX(1);}
+    50% { left: 500px; top: 400px; transform: scaleX(1);}
+    80% { left: 0px; top: 400px; transform: scaleX(1);}
+   100%  { left: 0px; top: 0px; transform: scaleX(1);}
+}
