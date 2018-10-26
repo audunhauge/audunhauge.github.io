@@ -1,4 +1,5 @@
 // @ts-check
+
 const CONNECTSTRING = "postgres://audun:123@localhost/bibliotek";
 
 const PORT = 3000;
@@ -45,47 +46,3 @@ async function runsql(res, obj) {
     });
   res.send({ results });
 }
-
-
-/* another file */
-
-/*
-async function makeQlist(qlistorder) {
-  if (qlistorder.length > 1000) {
-    return "Narrow down search - result is " + qlistorder.length;
-  }
-  let list = [];
-  let ids = qlistorder.join(",");
-  await fetch(`getQlist/${ids}`, { credentials: "include" })
-    .then(r => r.json())
-    .then(data => {
-      let qlist = data.qlist;
-      let qcache = {};
-      qlist.forEach(e => {
-        qcache[e.id] = e;
-      });
-
-      list = qlistorder.map((e, i) => {
-        let q = qcache[e];
-        return synopsis(q, e, i);
-      });
-    })
-    .catch(e => {
-      console.log("Failed to fetch qlist", e);
-    });
-
-  return list.join("");
-}
-*/
-/**
- * home pug
- *
- * 
-if user
-  p Hello #{user.username} please view your
-      a(href='/profile')  profile
-else
-  p welcome, please 
-    a(href='/login') login 
-    
-*/

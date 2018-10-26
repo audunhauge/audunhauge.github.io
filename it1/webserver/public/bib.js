@@ -45,6 +45,7 @@ async function lesBibliotek() {
 async function setup() {
     let divAntall = document.getElementById("antall");
     let inpISBN = document.getElementById("isbn");
+    let inpBOKID = document.getElementById("bokid");
     let inpTittel = document.getElementById("tittel");
     let inpForfatter = document.getElementById("forfatter");
     let inpSjanger = document.getElementById("sjanger");
@@ -57,19 +58,20 @@ async function setup() {
 
 
     function lagreData() {
+        let bokid = inpBOKID.value;
         let isbn = inpISBN.value;
         let tittel = inpTittel.value;
         let sjanger = inpSjanger.value;
         let sider = inpSider.value;
 
+        inpBOKID.value = String(+bokid+1);
         inpISBN.value = "";
         inpTittel.value = "";
         inpForfatter.value = "";
-        inpSjanger.itemValue = "";
+        inpSjanger.value = "";
         inpSider.value = "";
 
-        let bokData = new Bok({isbn, tittel, sjanger, sider});
-        bokData.bokid = 2;
+        let bokData = new Bok({bokid,isbn, tittel, sjanger, sider});
         let key = bokData.bokid;
         bib.bok[key] = bokData;
         divAntall.innerHTML = String(Object.keys(bib.bok).length);
@@ -125,7 +127,7 @@ function filtrer(liste, egenskap, test) {
     if (typeof test === "function") {
         return liste.filter(e => test(e, egenskap));
     }
-    return liste.filter(e => e[egenskap] === test);
+    return liste.filter(e => e[egenskap].trim() === test);
 }
 
 function upsert(sql="", data) {
