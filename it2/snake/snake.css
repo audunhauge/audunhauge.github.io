@@ -7,6 +7,20 @@
     left: 0;
 }
 
+#poeng {
+    position: absolute;
+    left: 800px;
+    top: 20px;
+    background-color: pink;
+    border: solid gray 1px;
+}
+#poeng::before {
+    position: absolute;
+    content: "Poeng";
+    left: -4em;
+    color:blue;
+}
+
 .apple {
     position: absolute;
     width: 20px;
@@ -20,6 +34,7 @@
 #board {
     position: relative;
     background-color: black;
+    color:white;
 }
 
 #snake {

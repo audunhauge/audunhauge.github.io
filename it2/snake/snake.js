@@ -2,6 +2,8 @@
 
 function startGame() {
     let divBoard = document.getElementById("board");
+    let divPoeng = document.getElementById("poeng");
+    let poeng = 0;
 
     let apple;
     const BRETT = { w: 30, h: 20 };
@@ -68,6 +70,8 @@ function startGame() {
             tseg.pos.y === apple.pos.y) {
             makeSegment(tseg.pos);
             makeApple();
+            poeng += 1;
+            divPoeng.innerHTML = String(poeng);
         } else sjekkSlange();
     }
 
@@ -77,8 +81,8 @@ function startGame() {
             if (i === head) continue;
             let s = segments[i];
             if (s.pos.x === h.pos.x && s.pos.y === h.pos.y) {
-                divBoard.style.backgroundColor = "yellow";
                 clearInterval(gameTimer);
+                divBoard.innerHTML = "game over, du fikk " + poeng + " poeng";
             }
         }
     }
