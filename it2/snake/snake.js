@@ -8,6 +8,8 @@ function startGame() {
     const SIZE = 20;
     let v = { x: 1, y: 0 };
 
+    let gameTimer;
+
     let segments = [ ];
     let head = 0;
 
@@ -46,7 +48,7 @@ function startGame() {
     function reallyStartTheGame() {
         divBoard.innerHTML = "";
         document.addEventListener("keydown", saveKey);
-        setInterval(gameLoop, 100);
+        gameTimer = setInterval(gameLoop, 100);
         makeApple();
         makeSegment( {x:10, y:10 });
         divBoard.style.width = BRETT.w * SIZE + "px";
@@ -62,6 +64,23 @@ function startGame() {
         tseg.pos.y = (hseg.pos.y + v.y + BRETT.h) % BRETT.h;
         head = tail;
         place(tseg);
+        if (tseg.pos.x ===  apple.pos.x &&
+            tseg.pos.y === apple.pos.y) {
+            makeSegment(tseg.pos);
+            makeApple();
+        } else sjekkSlange();
+    }
+
+    function sjekkSlange() {
+        let h = segments[head];
+        for (let i=0; i<segments.length; i++) {
+            if (i === head) continue;
+            let s = segments[i];
+            if (s.pos.x === h.pos.x && s.pos.y === h.pos.y) {
+                divBoard.style.backgroundColor = "yellow";
+                clearInterval(gameTimer);
+            }
+        }
     }
 
     function saveKey(e) {
