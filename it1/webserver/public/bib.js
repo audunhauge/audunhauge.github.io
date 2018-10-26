@@ -20,6 +20,13 @@ class Bok {
     }
 }
 
+class Forfatter {
+    constructor({ forfatterid=1,  navn, }) {
+        this.forfatterid = forfatterid;
+        this.navn = navn;
+    }
+}
+
 let bib = {
     bok: {},
     forfatter: {},
@@ -28,6 +35,7 @@ let bib = {
     utlaan: {},
 }
 
+// les det som finnes i tabellene
 async function lesBibliotek() {
     let r = await select("select * from bok");
     if (r.results && r.results.length) {
@@ -36,9 +44,39 @@ async function lesBibliotek() {
             bib.bok[b.bokid] = b;
         })
     }
+    r = await select("select * from forfatter");
+    if (r.results && r.results.length) {
+        r.results.forEach(e => {
+            let b = new Forfatter(e);
+            bib.forfatter[b.forfatterid] = b;
+        })
+    }
 }
 
+async function forfatter() {
+    let divAntall = document.getElementById("antall");
+    let inpForfatterID = document.getElementById("forfatterid");
+    let inpNavn = document.getElementById("navn");
+    let btnLagre = document.getElementById("lagre");
+    btnLagre.addEventListener("click", lagreData);
+    await lesBibliotek().catch(e => console.log(e));
+    divAntall.innerHTML = String(Object.keys(bib.forfatter).length);
 
+    function lagreData() {
+        let forfatterid = inpForfatterID.value;
+        let navn = inpNavn.value;
+
+        inpForfatterID.value = String(+forfatterid+1);
+        inpNavn.value = "";
+
+        let forfatterData = new Forfatter({forfatterid, navn});
+        let key = forfatterData.forfatterid;
+        bib.forfatter[key] = forfatterData;
+        divAntall.innerHTML = String(Object.keys(bib.bok).length);
+        upsert('insert into forfatter (forfatterid,navn)'+ 
+        'values ( $[forfatterid],$[navn])', forfatterData);      
+    }
+}
 
 
 
@@ -54,8 +92,6 @@ async function setup() {
     btnLagre.addEventListener("click", lagreData);
     await lesBibliotek().catch(e => console.log(e));
     divAntall.innerHTML = String(Object.keys(bib.bok).length);
-
-
 
     function lagreData() {
         let bokid = inpBOKID.value;

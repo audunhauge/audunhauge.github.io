@@ -81,7 +81,7 @@ form::after {
 #antall {
     position: absolute;
     top: 30px;
-    left: 16em;
+    right:  3em;
     width: 5em;
     height: 2em;
 }

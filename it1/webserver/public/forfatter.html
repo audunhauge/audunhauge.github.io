@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Forfatter</title>
+    <link rel="stylesheet" href="bib.css">
+    <script src="bib.js"></script>
+</head>
+<body>
+        <header>
+                <h1>
+                    Registrer forfattere 
+                </h1>
+                <div id="antall"></div>
+                <p>
+                    <a href="forfatterliste.html">Vis forfatterliste</a>
+                </p>
+            </header>
+            <form id="registrer" data-info="Registrer forfatter">
+                <label for="forfatterid">Forfatter id <input type="text" id="forfatterid"></label>
+                <label for="navn">Navn <input type="text" id="navn"></label>
+                <button type="button" id="lagre">Lagre forfatter</button>
+            </form>
+            <script>
+                forfatter();
+            </script>  
+</body>
+</html>
