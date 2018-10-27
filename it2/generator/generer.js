@@ -105,7 +105,7 @@ const html1 = `
 <body>
     <header>
         <h1>
-            Registrer bøker 
+            Registrer 
         </h1>
         <div id="antall"></div>
         <p>
@@ -135,6 +135,7 @@ function setup() {
     let divHTML = document.getElementById("html");
     let divCSS = document.getElementById("css");
     let divJs = document.getElementById("js");
+    let divPsql = document.getElementById("postgres");
 
     let sql, s, td, tabell;
 
@@ -178,6 +179,7 @@ function setup() {
         divHTML.innerHTML = "<pre>" + html1 + makeForm(tabell, td[tabell]) + html2 + "</pre>";
         divCSS.innerHTML = "<pre>" + css + "</pre>";
         divJs.innerHTML = "<pre>" + makeCode(tabell, td[tabell]) + "</pre>";
+        divPsql.innerHTML = "<pre>" + sql2postgres(sql) + "</pre>";
 
 
     }
