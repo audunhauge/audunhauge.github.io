@@ -1,13 +1,14 @@
-#side1, #side2 {
+.side {
     background-color: whitesmoke;
     min-width: 40em;
-    min-height: 20em;
+    min-height: 2em;
     margin: 1em;
+    padding: 10px;
 }
 
 #side1.hidden, #side2.hidden,
 .hidden {
-    display: none;
+    display: none; 
 }
 
 #ramme {

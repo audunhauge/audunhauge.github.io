@@ -173,7 +173,7 @@ function setup() {
 
         // console.log(backend,sql,tabeller);
         // divSide2.classList.toggle("hidden");
-        divSide3.classList.toggle("hidden");
+        divSide3.classList.remove("hidden");
 
         divDB.innerHTML = "<p>" + s.join("</p><p>") + "</p>";
         divHTML.innerHTML = "<pre>" + html1 + makeForm(tabell, td[tabell]) + html2 + "</pre>";

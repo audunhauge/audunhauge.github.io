@@ -1,0 +1,23 @@
+#tallene > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    background-color: gray;
+    color: white;
+    margin-top: 10px;
+}
+
+#tallene {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 150px;
+}
+
+#display > input {
+    width: 18em;
+    background-color: antiquewhite;
+    text-align: right;
+    font-size: 1.2em;
+}
