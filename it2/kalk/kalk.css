@@ -1,12 +1,32 @@
-#tallene > div {
+div.knapp > div {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 26px;
     height: 26px;
-    background-color: gray;
-    color: white;
     margin-top: 10px;
+    border-radius: 5px;
+    border: solid gray 1px;
+    box-shadow: 2px 2px 2px rgb(190, 186, 186);
+    transition: 0.3s;
+}
+
+div.knapp > div:active {
+    box-shadow: none;
+    left: 2px;
+    top: 2px;
+}
+
+div.knapp > div:after {
+    position: absolute;
+    content: attr(data-disp);
+    color:blue;
+}
+
+#tallene > div {
+    background-color: teal;
+    color: white;
 }
 
 #tallene {
@@ -21,3 +41,24 @@
     text-align: right;
     font-size: 1.2em;
 }
+
+#display > input.active {
+    background-color: rgb(221, 205, 185);
+}
+
+#knapper {
+    width: 30em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#operatorer {
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    width: 100px;
+}
+
+#operatorer > div {
+    background-color:lightblue;
+}
+
