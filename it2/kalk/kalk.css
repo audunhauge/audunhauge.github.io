@@ -49,12 +49,12 @@ div.knapp > div:after {
 #knapper {
     width: 30em;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 #operatorer {
     display: grid;
-    grid-template-columns: 1fr 1fr ;
+    grid-template-columns: 1fr 1fr;
     width: 100px;
 }
 
