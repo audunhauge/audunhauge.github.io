@@ -20,7 +20,7 @@ div.knapp > div:active {
 
 div.knapp > div:after {
     position: absolute;
-    content: attr(data-disp);
+    content: attr(data-per);
     color:blue;
 }
 
