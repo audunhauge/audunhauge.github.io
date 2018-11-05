@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="reg.css">
+  <script src="reg2.js"></script>
+</head>
+
+<body>
+
+  <div id="main">
+    <form id="skjema">
+        <select name="arr" id="arr">
+          <option value="">..velg..</option>
+            <option value="sang">Sang</option>
+            <option value="dans">Dans</option>
+        </select>
+        <br><label>antall voksne <input id="voksne" type="number"> </label>
+        <br><label>antall barn <input id="barn" type="number"> </label>
+        <br><button id="lagre" type="button" > Lagre </button> 
+
+    </form>
+    <div id="visliste">
+    </div>
+  </div>
+  <script>
+    setup();
+  </script>
+</body>
+</html>

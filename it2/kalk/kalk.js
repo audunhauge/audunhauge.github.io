@@ -20,6 +20,14 @@ function setup() {
             let id = t.id;
             nyttTall = true;
             switch (id) {
+                case "opC":
+
+                    let d = inpDisplay.value;
+                    let l = d.length;
+                    let nyverdi = d.substr(0, l - 1);
+                    inpDisplay.value = nyverdi;
+
+                    break;
                 case "opErlik":
                     beregn();
                     break;
