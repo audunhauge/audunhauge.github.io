@@ -18,7 +18,7 @@ function setup() {
     let inpAlder = document.getElementById("alder");
     let inpAdresse = document.getElementById("adresse");
     let btnLagre = document.getElementById("lagre");
-
+    let divOversikt = document.getElementById("oversikt");
     btnLagre.addEventListener("click", lagreData);
 
     function lagreData() {
@@ -27,5 +27,15 @@ function setup() {
         let adresse = inpAdresse.value;
         let person = new Person(navn,alder,adresse);
         personListe.push(person);
+        visListe();
+    }
+
+    function visListe() {
+        let innhold = "<ol>";
+        for (let p of personListe) {
+           innhold += `<li>Navn:${p.navn}  Alder:${p.alder} Adresse:${p.adresse}</li>`;
+        }
+        innhold += "</ol>";
+        divOversikt.innerHTML = innhold;
     }
 }
