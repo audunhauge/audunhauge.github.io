@@ -1,0 +1,32 @@
+#main {
+    margin-top: 5em;
+    display: grid;
+    grid-template-columns: 8fr 1fr;
+    width: calc(24px * 8 + 5px);
+}
+
+div.bit {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    background-color: lightblue;
+}
+
+#register {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+div.bit:after {
+    font-size: 0.8em;
+    color: blue;
+    position: absolute;
+    content: attr(data-tall);
+    top: -24px;
+    left: 0;
+    transform: rotate(-45deg);
+}
+
+div.on {
+    background-color: black;
+}

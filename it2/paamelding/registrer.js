@@ -36,10 +36,10 @@ function setup() {
             return;
         }
         
-    
+        let antall = Number(voksne) + Number(barn);
         let totalsum = Number(voksne) * 316 + Number(barn) * 120;
         let rabatt = false;
-        if (totalsum > 600) {
+        if (antall > 4) {
             totalsum *= 0.8;   // gir 20% rabatt
             rabatt = true;
         }
@@ -50,10 +50,17 @@ function setup() {
     }
 
     function visListe(totalsum,rabatt) {
-        let innhold = "";   //"<ul>";
-        for (let b of bestillingsListe) {
-           innhold += `<li>Voksne:${b.voksne}  Barn:${b.barn} Show:${b.forestilling}</li>`;
+        let innhold = "";   
+        let b = bestillingsListe[0];
+        let antall = Number(b.voksne) + Number(b.barn);
+        let melding = "";
+        if (rabatt === true) {
+            melding = "inkl rabatt på 20%";
         }
+        innhold += `Du har kjøpt ${antall} billetter til ${b.forestilling}.
+        ${b.voksne} voksne, ${b.barn} barn.
+        Totalprisen er ${totalsum}${melding}`;
+        
         //innhold += "</ul>";
         divOversikt.innerHTML = innhold;
     }

@@ -1,0 +1,27 @@
+#siffer {
+    margin-top:7em;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    width: 200px;
+}
+
+div.bit {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    background-color: lightblue;
+}
+
+div.bit:after {
+    /*font-size: 0.8em;*/
+    color: blue;
+    transform: rotate(-45deg);
+    position: absolute;
+    content: attr(data-tall);
+    top: -28px;
+    left: 0;
+}
+
+div.on {
+    background-color: black;
+}
