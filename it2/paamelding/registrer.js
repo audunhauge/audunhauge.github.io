@@ -2,7 +2,7 @@
 
 
 class Bestilling {
-    constructor(voksne,barn,forestilling) {
+    constructor(voksne, barn, forestilling) {
         this.voksne = voksne;
         this.barn = barn;
         this.forestilling = forestilling;
@@ -12,7 +12,7 @@ class Bestilling {
 
 function setup() {
 
-    let bestillingsListe = [ ];
+    let bestillingsListe = [];
 
     let inpVoksne = document.getElementById("voksne");
     let inpBarn = document.getElementById("barn");
@@ -23,38 +23,43 @@ function setup() {
     btnLagre.addEventListener("click", lagreData);
 
     function lagreData() {
-        let voksne = inpVoksne.value;
-        let barn = inpBarn.value;
+        let voksne = inpVoksne.valueAsNumber;
+        let barn = inpBarn.valueAsNumber;
         let forestilling = selForestilling.value;
+        let antall = voksne + barn;
 
-
-        if (+voksne + +barn > 0 && barn >= 0 && voksne >= 0 && forestilling !== "") {
-           document.getElementById("reg").classList.add("godkjent");
+        if (antall > 0 && barn >= 0 && voksne >= 0 && forestilling !== "") {
+            document.getElementById("reg").classList.add("godkjent");
         } else {
             alert("Du må fylle ut med gyldige verdier");
             document.getElementById("reg").classList.remove("godkjent");
             return;
         }
+
+
         
-    
-        let totalsum = Number(voksne) * 316 + Number(barn) * 120;
+        let totalsum = voksne * 316 + barn * 120;
         let rabatt = false;
-        if (totalsum > 600) {
+        if (antall > 4) {
             totalsum *= 0.8;   // gir 20% rabatt
             rabatt = true;
         }
 
-        let bestilling = new Bestilling(voksne,barn,forestilling);
+        let bestilling = new Bestilling(voksne, barn, forestilling);
         bestillingsListe[0] = bestilling;
-        visListe(totalsum,rabatt);
+        visListe();
+
+        function visListe() {
+            let innhold = "";
+            let rabtext = rabatt ? `, inklusivt grupperabatt på 20 prosent` : "";
+            let personer = [ voksne, barn];
+            let text = "voksne,barn".split(",");
+            let melding = text.map((e,i)=> personer[i] + " " + e).filter((e,i) => personer[i]).join(" og ");
+            innhold += `Du har bestillt ${antall} biletter til ${forestilling}, ${melding}.
+            Totalprisen er kr ${totalsum.toFixed(2)}${rabtext}.`;
+            divOversikt.innerHTML = innhold;
+        }
     }
 
-    function visListe(totalsum,rabatt) {
-        let innhold = "";   //"<ul>";
-        for (let b of bestillingsListe) {
-           innhold += `<li>Voksne:${b.voksne}  Barn:${b.barn} Show:${b.forestilling}</li>`;
-        }
-        //innhold += "</ul>";
-        divOversikt.innerHTML = innhold;
-    }
+ 
 }
