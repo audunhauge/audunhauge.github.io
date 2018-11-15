@@ -38,7 +38,8 @@ function setup() {
 
 
         
-        let totalsum = voksne * 316 + barn * 120;
+        let antall = Number(voksne) + Number(barn);
+        let totalsum = Number(voksne) * 316 + Number(barn) * 120;
         let rabatt = false;
         if (antall > 4) {
             totalsum *= 0.8;   // gir 20% rabatt
@@ -49,16 +50,20 @@ function setup() {
         bestillingsListe[0] = bestilling;
         visListe();
 
-        function visListe() {
-            let innhold = "";
-            let rabtext = rabatt ? `, inklusivt grupperabatt på 20 prosent` : "";
-            let personer = [ voksne, barn];
-            let text = "voksne,barn".split(",");
-            let melding = text.map((e,i)=> personer[i] + " " + e).filter((e,i) => personer[i]).join(" og ");
-            innhold += `Du har bestillt ${antall} biletter til ${forestilling}, ${melding}.
-            Totalprisen er kr ${totalsum.toFixed(2)}${rabtext}.`;
-            divOversikt.innerHTML = innhold;
+    function visListe(totalsum,rabatt) {
+        let innhold = "";   
+        let b = bestillingsListe[0];
+        let antall = Number(b.voksne) + Number(b.barn);
+        let melding = "";
+        if (rabatt === true) {
+            melding = "inkl rabatt på 20%";
         }
+        innhold += `Du har kjøpt ${antall} billetter til ${b.forestilling}.
+        ${b.voksne} voksne, ${b.barn} barn.
+        Totalprisen er ${totalsum}${melding}`;
+        
+        //innhold += "</ul>";
+        divOversikt.innerHTML = innhold;
     }
 
  
