@@ -2,7 +2,7 @@
 
 
 class Bestilling {
-    constructor(voksne,barn,forestilling) {
+    constructor(voksne, barn, forestilling) {
         this.voksne = voksne;
         this.barn = barn;
         this.forestilling = forestilling;
@@ -12,7 +12,7 @@ class Bestilling {
 
 function setup() {
 
-    let bestillingsListe = [ ];
+    let bestillingsListe = [];
 
     let inpVoksne = document.getElementById("voksne");
     let inpBarn = document.getElementById("barn");
@@ -23,18 +23,20 @@ function setup() {
     btnLagre.addEventListener("click", lagreData);
 
     function lagreData() {
-        let voksne = inpVoksne.value;
-        let barn = inpBarn.value;
+        let voksne = inpVoksne.valueAsNumber;
+        let barn = inpBarn.valueAsNumber;
         let forestilling = selForestilling.value;
+        let antall = voksne + barn;
 
-
-        if (+voksne + +barn > 0 && barn >= 0 && voksne >= 0 && forestilling !== "") {
-           document.getElementById("reg").classList.add("godkjent");
+        if (antall > 0 && barn >= 0 && voksne >= 0 && forestilling !== "") {
+            document.getElementById("reg").classList.add("godkjent");
         } else {
             alert("Du må fylle ut med gyldige verdier");
             document.getElementById("reg").classList.remove("godkjent");
             return;
         }
+
+
         
         let antall = Number(voksne) + Number(barn);
         let totalsum = Number(voksne) * 316 + Number(barn) * 120;
@@ -44,10 +46,9 @@ function setup() {
             rabatt = true;
         }
 
-        let bestilling = new Bestilling(voksne,barn,forestilling);
+        let bestilling = new Bestilling(voksne, barn, forestilling);
         bestillingsListe[0] = bestilling;
-        visListe(totalsum,rabatt);
-    }
+        visListe();
 
     function visListe(totalsum,rabatt) {
         let innhold = "";   
@@ -64,4 +65,6 @@ function setup() {
         //innhold += "</ul>";
         divOversikt.innerHTML = innhold;
     }
+
+ 
 }
