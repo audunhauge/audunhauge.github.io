@@ -22,9 +22,9 @@ function setup() {
         let maks = 1000;
         let pris = 200;
         let rabatt = 0;
-        if (alder < 17) {
+        if (alder < 13) {
             maks = 500;
-            pris = 200;
+            pris = 100;
         }
         let total = antall * pris;
         if (total > maks) {

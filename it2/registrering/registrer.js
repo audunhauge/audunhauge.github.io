@@ -26,16 +26,16 @@ function setup() {
         let alder = inpAlder.value;
         let adresse = inpAdresse.value;
         let person = new Person(navn,alder,adresse);
-        personListe.push(person);
+        personListe[0] = person;
         visListe();
     }
 
     function visListe() {
-        let innhold = "<ol>";
+        let innhold = "";
         for (let p of personListe) {
-           innhold += `<li>Navn:${p.navn}  Alder:${p.alder} Adresse:${p.adresse}</li>`;
+           innhold += `Navn:${p.navn}  Alder:${p.alder} Adresse:${p.adresse}`;
         }
-        innhold += "</ol>";
+        innhold += "";
         divOversikt.innerHTML = innhold;
     }
 }
