@@ -1,0 +1,28 @@
+#year, #month {
+    position: relative;
+    width: 20em;
+    border: solid gray 1px;
+    height: 2em;
+    text-align:center;
+
+}
+
+#ydiv, #mdiv {
+    display:grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    justify-items: center; 
+}
+
+#nextm, #prevm,
+#nexty, #prevy {
+  width: 2em;
+  height: 2em;
+  background-color: goldenrod;
+  text-align: center;
+}
+
+#kalender {
+    display:grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
