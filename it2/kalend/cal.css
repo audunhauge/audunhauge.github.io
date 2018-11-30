@@ -26,3 +26,17 @@
     grid-template-columns: 1fr;
     justify-items: center;
 }
+#dagene,
+#ddiv {
+    width: 18em;
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    justify-items: center; 
+}
+
+#dagene > div {
+    background-color: greenyellow;
+    min-width: 10px;
+    min-height: 10px;
+    margin: 2px;
+}
