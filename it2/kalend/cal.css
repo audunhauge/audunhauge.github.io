@@ -1,10 +1,9 @@
 #year, #month {
     position: relative;
     width: 20em;
-    border: solid gray 1px;
-    height: 2em;
+    height: 1em;
     text-align:center;
-
+    margin: 2px;
 }
 
 #ydiv, #mdiv {
@@ -16,9 +15,13 @@
 #nextm, #prevm,
 #nexty, #prevy {
   width: 2em;
-  height: 2em;
-  background-color: goldenrod;
+  height: 16px;
+  background-color: gray;
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px gray;
   text-align: center;
+  color: white;
+  border: solid green 1px;
 }
 
 #kalender {

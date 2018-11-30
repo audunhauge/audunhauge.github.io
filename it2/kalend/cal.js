@@ -28,6 +28,17 @@ monthLength.set(10, 31);
 monthLength.set(11, 30);
 monthLength.set(12, 31);
 
+
+function fridager(year) {
+    let url = "https://webapi.no/api/v1/holydays/" + year;
+    fetch(url).then(r => r.json())
+        .then(data => behandle(data))
+        .catch(e => console.log(e.message, "Dette virka ikke."));
+    function behandle(data) {
+        console.log(data);
+    }
+}
+
 function setup() {
     let divYear = document.getElementById("year");
     let divMonth = document.getElementById("month");
@@ -75,10 +86,10 @@ function setup() {
 
     function start() {
         let now = new Date();
-
         year = startYear = now.getFullYear();
         month = startMonth = now.getMonth() + 1;
         day = startDay = now.getDate();
+        fridager(year);
     }
 
     function show() {
@@ -86,8 +97,8 @@ function setup() {
         divMonth.innerHTML = monthNames.get(month);
         let antallDager = monthLength.get(month) + skudd(year, month);
 
-        let thisDate = new Date(year, month-1, 1);
-        let offset = (thisDate.getDay() + 6 ) % 7;
+        let thisDate = new Date(year, month - 1, 1);
+        let offset = (thisDate.getDay() + 6) % 7;
 
         // fjern tidligere effekter
         for (let i = 0; i < 42; i++) {
