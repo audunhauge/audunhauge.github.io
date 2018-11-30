@@ -24,10 +24,17 @@
   border: solid green 1px;
 }
 
+body {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    justify-items: center;
+}
+
 #kalender {
     display:grid;
     grid-template-columns: 1fr;
     justify-items: center;
+    height: 20em;
 }
 #dagene,
 #ddiv {
@@ -45,4 +52,10 @@
 .merk {
     border: solid red 1px;
     border-radius: 50%;
+}
+
+#fridager {
+    width: 20em;
+    min-height: 2em;
+    border: solid gray 1px;
 }

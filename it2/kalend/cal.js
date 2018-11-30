@@ -29,20 +29,24 @@ monthLength.set(11, 30);
 monthLength.set(12, 31);
 
 
-function fridager(year) {
+function fridager(year, div) {
     let url = "https://webapi.no/api/v1/holydays/" + year;
     fetch(url).then(r => r.json())
-        .then(data => behandle(data))
+        .then(data => lesFridager(data))
         .catch(e => console.log(e.message, "Dette virka ikke."));
-    function behandle(data) {
-        console.log(data);
+
+    function lesFridager(data) {
+        let info = data.data;
+        let datoer = info.map(e => e.date.split("T"))
+        let s = info.map(e => e.date + ":" + e.description).join("<br>");
+        div.innerHTML = s;
     }
 }
 
 function setup() {
     let divYear = document.getElementById("year");
     let divMonth = document.getElementById("month");
-
+    let divFridager = document.getElementById("fridager");
 
     let divDagene = Array.from(document.querySelectorAll("#dagene > div"));
 
@@ -54,13 +58,16 @@ function setup() {
     let divPrevM = document.getElementById("prevm");
     divPrevM.addEventListener("click", prevM);
     divNextM.addEventListener("click", nextM);
+
     function prevY() {
         year--;
         show();
+        fridager(year,divFridager);
     }
     function nextY() {
         year++;
         show();
+        fridager(year,divFridager);
     }
     function prevM() {
         if (month < 2) {
@@ -89,7 +96,7 @@ function setup() {
         year = startYear = now.getFullYear();
         month = startMonth = now.getMonth() + 1;
         day = startDay = now.getDate();
-        fridager(year);
+        fridager(year,divFridager);
     }
 
     function show() {

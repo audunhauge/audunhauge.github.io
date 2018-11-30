@@ -1,0 +1,41 @@
+#ytre {
+    background-image: url("jul.jpg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+}
+
+#luker {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    vertical-align: center;
+    width: 600px;
+    height: 600px;
+    margin-left: 27vw;
+    margin-top: 10vh;
+}
+
+.luke {
+    font-size: 1.2em;
+    color: white;
+    text-align: center;
+    text-shadow: 3px 3px 3px black;
+    border: solid gray 1px;
+    width: 60px;
+    height: 25px;
+    background-color: rgba(245, 245, 245, 0.187);
+
+}
+
+#vis {
+    width: 500px;
+    height: 500px;
+    border: solid red 1px;
+    display: none;
+    position: absolute;
+    top: 10em;
+    left: 10em;
+}
