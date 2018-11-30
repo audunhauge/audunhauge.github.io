@@ -35,8 +35,11 @@
 }
 
 #dagene > div {
-    background-color: greenyellow;
-    min-width: 10px;
-    min-height: 10px;
-    margin: 2px;
+   color:blue;
+   margin: 4px;
+}
+
+.merk {
+    border: solid red 1px;
+    border-radius: 50%;
 }
