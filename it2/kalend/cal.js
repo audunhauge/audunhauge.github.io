@@ -29,24 +29,34 @@ monthLength.set(11, 30);
 monthLength.set(12, 31);
 
 
-function fridager(year, div) {
-    let url = "https://webapi.no/api/v1/holydays/" + year;
-    fetch(url).then(r => r.json())
-        .then(data => lesFridager(data))
-        .catch(e => console.log(e.message, "Dette virka ikke."));
+const fridagerCache = {};
 
-    function lesFridager(data) {
-        let info = data.data;
-        let datoer = info.map(e => e.date.split("T"))
-        let s = info.map(e => e.date + ":" + e.description).join("<br>");
-        div.innerHTML = s;
+function fridager(year, month, offset, divListe) {
+    if (!fridagerCache[year]) {
+        let url = "https://webapi.no/api/v1/holydays/" + year;
+        fetch(url).then(r => r.json())
+            .then(data => { fridagerCache[year] = data.data; lesFridager(data.data) })
+            .catch(e => console.log(e.message, "Dette virka ikke."));
+    } else {
+        lesFridager(fridagerCache[year]);
+    }
+
+    function lesFridager(info) {
+        let datoer = info.map(e => ({ date: e.date.split("T")[0].split("-"), txt: e.description }));
+        datoer.filter(e => e.date[1] == month).forEach(e => {
+            let d = Number(e.date[2]);
+            let t = e.txt;
+            let div = divListe[d + offset - 1];
+            div.title = t;
+            div.classList.add("fri");
+        });
     }
 }
+
 
 function setup() {
     let divYear = document.getElementById("year");
     let divMonth = document.getElementById("month");
-    let divFridager = document.getElementById("fridager");
 
     let divDagene = Array.from(document.querySelectorAll("#dagene > div"));
 
@@ -62,12 +72,10 @@ function setup() {
     function prevY() {
         year--;
         show();
-        fridager(year,divFridager);
     }
     function nextY() {
         year++;
         show();
-        fridager(year,divFridager);
     }
     function prevM() {
         if (month < 2) {
@@ -88,6 +96,8 @@ function setup() {
 
     let startYear, startMonth, startDay;
     let year, month, day;
+
+
     start();
     show();
 
@@ -96,7 +106,7 @@ function setup() {
         year = startYear = now.getFullYear();
         month = startMonth = now.getMonth() + 1;
         day = startDay = now.getDate();
-        fridager(year,divFridager);
+
     }
 
     function show() {
@@ -111,7 +121,8 @@ function setup() {
         for (let i = 0; i < 42; i++) {
             let dag = divDagene[i];
             dag.innerHTML = "";
-            dag.classList.remove("merk");
+            dag.classList.remove("merk", "fri");
+            dag.title = "";
         }
 
         for (let i = 0; i < antallDager; i++) {
@@ -123,6 +134,8 @@ function setup() {
             let idag = divDagene[day + offset - 1];
             idag.classList.add("merk");
         }
+
+        fridager(year, month, offset, divDagene);
 
     }
 }
