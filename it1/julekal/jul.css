@@ -33,9 +33,11 @@
 #vis {
     width: 500px;
     height: 500px;
-    border: solid red 1px;
     display: none;
     position: absolute;
     top: 10em;
-    left: 10em;
+    left: calc(100vw - 750px);
+    background-position: center;
+    background-size: 200px;
+    background-repeat: no-repeat;
 }
