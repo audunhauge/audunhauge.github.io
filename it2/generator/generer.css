@@ -6,6 +6,7 @@
     padding: 10px;
 }
 
+div.faner.hidden,
 #side1.hidden, #side2.hidden,
 .hidden {
     display: none; 

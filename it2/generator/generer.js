@@ -146,8 +146,12 @@ function setup() {
     function velgTabell() {
         divSide1.classList.toggle("hidden");
         divSide2.classList.toggle("hidden");
+        let backend = selBackend.value;
         // @ts-ignore
         sql = txtSql.value;
+        if (backend !== 'pg') {
+            document.querySelector('.faner[data-t="postgres"]').classList.add("hidden");
+        }
         let rr = sql2class(sql);
         s = rr.s; td = rr.td;
         selTabell.innerHTML = Object.keys(td).map(t => `<option>${t}</option>`).join("");
@@ -179,7 +183,7 @@ function setup() {
         divHTML.innerHTML = "<pre>" + html1 + makeForm(tabell, td[tabell]) + html2 + "</pre>";
         divCSS.innerHTML = "<pre>" + css + "</pre>";
         divJs.innerHTML = "<pre>" + makeCode(tabell, td[tabell]) + "</pre>";
-        divPsql.innerHTML = "<pre>" + sql2postgres(sql) + "</pre>";
+        divPsql.innerHTML = "<pre>" + sql2postgres(sql, backend) + "</pre>";
 
 
     }
