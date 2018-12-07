@@ -41,3 +41,12 @@
     background-size: 200px;
     background-repeat: no-repeat;
 }
+
+#juleaften {
+    display: none;
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    top: 10em;
+    left: 20em;
+}
