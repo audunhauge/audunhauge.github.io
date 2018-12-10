@@ -1,0 +1,14 @@
+#main {
+    background-color: whitesmoke;
+}
+
+.soyle {
+    position: relative;
+    height: 3px;
+    background-color: blue;
+    margin: 1px;
+}
+
+.soyle.fem {
+    background-color: green;
+}

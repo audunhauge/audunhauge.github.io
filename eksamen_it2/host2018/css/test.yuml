@@ -1,0 +1,7 @@
+// {type:activity}
+(start)->(les alder)-><a> ugyldig alder ->(Feil)
+<a> gyldig alder-> (les antall)
+(Feil)->|b|
+(les antall) -> <c>
+<c> antall > 7 -> (Feil)
+<c> -> (beregn pris)

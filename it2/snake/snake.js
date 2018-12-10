@@ -3,7 +3,10 @@
 function startGame() {
     let divBoard = document.getElementById("board");
     let divPoeng = document.getElementById("poeng");
+    let btnOmstart = document.querySelector("#omstart > button");
+    let divOmstart = document.getElementById("omstart");
     let poeng = 0;
+    let hiscore = [];
 
     let apple;
     const BRETT = { w: 30, h: 20 };
@@ -12,14 +15,14 @@ function startGame() {
 
     let gameTimer;
 
-    let segments = [ ];
-    let head = 0;
+    let segments;
+    let head;
 
     function makeSegment(pos) {
         let s = document.createElement("div");
         s.className = "snake";
         divBoard.appendChild(s);
-        s.pos = {x: pos.x, y:pos.y};
+        s.pos = { x: pos.x, y: pos.y };
         segments.push(s);
         place(s);
     }
@@ -45,14 +48,17 @@ function startGame() {
 
 
     setTimeout(reallyStartTheGame, 0.5 * 1000);
+    document.addEventListener("keydown", saveKey);
 
 
     function reallyStartTheGame() {
         divBoard.innerHTML = "";
-        document.addEventListener("keydown", saveKey);
-        gameTimer = setInterval(gameLoop, 100);
+        divOmstart.style.left = "-300px";
+        segments = [];
+        head = 0;
         makeApple();
-        makeSegment( {x:10, y:10 });
+        makeSegment({ x: 10, y: 10 });
+        gameTimer = setInterval(gameLoop, 100);
         divBoard.style.width = BRETT.w * SIZE + "px";
         divBoard.style.height = BRETT.h * SIZE + "px";
     }
@@ -66,7 +72,7 @@ function startGame() {
         tseg.pos.y = (hseg.pos.y + v.y + BRETT.h) % BRETT.h;
         head = tail;
         place(tseg);
-        if (tseg.pos.x ===  apple.pos.x &&
+        if (tseg.pos.x === apple.pos.x &&
             tseg.pos.y === apple.pos.y) {
             makeSegment(tseg.pos);
             makeApple();
@@ -77,15 +83,29 @@ function startGame() {
 
     function sjekkSlange() {
         let h = segments[head];
-        for (let i=0; i<segments.length; i++) {
+        for (let i = 0; i < segments.length; i++) {
             if (i === head) continue;
             let s = segments[i];
             if (s.pos.x === h.pos.x && s.pos.y === h.pos.y) {
-                clearInterval(gameTimer);
-                divBoard.innerHTML = "game over, du fikk " + poeng + " poeng";
+                playerDied();
             }
         }
     }
+
+    function playerDied() {
+        clearInterval(gameTimer);
+        apple = null;  // lag nytt eple
+        divBoard.innerHTML = "game over, du fikk " + poeng + " poeng";
+        divOmstart.style.left = "300px";
+        btnOmstart.addEventListener("click", reallyStartTheGame);
+        hiscore.push(poeng);
+        hiscore.sort((a,b) => b-a);
+        if (hiscore[0] === poeng) {
+            divBoard.innerHTML += "<br>Ny hiscore";
+        }
+        poeng = 0;
+    }
+
 
     function saveKey(e) {
         let k = e.keyCode;

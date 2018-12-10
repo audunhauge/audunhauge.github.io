@@ -1,0 +1,18 @@
+#thief {
+    position: absolute;   
+    width: 92px;
+    height: 150px;
+    left: -150px;
+    background-image: url("../bilder/thief.png");
+    background-position-x: 5px;
+    animation: sneak 8s infinite linear,
+         run 0.5s infinite steps(6);
+}
+
+@keyframes sneak {
+    100% { left: 110%; }
+}
+
+@keyframes run {
+    100% {background-position-x: calc(8px + 98px * 6);}
+}

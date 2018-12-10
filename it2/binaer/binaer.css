@@ -1,0 +1,37 @@
+#visning {
+    margin-top:5em;
+}
+
+#siffer {
+    margin-top: 7em;
+    width: 250px;
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+}
+div.bit {
+    font-size: 0.8em;
+    position: relative;
+    width: 16px;
+    height: 20px;
+    background-color: aliceblue;
+    border: solid gray 1px;
+}
+
+div.bit:after {
+    color: blue;
+    position: absolute;
+    content: attr(data-tall);
+    top: -28px;
+    width: 24px;
+    transform: rotate(-45deg);
+}
+
+div.bit.on {
+    background-color: black;
+}
+
+#verdi {
+    margin-top: 3em;
+    width: 2em;
+    height: 2em;
+}

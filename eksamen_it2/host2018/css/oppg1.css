@@ -1,0 +1,62 @@
+#flytdiagram {
+    padding:1em;
+    width: 12em;
+    height: 3em;
+    position: absolute;
+    top: 3em;
+    right: 3em;
+    background-color: white;
+    transition: 3s;
+    border: solid gray 1px;
+}
+
+#flytdiagram:hover {
+    color: rgba(0,0,0,0);
+    height: 1271px;
+    width: 540px;
+    background-image: url("../media/oppg1.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-color: none;
+}
+
+#bestilling {
+    margin-top: 4em;
+}
+
+form {
+    position: relative;
+    width: 35em;
+    max-width: 85%;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid gray 1px;
+    background-color: gainsboro;
+}
+
+form.godkjent {
+    background-color: aquamarine;
+}
+
+form > label {
+    display: grid;
+    grid-template-columns: 7fr 4fr;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid gray 1px;
+    background-color: whitesmoke;
+}
+
+form::after {
+    color:blue;
+    content: "Registrering";
+    position: absolute;
+    right: 20px;
+    top: -20px;
+}
+
+#lagre {
+    background-color: antiquewhite;
+}

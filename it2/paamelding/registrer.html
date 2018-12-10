@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registrer</title>
+    <link rel="stylesheet" href="registrer.css">
+    <script src="registrer.js"></script>
+</head>
+<body>
+    <h1>Påmelding - ringve</h1>
+    <div id="registrer">
+        <form id="reg">
+            <label for="voksne">Antall voksne<input type="number" id="voksne"></label>
+            <label for="barn">Antall barn<input type="number" id="barn"></label>
+            <select  id="forestilling">
+                <option value="">velg</option>
+                <option value="sang">sang</option>
+                <option value="dans">dans</option>
+                <option value="sangdans">sangOgDans</option>
+            </select>
+            <label for="lagre"><button type="button" id="lagre">Lagre</button></label>
+        </form>
+        <div id="oversikt">
+ 
+        </div>
+    </div>
+    <script>
+       setup();
+    </script>
+</body>
+</html>

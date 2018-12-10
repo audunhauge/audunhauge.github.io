@@ -14,11 +14,12 @@
     background-color: pink;
     border: solid gray 1px;
 }
+
 #poeng::before {
     position: absolute;
     content: "Poeng";
     left: -4em;
-    color:blue;
+    color: blue;
 }
 
 .apple {
@@ -31,10 +32,22 @@
     border-radius: 50%;
 }
 
+#omstart {
+    position: absolute;
+    top: 100px;
+    left: -500px;
+    width: 10em;
+    height: 3em;
+
+}
+
 #board {
     position: relative;
     background-color: black;
-    color:white;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #snake {
@@ -52,10 +65,34 @@
 }
 
 @keyframes crawl {
-    0% { left: 0px; top: 0px;  transform: scaleX(-1);}
-    29.9% { left: 500px; top: 0px;  transform: scaleX(-1);}
-    30% { left: 500px; top: 0px;  transform: scaleX(1);}
-    50% { left: 500px; top: 400px; transform: scaleX(1);}
-    80% { left: 0px; top: 400px; transform: scaleX(1);}
-   100%  { left: 0px; top: 0px; transform: scaleX(1);}
+    0% {
+        left: 0px;
+        top: 0px;
+        transform: scaleX(-1);
+    }
+    29.9% {
+        left: 500px;
+        top: 0px;
+        transform: scaleX(-1);
+    }
+    30% {
+        left: 500px;
+        top: 0px;
+        transform: scaleX(1);
+    }
+    50% {
+        left: 500px;
+        top: 400px;
+        transform: scaleX(1);
+    }
+    80% {
+        left: 0px;
+        top: 400px;
+        transform: scaleX(1);
+    }
+    100% {
+        left: 0px;
+        top: 0px;
+        transform: scaleX(1);
+    }
 }

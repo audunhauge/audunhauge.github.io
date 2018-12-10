@@ -1,0 +1,60 @@
+#year, #month {
+    position: relative;
+    width: 20em;
+    height: 1em;
+    text-align:center;
+    margin: 2px;
+}
+
+#ydiv, #mdiv {
+    display:grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    justify-items: center; 
+}
+
+#nextm, #prevm,
+#nexty, #prevy {
+  width: 2em;
+  height: 16px;
+  background-color: gray;
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px gray;
+  text-align: center;
+  color: white;
+  border: solid green 1px;
+}
+
+#kalender {
+    display:grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    height: 20em;
+}
+#dagene,
+#ddiv {
+    width: 18em;
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    justify-items: center; 
+}
+
+#dagene > div {
+   color:blue;
+   margin: 4px;
+}
+
+.merk {
+    border: solid red 1px;
+    border-radius: 50%;
+}
+
+
+.fri {
+   background-color: rgba(127, 255, 155, 0.466);
+}
+
+#fridager {
+    width: 20em;
+    min-height: 2em;
+    border: solid gray 1px;
+}
