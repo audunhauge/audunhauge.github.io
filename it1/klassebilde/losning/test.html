@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      #astro {
+    background-image: url(astro.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 800px;
+    height: 477px;
+}
+#fjes {
+    position: relative;
+    left: 60px;
+    top: 29px;
+    display: grid;
+    grid-template-columns: repeat( 10, 1fr);
+    height: 208px;
+    width: 713px;
+}
+#fjes>div {
+   
+    width: 50px;
+    height: 50px;
+    border: solid yellow 1px;
+    animation: fjes 1s;
+    animation-play-state: paused;
+}
+.fjes:nth-child(n + 11) {
+   left: 20px;
+}
+.fjes:nth-child(n + 21) {
+    left: -24px;
+    top: -28px;
+}
+.fjes:nth-child(n + 24) {
+    left: -1px;
+    top: -13px;
+}
+
+.fjes:hover {
+    animation-play-state: running;
+}
+@keyframes fjes {
+    0% { border-color: transparent;}
+    100% { border-radius: 50%};
+}
+</style>
+
+<div id="astro">
+        <div id="fjes">
+            
+                <div title="Gaute"></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+                <div title=""></div>
+
+           
+        </div>
+    </div>
+          <audio id="lyd" src="Jingle Bells 3.mp3" ></audio>
+
+    <script>
+        setup();
+    </script>
+  </body>
+</html>
