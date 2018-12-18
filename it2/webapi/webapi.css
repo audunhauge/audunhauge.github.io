@@ -1,0 +1,17 @@
+#main {
+    width: 800px;
+    height: 600px;
+    border: solid gray 1px;
+    margin: 2em;
+}
+
+.bil {
+    position: absolute;
+    left: 400px;
+    top: 280px;
+    width: 80px;
+    height: 30px;
+    border: solid blue 1px;
+    background-color: red;
+    border-radius: 3px;
+}
