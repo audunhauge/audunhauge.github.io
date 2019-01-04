@@ -1,0 +1,110 @@
+#space {
+    position: relative;
+    background-color: darkblue;
+    height:90vh;
+}
+
+#ground {
+   background-color: brown;
+   height:10vh;
+}
+
+#spacex {
+    position: absolute;
+    height: 250px;
+    top: -200px;
+    left: calc(50vw - 20px);
+    width: 40px;
+    background-color: whitesmoke;
+    border: solid gray 1px;
+    border-radius: 5px;
+    animation: landing 5s ease-out forwards;
+}
+
+.fot {
+    position: absolute;
+    width: 5px;
+    height: 90px;
+    background-color: black;
+    border-radius: 3px;
+    bottom: 60px;
+    transform: rotate(0);
+}
+
+@keyframes foldOutLeft {
+    100% { transform: rotate(130deg); }
+}
+
+@keyframes foldOutRight {
+    100% { transform: rotate(-130deg); }
+}
+
+#venstre {
+   left: -5px;
+   animation: foldOutRight 1s 3s ease-in forwards;
+   transform-origin: bottom right;
+}
+
+#hoyre {
+   right: -5px;
+   animation: foldOutLeft 1s 3s ease-in forwards;
+   transform-origin: bottom left;
+}
+
+#logo {
+    position: absolute;
+    transform: rotate(90deg);
+    top: 100px;
+    left: -9px;
+    font-size: 1.2em;
+}
+
+#flamme {
+    position: absolute;
+    opacity: 0;
+    width: 40px;
+    height: 80px;
+    background-color: red;
+    border-radius: 15px;
+    bottom: -80px;
+    left: 0;
+    animation: burn 4.5s 0.5s linear;
+}
+
+@keyframes burn {
+    10% { opacity: 0.6; height: 80px; bottom: -80px}
+    50% { opacity: 1; height: 80px; bottom: -80px}
+    90% { opacity: 0.6; height: 10px; bottom: -10px}
+}
+
+@keyframes landing {
+    100% { top: calc(90vh - 250px); }
+}
+
+#spacex:after {
+    display: block;
+    content: "";
+    width: 30px;
+    height: 15px;
+    background-color: gray;
+    border: solid white 1px;
+    position: absolute;
+    bottom: 10px;
+    right: -30px;
+    transform: rotate(15deg);
+    border-radius: 3px;
+}
+
+#spacex:before {
+    display: block;
+    content: "";
+    width: 30px;
+    height: 15px;
+    background-color: gray;
+    border: solid white 1px;
+    position: absolute;
+    bottom: 10px;
+    left: -30px;
+    transform: rotate(-15deg);
+    border-radius: 3px;
+}
