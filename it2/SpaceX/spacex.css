@@ -1,0 +1,33 @@
+#space {
+    position: relative;
+    background-color: black;
+    height: 90vh;
+}
+
+#ground {
+    background-color: brown;
+    height: 10vh;
+}
+
+#spacex {
+    position: absolute;
+    top: -200px;
+    left: calc(50vw - 20px);
+    width: 40px;
+    height: 250px;
+    background-color: whitesmoke;
+    border: solid gray 1px;
+    border-radius: 5px;
+}
+
+#spacex:after {
+    content: "";
+    display:block;
+    position: absolute;
+    width: 15px;
+    height: 10px;
+    bottom: 10px;
+    right: -15px;
+    background-color: gray;
+    transform: rotate(5deg);
+}
