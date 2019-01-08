@@ -30,6 +30,38 @@
     top: 20px;
 }
 
+#right {
+    position: absolute;
+    bottom: 60px;
+    width: 5px;
+    height: 90px;
+    right:-5px;
+    background-color: black;
+    border: solid white 1px;
+    border-radius: 3px;
+    transform-origin: bottom left;
+}
+
+#logo {
+    font-size: 1.3em;
+    position: absolute;
+    top: 80px;
+    left:-10px;
+    transform: rotate(-90deg);
+}
+
+#left {
+    position: absolute;
+    bottom: 60px;
+    width: 5px;
+    height: 90px;
+    left:-5px;
+    background-color: black;
+    border: solid white 1px;
+    border-radius: 3px;
+    transform-origin: bottom right;
+}
+
 
 #drivstoff {
     position: absolute;
