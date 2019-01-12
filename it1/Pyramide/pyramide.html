@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="Homebar.js"></script>
+    <script src="Digitalklokke.js"></script>
+    <script src="pyramide.js"></script>
+    <title>Pyramider</title>
+</head>
+
+<body>
+    <home-bar info="<digi-time></digi-time>" username="" title="Befolkningspyramider"></home-bar>
+
+    <form action="" id="f">
+        <div>
+            <label for="land">
+                Velg land
+                <select name="land" id="land"></select>
+            </label>
+        </div>
+        <div>
+            <label for="aar">
+                Velg årstall
+                <input min="1920" max="2020" type="number" id="aar">
+            </label>
+        </div>
+        <div><label for="farge">Velg farge <input type="color" id="farge"></label></div>
+        <div>
+            <label for="size">
+                Velg størrelse
+                <select name="size" id="size">
+                    <option>liten</option>
+                    <option>middels</option>
+                    <option>stor</option>
+                </select>
+            </label>
+        </div>
+    </form>
+
+    <script>
+       setup();
+    </script>
+
+</body>
+
+</html>

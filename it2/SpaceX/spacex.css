@@ -1,11 +1,16 @@
 #space {
     position: relative;
-    background-color: black;
+    background-image: url("sky.png");
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 90vh;
 }
 
 #ground {
-    background-color: brown;
+    background-image: url("sky.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: -600px;
     height: 10vh;
 }
 

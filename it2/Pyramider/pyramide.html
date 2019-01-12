@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pyramider</title>
+    <script src="Homebar.js"></script>
+    <script src="pyramide.js"></script>
+    <link rel="stylesheet" href="pyramide.css">
+</head>
+<body>
+    <home-bar title="Pyramider"></home-bar>
+    <form action="">
+        <div>Skriv inn land <select id="land"></select>
+        <div>Skriv inn år <input type="text" id="aar"></div>
+        <div><button type="button" id="tegn">Vis pyramide</button></div>
+    </form>
+    <div id="main">
+       <div id="males" class="pyramide"></div>
+       <div id="females" class="pyramide"></div>
+
+    </div>
+
+    <script>
+      setup();
+    </script>
+    
+</body>
+</html>

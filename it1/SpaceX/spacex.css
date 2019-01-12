@@ -30,21 +30,17 @@
     bottom: 60px;
     transform: rotate(0);
 }
-
 @keyframes foldOutLeft {
     100% { transform: rotate(130deg); }
 }
-
 @keyframes foldOutRight {
     100% { transform: rotate(-130deg); }
 }
-
 #venstre {
    left: -5px;
    animation: foldOutRight 1s 3s ease-in forwards;
    transform-origin: bottom right;
 }
-
 #hoyre {
    right: -5px;
    animation: foldOutLeft 1s 3s ease-in forwards;
