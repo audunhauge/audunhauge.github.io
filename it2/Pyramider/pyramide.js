@@ -237,12 +237,11 @@ let landListe = [
 
 
 function setup() {
-    let divMain = document.getElementById("main");
     let btnTegn = document.getElementById("tegn");
     let inpLand = document.getElementById("land");
     let inpAar = document.getElementById("aar");
-    let divMales = document.getElementById("males");
-    let divFemales = document.getElementById("females");
+    let pyramider = Array.from(document.querySelectorAll("pop-pyr"));
+    let idx = 0;
 
     landListe.forEach(e => {
         let opt = document.createElement("option");
@@ -250,47 +249,19 @@ function setup() {
         inpLand.appendChild(opt);
     })
 
+ 
 
 
+    btnTegn.addEventListener("click", nyPyramide);
 
-    btnTegn.addEventListener("click", hentDataOgTegn);
+    function nyPyramide() {
+       let land = inpLand.value || "Norway";
+       let aar = inpAar.value || "1950";
+       let pyr = pyramider[idx];
+       idx = (idx + 1) % pyramider.length;
+       pyr.setAttribute("country", land);
+       pyr.setAttribute("year", aar);
 
-    function hentDataOgTegn() {
-        // @ts-ignore
-        let land = inpLand.value || "Norway";
-        // @ts-ignore
-        let aar = inpAar.value || "1950";
-        let url = `http://api.population.io:80/1.0/population/${aar}/${land}`;
-        fetch(url).then(r => r.json())
-            .then(data => behandle(data))
-            .catch(e => console.log("Dette virka ikke."));
-    }
-
-
-
-
-    function behandle(data) {
-
-        divFemales.innerHTML = "";
-        divMales.innerHTML = "";
-
-        let max = Math.max(... data.map(e => e.males));
-
-        //let max = data.reduce( (s,e) => Math.max(s,e.males) ,0);
-
-        for (let i = 0; i < data.length; i++) {
-            let aardata = data[i];
-            let f = Number(aardata.females);
-            let m = Number(aardata.males);
-            let divm = document.createElement("div");
-            let divf = document.createElement("div");
-            divm.className = "soyle males";
-            divf.className = "soyle females";
-            divf.style.width = f + "px";
-            divm.style.width = m + "px";
-            divFemales.appendChild(divf);
-            divMales.appendChild(divm);
-        }
 
     }
 }
