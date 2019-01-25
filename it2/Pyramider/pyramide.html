@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pyramider</title>
+    <script src="BefolkningsPyramide.js"></script>
     <script src="Homebar.js"></script>
     <script src="pyramide.js"></script>
     <link rel="stylesheet" href="pyramide.css">
@@ -12,14 +13,14 @@
 <body>
     <home-bar title="Pyramider"></home-bar>
     <form action="">
-        <div>Skriv inn land <select id="land"></select>
+        <div>Velg land <select id="land"></select>
         <div>Skriv inn år <input type="text" id="aar"></div>
         <div><button type="button" id="tegn">Vis pyramide</button></div>
     </form>
-    <div id="main">
-       <div id="males" class="pyramide"></div>
-       <div id="females" class="pyramide"></div>
-
+    <div class="pyramider">
+      <pop-pyr country="Germany" year="1950"></pop-pyr>
+      <pop-pyr country="United Kingdom" year="1950"></pop-pyr>
+      <pop-pyr country="China" year="1950"></pop-pyr>
     </div>
 
     <script>
