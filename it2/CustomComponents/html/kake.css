@@ -1,0 +1,7 @@
+#kaker {
+    display: flex;
+    flex-wrap: wrap;
+}
+#kaker * {
+    margin: 20px;
+}

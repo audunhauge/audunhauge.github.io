@@ -1,0 +1,52 @@
+#registrer {
+    margin-top: 2em;
+}
+
+#grafikk {
+    display: flex;
+    flex-wrap: wrap;
+    width: 900px;
+    height: 300px;
+    border: 1px solid green;
+    background-color: aqua;
+}
+
+div.sirkel {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    border: solid 1px white;
+    border-radius: 50%;
+}
+
+form {
+    position: relative;
+    width: 35em;
+    max-width: 85%;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid gray 1px;
+    background-color: gainsboro;
+}
+
+form > label {
+    display: grid;
+    grid-template-columns: 7fr 4fr;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid gray 1px;
+    background-color: whitesmoke;
+}
+
+form::after {
+    color:blue;
+    content: "Registrering";
+    position: absolute;
+    right: 20px;
+    top: -20px;
+}
+
+#lagre {
+    background-color: antiquewhite;
+}

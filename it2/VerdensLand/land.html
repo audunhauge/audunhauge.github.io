@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Land</title>
+    <script src="land.js"></script>
+    <link rel="stylesheet" href="land.css">
+</head>
+
+<body>
+    <div id="main">
+        <div id="registrer">
+            <form id="reg">
+                <label for="navn">Navn<input type="text" id="navn"></label>
+                <label for="befolkning">Befolkning<input type="number" id="befolkning"></label>
+                <label for="hovedstad">Hovedstad<input type="text" id="hovedstad"></label>
+                <label for="lagre"><button type="button" id="lagre">Lagre</button></label>
+            </form>
+        </div>
+
+    </div>
+    <div id="oversikt">
+        <select name="land1" id="land1">
+        </select>
+        <select name="land2" id="land2">
+        </select>
+        <select name="land3" id="land3">
+        </select>
+        <select name="land4" id="land4">
+        </select>
+        <button id="tegn">Vis grafisk</button>
+        <div id="grafikk">
+            
+        </div>
+
+
+    </div>
+    <script>
+        setup();
+    </script>
+</body>
+
+</html>
