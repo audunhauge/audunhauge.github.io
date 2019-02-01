@@ -1,0 +1,11 @@
+#varer {
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+#varer > div.bilder {
+    width: 200px;
+    height: 150px;
+    background-image: url("../media/noImage.png");
+}
