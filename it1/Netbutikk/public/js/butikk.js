@@ -25,6 +25,7 @@ async function lesButikk() {
 }
 async function setup() {
     await lesButikk().catch(e => console.log(e));
+    vareliste();
 }
 async function vareliste() {
     let divMain = document.getElementById("main");
@@ -33,7 +34,7 @@ async function vareliste() {
 
     function oppdaterListe() {
         let s = ""; 
-        let varer = butikk.vare;
+        let varer = Array.from(Object.values(butikk.vare));
         varer.forEach(
             vare => {
                s += `<br>${vare.varenavn} ${vare.basispris} ${vare.beholdning}`
