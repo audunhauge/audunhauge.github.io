@@ -24,6 +24,16 @@ async function lesButikk() {
     }
 }
 async function setup() {
+    let homebar = document.querySelector('home-bar');
+    if (homebar) {
+        homebar.setAttribute("menu",
+        `<i class="material-icons">menu</i>
+        <ul>
+          <li>Registrer varer
+          <li>Bestillinger
+        </ul>
+        `)
+    }
     await lesButikk().catch(e => console.log(e));
     vareliste();
 }
@@ -40,7 +50,7 @@ async function vareliste() {
                s += `<br>${vare.varenavn} ${vare.basispris} ${vare.beholdning}`
             }
         );
-        divMain.innerHTML = s;
+        divMain.innerHTML += s;
     }
 }
 
@@ -53,7 +63,10 @@ async function select(sql = "select * from vare") {
             "Content-Type": "application/json"
         }
     };
-    const response = await fetch("/runsql", init);
+    const address = window.location.protocol + '//'
+       + window.location.hostname + ':'
+       + window.location.port;
+    const response = await fetch(address + "/runsql", init);
     let res = await response.json();
     return res;
 }
