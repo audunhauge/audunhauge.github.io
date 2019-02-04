@@ -21,8 +21,9 @@
         <svg-chart font="yellow" heading="Kvelds" id="kvelds" width="495"></pie-chart>
     </div>
 
-    <db-form>
-        <span slot="heading">Overskrift</span>
+    <db-form fields="fornavn,etternavn,alder:number,email:text:Epost"
+             table="person" >
+        <span slot="heading">Familie</span>
     </db-form>
 
     <script>
