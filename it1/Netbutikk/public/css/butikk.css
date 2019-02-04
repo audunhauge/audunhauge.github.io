@@ -9,3 +9,19 @@
     height: 150px;
     background-image: url("../media/noImage.png");
 }
+
+#meny {
+   position: absolute;
+   top: 65px;
+   left: 10px;
+   background-color: rgb(227, 227, 227);
+   border: solid gray 1px;
+   border-radius: 4px;
+   box-shadow: 2px 2px 2px gray;
+   opacity: 1;
+}
+#meny > ul {
+    list-style: none;
+    margin: 5px;
+    padding: 3px;
+}
