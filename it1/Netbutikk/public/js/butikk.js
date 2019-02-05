@@ -34,9 +34,10 @@ async function setup() {
         </ul>
         `)
     }
-    await lesButikk().catch(e => console.log(e));
-    vareliste();
+    //await lesButikk().catch(e => console.log(e));
+    //vareliste();
 }
+/*
 async function vareliste() {
     let divMain = document.getElementById("main");
     await lesButikk().catch(e => console.log(e));
@@ -54,6 +55,7 @@ async function vareliste() {
     }
 }
 
+
 async function select(sql = "select * from vare") {
     let init = {
         method: "POST",
@@ -70,5 +72,5 @@ async function select(sql = "select * from vare") {
     let res = await response.json();
     return res;
 }
-
+*/
 
