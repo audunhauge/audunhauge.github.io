@@ -1,0 +1,24 @@
+:root {
+    --w: 40px;
+}
+
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    width: calc((var(--w) + 2px) * 12 );
+    border: solid gray 1px;
+}
+
+div.tetro {
+    border: solid 1px green;
+    width: var(--w);
+    height: var(--w);
+}
+
+div.tetro.O {
+  background-color: blue;
+}
+div.tetro.L {
+    background-color: red;
+  }

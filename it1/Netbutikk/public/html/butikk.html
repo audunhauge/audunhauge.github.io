@@ -19,27 +19,28 @@
     </home-bar>
 
 
-    <db-form fields="varenavn,beholdning,basispris" table="vare">
-        <span slot="heading">Registrer vare</span>
+    <db-form table="kunde" fields="fornavn,etternavn,adresse">
     </db-form>
 
-    <db-select liste="vareliste" table="vare" fields="varenavn,basispris" where="varenavn ~ 'k'">
+    <db-select liste="vareliste" table="vare" buy="true" fields="varenavn,basispris" where="1=1">
         <style>
-            #vareliste > div {  
-                width: 12em; 
+            #korg>div,
+            #vareliste>div {
+                width: 12em;
             }
+            #korg,
             #vareliste {
                 display: flex;
                 flex-wrap: wrap;
             }
         </style>
-        <div id="vareliste">
-          <div>
-            <img  onerror='this.src="../media/noImage.png"' 
-                  src="../media/{varenavn}.png" alt="{varenavn}">
-            <div class="vare">{varenavn}</div>
-            <div class="pris">Pris {basispris}kr</div>
-          </div>
+        <div slot="liste" id="vareliste">
+            <div>
+                <img onerror='this.src="../media/noImage.png"' src="../media/{varenavn}.png" alt="{varenavn}">
+                <div class="vare">{varenavn}</div>
+                <div class="pris">Pris {basispris}kr</div>
+                <div class="buy">{buy}</div>
+            </div>
         </div>
     </db-select>
 
