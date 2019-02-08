@@ -24,6 +24,7 @@ async function lesButikk() {
     }
 }
 async function setup() {
+    let select = document.querySelector("db-select");
     let homebar = document.querySelector('home-bar');
     if (homebar) {
         homebar.setAttribute("menu",
@@ -34,41 +35,10 @@ async function setup() {
         </ul>
         `)
     }
-    await lesButikk().catch(e => console.log(e));
-    vareliste();
-}
-async function vareliste() {
-    let divMain = document.getElementById("main");
-    await lesButikk().catch(e => console.log(e));
-    oppdaterListe();
+    select.addEventListener("korg", bestilling);
 
-    function oppdaterListe() {
-        let s = ""; 
-        let varer = Array.from(Object.values(butikk.vare));
-        varer.forEach(
-            vare => {
-               s += `<br>${vare.varenavn} ${vare.basispris} ${vare.beholdning}`
-            }
-        );
-        divMain.innerHTML += s;
+    function bestilling() {
+        alert("Du har kjøpt varer");
+        select.style.display = "none";
     }
 }
-
-async function select(sql = "select * from vare") {
-    let init = {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify({ sql }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    };
-    const address = window.location.protocol + '//'
-       + window.location.hostname + ':'
-       + window.location.port;
-    const response = await fetch(address + "/runsql", init);
-    let res = await response.json();
-    return res;
-}
-
-

@@ -34,7 +34,7 @@ class Board {
       let linecount = 0;  // count completed lines
       let c = this.cells;
       for (let y = c.length - 2; y > 0; y--) {
-        let line = c[y].slice(1, -1);
+        let line = c[y].slice(1, -1);  // do not take edges
         if (line.every(e => e > 0)) {
           // found a full line, copy all lines above down 1, clear top line
           linecount++;

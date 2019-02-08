@@ -25,3 +25,11 @@
     margin: 5px;
     padding: 3px;
 }
+
+db-select {
+    opacity: 0.4;
+}
+
+#vareliste {
+    background-color: aliceblue;
+}
