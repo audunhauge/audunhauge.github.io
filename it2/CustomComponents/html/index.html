@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Eksempel på bruk av komponenter</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="../komponenter/Homebar.js"></script>
     <script src="../komponenter/DigitalTime.js"></script>
     <script src="../komponenter/PieChart.js"></script>
@@ -15,6 +16,8 @@
 </head>
 
 <body>
+
+    <home-bar heading="yes"></home-bar>
 
     <div id="kaker">
         <pie-chart heading="Middag" id="middag" width="495"></pie-chart>
@@ -27,6 +30,8 @@
     </db-form>
 
     <script>
+        let homebar = document.querySelector("home-bar");
+        homebar.setAttribute("menu",'<i class="material-icons">menu</i>');
        
         let middag = document.getElementById("middag");
         middag.init([
