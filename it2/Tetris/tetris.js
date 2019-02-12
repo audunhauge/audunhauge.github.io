@@ -3,23 +3,35 @@
 // lager et brett 
 // koden under lager samme array - den jeg bruker er kortere, men
 // kanskje litt vanskelig å forstå
-/*
+
 const brett = [
-    [1,0,0,0,0,0,0,0,0,0,0,0,1],
-    [1,0,0,0,0,0,0,0,0,0,0,0,1],
-    [1,0,0,0,0,0,0,0,0,0,0,0,1],
-    // .... 20 linjer ...
-    [1,0,0,0,0,0,0,0,0,0,0,0,1],
-    [1,0,0,0,0,0,0,0,0,0,0,0,1],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1],
+    "V          V".split(""),
+    "V          V".split(""),
+    "V          V".split(""),
+    "V          V".split(""),
+    "V          V".split(""),
+    "V          V".split(""),
+    "V          V".split(""),
+    "V          V".split(""),
+    "V          V".split(""),
+    "V          V".split(""),
+    "V          V".split(""),
+    "V          V".split(""),
+    "V          V".split(""),
+    "V          V".split(""),
+    "V          V".split(""),
+    "V          V".split(""),
+    "V          V".split(""),
+    "V          V".split(""),
+    "V          V".split(""),
+    "VVVVVVVVVVVV".split("")
 ]
-*/
-const line = new Array(12).fill(0);
-line[0] = line[11] = 1;  // marker sidekanter
-const brett = (new Array(21).fill(1)).map(e => line.slice());
-brett[20].fill(1);  // siste rad
+
 
 const minos = [];
+let speed = 600;
+let timer;
+let xp,yp,t;
 
 
 
@@ -30,22 +42,67 @@ function setup() {
         homebar.setAttribute("menu", `<i class="material-icons">settings</i>`);
     }
 
-    let tetroDivs = [];   // all divs
 
-    // lag alle tetraminoene
-    // types er definert i Tetramino.js
-    for (let typ of types) {
-        let t = new Tetramino(typ);
-        minos.push(t);
-    }
+
     // lager en div for hver mulige posisjon for en brikke (20*10) + kanter
-    for (let i=0; i < 20*12; i++) {
-       let div = document.createElement("div");
-       div.className = "tetro";
-       divBoard.appendChild(div);
-       tetroDivs.push(div);
+    for (let i = 0; i < 20 * 12; i++) {
+        let div = document.createElement("div");
+        div.className = "tetro";
+        divBoard.appendChild(div);
+        minos.push(div);
     }
 
-    minos[2].render(0,-3,tetroDivs);
+
+    clearBoard();
+
+    function clearBoard() {
+        for (let i = 0; i < minos.length; i++) {
+            let e = minos[i];
+            let x = i % 12;
+            let y = Math.floor(i / 12);
+            e.className = "tetro " + brett[y][x];
+        }
+    }
+
+
+    timer = setInterval(gameLoop, speed);
+
+    t = new Tetramino("I");
+    xp = 4;
+    yp = -3;
+
+    function gameLoop() {
+        clearBoard();
+        t.render(xp,yp,minos);
+        yp++;
+    }
+
+    // tester at brettet er i orden
+    expect(brett,"brett").it.is.a("Array");
+    expect(brett,"brett").to.have("length").eq(20);
+    expect(brett,"brett").to.have(0).to.have(0).eq('V');
+    expect(brett,"brett").to.have(19).to.have(8).eq('V');
+    expect(brett[0].join(""),"først linje i brett").to.eq("V          V");
+    expect(brett[19].join(""),"siste linje i brett").to.eq("VVVVVVVVVVVV");
+
+    let test = new Tetramino("I");
+    expect(test,"test").it.is.a("Tetramino");
+    expect(test.rotation,"test.rotation").to.eq(0);
+
+    // roterer en gang (til venstre)
+    test.rot(1);
+    expect(test.rotation,"test.rot(1)").to.eq(1);
+    
+    // roterer 5 ganger (til venstre)
+    test.rot(5);
+    expect(test.rotation,"test.rot(5)").to.eq(2);
+    
+    // roterer 3 ganger (til høyre)
+    test.rot(-3);
+    expect(test.rotation,"test.rot(-3)").to.eq(3);
+    
+    Test.summary("#tester");
+   
 
 }
+

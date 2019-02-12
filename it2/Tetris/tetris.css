@@ -9,6 +9,13 @@
     border: solid gray 1px;
 }
 
+#tester {
+    position: absolute;
+    right: 20px;
+    top: 80px;
+    min-width: 200px;
+}
+
 div.tetro {
     border: solid 1px white;
     width: var(--w);
