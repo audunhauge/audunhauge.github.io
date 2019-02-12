@@ -12,11 +12,9 @@
     <script src="../js/DbKorg.js"></script>
     <title>Butikk</title>
 </head>
-
 <body>
     <home-bar title="Nettbutikk" info="Kampanje! Salg!" username="Ole Olsen">
     </home-bar>
-
     <db-korg heading="Din handlekorg" liste="korg" 
               table="vare" buy="true" fields="varenavn,basispris" where="1=1">
         <div slot="liste" id="korg">
@@ -27,11 +25,8 @@
             </div>
         </div>
     </db-select>
-
-
     <script>
         setup();
     </script>
 </body>
-
 </html>
