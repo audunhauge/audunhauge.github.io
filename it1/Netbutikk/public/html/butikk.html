@@ -9,20 +9,13 @@
     <script src="../js/Homebar.js"></script>
     <link rel="stylesheet" href="../css/butikk.css">
     <script src="../js/butikk.js"></script>
-    <script src="../js/DbForm.js"></script>
     <script src="../js/DbSelect.js"></script>
-    <script src="../js/DbKorg.js"></script>
     <title>Butikk</title>
 </head>
 
 <body>
     <home-bar title="Nettbutikk" info="Kampanje! Salg!" username="Ole Olsen">
     </home-bar>
-
-
-    <db-form table="kunde" fields="fornavn,etternavn,adresse">
-    </db-form>
-
     <db-select heading="Våre varer" liste="vareliste" table="vare" buy="true" 
                fields="varenavn,basispris" where="1=1">
         <div slot="liste" id="vareliste">
@@ -34,8 +27,6 @@
             </div>
         </div>
     </db-select>
-
-
     <script>
         setup();
     </script>
