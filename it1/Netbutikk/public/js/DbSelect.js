@@ -11,6 +11,9 @@
          div.korg {
            display:none;
          }
+         h4 {
+           text-align:center;
+         }
        </style>
        <h4>Vareliste</h4>
        <div class="liste">
@@ -33,7 +36,7 @@
     }
 
     static get observedAttributes() {
-      return ["table", "fields", "where"];
+      return ["table", "fields", "where","heading"];
     }
 
     get valgt() {
@@ -47,6 +50,9 @@
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
+      if (name === "heading") {
+        this._root.querySelector('h4').innerHTML = newValue;
+      }
       if (name === "fields") {
         this.fields = newValue.replace(/[^a-z0-9,]+/g, '');
       }
@@ -59,20 +65,18 @@
       if (this.starting && this.table && this.where && this.fields) {
         let sql = `select ${this.fields} from ${this.table} where ${this.where}`;
         let slot = this._root.querySelector('div.liste slot');
-        let divKorg = this._root.querySelector('div.korg');
-        let divListe = this._root.querySelector('div.liste');
         this.starting = false;
         this._root.querySelector('button').addEventListener("click", () => {
            let valgt = Array.from(this.valgt);
            let items = valgt.map(e => Object.assign({},this.datalist[e.id]));
            items.forEach(e => delete e.buy);
+           // lagrer alle kjøpte varer i localstorage
            localStorage.setItem('korg',JSON.stringify(items));
            this.dispatchEvent(new Event("korg"));        
         });
         slot.addEventListener('slotchange', async (e) => {
           let data = await this.select(sql);
           let id = this.getAttribute("liste");
-          let korg = this.getAttribute("korg");
           let buy = this.getAttribute("buy");
           //*
           if (data.results) {
