@@ -30,6 +30,20 @@ db-select {
     opacity: 0.4;
 }
 
+#korg>div,
+#vareliste>div {
+    width: 12em;
+}
+#korg,
 #vareliste {
+    display: flex;
+    flex-wrap: wrap;
     background-color: aliceblue;
+}
+
+#korg img,#vareliste img {
+    width: 150px;
+    height: 150px;
+    min-width:150px;
+    min-height: 150px;
 }

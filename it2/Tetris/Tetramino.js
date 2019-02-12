@@ -14,15 +14,15 @@ bricks.set("T", "....|xxx.|.x..|....");
 class Tetramino {
     constructor(type) {
         this.blocks = [
-          [
-            [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0] 
-          ]
+            [
+                [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]
+            ]
         ];
         this.rotation = 0;
         let pattern = bricks.get(type).split('|');
         for (let i = 0; i < 4; i++) {
             let line = pattern[i];
-            let block = this.blocks[i];
+            let block = this.blocks[0][i];
             for (let j = 0; j < 4; j++) {
                 let mark = line.charAt(j);
                 if (mark === 'x') {
@@ -51,7 +51,27 @@ class Tetramino {
             return b.reverse();
         }
     }
-   
+
+    render(xp, yp, arr) {
+        let mineRuter = this.blocks[this.rotation];
+        for (let y = 0; y < 4; y++) {
+            let rad = mineRuter[y];
+            for (let x = 0; x < 4; x++) {
+                let f = rad[x];
+                if (f !== 0) {
+                    let idx = (y + yp) * 12 + x + xp;
+                    if (idx >= 0 && idx < 20 * 12) {
+                        arr[idx].classList.add(f);
+                    }
+                }
+            }
+        }
+    }
+
+    rot(delta) {
+        
+    }
+
 
 }
 

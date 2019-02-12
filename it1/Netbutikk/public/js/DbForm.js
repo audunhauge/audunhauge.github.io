@@ -17,7 +17,7 @@
             border-radius: 5px;
             border: solid gray 1px;
             background-color: gainsboro;
-            margin-top: 1em;
+            margin-top: 1.5em;
         }
 
         form > label {
