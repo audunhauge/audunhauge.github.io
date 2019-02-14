@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="solve.js"></script>
+    <link rel="stylesheet" href="solve.css">
+    <title>Solve equations</title>
+</head>
+<body>
+    <div>
+        <label>Enter eq <input id="eq" type="text"></label>
+        <label>Lo limit <input id="lo" type="number" placeholder="-100"></label>
+        <label>Hi limit <input id="hi" type="number" placeholder="+100"></label>
+        <label>Plot <button id="start">start</button></label>
+
+    </div>
+    <div id="graph">
+        <canvas width="500" height="500" id="plot"></canvas>
+    </div>
+    <script>
+      setup();
+    </script>
+</body>
+</html>
