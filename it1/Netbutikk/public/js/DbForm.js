@@ -111,7 +111,9 @@
       const address = window.location.protocol + '//'
         + window.location.hostname + ':'
         + window.location.port;
-      fetch(address + "/runsql", init).catch(e => console.log(e.message));
+      fetch(address + "/runsql", init)
+      .then(  this.dispatchEvent(new Event("saved")) )
+      .catch(e => console.log(e.message));
     }
   }
 

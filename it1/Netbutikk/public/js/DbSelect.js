@@ -25,18 +25,20 @@
   class DBSelect extends HTMLElement {
     constructor() {
       super();
-      this.datalist =[];
+      this.datalist = [];
       this.starting = true;
       this.table = "";
       this.fields = "";
       this.where = "";
+      this.kasse = false;
       this.buy = false;
+      this.pattern = '';
       this._root = this.attachShadow({ mode: "open" });
       this.shadowRoot.appendChild(template.content.cloneNode(true));
     }
 
     static get observedAttributes() {
-      return ["table", "fields", "where","heading"];
+      return ["table", "fields", "where", "heading"];
     }
 
     get valgt() {
@@ -63,68 +65,78 @@
         this.where = newValue.replace(/;/g, '').replace(/union/ig, '');
       }
       if (this.starting && this.table && this.where && this.fields) {
-        let sql = `select ${this.fields} from ${this.table} where ${this.where}`;
         let slot = this._root.querySelector('div.liste slot');
         this.starting = false;
+        let kasse = this.getAttribute("kasse");
         this._root.querySelector('button').addEventListener("click", () => {
-           let valgt = Array.from(this.valgt);
-           let items = valgt.map(e => Object.assign({},this.datalist[e.id]));
-           items.forEach(e => delete e.buy);
-           // lagrer alle kjøpte varer i localstorage
-           localStorage.setItem('korg',JSON.stringify(items));
-           this.dispatchEvent(new Event("korg"));        
         });
-        slot.addEventListener('slotchange', async (e) => {
-          let data = await this.select(sql);
-          let id = this.getAttribute("liste");
-          let buy = this.getAttribute("buy");
-          //*
-          if (data.results) {
-            let target = document.getElementById(id);
-            if (target) {
-              let pattern  = target.innerHTML;
-              console.log(pattern);
-              let s = "";
-              data.results.forEach((linje,idx) => {
-                this.datalist[idx] = linje;
-                if (buy) {
-                  linje.buy = `<input id="${idx}" type="checkbox">`;
-                }
-                s += supplant(pattern,linje);
-              });
-              target.innerHTML = s;
-            }
-          }
-          //*/
-        });
-        
+        if (kasse) {
+          this._root.querySelector('button').addEventListener("click", () => {
+            let valgt = Array.from(this.valgt);
+            let items = valgt.map(e => Object.assign({}, this.datalist[e.id]));
+            items.forEach(e => delete e.buy);
+            // lagrer alle kjøpte varer i localstorage
+            localStorage.setItem('korg', JSON.stringify(items));
+            this.dispatchEvent(new Event("korg"));
+          });
+        }
+        slot.addEventListener('slotchange', () => { this.getData() });
       }
-      function supplant(s, o) {
-        return s.replace(/{([^{}]*)}/g, function (a, b) {
-          var r = o[b];
-          return typeof r === "string" || typeof r === "number" ? r : a;
-        });
-      }
+
     }
 
-    async select(sql = "") {
-      let init = {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify({ sql }),
-        headers: {
-          "Content-Type": "application/json"
+    async getData() {
+      let sql = `select ${this.fields} from ${this.table} where ${this.where}`;
+      let data = await select(sql);
+      let id = this.getAttribute("liste");
+      let buy = this.getAttribute("buy");
+      let kasse = this.getAttribute("kasse");
+      if (!kasse) {
+        this._root.querySelector('button').style.display = "none";
+      }
+      if (data.results.length) {
+        let target = document.getElementById(id);
+        if (target) {
+          let pattern = this.pattern || target.innerHTML;
+          this.pattern = pattern;
+          console.log(pattern);
+          let s = "";
+          data.results.forEach((linje, idx) => {
+            this.datalist[idx] = linje;
+            if (buy) {
+              linje.buy = `<input id="${idx}" type="checkbox">`;
+            }
+            s += supplant(pattern, linje);
+          });
+          target.innerHTML = s;
         }
-      };
-      console.log(sql);
-      const address = window.location.protocol + '//'
-        + window.location.hostname + ':'
-        + window.location.port;
-      const response = await fetch(address + "/runsql", init).catch(e => console.log(e.message));
-      let res = await response.json();
-      return res;
-    }
+      }
+      async function select(sql = "") {
+        let init = {
+          method: "POST",
+          credentials: "include",
+          body: JSON.stringify({ sql }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        };
+        console.log(sql);
+        const address = window.location.protocol + '//'
+          + window.location.hostname + ':'
+          + window.location.port;
+        const response = await fetch(address + "/runsql", init).catch(e => console.log(e.message));
+        let res = await response.json();
+        return res;
+      }
+    };
   }
 
   window.customElements.define("db-select", DBSelect);
 })();
+
+function supplant(s, o) {
+  return s.replace(/{([^{}]*)}/g, function (a, b) {
+    var r = o[b];
+    return typeof r === "string" || typeof r === "number" ? r : a;
+  });
+}
