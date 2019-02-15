@@ -16,7 +16,16 @@
 <body>
     <home-bar title="Nettbutikk" info="Kampanje! Salg!" username="Ole Olsen">
     </home-bar>
-    <db-select heading="Våre varer" liste="vareliste" table="vare" buy="true" 
+   <!--
+       // dersom kasse er definert (kass="xxx") da blir
+       // en event xxx generert når knappen under lista klikkes.
+       // en kan da sette opp forskjellige events som kan fanges slik:
+       //   divSelect.addEventListener("xxx", funksjonSomOrdnerOpp);
+       // divSelect er her definert: let divSelect= document.querySelector("db-select")
+       // eller document.getElementById("idTilDBSelect");
+   -->
+    <db-select heading="Våre varer" liste="vareliste" table="vare" 
+               buy="true" kasse="korg"
                fields="varenavn,basispris" where="1=1">
         <div slot="liste" id="vareliste">
             <div>

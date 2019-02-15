@@ -29,9 +29,9 @@ const brett = [
 
 
 const minos = [];
-let speed = 600;
+let speed = 1000;
 let timer;
-let xp,yp,t;
+let xp, yp, t;
 
 
 
@@ -64,19 +64,71 @@ function setup() {
         }
     }
 
+    addEventListener("keydown", styrSpillet);
 
+    function styrSpillet(e) {
+        clearBoard();
+        switch (e.key) {
+            case "ArrowLeft":
+                if (!t.kollisjon(xp - 1, yp, brett)) {
+                    xp--;
+                }
+                break;
+            case "ArrowRight":
+                if (!t.kollisjon(xp + 1, yp, brett)) {
+                    xp++;
+                }
+                break;
+            case "ArrowUp":
+                if (!t.kollisjon(xp, yp, brett, 1)) {
+                    t.rot(1);
+                }
+                break;
+            case "ArrowDown":
+                if (!t.kollisjon(xp, yp, brett, -1)) {
+                    t.rot(-1);
+                }
+                break;
+            case " ":
+                clearInterval(timer);
+                timer = setInterval(gameLoop, 20);
+        }
+        t.render(xp, yp, minos);
+    }
+
+
+    let type = "I";
     timer = setInterval(gameLoop, speed);
+    makeNewTetrino(type);
+    gameLoop();
 
-    t = new Tetramino("I");
-    xp = 4;
-    yp = -3;
+    function makeNewTetrino(type) {
+        let possible = "OISZJLT".replace(type, "");
+        type = possible.charAt(Math.random() * 7);
+        t = new Tetramino(type);
+        xp = 4;
+        yp = -3;
+        clearInterval(timer);
+        timer = setInterval(gameLoop, speed);
+        gameLoop();
+    }
 
     function gameLoop() {
         clearBoard();
-        t.render(xp,yp,minos);
-        yp++;
+        if (t.kollisjon(xp, yp, brett)) {
+            t.transfer(xp, yp - 1, brett);
+            if (yp < 0) {
+                alert("game over");
+                clearInterval(timer);
+                return;
+            }
+            makeNewTetrino();
+        } else {
+            t.render(xp, yp, minos);
+            yp++;
+        }
     }
-
+    /*
     // tester at brettet er i orden
     expect(brett,"brett").it.is.a("Array");
     expect(brett,"brett").to.have("length").eq(20);
@@ -87,22 +139,30 @@ function setup() {
 
     let test = new Tetramino("I");
     expect(test,"test").it.is.a("Tetramino");
-    expect(test.rotation,"test.rotation").to.eq(0);
+    expect(test.rotation,"test.rotation").to.eq(0); 
 
     // roterer en gang (til venstre)
     test.rot(1);
     expect(test.rotation,"test.rot(1)").to.eq(1);
     
     // roterer 5 ganger (til venstre)
-    test.rot(5);
-    expect(test.rotation,"test.rot(5)").to.eq(2);
+    test.rot(2);
+    expect(test.rotation,"test.rot(5)").to.eq(3);
     
     // roterer 3 ganger (til høyre)
-    test.rot(-3);
-    expect(test.rotation,"test.rot(-3)").to.eq(3);
+    test.rot(-1);
+    expect(test.rotation,"test.rot(-3)").to.eq(2);
+
+    // roterer 5 venstre
+    test = new Tetramino("I");
+    test.rot(5);
+    expect(test.rotation,"test.rot(5)").to.eq(1);
+
+    test.rot(-4);
+    expect(test.rotation,"test.rot(5)").to.eq(1);
     
     Test.summary("#tester");
-   
+   */
 
 }
 

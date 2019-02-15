@@ -49,17 +49,15 @@ db-select {
 }
 
 #kunder {
-    display : flex;
-    flex-wrap: wrap;
+   display: flex;
+   flex-wrap: wrap;
 }
 
-#kunder > div {
-    border: solid gray 1px;
-    padding: 5px;
-    margin: 2px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+#kunder > li {
+    width: 14em;
 }
-#kunder > div > div {
+
+
+#kunder > li > div {
     margin: 2px;
 }
