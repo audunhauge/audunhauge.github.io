@@ -52,6 +52,22 @@ class Tetramino {
         }
     }
 
+    transfer(xp, yp, brett) {
+        let mineRuter = this.blocks[this.rotation];
+        for (let y = 0; y < 4; y++) {
+            let rad = mineRuter[y];
+            for (let x = 0; x < 4; x++) {
+                let f = rad[x];
+                if (f !== 0) {
+                    let idx = (y + yp) * 12 + x + xp;
+                    if (idx >= 0 && idx < 20 * 12) {
+                        brett[yp+y][xp+x] = f;
+                    }
+                }
+            }
+        }
+    }
+
     render(xp, yp, arr) {
         let mineRuter = this.blocks[this.rotation];
         for (let y = 0; y < 4; y++) {
@@ -68,8 +84,27 @@ class Tetramino {
         }
     }
 
+    kollisjon(xp, yp, brett, r=0) {
+        let mineRuter = this.blocks[(this.rotation+r+4) % 4];
+        for (let y = 0; y < 4; y++) {
+            let rad = mineRuter[y];
+            for (let x = 0; x < 4; x++) {
+                let f = rad[x];
+                if (f !== 0) {
+                    let idx = (y + yp) * 12 + x + xp;
+                    if (idx >= 0 && idx < 20 * 12) {
+                        if (brett[yp+y][xp+x] !== " ") {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     rot(delta) {
-        
+        this.rotation = (this.rotation + delta + 4) % 4;
     }
 
 

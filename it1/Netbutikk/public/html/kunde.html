@@ -23,14 +23,17 @@
     </db-form>
 
     <db-select heading="Kundeliste" liste="kunder" table="kunde"  
+    buy="true" kasse="slett"
     fields="fornavn,etternavn,adresse" where="1=1">
-        <div slot="liste" id="kunder">
-            <div>
+        <ol slot="liste" id="kunder">
+            <li>
                 <div class="fornavn">{fornavn}</div>
                 <div class="etternavn">{etternavn}</div>
                 <div class="adresse">{adresse}</div>
-            </div>
-        </div>
+                {buy} 
+            </li>
+        </ol>
+        <span slot="kasse">Slett valgte</span>
     </db-select>
 
     <script>

@@ -18,6 +18,7 @@ function setup() {
     }
     if (select) {
         select.addEventListener("korg", bestilling);
+        select.addEventListener("slett", slettKunder);
     }
 
     if (form) {
@@ -30,7 +31,13 @@ function setup() {
         }
     }
 
+    function slettKunder() {
+        // fra kundeskjema
+        alert("Sletter valgte kunder");
+    }
+
     function bestilling() {
+        // fra butikk-skjema
         location.href = "korg.html";
     }
 

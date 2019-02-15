@@ -18,7 +18,7 @@
        <h4>Vareliste</h4>
        <div class="liste">
          <slot name="liste"></slot>
-         <button>Gå til kasse</button>
+         <button><slot name="kasse">Gå til kasse</slot></button>
        </div>
     `;
 
@@ -77,7 +77,7 @@
             items.forEach(e => delete e.buy);
             // lagrer alle kjøpte varer i localstorage
             localStorage.setItem('korg', JSON.stringify(items));
-            this.dispatchEvent(new Event("korg"));
+            this.dispatchEvent(new Event(kasse));
           });
         }
         slot.addEventListener('slotchange', () => { this.getData() });
