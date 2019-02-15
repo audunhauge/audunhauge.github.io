@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../css/butikk.css">
     <script src="../js/butikk.js"></script>
     <script src="../js/DbForm.js"></script>
+    <script src="../js/DbSelect.js"></script>
+    <script src="../js/DBAggregate.js"></script>
     <title>Registrer varer</title>
 </head>
 
@@ -20,6 +22,24 @@
     <db-form heading="Varer" table="vare" fields="varenavn,basispris,beholdning">
         <div slot="heading">Varer</div>
     </db-form>
+    <db-select heading="Vareliste" liste="varer" table="vare"  
+       buy="true" kasse="slett"
+       fields="varenavn,basispris,beholdning" where="1=1">
+        <ol class="liste" slot="liste" id="varer">
+            <li>
+                <div>Varenavn: {varenavn}</div>
+                <div>Basispris :{basispris}</div>
+                <div>Antall på lager: {beholdning}</div>
+                {buy} 
+            </li>
+        </ol>
+        <span slot="kasse">Slett merka varer</span>
+    </db-select>
+
+    <db-agg liste="varer" table="vare"  fields="sum(basispris)" where="1=1"  groupby="-" >
+          <span>{sum}</span>
+    </db-agg>
+
     <script>
         setup();
     </script>

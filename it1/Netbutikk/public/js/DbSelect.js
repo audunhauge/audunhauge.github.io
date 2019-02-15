@@ -91,11 +91,11 @@
       let id = this.getAttribute("liste");
       let buy = this.getAttribute("buy");
       let kasse = this.getAttribute("kasse");
+      let target = document.getElementById(id);
       if (!kasse) {
         this._root.querySelector('button').style.display = "none";
       }
       if (data.results.length) {
-        let target = document.getElementById(id);
         if (target) {
           let pattern = this.pattern || target.innerHTML;
           this.pattern = pattern;
@@ -110,6 +110,8 @@
           });
           target.innerHTML = s;
         }
+      } else {
+        this._root.querySelector('div.liste').style.display = "none";
       }
       async function select(sql = "") {
         let init = {
