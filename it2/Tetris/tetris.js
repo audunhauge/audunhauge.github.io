@@ -113,10 +113,24 @@ function setup() {
         gameLoop();
     }
 
+    function dropAbove(brett,i) {
+        alert("Linje full");
+    }
+
+    function sjekkForLinjer(brett) {
+        for (let i= brett.length-2; i > 0; i--) {
+            let linje = brett[i].join("");
+            if (! linje.includes(" ")) {
+                dropAbove(brett, i);
+            }
+        }
+    }
+
     function gameLoop() {
         clearBoard();
         if (t.kollisjon(xp, yp, brett)) {
             t.transfer(xp, yp - 1, brett);
+            sjekkForLinjer(brett);
             if (yp < 0) {
                 alert("game over");
                 clearInterval(timer);
