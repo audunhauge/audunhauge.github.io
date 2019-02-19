@@ -39,7 +39,26 @@ function setup() {
     let divBoard = document.getElementById("board");
     let homebar = document.querySelector("home-bar");
     if (homebar) {
-        homebar.setAttribute("menu", `<i class="material-icons">settings</i>`);
+        homebar.setAttribute("menu",
+            `<i class="material-icons">menu</i>
+        <ul>
+          <li>Kunde
+          <li>Vare
+          <li>Butikk
+          <li>Korg
+          <li>Bestilling
+          <li>Linje
+        </ul>
+        `)
+        homebar.addEventListener("menu", menuHandler);
+    }
+
+    function menuHandler(e) {
+        let info = homebar.info;
+        let text = info.target.innerHTML.trim().toLowerCase();
+        if (text) {
+            location.href = text + ".html";
+        }
     }
 
 
