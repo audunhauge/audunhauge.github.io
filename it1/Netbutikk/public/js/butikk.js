@@ -12,6 +12,8 @@ function setup() {
           <li>Vare
           <li>Butikk
           <li>Korg
+          <li>Bestilling
+          <li>Linje
         </ul>
         `)
         homebar.addEventListener("menu", menuHandler);
@@ -43,7 +45,7 @@ function setup() {
 
     function menuHandler(e) {
         let info = homebar.info;
-        let text = info.target.innerHTML.trim();
+        let text = info.target.innerHTML.trim().toLowerCase();
         if (text) {
             location.href = text + ".html";
         }

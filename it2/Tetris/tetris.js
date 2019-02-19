@@ -113,17 +113,36 @@ function setup() {
         gameLoop();
     }
 
-    function dropAbove(brett,i) {
-        alert("Linje full");
+    function dropAbove(brett, idx) {
+        for (let i = idx; i > 0; i--) {
+            let s = brett[i-1].join("");
+            brett[i] = s.split("");
+        }
     }
 
     function sjekkForLinjer(brett) {
+        // Ny løkke
+        // while løkka har den fordelen at du selv
+        // bestemmer hvordan indeksen (i) skal endres
+        // i en for løkke endres indeks etter en fast regel
+        // i en while kan du bestemme med en if ()
+        let i = brett.length - 2;
+        while (i > 0) {
+            let linje = brett[i].join("");
+            if (!linje.includes(" ")) {
+                dropAbove(brett, i);
+            } else {
+                i--;
+            }
+        }
+        /*
         for (let i= brett.length-2; i > 0; i--) {
             let linje = brett[i].join("");
             if (! linje.includes(" ")) {
                 dropAbove(brett, i);
             }
         }
+        */
     }
 
     function gameLoop() {
