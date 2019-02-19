@@ -32,6 +32,7 @@ const minos = [];
 let speed = 1000;
 let timer;
 let xp, yp, t;
+let poeng = 0;
 
 
 
@@ -42,12 +43,7 @@ function setup() {
         homebar.setAttribute("menu",
             `<i class="material-icons">menu</i>
         <ul>
-          <li>Kunde
-          <li>Vare
-          <li>Butikk
-          <li>Korg
-          <li>Bestilling
-          <li>Linje
+          <li>Omstart
         </ul>
         `)
         homebar.addEventListener("menu", menuHandler);
@@ -57,7 +53,15 @@ function setup() {
         let info = homebar.info;
         let text = info.target.innerHTML.trim().toLowerCase();
         if (text) {
-            location.href = text + ".html";
+            switch(text) {
+                case "omstart":
+                  poeng = 0;
+                  for (let i=0; i< brett.length-1; i++) {
+                      brett[i] =  "V          V".split("");
+                  }
+                  makeNewTetrino("I");
+                  break;
+            }
         }
     }
 
@@ -145,15 +149,19 @@ function setup() {
         // bestemmer hvordan indeksen (i) skal endres
         // i en for løkke endres indeks etter en fast regel
         // i en while kan du bestemme med en if ()
+        let linjer = 0;  // antall linjer du renska nå
         let i = brett.length - 2;
         while (i > 0) {
             let linje = brett[i].join("");
             if (!linje.includes(" ")) {
                 dropAbove(brett, i);
+                linjer++;
             } else {
                 i--;
             }
         }
+        poeng += linjer ** 3;
+        homebar.setAttribute("info",String(poeng));
         /*
         for (let i= brett.length-2; i > 0; i--) {
             let linje = brett[i].join("");
