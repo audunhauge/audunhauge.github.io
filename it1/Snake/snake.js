@@ -43,6 +43,7 @@ function setup() {
     let snake = [{ x: 50, y: 10 }];
     let h = 0;
     let speed = { x: 1, y: 0 };
+    let hastighet = 200;
 
 
 
@@ -73,6 +74,12 @@ function setup() {
         ruter[y * 100 + x].classList.remove(klass);
     }
 
+
+
+    // her settes intervallet mellom hver gang snaken flytter seg
+    // tiden er i ms
+    let timer;
+
     function startSpillet() {
         poeng = 0;
         food = [];
@@ -81,11 +88,20 @@ function setup() {
         speed = { x: 1, y: 0 };
         makeFood();
         makeFood();
+        makeFood();
+        makeFood();
+        makeFood();
+        makeFood();
         ruter.forEach( e => {
             e.className = "rute";
         })
         ruter.slice(0, 100).forEach(e => e.classList.add("sneek"));
         ruter.slice(4900, 5000).forEach(e => e.classList.add("sneek"));
+        if (timer) {
+            clearInterval(timer);
+        }
+        
+        timer = setInterval(gameLoop, 20);
     }
 
     startSpillet();
@@ -129,10 +145,6 @@ function setup() {
     }
 
 
-    // her settes intervallet mellom hver gang snaken flytter seg
-    // tiden er i ms
-    let timer = setInterval(gameLoop, 80);
-
 
 
     function gameLoop() {
@@ -144,6 +156,7 @@ function setup() {
         if (!isfree(tail)) {
             // kollisjon self
             clearInterval(timer);
+            timer = null;
             homebar.setAttribute("username", "Game over");
         }
         if (isThisFood(tail)) {
@@ -151,8 +164,10 @@ function setup() {
             growSnake();
             makeFood();
             poeng += 1;
+            hastighet -= 30;
             if (homebar) {
                 homebar.setAttribute("info", poeng + " poeng");
+                homebar.setAttribute("crumb", "" + hastighet);
             }
         }
         h = t();
