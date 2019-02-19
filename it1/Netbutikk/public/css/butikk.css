@@ -53,11 +53,11 @@ db-select {
    flex-wrap: wrap;
 }
 
-#kunder > li {
+.liste > li {
     width: 14em;
 }
 
 
-#kunder > li > div {
+.liste > li > div {
     margin: 2px;
 }

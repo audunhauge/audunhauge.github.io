@@ -25,11 +25,10 @@
     <db-select heading="Kundeliste" liste="kunder" table="kunde"  
     buy="true" kasse="slett"
     fields="fornavn,etternavn,adresse" where="1=1">
-        <ol slot="liste" id="kunder">
+        <ol class="liste" slot="liste" id="kunder">
             <li>
-                <div class="fornavn">{fornavn}</div>
-                <div class="etternavn">{etternavn}</div>
-                <div class="adresse">{adresse}</div>
+                <div>{fornavn} {etternavn}</div>
+                <div>Adresse: {adresse}</div>
                 {buy} 
             </li>
         </ol>
