@@ -24,16 +24,7 @@ function setup() {
         let text = info.target.innerHTML.trim().toLowerCase();
         if (text) {
             if (text === "omstart") {
-                poeng = 0;
-                food = [];
-                snake = [{ x: 50, y: 10 }];
-                h = 0;
-                speed = { x: 1, y: 0 };
-                makeFood();
-                makeFood();
-                ruter.forEach( e => {
-                    e.className = "rute";
-                })
+               startSpillet();
             }
         }
     }
@@ -46,8 +37,7 @@ function setup() {
         ruter.push(div);
     }
 
-    ruter.slice(0, 100).forEach(e => e.classList.add("sneek"));
-    ruter.slice(4900, 5000).forEach(e => e.classList.add("sneek"));
+   
 
     let food = [];
     let snake = [{ x: 50, y: 10 }];
@@ -83,8 +73,24 @@ function setup() {
         ruter[y * 100 + x].classList.remove(klass);
     }
 
-    makeFood();
-    makeFood();
+    function startSpillet() {
+        poeng = 0;
+        food = [];
+        snake = [{ x: 50, y: 10 }];
+        h = 0;
+        speed = { x: 1, y: 0 };
+        makeFood();
+        makeFood();
+        ruter.forEach( e => {
+            e.className = "rute";
+        })
+        ruter.slice(0, 100).forEach(e => e.classList.add("sneek"));
+        ruter.slice(4900, 5000).forEach(e => e.classList.add("sneek"));
+    }
+
+    startSpillet();
+
+    
 
     addEventListener("keydown", styrSnake);
 
