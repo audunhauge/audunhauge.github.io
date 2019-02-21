@@ -24,7 +24,7 @@ function setup() {
         let text = info.target.innerHTML.trim().toLowerCase();
         if (text) {
             if (text === "omstart") {
-               startSpillet();
+                startSpillet();
             }
         }
     }
@@ -37,7 +37,7 @@ function setup() {
         ruter.push(div);
     }
 
-   
+
 
     let food = [];
     let snake = [{ x: 50, y: 10 }];
@@ -92,21 +92,21 @@ function setup() {
         makeFood();
         makeFood();
         makeFood();
-        ruter.forEach( e => {
+        ruter.forEach(e => {
             e.className = "rute";
         })
         ruter.slice(0, 100).forEach(e => e.classList.add("sneek"));
         ruter.slice(4900, 5000).forEach(e => e.classList.add("sneek"));
         if (timer) {
-            clearInterval(timer);
+            cancelAnimationFrame(timer);
         }
-        
-        timer = setInterval(gameLoop, 20);
+
+        timer = requestAnimationFrame(gameLoop);
     }
 
     startSpillet();
 
-    
+
 
     addEventListener("keydown", styrSnake);
 
@@ -144,34 +144,38 @@ function setup() {
         clearR({ x, y }, "food");
     }
 
-
-
-
-    function gameLoop() {
-        let head = snake[h];
-        let tail = snake[t()];
-        clearR(tail);
-        tail.x = head.x + speed.x;
-        tail.y = head.y + speed.y;
-        if (!isfree(tail)) {
-            // kollisjon self
-            clearInterval(timer);
-            timer = null;
-            homebar.setAttribute("username", "Game over");
-        }
-        if (isThisFood(tail)) {
-            eatFood(tail);
-            growSnake();
-            makeFood();
-            poeng += 1;
-            hastighet -= 30;
-            if (homebar) {
-                homebar.setAttribute("info", poeng + " poeng");
-                homebar.setAttribute("crumb", "" + hastighet);
+    let start = null;
+    function gameLoop(tid) {
+        if (!start) start = tid;
+        let diff = tid - start;
+        if (diff > hastighet) {
+            start = tid;
+            let head = snake[h];
+            let tail = snake[t()];
+            clearR(tail);
+            tail.x = head.x + speed.x;
+            tail.y = head.y + speed.y;
+            if (!isfree(tail)) {
+                // kollisjon self
+                cancelAnimationFrame(timer);
+                timer = null;
+                homebar.setAttribute("username", "Game over");
             }
+            if (isThisFood(tail)) {
+                eatFood(tail);
+                growSnake();
+                makeFood();
+                poeng += 1;
+                hastighet -= 30;
+                if (homebar) {
+                    homebar.setAttribute("info", poeng + " poeng");
+                    homebar.setAttribute("crumb", "" + hastighet);
+                }
+            }
+            h = t();
+            setR(tail);
+            food.forEach(e => setR(e, "food"));
         }
-        h = t();
-        setR(tail);
-        food.forEach(e => setR(e, "food"));
+        timer = requestAnimationFrame(gameLoop);
     }
 }
