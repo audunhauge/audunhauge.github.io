@@ -13,6 +13,8 @@ function setup() {
           <li>Vare
           <li>Butikk
           <li>Korg
+          <li>Bestilling
+          <li>Linje
         </ul>
         `)
         homebar.addEventListener("menu", menuHandler);

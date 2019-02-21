@@ -1,3 +1,5 @@
+// @ts-check
+
 class HomeBar extends HTMLElement {
 
   constructor() {
@@ -15,8 +17,8 @@ class HomeBar extends HTMLElement {
       <div id="home">
         <div id="menu"></div>
         <div id="heading">${heading}</div>
-        <div id="crumb">${crumb}</div>
-        <div id="username">${username}</div>
+        <div id="crumb">${heading}</div>
+        <div id="username">${heading}</div>
         <div id="info">${datestr}</div>
       </div>
           <style>

@@ -1,0 +1,31 @@
+:root {
+    --w: 5px;
+}
+
+#ramme {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#brett {
+    margin-top: 5%;
+    border: solid green 1px;
+    display: grid;
+    grid-template-columns: repeat(100, 1fr);
+    width: calc((var(--w) + 2px) * 100);
+}
+
+div.rute {
+    width: var(--w);
+    height: var(--w);
+    border: solid whitesmoke 1px;
+}
+
+div.rute.sneek {
+    background-color: red;
+}
+
+div.rute.food {
+    background-color: green;
+}

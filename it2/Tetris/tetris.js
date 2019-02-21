@@ -32,6 +32,7 @@ const minos = [];
 let speed = 1000;
 let timer;
 let xp, yp, t;
+let poeng = 0;
 
 
 
@@ -39,7 +40,29 @@ function setup() {
     let divBoard = document.getElementById("board");
     let homebar = document.querySelector("home-bar");
     if (homebar) {
-        homebar.setAttribute("menu", `<i class="material-icons">settings</i>`);
+        homebar.setAttribute("menu",
+            `<i class="material-icons">menu</i>
+        <ul>
+          <li>Omstart
+        </ul>
+        `)
+        homebar.addEventListener("menu", menuHandler);
+    }
+
+    function menuHandler(e) {
+        let info = homebar.info;
+        let text = info.target.innerHTML.trim().toLowerCase();
+        if (text) {
+            switch(text) {
+                case "omstart":
+                  poeng = 0;
+                  for (let i=0; i< brett.length-1; i++) {
+                      brett[i] =  "V          V".split("");
+                  }
+                  makeNewTetrino("I");
+                  break;
+            }
+        }
     }
 
 
@@ -113,17 +136,40 @@ function setup() {
         gameLoop();
     }
 
-    function dropAbove(brett,i) {
-        alert("Linje full");
+    function dropAbove(brett, idx) {
+        for (let i = idx; i > 0; i--) {
+            let s = brett[i-1].join("");
+            brett[i] = s.split("");
+        }
     }
 
     function sjekkForLinjer(brett) {
+        // Ny løkke
+        // while løkka har den fordelen at du selv
+        // bestemmer hvordan indeksen (i) skal endres
+        // i en for løkke endres indeks etter en fast regel
+        // i en while kan du bestemme med en if ()
+        let linjer = 0;  // antall linjer du renska nå
+        let i = brett.length - 2;
+        while (i > 0) {
+            let linje = brett[i].join("");
+            if (!linje.includes(" ")) {
+                dropAbove(brett, i);
+                linjer++;
+            } else {
+                i--;
+            }
+        }
+        poeng += linjer ** 3;
+        homebar.setAttribute("info",String(poeng));
+        /*
         for (let i= brett.length-2; i > 0; i--) {
             let linje = brett[i].join("");
             if (! linje.includes(" ")) {
                 dropAbove(brett, i);
             }
         }
+        */
     }
 
     function gameLoop() {
