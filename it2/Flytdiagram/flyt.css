@@ -1,0 +1,14 @@
+body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+#main textarea {
+    width: 25em;
+    height: 30em;
+}
+
+#diagram {
+    margin: 3em;
+}

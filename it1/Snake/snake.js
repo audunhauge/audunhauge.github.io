@@ -20,6 +20,7 @@ function setup() {
     }
 
     function menuHandler(e) {
+        // @ts-ignore
         let info = homebar.info;
         let text = info.target.innerHTML.trim().toLowerCase();
         if (text) {
@@ -44,6 +45,7 @@ function setup() {
     let h = 0;
     let speed = { x: 1, y: 0 };
     let hastighet = 200;
+    let running = true;   // the game is on
 
 
 
@@ -159,6 +161,7 @@ function setup() {
                 // kollisjon self
                 cancelAnimationFrame(timer);
                 timer = null;
+                running = false;
                 homebar.setAttribute("username", "Game over");
             }
             if (isThisFood(tail)) {
@@ -166,16 +169,16 @@ function setup() {
                 growSnake();
                 makeFood();
                 poeng += 1;
-                hastighet -= 30;
+                hastighet = Math.max(10, hastighet -1);
                 if (homebar) {
                     homebar.setAttribute("info", poeng + " poeng");
-                    homebar.setAttribute("crumb", "" + hastighet);
+                    homebar.setAttribute("crumb", "Speed:" + hastighet);
                 }
             }
             h = t();
             setR(tail);
             food.forEach(e => setR(e, "food"));
         }
-        timer = requestAnimationFrame(gameLoop);
+        if (running) timer = requestAnimationFrame(gameLoop);
     }
 }
