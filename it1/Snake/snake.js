@@ -5,8 +5,8 @@ function setup() {
     let poeng = 0;
 
     let divBrett = document.getElementById("brett");
-    let homebar = document.querySelector("home-bar");
 
+    let homebar = document.querySelector("home-bar");
     if (homebar) {
         homebar.setAttribute("info", "0 poeng");
         homebar.setAttribute("menu",
@@ -18,7 +18,6 @@ function setup() {
     `)
         homebar.addEventListener("menu", menuHandler);
     }
-
     function menuHandler(e) {
         let info = homebar.info;
         let text = info.target.innerHTML.trim().toLowerCase();

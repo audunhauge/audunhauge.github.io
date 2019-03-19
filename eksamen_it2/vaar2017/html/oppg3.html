@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vindkraft</title>
+    <script src="../js/Test.js"></script>
+    <script src="vind.js"></script>
+    <link rel="stylesheet" href="vind.css">
+</head>
+
+<body>
+    <div id="kravspek">
+        <h4>Kravspek</h4>
+        <ul>
+            <li>Overordnet beskrivelse:</li>
+            <li><h5>Hensikt</h5>
+                Vise brukeren hvordan vindstyrke kan påvirke produksjon av kraft.
+            </li>
+            <li>Funksjonelle krav</li>
+            <li>Rammer</li>
+            <li>Systemkrav</li>
+        </ul>
+    </div>
+    <div id="pseudo">
+        <h4>Pseudokode</h4>
+        Dette inngår som en del av dokumentasjonen
+        <pre>
+            Definerer tabellen grenser G
+              1.6  0
+              3.4  2
+              (definisjon fra tabell i oppgave)
+
+            lese inn fart for periode
+            fra skjema
+              fart1
+              fart2
+              fart3
+              fart4
+            beregne 6*( watt(fart1) + watt(fart2) + watt(fart3) + watt(fart4) )
+            vis beregna verdi
+
+            funksjon watt(fart)
+              gitt en tabell med grenser G
+              for alle grenser g i G
+                dersom fart er mindre enn g
+                  da returner tilsvarende watt
+              returner 0 // fart over alle grenser
+            
+        </pre>
+        Under var et forsøk på flytdiagram (se kode)
+        <!--
+            // prøvde å vise flytdiagram, men det skar seg
+        <h4>Flyt-diagram</h4>
+        <div id="diagram">
+            <div id="hoved"></div>
+            <div id="watt"></div>
+        </div>
+        -->
+        <h4>Wireframe</h4>
+        <div id="wire">
+            <pre>
+                fart periode 1 ________              |Beregn watt|
+                fart periode 2 ________              
+                fart periode 3 ________
+                fart periode 4 ________           
+
+                I perioden blir det produsert ____ wattTimer
+
+            </pre>
+        </div>
+
+    </div>
+    <h2>Tester</h2>
+    Jeg bruker et testbibliotek som lar meg skrive tester slik som
+    <pre>
+        <code>
+            expect(watt,1.2).to.be(0);
+            expect(watt,3).to.be(2);
+        </code>
+    </pre>
+    <div id="tester"></div>
+    <script>
+        setup();
+    </script>
+</body>
+
+</html>

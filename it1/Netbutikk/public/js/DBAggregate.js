@@ -79,6 +79,7 @@
                 const address = window.location.protocol + '//'
                     + window.location.hostname + ':'
                     + window.location.port;
+                // @ts-ignore
                 const response = await fetch(address + "/runsql", init).catch(e => console.log(e.message));
                 let res = await response.json();
                 return res;
@@ -89,9 +90,14 @@
     window.customElements.define("db-agg", DBAgg);
 })();
 
+/**
+ * 
+ * @param {string} s source string
+ * @param {Object} o object with values string||number
+ */
 function supplant(s, o) {
     return s.replace(/{([^{}]*)}/g, function (a, b) {
         var r = o[b];
-        return typeof r === "string" || typeof r === "number" ? r : a;
+        return typeof r === "string" || typeof r === "number" ? String(r) : a;
     });
 }

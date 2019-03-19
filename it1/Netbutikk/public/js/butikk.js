@@ -18,6 +18,14 @@ function setup() {
         `)
         homebar.addEventListener("menu", menuHandler);
     }
+    function menuHandler(e) {
+        // @ts-ignore
+        let info = homebar.info;
+        let text = info.target.innerHTML.trim().toLowerCase();
+        if (text) {
+            location.href = text + ".html";
+        }
+    }
     if (select) {
         select.addEventListener("korg", bestilling);
         select.addEventListener("slett", slettKunder);
@@ -29,6 +37,7 @@ function setup() {
 
     function refresh() {
         if (select) {
+            // @ts-ignore
            setTimeout( () => select.getData(), 500);
         }
     }
@@ -43,11 +52,5 @@ function setup() {
         location.href = "korg.html";
     }
 
-    function menuHandler(e) {
-        let info = homebar.info;
-        let text = info.target.innerHTML.trim().toLowerCase();
-        if (text) {
-            location.href = text + ".html";
-        }
-    }
+   
 }

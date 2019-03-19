@@ -1,0 +1,42 @@
+input[type="checkbox"] + label {
+    opacity: 0;
+}
+
+input[type="checkbox"]:checked + label {
+    opacity: 1;
+}
+
+input[type="checkbox"]:checked + label:after {
+    content: " ✗";
+    color: red;
+    font-size: 1.2em;
+}
+
+input[type="checkbox"]:checked + label.riktig:after {
+    content: " ✔";
+    color: green;
+    font-size: 1.2em;
+}
+
+
+input[type="radio"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+input[type="radio"] + div {
+    display: none;
+}
+
+input[type="radio"]:checked + div {
+    display: block;
+    margin-top: 50px;
+}
+
+#r2 {
+  left: 50px;
+}
+#r3 {
+    left: 100px;
+}

@@ -1,0 +1,36 @@
+#samling {
+    width:750px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#roma, #petersburg,
+#newyork {
+    width: 200px;
+    height: 200px;
+    background-color: green;
+}
+#roma {
+    background-color: purple;
+}
+#petersburg {
+    background-color: plum;
+}
+
+
+#quiz {
+    display: none;
+}
+#bygning {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+}
+
+input + label {
+   opacity: 0;
+}
+
+input:checked + label {
+    opacity: 1;
+}

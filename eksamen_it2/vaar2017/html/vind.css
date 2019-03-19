@@ -1,0 +1,21 @@
+#diagram {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+}
+#watt,
+#hoved {
+    background-image: url("../media/flyt.png");
+    background-repeat: no-repeat;
+    background-size: 250px;
+    background-position-x: 10px;
+    background-position-y: 10px;
+    height: 300px;
+    width: 200px;
+    transform: rotate(-90deg) scaleX(-1);
+}
+
+#watt {
+    background-size: 150px;
+    background-position-x: 100px;
+    background-position-y: 10px;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="quiz.css">
+    <script src="quiz.js"></script>
+</head>
+
+<body>
+    <div id="main">
+        <!--
+Bilete nummer 3 (New York) skal ta brukaren til ein applikasjon der han skal tippe kva
+bygning som er på biletet. Dersom han svarer rett, skal han få ei hyggjeleg melding,
+f.eks.: «Du veit allereie noko om New York – kva med å lære meir?» Dersom han
+svarer galt, kan teksten «Det var ikkje rett – kanskje på tide med ein New York-tur?»
+komme opp.
+        -->
+
+        <!--
+            Lager en div med tre bilder
+            Fungerer like godt som ett bilde laga i photoshop
+        -->
+        <div id="samling">
+            <div id="newyork"></div>
+            <div id="roma"></div>
+            <div id="petersburg"></div>
+        </div>
+        <div id="quiz">
+            <div id="bygning"></div>
+            Hvilken bygning er dette
+            <ul>
+                <li>Empire state <input type="checkbox"><label>Riktig</label></li>
+                <li>Twin towers<input type="checkbox"><label>Galt</label></li>
+                <li>7eleven<input type="checkbox"><label>Galt</label></li>
+            </ul>
+
+        </div>
+    </div>
+    <script>
+        setup();
+    </script>
+</body>
+
+</html>
