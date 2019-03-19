@@ -42,7 +42,7 @@
     }
 
     get valgt() {
-      let id = this.getAttribute("liste");
+      let id = this.getAttribute("target");
       let div = document.getElementById(id);
       return div.querySelectorAll("input:checked");
     }
@@ -88,7 +88,7 @@
     async getData() {
       let sql = `select ${this.fields} from ${this.table} where ${this.where}`;
       let data = await select(sql);
-      let id = this.getAttribute("liste");
+      let id = this.getAttribute("target");
       let buy = this.getAttribute("buy");
       let kasse = this.getAttribute("kasse");
       let target = document.getElementById(id);

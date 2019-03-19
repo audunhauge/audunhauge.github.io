@@ -4,6 +4,7 @@ function setup() {
     let select = document.querySelector("db-select");
     let form = document.querySelector("db-form");
     let homebar = document.querySelector('home-bar');
+    let refreshList = Array.from(document.querySelectorAll(".db-refresh"));
     if (homebar) {
         homebar.setAttribute("menu",
             `<i class="material-icons">menu</i>

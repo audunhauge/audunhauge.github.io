@@ -19,7 +19,7 @@
         }
 
         static get observedAttributes() {
-            return ["table", "fields", "where", "groupby"];
+            return ["table", "fields", "where", "groupby" ];
         }
 
 
@@ -53,7 +53,8 @@
               sql = `select ${this.fields} from ${this.table} where ${this.where} group by ${this.groupby}`;
             }
             let data = await select(sql);
-            let target = this._root.querySelector('span.value');
+            let id = this.getAttribute("target");
+            let target = document.getElementById(id);
             if (data.results.length) {
                 if (target) {
                     let pattern = this.pattern || target.innerHTML;
