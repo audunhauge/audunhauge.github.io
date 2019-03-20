@@ -1,42 +1,103 @@
+/*
+Denne css-en viser 
+   bruk av nærmeste søsken-selector (input + label) sibling selector "+"
+   generell søsken selector (general sibling selector) "~"  (input ~ label)
+   ::before og ::after
+   selector med attribute - input[type="radio"]
+   nummerering med content: counter(nn)  
+   bruk av radio til å skjule/vise elementer
+   skjult radioknapp aktivert av synlig label
+*/
+
 input[type="checkbox"] + label {
-    opacity: 0;
+  opacity: 0;
 }
 
 input[type="checkbox"]:checked + label {
-    opacity: 1;
+  opacity: 1;
 }
 
 input[type="checkbox"]:checked + label:after {
-    content: " ✗";
-    color: red;
-    font-size: 1.2em;
+  content: " ✗";
+  color: red;
+  font-size: 1.2em;
 }
 
-input[type="checkbox"]:checked + label.riktig:after {
-    content: " ✔";
-    color: green;
-    font-size: 1.2em;
+input.riktig[type="checkbox"]:checked + label:after {
+  content: " ✔";
+  color: green;
+  font-size: 1.2em;
+}
+
+/* legg alle labler for qnum oppe til venstre (spres lengre nede i css) */
+label.qnum {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+div.quiz {
+  counter-reset: rnum 0;
+}
+
+label.qnum {
+  color: blue;
+  pointer-events: none;
+  padding: 4px;
+}
+
+label.qnum.count::after {
+  content: counter(rnum);
+  counter-increment: rnum 1;
 }
 
 
-input[type="radio"] {
-    position: absolute;
-    top: 0;
-    left: 0;
+div.question.count::before {
+  content: "Question " counter(rnum);
+  font-size: 1.2em;
+  color: blue;
 }
 
 input[type="radio"] + div {
-    display: none;
+  display: none;
 }
 
 input[type="radio"]:checked + div {
-    display: block;
-    margin-top: 50px;
+  display: block;
+  margin-top: 50px;
 }
 
-#r2 {
-  left: 50px;
+/* kan ikke angre på avkryssning */
+input[type="checkbox"]:checked {
+  pointer-events: none;
 }
-#r3 {
-    left: 100px;
+
+/* ingen radioknapper virker (men se neste regel) 
+   radioknappen er skjult - men virker pga < label for="id" >
+*/
+input[type="radio"] {
+  pointer-events: none;  /* reagrere ikke på klikk */
+  opacity: 0;
+}
+
+/* alle radio til høyre for checked virker */
+/* den første (sprsml 1) er checked i html */
+input[type="radio"]:checked ~ input[type="radio"] {
+  pointer-events: all;
+}
+
+/* label for radio virker til høyre for radio:checked */
+input[type="radio"]:checked ~ label.qnum {
+  color: green;
+  pointer-events: all;
+}
+
+div.quiz label.qnum:nth-of-type(2) {
+  left: 100px;
+}
+div.quiz label:nth-of-type(3) {
+  left: 200px;
+}
+div.quiz label:nth-of-type(4) {
+  left: 300px;
 }
