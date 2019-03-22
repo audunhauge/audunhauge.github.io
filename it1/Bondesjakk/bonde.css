@@ -1,0 +1,33 @@
+:root {
+    --bredde: 10px;
+    --antall: 50;
+}
+
+#brett {
+    display: grid;
+    grid-template-columns: repeat(var(--antall),1fr);
+    width: calc((var(--bredde) + 2px) * var(--antall));
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.rute {
+    width: var(--bredde);
+    height: var(--bredde);
+    border: solid gray 1px;
+}
+
+div.rute.kryss:after {
+    content: "x";
+    position: relative;
+    top: -5px;
+    left: 1px;
+}
+
+
+div.rute.runding:after {
+    content: "o";
+    position: relative;
+    top: -5px;
+    left: 1px;
+}

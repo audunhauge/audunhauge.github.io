@@ -1,132 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Quiz</title>
-    <link rel="stylesheet" href="quiz.css">
-</head>
+    <link rel="stylesheet" href="quiz.css" />
+    <script src="quiz.js"></script>
+  </head>
 
-<body>
-    <div id="quiz">
-        <input type="radio" name="r" id="r1" checked>
-        <div class="question">
-            <h4>Hvilke land er med i EU</h4>
-            <ul>
-                <li>
-                    <label for="">Holland</label>
-                    <input type="checkbox">
-                    <label class="riktig" for="">Riktig</label>
-                </li>
-                <li>
-                    <label for="">Spania</label>
-                    <input type="checkbox">
-                    <label class="riktig" for="">Riktig</label>
-                </li>
-                <li>
-                    <label for="">UK</label>
-                    <input type="checkbox">
-                    <label for="">Tja</label>
-                </li>
-                <li>
-                    <label for="">Norge</label>
-                    <input type="checkbox">
-                    <label for="">Galt</label>
-                </li>
-                <li>
-                    <label for="">Danmark</label>
-                    <input type="checkbox">
-                    <label class="riktig" for="">Riktig</label>
-                </li>
-                <li>
-                    <label for="">Russland</label>
-                    <input type="checkbox">
-                    <label class="riktig" for="">Galt</label>
-                </li>
-            </ul>
-        </div>
-        <input type="radio" name="r" id="r2">
-        <div class="question">
-            <h4>Hvilke land er med i Norden</h4>
-            <ul>
-                <li>
-                    <label for="">Holland
-                    <input type="checkbox">
-                    <label class="riktig" for="">Riktig</label>
-                </li>
-                <li>
-                    <label for="">Spania</label>
-                    <input type="checkbox">
-                    <label class="riktig" for="">Riktig</label>
-                </li>
-                <li>
-                    <label for="">UK</label>
-                    <input type="checkbox">
-                    <label for="">Tja</label>
-                </li>
-                <li>
-                    <label for="">Norge</label>
-                    <input type="checkbox">
-                    <label for="">Galt</label>
-                </li>
-                <li>
-                    <label for="">Danmark</label>
-                    <input type="checkbox">
-                    <label class="riktig" for="">Riktig</label>
-                </li>
-                <li>
-                    <label for="">Russland</label>
-                    <input type="checkbox">
-                    <label class="riktig" for="">Galt</label>
-                </li>
-            </ul>
-        </div>
-        <input type="radio" name="r" id="r3">
-        <div class="question">
-            <h4>Hvilke land er med i EFTA</h4>
-            <ul>
-                <li>
-                    <label for="">Holland</label>
-                    <input type="checkbox">
-                    <label class="riktig" for="">Riktig</label>
-                </li>
-                <li>
-                    <label for="">Spania</label>
-                    <input type="checkbox">
-                    <label class="riktig" for="">Riktig</label>
-                </li>
-                <li>
-                    <label for="">UK</label>
-                    <input type="checkbox">
-                    <label for="">Tja</label>
-                </li>
-                <li>
-                    <label for="">Norge</label>
-                    <input type="checkbox">
-                    <label for="">Galt</label>
-                </li>
-                <li>
-                    <label for="">Danmark</label>
-                    <input type="checkbox">
-                    <label class="riktig" for="">Riktig</label>
-                </li>
-                <li>
-                    <label for="">Russland</label>
-                    <input type="checkbox">
-                    <label class="riktig" for="">Galt</label>
-                </li>
-            </ul>
-        </div>
-        <input type="radio" name="r" id="r4">
-        <div class="question">
-            <h2>Klikk på knappen for å beregne poeng</h2>
-            <button>Beregn</button>
-        </div>
-    </div>
-    <div id="liste">
-    </div>
-</body>
+  <body>
+    <div class="quiz" id="quiz">
+      <!--
+        Grunnen til at jeg ikke bruker 
+        <label>Holland <input type="checkbox"> </label> (da kan en klikke på Holland)
+        er at da virker ikke "input + label" selectoren (som skal demonstreres).
+        Labelen som viser Galt/Riktig kunne vært ::after content, men ønsker
+        å vise begge metodene da content er begrensa i hva du kan vise (ingen html)
 
+        En forbedring vil være å sette id på checkboxene og bruke for="id" på labelen -
+        da blir det letter å krysse av valg (klikk på label)
+      -->
+
+      <label class="qnum count" for="r1">Qnr</label>
+      <input type="radio" name="r" id="r1" checked />
+      <div class="question count">
+        <h4>Hvilke land er med i EU</h4>
+        <ul>
+          <li>
+            <label for="">Holland</label>
+            <input class="riktig" type="checkbox" />
+            <label for="">Riktig</label>
+          </li>
+          <li>
+            <label for="">Spania</label>
+            <input class="riktig" type="checkbox" />
+            <label for="">Riktig</label>
+          </li>
+          <li>
+            <label for="">UK</label>
+            <input type="checkbox" />
+            <label for="">Tja</label>
+          </li>
+          <li>
+            <label for="">Norge</label>
+            <input type="checkbox" />
+            <label for="">Galt</label>
+          </li>
+          <li>
+            <label for="">Danmark</label>
+            <input class="riktig" type="checkbox" />
+            <label for="">Riktig</label>
+          </li>
+          <li>
+            <label for="">Russland</label>
+            <input type="checkbox" />
+            <label for="">Galt</label>
+          </li>
+        </ul>
+      </div>
+
+      <label class="qnum count" for="r2">Qnr</label>
+      <input type="radio" name="r" id="r2" />
+      <div class="question count">
+        <h4>Hvilke land er med i Norden</h4>
+        <ul>
+          <li>
+            <label for="">Holland</label>
+            <input type="checkbox" />
+            <label for="">Galt</label>
+          </li>
+          <li>
+            <label for="">Spania</label>
+            <input type="checkbox" />
+            <label for="">Galt</label>
+          </li>
+          <li>
+            <label for="">UK</label>
+            <input type="checkbox" />
+            <label for="">Galt</label>
+          </li>
+          <li>
+            <label for="">Norge</label>
+            <input class="riktig" type="checkbox" />
+            <label for="">Riktig</label>
+          </li>
+          <li>
+            <label for="">Danmark</label>
+            <input class="riktig" type="checkbox" />
+            <label for="">Riktig</label>
+          </li>
+          <li>
+            <label for="">Russland</label>
+            <input type="checkbox" />
+            <label for="">Galt</label>
+          </li>
+        </ul>
+      </div>
+
+      <label class="qnum count" for="r3">Qnr</label>
+      <input type="radio" name="r" id="r3" />
+      <div class="question count">
+        <h4>Hvilke land er med i EFTA</h4>
+        <ul>
+          <li>
+            <label for="">Holland</label>
+            <input type="checkbox" />
+            <label for="">Galt</label>
+          </li>
+          <li>
+            <label for="">Spania</label>
+            <input type="checkbox" />
+            <label for="">Galt</label>
+          </li>
+          <li>
+            <label for="">UK</label>
+            <input type="checkbox" />
+            <label for="">Galt</label>
+          </li>
+          <li>
+            <label for="">Norge</label>
+            <input class="riktig" type="checkbox" />
+            <label for="">Riktig</label>
+          </li>
+          <li>
+            <label for="">Danmark</label>
+            <input type="checkbox" />
+            <label for="">Galt</label>
+          </li>
+          <li>
+            <label for="">Russland</label>
+            <input type="checkbox" />
+            <label for="">Galt</label>
+          </li>
+        </ul>
+      </div>
+
+      <label class="qnum score" for="r4">Score</label>
+      <input type="radio" name="r" id="r4" />
+
+      <div class="question">
+        <h4>Beregn poengsum</h4>
+        Klikk på knappen for å beregne poengsum
+        <button>Beregn</button>
+      </div>
+    </div>
+    <div id="score"></div>
+    <script>
+      setup();
+    </script>
+  </body>
 </html>
