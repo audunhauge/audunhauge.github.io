@@ -23,7 +23,7 @@ let file =
 - things *
 - the house
 - the wife
-3. Spill av lydfilen «Oversetting.mp3» og velg riktig oversettelse:
+3. Spill av lydfilen Oversetting.mp3 og velg riktig oversettelse:
 - Hei, mitt navn er Tom
 - Jeg er Tom
 - Kjenner du Tom? *
@@ -31,47 +31,86 @@ let file =
 let linjer = file.split('\n');
 console.log(linjer, linjer.length);
 
-/*
-<input type="radio" name="r" id="r2">
-<div class="question">
-            <h4>Hvilke land er med i Norden</h4>
-            <ul>
-                <li>
-                    <label for="">Holland</label>
-                    <input type="checkbox">
-                    <label class="riktig" for="">Riktig</label>
-                </li>
-*/
 
 function setup() {
     let divQuiz = document.getElementById("quiz");
+    let divScore = document.getElementById("score");
     let qtekst = "";
     let i = 0;
+    let max = linjer.length;
     for (let linje of linjer) {
-        i++;
+        
+        let checked = 'checked';
         if ( "123456789".includes(linje.charAt(0))
-        ) {
+        ) { 
+            i++;
             if (qtekst !== "") {
                 qtekst += "</ul></div>";
+                checked = '';
+            } 
+            let [nr,tekst] = linje.split('. ');  // kan begrense til en split, men tid...
+
+            // sjekk om vi har en lydfil og legg til avspiller
+            if (tekst.includes("mp3")) {
+                tekst = tekst.replace(/(\w+\.mp3)/g, (m,f) => {
+                    return `<figure>
+                        <figcaption>${m}</figcaption>
+                        <audio
+                            controls
+                            src="${m}">
+                                Your browser does not support the
+                                <code>audio</code> element.
+                        </audio>
+                    </figure>`
+                });
             }
-            let [nr,tekst] = linje.split('. ');  // kan begrense til ett klipp, men tid...
-            qtekst += ` <input type="radio" name="r" id="r${i}">
+
+            qtekst += ` <input data-nr="${i}" style="z-index:${max-i};" type="radio" name="r" id="r${i}" ${checked}>
                         <div class="question">
                           <h4>${tekst}</h4>
                           <ul>`;
         } else {
             let [minus,tekst] = linje.split("- ");  
+            let rett = tekst.includes("*");
+            let melding = rett ? "Riktig" : "Galt";
+            let klass = rett ? "riktig" : "";
+            tekst = tekst.replace("*","");
             qtekst += `<li>
             <label for="">${tekst}</label>
-            <input type="checkbox">
-            <label class="riktig" for="">Riktig</label>
+            <input class="${klass}" type="checkbox">
+            <label class="${klass}" for="">${melding}</label>
             </li>`;
-            // det må være et alternativ
-            // legg till alternativet
         }
     }
-    qtekst += "</ul></div>";
+    qtekst += "</ul></div>"
+    // legger til knapp for vurdering
+    qtekst += ` <input type="radio" name="r" id="r${i+1}">
+    <div class="question"><button>Beregn score</button></div>`;
     // vis på skjermen
     divQuiz.innerHTML = qtekst;
+
+    let btnBeregn = document.querySelector("button");
+    btnBeregn.addEventListener("click", poeng);
+
+    function poeng() {
+        // merk : alle input.riktig er checkbox -
+        // men ikke alle input:checked (en er radio)
+        let fasit = Array.from(document.querySelectorAll("input.riktig"));
+        let riktigValgt = Array.from(document.querySelectorAll("input.riktig:checked"));
+        let alleValgt = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'));
+        let total = fasit.length;
+        let antallRette = riktigValgt.length;
+        let feilValgt = alleValgt.length - riktigValgt.length;
+        // en bedre løsning som unngår negativ score på en quiz,
+        // men følger oppskriften
+        // let poeng = Math.max(0, antallRette - feilValgt/3) ;
+        let poeng = antallRette - feilValgt;
+        divScore.innerHTML = `Du fikk ${poeng.toFixed(2)} av ${total}
+        <p>
+         Du har ${antallRette} riktige valg (av ${total}).
+         <br>Du har ${feilValgt} feil valg.
+         <br>Prosentscore er ${(100*poeng/total).toFixed(2)}`;
+      }
+
 
 }
