@@ -3,6 +3,10 @@
     --antall: 50;
 }
 
+body {
+    background-color: antiquewhite;
+}
+
 #brett {
     display: grid;
     grid-template-columns: repeat(var(--antall),1fr);
