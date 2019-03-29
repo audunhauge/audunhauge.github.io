@@ -1,0 +1,11 @@
+#skjema {
+    display:none;
+}
+
+#skjema.valgt {
+    display: block;
+}
+
+#main.skjult {
+    display: none;
+}
