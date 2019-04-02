@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mindre Enkelt skjema</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="kombo.js"></script>
+</head>
+
+<body>
+    <div id="main">
+        <div>
+            <form onchange=endringer() id="skjema">
+                <div>
+                    <label>
+                        Velg land
+                        <select name="land" id="land">
+                            <option value="100">..velg..</option>
+                            <option value="0">Norge</option>
+                            <option value="1">Danmark</option>
+                            <option value="2">Finland</option>
+                        </select>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Velg by fra dette landet
+                        <select name="by" id="by">
+
+                        </select>
+                    </label>
+                </div>
+
+            </form>
+            <div id="resultat">
+
+            </div>
+        </div>
+
+    </div>
+    <script>
+        setup();
+    </script>
+</body>
+
+</html>
