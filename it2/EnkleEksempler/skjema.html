@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Enkelt skjema</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="skjema.js"></script>
+</head>
+<body>
+    <div id="main">
+        <div>
+            <form onchange=endringer() id="skjema">
+                <div><label>
+                    Skriv inn antall mil
+                    <input id="mil" type="number"></label></div>
+                <div><label>
+                    Skriv inn forbruk pr mil
+                    <input id="forbruk" type="number"></label></div>
+                <div><button type="button" id="beregn">Beregn</button></div>
+            </form>
+            <div>Du trenger <span id="resultat">0</span> liter for denne turen</div>
+        </div>
+
+    </div>
+    <script>
+      setup();
+    </script>
+</body>
+</html>

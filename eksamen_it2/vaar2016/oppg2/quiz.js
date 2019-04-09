@@ -31,10 +31,28 @@ let file =
 let linjer = file.split('\n');
 console.log(linjer, linjer.length);
 
+/*
+STØTTE FOR FLERE SPRÅK:
+For å støtte flere språk vil jeg legge til en 
+< select > og bruke valgt verdi til å lese riktig
+fil med spørsmål - enkelt å implementere med denne løsningen
+  flytter 
+    let linjer = file.split('\n');
+    console.log(linjer, linjer.length);
+  inn i eventlistener for change på select,
+  lager en Map av språkfiler
+    let spraak = new Map()
+    spraak.set("engelsk", fil1);
+    spraak.set("tysk", fil2);
+  slår opp i spraak med verdi fra select
+  let file = spraak.get(valgt)
+  -- nå kommer linjer = file.split ...
+*/
 
 function setup() {
     let divQuiz = document.getElementById("quiz");
     let divScore = document.getElementById("score");
+    let btnBeregn = document.getElementById("beregn");
     let qtekst = "";
     let i = 0;
     let max = linjer.length;
@@ -42,43 +60,30 @@ function setup() {
         
         let checked = 'checked';
         if ( "123456789".includes(linje.charAt(0))
-        ) { 
-            i++;
+        ) {
+            let checked = "checked";
             if (qtekst !== "") {
                 qtekst += "</ul></div>";
-                checked = '';
-            } 
-            let [nr,tekst] = linje.split('. ');  // kan begrense til en split, men tid...
-
-            // sjekk om vi har en lydfil og legg til avspiller
-            if (tekst.includes("mp3")) {
-                tekst = tekst.replace(/(\w+\.mp3)/g, (m,f) => {
-                    return `<figure>
-                        <figcaption>${m}</figcaption>
-                        <audio
-                            controls
-                            src="${m}">
-                                Your browser does not support the
-                                <code>audio</code> element.
-                        </audio>
-                    </figure>`
-                });
+                checked = "";
             }
-
-            qtekst += ` <input data-nr="${i}" style="z-index:${max-i};" type="radio" name="r" id="r${i}" ${checked}>
+            let [nr,tekst] = linje.split('. ');  // kan begrense til ett klipp, men tid...
+            qtekst += ` 
                         <div class="question">
                           <h4>${tekst}</h4>
                           <ul>`;
         } else {
             let [minus,tekst] = linje.split("- ");  
-            let rett = tekst.includes("*");
-            let melding = rett ? "Riktig" : "Galt";
-            let klass = rett ? "riktig" : "";
-            tekst = tekst.replace("*","");
+            let klasse = "";
+            let melding = "Galt";
+            if (tekst.includes("*")) {
+                tekst = tekst.replace("*","");
+                klasse = "riktig";
+                melding = "Riktig";
+            }
             qtekst += `<li>
             <label for="">${tekst}</label>
-            <input class="${klass}" type="checkbox">
-            <label class="${klass}" for="">${melding}</label>
+            <input class="${klasse}" type="checkbox">
+            <label class="${klasse}" for="">${melding}</label>
             </li>`;
         }
     }
@@ -87,9 +92,9 @@ function setup() {
     qtekst += ` <input type="radio" name="r" id="r${i+1}">
     <div class="question"><button>Beregn score</button></div>`;
     // vis på skjermen
+    
     divQuiz.innerHTML = qtekst;
 
-    let btnBeregn = document.querySelector("button");
     btnBeregn.addEventListener("click", poeng);
 
     function poeng() {
@@ -101,16 +106,12 @@ function setup() {
         let total = fasit.length;
         let antallRette = riktigValgt.length;
         let feilValgt = alleValgt.length - riktigValgt.length;
-        // en bedre løsning som unngår negativ score på en quiz,
-        // men følger oppskriften
-        // let poeng = Math.max(0, antallRette - feilValgt/3) ;
-        let poeng = antallRette - feilValgt;
+        let poeng = antallRette - feilValgt ;
         divScore.innerHTML = `Du fikk ${poeng.toFixed(2)} av ${total}
         <p>
          Du har ${antallRette} riktige valg (av ${total}).
          <br>Du har ${feilValgt} feil valg.
          <br>Prosentscore er ${(100*poeng/total).toFixed(2)}`;
       }
-
 
 }

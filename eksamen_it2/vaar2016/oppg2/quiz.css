@@ -5,7 +5,7 @@ input[type="checkbox"]:checked + label {
     opacity: 1;
 }
 input[type="checkbox"]:checked  {
-    pointer-events: none;
+    /*pointer-events: none;*/
 }
 input[type="checkbox"]:checked + label:after {
     content: " ✗";
@@ -24,7 +24,7 @@ input[type="radio"] {
     display: none;
 }
 input[type="radio"] + div {
-    display: none;
+    /*display: none;*/
 }
 input[type="radio"]:checked + div {
     display: block;
