@@ -7,8 +7,8 @@
     background-position: center;
 }
 
-#stua,
-#bo {
+#Granstua,
+#Granbo {
     position: absolute;
     width: 20px;
     height: 20px;
@@ -17,7 +17,7 @@
     top: 280px;
 }
 
-#bo {
+#Granbo {
     left: 637px;
     top: 320px;
 }
@@ -38,7 +38,10 @@ div.info {
     left: -600px;
     top: 2em;
     background-position: center;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: white;
+    text-shadow: 3px 3px 5px black;
 }
 
 div.info.show {
@@ -51,17 +54,17 @@ div.info.show {
     background-color: white;
 }
 
-#boinfo.nr01 {
-    background-image: url("../media/bo01.jpg");
+#Granboinfo.nr01 {
+    background-image: url("../media/granbo01.jpg");
 }
-#boinfo.nr02 {
-    background-image: url("../media/bo02.jpg");
-}
-
-#stuainfo.nr01 {
-    background-image: url("../media/stua01.jpg");
+#Granboinfo.nr02 {
+    background-image: url("../media/granbo02.jpg");
 }
 
-#stuainfo.nr02 {
-    background-image: url("../media/stua02.jpg");
+#Granstuainfo.nr01 {
+    background-image: url("../media/granstua01.jpg");
+}
+
+#Granstuainfo.nr02 {
+    background-image: url("../media/granstua02.jpg");
 }
