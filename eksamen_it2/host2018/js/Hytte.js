@@ -19,12 +19,18 @@ class Hytte {
         this.reservert = [0, 0, 0];
     }
 
-    vis() {
+    /**
+     * Viser info om hytta, bilde kan vises
+     * @param {boolean} img sett til true for å vise bilde
+     */
+    vis(img=false) {
+        let bilde = img ? `<br><img src="../media/${this.bilde}">` : '';
         return `${this.navn}
         <br>Pris: ${this.pris} 
         <br>Plasser: ${this.plasser}
         <br>Standard: ${this.standard} 
         <br>Badstu: ${this.badstue} 
+        ${bilde}
          `;
     }
 

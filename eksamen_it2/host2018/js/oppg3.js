@@ -1,5 +1,30 @@
 // @ts-check
 
+
+/**
+ * Data om reserverte hytter kan lagres i localstorage slik at en kan besøke
+ * sida flere ganger og få simulert at bestilling er lagra.
+ * Dette kan fungere for en demo/prototyp som vises kunden for å få tilbakemelding på
+ * design og funksjonalitet.
+ * Senere ville vi da flytte lagring til database på server ...
+ */
+
+
+ /**
+   En del av valgene jeg tar her er styrt av formuleringene:
+    "lager enkle multimediale
+       brukergrensesnitt uten bruk av
+       programmert kode " (lavt nivå)
+    "bruker programmeringsspråk i
+        utvikling av multimedieapplikasjoner " (høyt nivå)
+   Jeg bruker da kode under til å lage html-elementer som like enkelt
+   kan lages i editor, spesielt i vs-code med støtte for emmet
+   eks  "select>option*3"  lager en select med tre options
+
+   Den selecten som må endre innhold etter valgt periode må selvsagt lages med kode
+   Den første kunne med fordel lages i html (ulempe: dersom flere perioder legges til)
+  */
+
 function setup() {
     let divMain = document.getElementById("main");
     let divInfo = document.getElementById("info");
@@ -86,7 +111,7 @@ function setup() {
             if (hyttenavn !== "") {
                 let hytte = hytter.get(hyttenavn);
                 divInfo.innerHTML = '<h4>Ledig Hytte</h4>'
-                + hytte.vis()
+                + hytte.vis(true)  // true slik at vi får bilde
                 + `<p><button data-navn="${hyttenavn}" id="bestill">Bestill</button>`;
 
                 document.getElementById("bestill").addEventListener("click", bestill);
@@ -102,6 +127,10 @@ function setup() {
                 hytte.reserver(periodeID);  
                 // periode er tilgjengelig da den er definert
                 // i den yttre funksjonen visLedig
+                // Det er litt urimelig at en bruker skal
+                // reservere flere hytter i samme app-vindu
+                // men for å vise at hyttene er reservert
+                // velger jeg denne løsningen
                 divInfo.innerHTML = "";
                 divMelding.innerHTML = `Du har nå reservert ${hyttenavn} for ${periode}.`
                 selHytte.innerHTML = "";
