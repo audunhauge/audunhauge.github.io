@@ -3,7 +3,8 @@
 function setup() {
     let divMain = document.getElementById("main");
     let divInfo = document.getElementById("info");
-    let divmelding = document.getElementById("melding");
+    let divMelding = document.getElementById("melding");
+    let divFeil = document.getElementById("feil");
     let selPeriode = document.createElement("select");
     let selHytte = document.createElement("select");
     {   // lager innhold i select
@@ -18,7 +19,12 @@ function setup() {
         }
         divMain.appendChild(selPeriode);
     }
+    
     selPeriode.addEventListener("change", visLedig);
+
+    
+    selHytte.classList.add("hidden");
+    divMain.appendChild(selHytte);
 
     function alleOpptatt() {
         let noeLedig = false;
@@ -27,13 +33,17 @@ function setup() {
             // sann dersom denne hytta har en ledig periode
         })
         if (! noeLedig) {
-            divInfo.innerHTML = "Alle hyttene er bestilt!";
+            divFeil.innerHTML = "Alle hyttene er bestilt!";
         }
         return (! noeLedig);
     }
 
     function visLedig(e) {
         // sjekker om alle hytter er opptatt
+        if (e) {
+            // on change event
+            divInfo.innerHTML = divMelding.innerHTML = divFeil.innerHTML = "";
+        }
         if (alleOpptatt() ) return;   
         let periode = selPeriode.value;
         if (periode !== "") {
@@ -57,11 +67,16 @@ function setup() {
                 });
 
             }
-            if (antall > 0) {
-              divMain.appendChild(selHytte);
+            if (antall > 1) {
+              selHytte.classList.remove("hidden");
+            } else if (antall === 1) {
+                selHytte.classList.add("hidden");
+                selHytte.selectedIndex = 1;
+                visHytte();
             } else {
               // ingen hytter ledig for valgt periode
-              divMain.removeChild(selHytte);
+              selHytte.classList.add("hidden");
+              divFeil.innerHTML = "(Ingen flere hytter ledige for valgt periode)";
             }
             selHytte.addEventListener("change", visHytte);
         }
@@ -70,7 +85,8 @@ function setup() {
             let hyttenavn = selHytte.value;
             if (hyttenavn !== "") {
                 let hytte = hytter.get(hyttenavn);
-                divInfo.innerHTML = hytte.vis()
+                divInfo.innerHTML = '<h4>Ledig Hytte</h4>'
+                + hytte.vis()
                 + `<p><button data-navn="${hyttenavn}" id="bestill">Bestill</button>`;
 
                 document.getElementById("bestill").addEventListener("click", bestill);
@@ -86,7 +102,8 @@ function setup() {
                 hytte.reserver(periodeID);  
                 // periode er tilgjengelig da den er definert
                 // i den yttre funksjonen visLedig
-                divInfo.innerHTML = `Du har nå reservert ${hyttenavn} for ${periode}.`
+                divInfo.innerHTML = "";
+                divMelding.innerHTML = `Du har nå reservert ${hyttenavn} for ${periode}.`
                 selHytte.innerHTML = "";
                 visLedig(null);
             }
