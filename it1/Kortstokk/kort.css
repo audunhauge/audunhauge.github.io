@@ -1,0 +1,79 @@
+.kort {
+    position: relative;
+    width: 57mm;
+    height: 89mm;
+    background-color: rgba(250, 246, 241, 0.384);
+    border: solid gray 2px;
+    border-radius: 8mm;
+}
+
+.kort.ess span {
+    position: absolute;
+    top: 8mm;
+    left: 8mm;
+    font-size: 3em;
+    color: red;
+}
+
+.kort.ess span:nth-of-type(2) {
+    transform: rotate(180deg);
+    bottom: 8mm;
+    right: 8mm;
+}
+
+.kort.ess div {
+    position: absolute;
+    width: 18mm;
+    height: 18mm;
+    transform: rotate(45deg);
+    background-color: red;
+    top: calc(89mm / 2 - 11mm);
+    left: calc(59mm / 2 - 11mm);
+}
+
+
+.kort.fem span {
+    position: absolute;
+    top: 8mm;
+    left: 8mm;
+    font-size: 3em;
+    color: red;
+}
+
+.kort.fem span:nth-of-type(2) {
+    transform: rotate(180deg);
+    bottom: 8mm;
+    right: 8mm;
+}
+
+.kort.fem div {
+    position: absolute;
+    width: 8mm;
+    height: 8mm;
+    transform: rotate(45deg);
+    background-color: red;
+}
+
+.kort.fem div:nth-of-type(3) {
+    top: calc(89mm / 2 - 5mm);
+    left: calc(59mm / 2 - 5mm);
+}
+
+.kort.fem div:nth-of-type(1) {
+    top: 22mm;
+    left: 16mm;
+}
+
+.kort.fem div:nth-of-type(2) {
+    top: 22mm;
+    right: 16mm;
+}
+
+.kort.fem div:nth-of-type(4) {
+    bottom: 22mm;
+    left: 16mm;
+}
+.kort.fem div:nth-of-type(5) {
+    bottom: 22mm;
+    right: 16mm;
+}
