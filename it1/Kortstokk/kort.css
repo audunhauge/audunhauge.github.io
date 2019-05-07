@@ -1,3 +1,9 @@
+#brett {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+
 .kort {
     position: relative;
     width: 57mm;
@@ -7,7 +13,7 @@
     border-radius: 8mm;
 }
 
-.kort.ess span {
+.kort span {
     position: absolute;
     top: 8mm;
     left: 8mm;
@@ -15,7 +21,7 @@
     color: red;
 }
 
-.kort.ess span:nth-of-type(2) {
+.kort span:nth-of-type(2) {
     transform: rotate(180deg);
     bottom: 8mm;
     right: 8mm;
@@ -31,14 +37,6 @@
     left: calc(59mm / 2 - 11mm);
 }
 
-
-.kort.fem span {
-    position: absolute;
-    top: 8mm;
-    left: 8mm;
-    font-size: 3em;
-    color: red;
-}
 
 .kort.fem span:nth-of-type(2) {
     transform: rotate(180deg);
@@ -73,7 +71,68 @@
     bottom: 22mm;
     left: 16mm;
 }
+
 .kort.fem div:nth-of-type(5) {
     bottom: 22mm;
+    right: 16mm;
+}
+
+
+.kort.ti div {
+    position: absolute;
+    width: 6mm;
+    height: 6mm;
+    transform: rotate(45deg);
+    background-color: red;
+}
+
+.kort.ti div:nth-of-type(1) {
+    top: 22mm;
+    left: 16mm;
+}
+
+.kort.ti div:nth-of-type(2) {
+    top: 22mm;
+    right: 16mm;
+}
+
+.kort.ti div:nth-of-type(3) {
+    top: 28mm;
+    left: calc(59mm / 2 - 4mm);
+}
+
+.kort.ti div:nth-of-type(4) {
+    top: 34mm;
+    left: 16mm;
+}
+
+.kort.ti div:nth-of-type(5) {
+    top: 34mm;
+    right: 16mm;
+}
+
+
+.kort.ti div:nth-of-type(6) {
+    bottom: 22mm;
+    left: 16mm;
+}
+
+.kort.ti div:nth-of-type(7) {
+    bottom: 22mm;
+    right: 16mm;
+}
+
+.kort.ti div:nth-of-type(8) {
+    bottom: 28mm;
+    left: calc(59mm / 2 - 4mm);
+}
+
+.kort.ti div:nth-of-type(9) {
+    bottom: 34mm;
+    left: 16mm;
+}
+
+.kort.ti div:nth-of-type(10) {
+    bottom: 34mm;
     right: 16mm;
 }
