@@ -3,14 +3,30 @@
     grid-template-columns: repeat(5, 1fr);
 }
 
+.kort.bakside {
+  background-color: green;
+}
+
+.kort.bakside:hover {
+    background-color: rgba(250, 246, 241, 0.384);
+  }
+
+
 
 .kort {
     position: relative;
     width: 57mm;
     height: 89mm;
-    background-color: rgba(250, 246, 241, 0.384);
+    /*background-color: rgba(250, 246, 241, 0.384);*/
     border: solid gray 2px;
     border-radius: 8mm;
+}
+
+.kort.bakside span {
+    display: none;
+}
+.kort.bakside:hover span {
+    display: inline;
 }
 
 .kort span {
@@ -25,6 +41,13 @@
     transform: rotate(180deg);
     bottom: 8mm;
     right: 8mm;
+}
+
+.kort.bakside div {
+    display: none;
+}
+.kort.bakside:hover div {
+    display: block;
 }
 
 .kort.ess div {
