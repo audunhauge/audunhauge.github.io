@@ -3,14 +3,17 @@
     grid-template-columns: repeat(5, 1fr);
 }
 
-.kort.bakside {
-  background-color: green;
+.kort.bakside:after {
+  content: "";
+  display:block;
+  position: absolute;
+  background: linear-gradient(to right, #1e5799 0%,#1e5799 4%,#949699 5%,#949699 9%,#1e5799 10%,#1e5799 16%,#959799 17%,#e3e3e8 23%,#1e5799 24%,#1e5799 30%,#eaebed 31%,#f2f4f7 37%,#1e5799 38%,#1e5799 44%,#2989d8 45%,#1e5799 53%,#207cca 54%,#1e5799 62%,#1e5799 63%,#1e5799 69%,#1e5799 70%,#1e5799 76%,#1e5799 77%,#1e5799 84%,#1e5799 85%,#1e5799 91%,#1e5799 92%,#7db9e8 100%);
+  width: 50mm;
+  height: 80mm;
+  top: 3mm;
+  left:4mm;
+  border-radius: 8mm;
 }
-
-.kort.bakside:hover {
-    background-color: rgba(250, 246, 241, 0.384);
-  }
-
 
 
 .kort {
