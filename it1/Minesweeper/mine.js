@@ -43,6 +43,12 @@ function setup() {
         let idx = t.dataset.idx;
         if (t.innerHTML === "O") {
             document.getElementById("smily").innerHTML = ":(";
+            return;
+        }
+        let usett = Array.from(document.querySelectorAll("div.rute:not(.synlig)"));
+        if (usett.length === 11) {
+            document.getElementById("tid").innerHTML = "OK";
+            return;
         }
         if (t.classList.contains("rute")) {
             reveal(idx);
@@ -55,7 +61,6 @@ function setup() {
                 if (t.innerHTML !== "") {
                     return;
                 }
-                
                 if (idx < 16 || idx > 238 || idx % 16 === 0 || (idx + 1) % 16 === 0) {
                     // sadhkh
                 } else {
