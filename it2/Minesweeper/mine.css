@@ -1,0 +1,57 @@
+:root {
+    --bredde:20px;
+}
+#poeng {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: calc(16 * (var(--bredde) + 2px));
+}
+
+#poeng > div {
+    background-color: black;
+    color: red;
+    font-size: 2em;
+}
+
+#brett {
+    width: calc(16 * (var(--bredde) + 2px));
+    height: calc(16 * (var(--bredde) + 2px));
+    border: solid gray 1px;
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    /* overstyres med kode for forskjellig bredde */
+}
+
+div.rute {
+    position: relative;
+    width: var(--bredde);
+    height: var(--bredde);
+    margin: 1px;
+    background-color: gray;
+    color: red;
+}
+
+div.rute.visible {
+    background-color: lightgray;
+}
+
+div.visible.rute:after {
+    content: attr(data-n);
+    position: absolute;
+    left:0;
+    top:0;
+}
+
+div.visible.rute[data-n="0"]:after {
+    content: " ";
+    position: absolute;
+    left:0;
+    top:0;
+}
+
+div.visible.rute[data-n="8"]:after {
+    content: "O";
+    position: absolute;
+    left:0;
+    top:0;
+}
