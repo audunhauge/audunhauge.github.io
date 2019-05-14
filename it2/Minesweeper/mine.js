@@ -112,6 +112,14 @@ function setup() {
     let divSmily = $("smily");
     let ruter = visBrett(divBrett, brikker);
     divBrett.addEventListener("click", sjekkBombe);
+    divAntall.innerHTML = String(ANTALL);
+
+    let t = 0;
+    let timer = setInterval(tid,1000);
+    function tid(e) {
+        t += 1;
+        divTid.innerHTML = String(t);
+    }
 
     function sjekkBombe(event) {
         let t = event.target;
@@ -121,6 +129,7 @@ function setup() {
                 if (t.dataset.n === "8") {
                     // klikka på en bombe
                     divSmily.innerHTML = "DIE";
+                    ruter.forEach(e => e.classList.add("visible"));
                 }
                 reveal(idx);
                 function reveal(idx) {
@@ -142,9 +151,10 @@ function setup() {
                     }
                 }
             }
-            let skjulte = document.querySelectorAll(".rute:not(synlig)");
+            let skjulte = document.querySelectorAll(".rute:not(.visible)");
             if (skjulte.length === ANTALL) {
                 divSmily.innerHTML = "OK";
+                clearInterval(timer);
             }
         }
     }
