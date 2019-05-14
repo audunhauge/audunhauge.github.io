@@ -1,16 +1,27 @@
 :root {
     --bredde:20px;
 }
+
+#spill {
+    width:  calc(16 * (var(--bredde) + 2px));
+    margin-left:auto;
+    margin-right:auto;
+    height: calc(16 * (var(--bredde) + 2px) + 2em);
+    margin-top: calc(50vh - (16 * 22px + 5em) / 2);
+}
+
 #poeng {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     width: calc(16 * (var(--bredde) + 2px));
+    background-color: blue;
 }
 
 #poeng > div {
     background-color: black;
     color: red;
     font-size: 2em;
+    width: 2em;
 }
 
 #brett {
@@ -54,4 +65,5 @@ div.visible.rute[data-n="8"]:after {
     position: absolute;
     left:0;
     top:0;
+    background-color: black;
 }

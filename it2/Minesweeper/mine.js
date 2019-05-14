@@ -2,6 +2,7 @@
 
 const W = 16;
 const H = 16;
+const ANTALL = 10 + Math.trunc( Math.random()*50);
 
 
 /**
@@ -13,7 +14,7 @@ const H = 16;
 function lagBrett(width, height) {
     const TOTAL = width * height;
     let b = Array(TOTAL).fill(0);
-    let antall = 35;
+    let antall = ANTALL;
     do {
         let x = Math.trunc(Math.random() * TOTAL);
         if (b[x] === 0) {
@@ -117,6 +118,10 @@ function setup() {
         if (t.classList.contains("rute")) {
             let idx = Number(t.dataset.idx);
             if (t.classList.contains("rute")) {
+                if (t.dataset.n === "8") {
+                    // klikka på en bombe
+                    divSmily.innerHTML = "DIE";
+                }
                 reveal(idx);
                 function reveal(idx) {
                     let t = ruter[idx];
@@ -130,12 +135,16 @@ function setup() {
                     if (idx < W || idx > 238 || idx % W === 0 || (idx + 1) % W === 0) {
                         // sadhkh
                     } else {
-                        setTimeout(() => reveal(idx - 1), 100);
-                        setTimeout(() => reveal(idx + 1), 100);
-                        setTimeout(() => reveal(idx - 16), 100);
-                        setTimeout(() => reveal(idx + 16), 300);
+                        setTimeout(() => reveal(idx - 1), 200);
+                        setTimeout(() => reveal(idx + 1), 200);
+                        setTimeout(() => reveal(idx - 16), 200);
+                        setTimeout(() => reveal(idx + 16), 200);
                     }
                 }
+            }
+            let skjulte = document.querySelectorAll(".rute:not(synlig)");
+            if (skjulte.length === ANTALL) {
+                divSmily.innerHTML = "OK";
             }
         }
     }
