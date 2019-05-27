@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Arbeidstittel</title>
+    <script src="../js/Test.js"></script>
+    <script src="../js/testing.js"></script>
+    <link rel="stylesheet" href="../css/dok.css">
+</head>
+
+<body>
+    <div id="kravspek">
+        <h4>Kravspek</h4>
+        <ul>
+            <li>Overordnet beskrivelse:</li>
+            <li>
+                <h5>Hensikt</h5>
+                ...
+            </li>
+            <li>Funksjonelle krav
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+
+            </li>
+            <li>Rammer
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </li>
+            <li>Systemkrav
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div id="pseudo">
+        <h4>Pseudokode</h4>
+        Dette inngår som en del av dokumentasjonen
+        <pre>
+            funksjon test(tall)
+              legg til 4
+              for n i en liste
+                dersom tall er mindre enn n
+                  da returner n
+              returner 0 // mangler verdi
+            
+        </pre>
+    </div>
+    <div id="flytdiagram">
+        <h4>Flytdiagram for funksjonen watt(fart)</h4>
+        Bildet er generert av yuml koden under (se html-kommentar)
+        <!--   yUML kode for diagrammet
+        // {type:activity}
+            (start)->(les watt)
+            (les watt)->(løkke)
+            (løkke)->(hent grense fra array)->(watt > grense?)-><a>
+            <a>[nei]->(neste)-><b>
+            <b>[flere]->(løkke)
+            <b>[slutt]->(grense = 0)-(return grense)
+            <a>[ja]->(return grense)->(end)
+        -->
+        <div>
+            <img src="../media/snitt.png">
+        </div>
+    </div>
+    <div id="wireframe">
+        <h4>Wireframe</h4>
+        <div id="wire">
+            <pre>
+                Velg by        |______\/|  // nedtrekksliste
+                Velg hotell    |______\/|  
+                |beregn pris|
+            </pre>
+        </div>
+
+    </div>
+    <h2>Tester</h2>
+    Jeg bruker et testbibliotek som lar meg skrive tester slik som
+    <pre>
+        <code>
+            expect(test,1.2).to.be(0);
+            expect(test,3).to.be(2);
+        </code>
+    </pre>
+    <ul>
+    <li>Jeg tester om funksjonen gir tilbake tallverdi for en tillfeldig array.
+    <li>Jeg tester at min < = gjennomsnitt > = max
+    <li>Snitt av bestemte verdier som forventet</li>
+    <li>Tester for avrundingsfeil</li>
+    <li></li>
+    <li>Tester funksjon lagNedtrekk</li>
+    </ul>
+    <div id="tester"></div>
+    <script>
+        setup();
+    </script>
+</body>
+
+</html>
