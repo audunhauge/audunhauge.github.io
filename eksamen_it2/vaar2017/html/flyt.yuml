@@ -1,0 +1,8 @@
+// {type:activity}
+(start)->(les watt)
+(les watt)->(løkke)
+(løkke)->(hent grense fra array)->(watt > grense?)-><a>
+<a>[nei]->(neste)-><b>
+<b>[flere]->(løkke)
+<b>[slutt]->(grense = 0)-(return grense)
+<a>[ja]->(return grense)->(end)

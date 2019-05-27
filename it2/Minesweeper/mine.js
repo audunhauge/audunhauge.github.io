@@ -2,7 +2,7 @@
 
 const W = 16;
 const H = 16;
-const ANTALL = 10 + Math.trunc( Math.random()*50);
+const ANTALL = 10 + Math.trunc(Math.random() * 50);
 
 
 /**
@@ -105,6 +105,7 @@ function visBrett(div, arr) {
 }
 
 function setup() {
+    let timer;  // brukes av klokken
     const brikker = lagBrett(W, H);
     let divTid = $("tid");
     let divAntall = $("antall");
@@ -112,14 +113,31 @@ function setup() {
     let divSmily = $("smily");
     let ruter = visBrett(divBrett, brikker);
     divBrett.addEventListener("click", sjekkBombe);
+    divBrett.addEventListener("contextmenu", merkBombe);
+
     divAntall.innerHTML = String(ANTALL);
 
-    let t = 0;
-    let timer = setInterval(tid,1000);
-    function tid(e) {
-        t += 1;
-        divTid.innerHTML = String(t);
+    // start klokken
+    {
+        let t = 0;
+        timer = setInterval(tid, 1000);
+        function tid(e) {
+            t += 1;
+            divTid.innerHTML = String(t);
+        }
     }
+
+    function merkBombe(event) {
+        let t = event.target;
+        if (t.classList.contains("rute")) {
+            if (! t.classList.contains("visible")) {
+                t.classList.toggle("flagged");
+            }
+        }
+        event.preventDefault();
+    }
+
+
 
     function sjekkBombe(event) {
         let t = event.target;
@@ -155,6 +173,9 @@ function setup() {
             if (skjulte.length === ANTALL) {
                 divSmily.innerHTML = "OK";
                 clearInterval(timer);
+                // stopper klokken
+                ruter.forEach(e => e.classList.add("visible","green"));
+                // avslører alle ruter
             }
         }
     }
