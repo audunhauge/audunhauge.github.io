@@ -22,6 +22,8 @@
     color: red;
     font-size: 2em;
     width: 2em;
+    text-align: right;
+    align-content: flex-end;
 }
 
 #brett {
