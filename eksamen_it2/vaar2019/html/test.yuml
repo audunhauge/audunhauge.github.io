@@ -1,0 +1,4 @@
+// {type:activity}
+(start)->(sum=0)->(løkke)->(sum+=verdi)-><a>
+<a>[fortsett]->(neste)->(løkke)
+<a>->(return sum/lengde)->(end)
