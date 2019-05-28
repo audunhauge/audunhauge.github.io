@@ -50,15 +50,24 @@
               returner 0 // fart over alle grenser
             
         </pre>
-        Under var et forsøk på flytdiagram (se kode)
-        <!--
-            // prøvde å vise flytdiagram, men det skar seg
-        <h4>Flyt-diagram</h4>
-        <div id="diagram">
-            <div id="hoved"></div>
-            <div id="watt"></div>
-        </div>
+    </div>
+    <div id="flytdiagram">
+        <h4>Flytdiagram for funksjonen watt(fart)</h4>
+        <!--   yUML kode for diagrammet
+        // {type:activity}
+            (start)->(les watt)
+            (les watt)->(løkke)
+            (løkke)->(hent grense fra array)->(watt > grense?)-><a>
+            <a>[nei]->(neste)-><b>
+            <b>[flere]->(løkke)
+            <b>[slutt]->(grense = 0)-(return grense)
+            <a>[ja]->(return grense)->(end)
         -->
+        <div>
+            <img src="../media/grense.png">
+        </div>
+    </div>
+    <div id="wireframe">
         <h4>Wireframe</h4>
         <div id="wire">
             <pre>

@@ -1,69 +1,35 @@
 // @ts-check
 
-const Jul = 0, Vinterferie = 1, Påske = 2;
-
-class Hytte {
-    constructor() {
-        this.reservert = [0, 0, 0];
-    }
-
-    /**
-     * Reserverer hytta for gitt periode
-     * @param {number} periode 0,1,2 
-     */
-    reserver(periode) {
-        this.reservert[periode] = 1;
-    }
-
-    /**
-     * Sann dersom minst en periode er ledig
-     */
-    get ledig() {
-        return this.reservert.some(e => e === 0);
-    }
-
-    /**
-     * Sann dersom hytta er ledig i denne perioden
-     * @param {number} periode 0,1,2
-     */
-    erledig(periode) {
-        return this.reservert[periode] === 0;
-    }
-}
 
 /**
- * Denne leses fra fil eller database
- * Simulerer bruk av eksterne data med denne tekst-strengen.
+ * Data om reserverte hytter kan lagres i localstorage slik at en kan besøke
+ * sida flere ganger og få simulert at bestilling er lagra.
+ * Dette kan fungere for en demo/prototyp som vises kunden for å få tilbakemelding på
+ * design og funksjonalitet.
+ * Senere ville vi da flytte lagring til database på server ...
  */
-let hyttedata_str = `Granstua,1,1,0
-Granbo,0,0,1
-Grantoppen,1,0,1
-Granhaug,1,0,1`;
-
-const hytter = new Map();
-
-// gitt navnet på en periode -> tallverdi
-const Perioder = new Map([["Jul", Jul], ["Vinterferie", Vinterferie], ["Påske", Påske]]);
 
 
-// legger inn reserveringer fra tabell (henta fra database/fil)
-let hytteListe = hyttedata_str.split('\n');
-hytteListe.forEach(hyttedata => {
-    let [navn, p0, p1, p2] = hyttedata.split(",");
-    let hytte = new Hytte();
-    // innlegging av eksisterende data kan forenkles
-    // med egen funksjon som tar "1,0,1" som parameter
-    // men trenger reserver(periode) senere - så bruker denne
-    if (p0 === "1") hytte.reserver(0);
-    if (p1 === "1") hytte.reserver(1);
-    if (p2 === "1") hytte.reserver(2);
-    hytter.set(navn, hytte);
-})
+ /**
+   En del av valgene jeg tar her er styrt av formuleringene:
+    "lager enkle multimediale
+       brukergrensesnitt uten bruk av
+       programmert kode " (lavt nivå)
+    "bruker programmeringsspråk i
+        utvikling av multimedieapplikasjoner " (høyt nivå)
+   Jeg bruker da kode under til å lage html-elementer som like enkelt
+   kan lages i editor, spesielt i vs-code med støtte for emmet
+   eks  "select>option*3"  lager en select med tre options
 
-
+   Den selecten som må endre innhold etter valgt periode må selvsagt lages med kode
+   Den første kunne med fordel lages i html (ulempe: dersom flere perioder legges til)
+  */
 
 function setup() {
     let divMain = document.getElementById("main");
+    let divInfo = document.getElementById("info");
+    let divMelding = document.getElementById("melding");
+    let divFeil = document.getElementById("feil");
     let selPeriode = document.createElement("select");
     let selHytte = document.createElement("select");
     {   // lager innhold i select
@@ -78,18 +44,37 @@ function setup() {
         }
         divMain.appendChild(selPeriode);
     }
+    
     selPeriode.addEventListener("change", visLedig);
 
+    
+    selHytte.classList.add("hidden");
+    divMain.appendChild(selHytte);
 
-
-
-
+    function alleOpptatt() {
+        let noeLedig = false;
+        hytter.forEach((hytte,navn) => {
+            noeLedig = noeLedig || hytte.ledig;
+            // sann dersom denne hytta har en ledig periode
+        })
+        if (! noeLedig) {
+            divFeil.innerHTML = "Alle hyttene er bestilt!";
+        }
+        return (! noeLedig);
+    }
 
     function visLedig(e) {
+        // sjekker om alle hytter er opptatt
+        if (e) {
+            // on change event
+            divInfo.innerHTML = divMelding.innerHTML = divFeil.innerHTML = "";
+        }
+        if (alleOpptatt() ) return;   
         let periode = selPeriode.value;
         if (periode !== "") {
             // gyldig periode
             // fjerner innhold fra select
+            let antall = 0;   // antall ledige hytter denne perioden
             selHytte.innerHTML = "";
             {
                 let opt = document.createElement("option");
@@ -102,9 +87,54 @@ function setup() {
                         let opt = document.createElement("option");
                         opt.innerHTML = navn;
                         selHytte.appendChild(opt);
+                        antall ++;
                     }
                 });
-                divMain.appendChild(selHytte);
+
+            }
+            if (antall > 1) {
+              selHytte.classList.remove("hidden");
+            } else if (antall === 1) {
+                selHytte.classList.add("hidden");
+                selHytte.selectedIndex = 1;
+                visHytte();
+            } else {
+              // ingen hytter ledig for valgt periode
+              selHytte.classList.add("hidden");
+              divFeil.innerHTML = "(Ingen flere hytter ledige for valgt periode)";
+            }
+            selHytte.addEventListener("change", visHytte);
+        }
+
+        function visHytte(e) {
+            let hyttenavn = selHytte.value;
+            if (hyttenavn !== "") {
+                let hytte = hytter.get(hyttenavn);
+                divInfo.innerHTML = '<h4>Ledig Hytte</h4>'
+                + hytte.vis(true)  // true slik at vi får bilde
+                + `<p><button data-navn="${hyttenavn}" id="bestill">Bestill</button>`;
+
+                document.getElementById("bestill").addEventListener("click", bestill);
+
+            }
+        }
+
+        function bestill(e) {
+            let hyttenavn = e.target.dataset.navn;
+            if (hyttenavn && hytter.has(hyttenavn)) {
+                let hytte = hytter.get(hyttenavn);
+                let periodeID = Perioder.get(periode);
+                hytte.reserver(periodeID);  
+                // periode er tilgjengelig da den er definert
+                // i den yttre funksjonen visLedig
+                // Det er litt urimelig at en bruker skal
+                // reservere flere hytter i samme app-vindu
+                // men for å vise at hyttene er reservert
+                // velger jeg denne løsningen
+                divInfo.innerHTML = "";
+                divMelding.innerHTML = `Du har nå reservert ${hyttenavn} for ${periode}.`
+                selHytte.innerHTML = "";
+                visLedig(null);
             }
         }
     }

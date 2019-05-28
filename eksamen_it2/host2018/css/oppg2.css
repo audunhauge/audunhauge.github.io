@@ -7,8 +7,8 @@
     background-position: center;
 }
 
-#stua,
-#bo {
+#Granstua,
+#Granbo {
     position: absolute;
     width: 20px;
     height: 20px;
@@ -17,12 +17,12 @@
     top: 280px;
 }
 
-#bo {
+#Granbo {
     left: 637px;
     top: 320px;
 }
 
-div.info.show:after,
+div.info.show:before,
 div.tags:after {
   content: attr(data-navn);
   position: absolute;
@@ -38,30 +38,74 @@ div.info {
     left: -600px;
     top: 2em;
     background-position: center;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: white;
+    text-shadow: 3px 3px 5px black;
+    box-shadow: 4px 4px 4px black;
 }
 
 div.info.show {
     width: 500px;
     height: 500px;
-    border: solid blue 1px;
+    border: solid gray 1px;
     top: 2em;
     left: 2em;
     opacity: 1;
-    background-color: white;
+    background-color: rgba(200,200,200,0.2);
 }
 
-#boinfo.nr01 {
-    background-image: url("../media/bo01.jpg");
-}
-#boinfo.nr02 {
-    background-image: url("../media/bo02.jpg");
+div.info.show:after {
+    content: ">";
+    font-size: 3em;
+    position: absolute;
+    color: blue;
+    text-shadow: 3px 3px 5px white;
+    top: 200px;
+    right: 5px;
 }
 
-#stuainfo.nr01 {
-    background-image: url("../media/stua01.jpg");
+#Granboinfo.nr01 {
+    background-image: url("../media/granbo01.jpg");
+}
+#Granboinfo.nr02 {
+    background-image: url("../media/granbo02.jpg");
 }
 
-#stuainfo.nr02 {
-    background-image: url("../media/stua02.jpg");
+#Granstuainfo.nr01 {
+    background-image: url("../media/granstua01.jpg");
+}
+
+#Granstuainfo.nr02 {
+    background-image: url("../media/granstua02.jpg");
+}
+
+#fiml {
+    position: absolute;
+    top: 30px;
+    left: 850px;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(240, 248, 255, 0.13);
+    border: solid gray 1px;
+}
+
+#fiml > video {
+    opacity:0;
+}
+
+#fiml:hover {
+    left: 300px;
+}
+
+#fiml:hover > video{
+    opacity: 1;
+}
+
+#fiml:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content:"Se film";
+    color:white;
 }

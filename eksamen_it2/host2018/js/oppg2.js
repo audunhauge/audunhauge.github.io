@@ -5,54 +5,35 @@
 // siden dette ikke er på en server må vi lagre
 // antall bilder for hver hytte (default = 2)
 // dvs alle hytter må ha minst to galleribilder
-
-class Hytter {
-    constructor(navn, plasser, standard, badstue, prisK, antall = 2) {
-        this.navn = navn;
-        this.plasser = plasser;
-        this.standard = standard;
-        this.badstue = badstue;
-        this.pris = prisK * 1000;
-        this.bilde = navn.toLowerCase() + ".jpg";
-        this.antallBilder = antall;
-    }
-
-    vis() {
-        return `${this.navn}
-        <br>Pris: ${this.pris} 
-        <br>Plasser: ${this.plasser}
-        <br>Standard: ${this.standard} 
-        <br>Badstu: ${this.badstue} 
-         `;
-    }
-}
-
-const hytter = {};
-
-hytter.stua = new Hytter("Granstua", 4, "Høy", true, 12);
-hytter.bo = new Hytter("Granbo", 6, "Middels", false, 15);
-hytter.toppen = new Hytter("Grantoppen", 8, "Lav", false, 16);
-hytter.haug = new Hytter("Granhaug", 10, "Høy", true, 30);
+// FORDI: browser-js kan ikke lese en mappe og finne ut antall bilder 
+// på en server kan vi finne antall bilder pr hytte ved å lese mappen
+// (nodejs på server)
 
 
 function setup() {
+    // lager koblinger til html (dom)
     let divsInfo = Array.from(document.querySelectorAll(".info"));
     let divMeny = document.getElementById("meny");
 
-
-
+    // alle klikk på menybildet sjekkes
     divMeny.addEventListener("click", visInfo);
 
     function visInfo(e) {
         let t = e.target;
         divsInfo.forEach(div => div.classList.remove("show"));
+        // alle klikk skjuler info 
+        // klikk på andre ting enn granbo eller granstua ignoreres
+        // bare de to div-ene har class=tags
         if (t.classList.contains("tags")) {
-            let id = t.id; // bo eller stua
+            let id = t.id; // Granbo eller Granstua
             let divInf = document.getElementById(id + "info");
             divInf.classList.add("show");
+            
+            // klikk i info-div viser neste bilde
             divInf.addEventListener("click", next);
-            let hytte = hytter[id];
+            let hytte = hytter.get(id);
             divInf.innerHTML = hytte.vis();
+            divInf.classList.add("nr01");
 
             function next(e) {
                 // ved klikk på bakgrunn vises neste bilde

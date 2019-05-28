@@ -1,0 +1,41 @@
+:root {
+    --bredde: 20px;
+}
+
+#poeng {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-evenly;
+    width: calc(16 * (var(--bredde) + 2px));
+    background-color: gainsboro;
+}
+
+#poeng>div {
+    width: calc(3 * (var(--bredde) + 2px));
+    height: 64px;
+    color: red;
+    background-color: black;
+    font-size: 3em;
+}
+
+
+#brett {
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    width: calc(16 * (var(--bredde) + 2px));
+}
+
+.rute {
+    width: var(--bredde);
+    height: var(--bredde);
+    background-color: grey;
+    margin: 1px;
+    color: grey;
+    font-size:1.1em;
+    text-align: center;
+}
+
+.rute.synlig {
+    color:red;
+    background-color: lightgray;
+}

@@ -1,0 +1,164 @@
+#brett {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.kort.bakside:after {
+  content: "";
+  display:block;
+  position: absolute;
+  background: linear-gradient(to right, #1e5799 0%,#1e5799 4%,#949699 5%,#949699 9%,#1e5799 10%,#1e5799 16%,#959799 17%,#e3e3e8 23%,#1e5799 24%,#1e5799 30%,#eaebed 31%,#f2f4f7 37%,#1e5799 38%,#1e5799 44%,#2989d8 45%,#1e5799 53%,#207cca 54%,#1e5799 62%,#1e5799 63%,#1e5799 69%,#1e5799 70%,#1e5799 76%,#1e5799 77%,#1e5799 84%,#1e5799 85%,#1e5799 91%,#1e5799 92%,#7db9e8 100%);
+  width: 50mm;
+  height: 80mm;
+  top: 3mm;
+  left:4mm;
+  border-radius: 8mm;
+}
+
+
+.kort {
+    position: relative;
+    width: 57mm;
+    height: 89mm;
+    /*background-color: rgba(250, 246, 241, 0.384);*/
+    border: solid gray 2px;
+    border-radius: 8mm;
+}
+
+.kort.bakside span {
+    display: none;
+}
+.kort.bakside:hover span {
+    display: inline;
+}
+
+.kort span {
+    position: absolute;
+    top: 8mm;
+    left: 8mm;
+    font-size: 3em;
+    color: red;
+}
+
+.kort span:nth-of-type(2) {
+    transform: rotate(180deg);
+    bottom: 8mm;
+    right: 8mm;
+}
+
+.kort.bakside div {
+    display: none;
+}
+.kort.bakside:hover div {
+    display: block;
+}
+
+.kort.ess div {
+    position: absolute;
+    width: 18mm;
+    height: 18mm;
+    transform: rotate(45deg);
+    background-color: red;
+    top: calc(89mm / 2 - 11mm);
+    left: calc(59mm / 2 - 11mm);
+}
+
+
+.kort.fem span:nth-of-type(2) {
+    transform: rotate(180deg);
+    bottom: 8mm;
+    right: 8mm;
+}
+
+.kort.fem div {
+    position: absolute;
+    width: 8mm;
+    height: 8mm;
+    transform: rotate(45deg);
+    background-color: red;
+}
+
+.kort.fem div:nth-of-type(3) {
+    top: calc(89mm / 2 - 5mm);
+    left: calc(59mm / 2 - 5mm);
+}
+
+.kort.fem div:nth-of-type(1) {
+    top: 22mm;
+    left: 16mm;
+}
+
+.kort.fem div:nth-of-type(2) {
+    top: 22mm;
+    right: 16mm;
+}
+
+.kort.fem div:nth-of-type(4) {
+    bottom: 22mm;
+    left: 16mm;
+}
+
+.kort.fem div:nth-of-type(5) {
+    bottom: 22mm;
+    right: 16mm;
+}
+
+
+.kort.ti div {
+    position: absolute;
+    width: 6mm;
+    height: 6mm;
+    transform: rotate(45deg);
+    background-color: red;
+}
+
+.kort.ti div:nth-of-type(1) {
+    top: 22mm;
+    left: 16mm;
+}
+
+.kort.ti div:nth-of-type(2) {
+    top: 22mm;
+    right: 16mm;
+}
+
+.kort.ti div:nth-of-type(3) {
+    top: 28mm;
+    left: calc(59mm / 2 - 4mm);
+}
+
+.kort.ti div:nth-of-type(4) {
+    top: 34mm;
+    left: 16mm;
+}
+
+.kort.ti div:nth-of-type(5) {
+    top: 34mm;
+    right: 16mm;
+}
+
+
+.kort.ti div:nth-of-type(6) {
+    bottom: 22mm;
+    left: 16mm;
+}
+
+.kort.ti div:nth-of-type(7) {
+    bottom: 22mm;
+    right: 16mm;
+}
+
+.kort.ti div:nth-of-type(8) {
+    bottom: 28mm;
+    left: calc(59mm / 2 - 4mm);
+}
+
+.kort.ti div:nth-of-type(9) {
+    bottom: 34mm;
+    left: 16mm;
+}
+
+.kort.ti div:nth-of-type(10) {
+    bottom: 34mm;
+    right: 16mm;
+}
