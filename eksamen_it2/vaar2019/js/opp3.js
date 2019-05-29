@@ -50,7 +50,7 @@ class Hytte {
 let hytteListe = {};
 hytter.forEach(e => (hytteListe[e] = new Hytte()));
 
-// finner naboer
+// finner naboer - de som har sti mellom seg
 hytter.forEach(a => {
   hytter.forEach(b => {
     if (avstand(a, b)) {
@@ -61,7 +61,9 @@ hytter.forEach(a => {
 });
 
 function setup() {
-  let divMain = $("main");
+  let divMain = $("main");  // kobling til skjema
+
+  // lager nye elementer
   let info = new$("div");
   let velger = new$("select");
   let btnAngre = new$("button");
@@ -79,6 +81,8 @@ function setup() {
   divMain.appendChild(btnAngre);
   divMain.appendChild(chkOneWay);
   divMain.appendChild(lblOneWay);
+
+  // setter tekst og type for checkboxen
   lblOneWay.innerHTML = "Ingen sløyfer i turen"
   chkOneWay.type = "checkbox";
   // dersom denne markeres vil neste valg begrenses slik at vi ikke får sløyfer
@@ -93,7 +97,7 @@ function setup() {
     // dropper siste hytte
     if (sti.length) {
       sti.pop();
-      leggTilHytte(null);
+      leggTilHytte(null);  // for å beregne på nytt
     }
   }
 
@@ -115,10 +119,14 @@ function setup() {
     if (sti.length === 1) {
       info.innerHTML = `Du starter fra ${hytte}, velg neste trinn`;
     } else {
+      // finner avstand mellom valgte hytter
       let distanser = sti.slice(0, -1).map((e, i) => avstand(e, sti[i + 1]));
+      // summerer opp denne arrayen
       let total = distanser.reduce((s, v) => s + v, 0);
+      // lager en beskrivelse: hytte - avstand - hytte ...
+      let stiText = distanser.map((e,i) => `${sti[i]} - ${e} - `).join("") + sti[sti.length-1];
       info.innerHTML =
-        "Start på " + sti.join(" til ") + `. Det er tilsammen ${total}km.`;
+        "Start på " + stiText + `. Det er tilsammen ${total}km.`;
     }
     if (oneWay) {
         // fjern besøkte hytter fra nabolista
