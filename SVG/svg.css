@@ -1,3 +1,9 @@
 #main {
-    background-color: mediumturquoise;
+    
+}
+
+svg {
+    border: solid red 1px;
+    width: 500px;
+    height: 500px;
 }
