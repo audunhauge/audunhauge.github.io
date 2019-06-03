@@ -23,7 +23,7 @@ let file =
 - things *
 - the house
 - the wife
-3. Spill av lydfilen «Oversetting.mp3» og velg riktig oversettelse:
+3. Spill av lydfilen Oversetting.mp3 og velg riktig oversettelse:
 - Hei, mitt navn er Tom
 - Jeg er Tom
 - Kjenner du Tom? *
@@ -55,8 +55,10 @@ function setup() {
     let btnBeregn = document.getElementById("beregn");
     let qtekst = "";
     let i = 0;
+    let max = linjer.length;
     for (let linje of linjer) {
-        i++;
+        
+        let checked = 'checked';
         if ( "123456789".includes(linje.charAt(0))
         ) {
             let checked = "checked";
@@ -83,11 +85,12 @@ function setup() {
             <input class="${klasse}" type="checkbox">
             <label class="${klasse}" for="">${melding}</label>
             </li>`;
-            // det må være et alternativ
-            // legg till alternativet
         }
     }
-    qtekst += "</ul></div>";
+    qtekst += "</ul></div>"
+    // legger til knapp for vurdering
+    qtekst += ` <input type="radio" name="r" id="r${i+1}">
+    <div class="question"><button>Beregn score</button></div>`;
     // vis på skjermen
     
     divQuiz.innerHTML = qtekst;

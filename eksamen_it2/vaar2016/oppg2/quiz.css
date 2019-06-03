@@ -1,51 +1,52 @@
 input[type="checkbox"] + label {
     opacity: 0;
 }
-
 input[type="checkbox"]:checked + label {
     opacity: 1;
 }
-
 input[type="checkbox"]:checked  {
     /*pointer-events: none;*/
 }
-
-
 input[type="checkbox"]:checked + label:after {
     content: " ✗";
     color: red;
     font-size: 1.2em;
 }
-
 input[type="checkbox"]:checked + label.riktig:after {
     content: " ✔";
-    color: green;
+    color: green; 
     font-size: 1.2em;
 }
-
-
 input[type="radio"] {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 100px;
+    display: none;
 }
-
 input[type="radio"] + div {
     /*display: none;*/
 }
-
 input[type="radio"]:checked + div {
     display: block;
     margin-top: 50px;
 }
-
-#r2 {
-  left: 50px;
+input[type="radio"]:checked:after {
+    position: relative;
+    content: "Qnr" attr(data-nr);
+    left: -50px;
 }
-#r3 {
-    left: 100px;
+input[type="radio"]:checked ~ input:after {
+    position: relative;
+    content: "Neste";
+    left: -50px;
 }
-
-#r4 {
-    left: 150px;
+input[type="radio"]:checked {
+    display: inline;
+}
+input[type="radio"] ~ input {
+    display: none;
+}
+input[type="radio"]:checked ~ input {
+    display: inline;
+    left:200px;
 }
