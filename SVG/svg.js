@@ -10,27 +10,28 @@ function setup() {
   let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   divMain.appendChild(svg);
   svg.setAttribute("viewBox", "0 0 500 500");
-  svg.innerHTML = `
-    <polygon 
-    points="10,400 400,400 200,10 10,400"
-    fill="none" stroke="blue" />
-    <polygon 
-    points="30,420 420,420 220,30 30,420"
-    fill="none" stroke="blue" />
-    <text x="20" y="35" class="small">My</text>  
-    `;
-  let b = trig({ a: 3, b: 4, c: 5 });
+  let b = trig({ a: 3, b: 4, c: 5, ABC: "A,B,C" });
   if (b.valid) {
     svg.innerHTML += `<polygon points="${
       b.polygon
-    }" stroke="green" fill="none" />`;
+      }" stroke="green" fill="none" />`;
+    if (b.ABC) {
+      let s = b.ABC.map(e => `<text x="${e.x}" y="${e.y}">${e.txt}</text>`)
+      svg.innerHTML += s.join("");
+    }
   }
+  let pp = new Point(b.points.p2).add(new Point(1,0));
+  let qq = new Point(b.points.p1).add(new Point(1,0));
 
-  let c = tri({ a: 3, b: 4, B: 90, p: b.points.p2, q: b.points.p1 });
+  let c = tri({ a: 3, b: 4, B: 90, p: pp, q: qq, ABC: "D,E,F" });
   if (c.valid) {
     svg.innerHTML += `<polygon points="${
       c.polygon
-    }" stroke="red" fill="none" />`;
+      }" stroke="red" fill="none" />`;
+    if (c.ABC) {
+      let s = c.ABC.map(e => `<text x="${e.x}" y="${e.y}">${e.txt}</text>`)
+      svg.innerHTML += s.join("");
+    }
   }
 }
 
@@ -112,7 +113,7 @@ let tri = param => {
       let sinus = sides[idx] / SIN(angles[idx]);
       let sunis = SIN(angles[idx]) / sides[idx]; // reciproc
       angles = [A, B, C].map((e, i) => (e ? e : ASIN(sunis * sides[i]))); // found one more angle
-      let missing = 180 - angles.reduce((s,v) => s+v,0);
+      let missing = 180 - angles.reduce((s, v) => s + v, 0);
       angles = angles.map(e => (e ? e : missing));
       sides = [a, b, c].map((e, i) => (e ? e : sinus * SIN(angles[i]))); // now all sides
       param.a = sides[0];
@@ -132,13 +133,14 @@ function trig(param) {
     A = 0,
     B = 0,
     C = 0,
-    abc,
-    ABC,
-    vABC,
+    abc = "",
+    ABC = "",
+    vABC = "",
     p = { x: 1, y: 1 },
     q,
     size = { w: 500, h: 500, sx: 10, sy: 10 }
   } = param;
+  let ret = { valid: true };  // return value
   p = new Point(p.x, p.y);
   let p0 = new Point(p.x, p.y);
   let p1 = new Point(p.x, p.y);
@@ -154,8 +156,43 @@ function trig(param) {
   p2 = p2.add(v.mult(a - rx));
   let ry = Math.sqrt(b * b - rx * rx);
   p2 = p2.add(n.mult(ry));
-  let polygon = [p0, p1, p2].map(e => fx(e.x) + "," + fy(e.y)).join(" ");
-  return { valid: true, polygon, points: { p0, p1, p2 } };
+  ret.polygon = [p0, p1, p2].map(e => fx(e.x) + "," + fy(e.y)).join(" ");
+  ret.points = { p0, p1, p2 };
+  ret.scaled = [p0, p1, p2].map(e => [fx(e.x), fy(e.y)]);   // scaled points
+  let ab = p1.sub(p0);
+  let bc = p2.sub(p1);
+  let ca = p0.sub(p2);
+  a = Math.abs(a);
+  b = Math.abs(b);
+  c = Math.abs(c);
+  ret.area = Math.sqrt((a + b + c) * (a + b - c) * (a + c - b) * (b + c - a)) / 4;
+  let s = (a + b + c) / 2;
+  let r = ret.area / s;
+  let e = (b + a - c) / 2;
+  let t = new Point(p1.x - e * v.x, p1.y - e * v.y); // tangent for incircle on segment-a
+  let CO = new Point(t.x + n.x * r, t.y + n.y * r); // center of incircle
+  let pb, pa, dd; // dd is delta to adjust for text being placed by lower left corner
+  let Ca = CO.sub(p0).unit(); // vectors towards triangle center
+  let Cb = CO.sub(p1).unit();
+  let Cc = CO.sub(p2).unit();
+  let Px, ptxt = {};
+  let adj = new Point(1, 1).unit();
+  if (ABC) {
+    // supplied text for corner points
+    // text pushed away from triangle center
+    ret.ABC = [];
+    Px = ABC.split(",");
+    dd = Math.max(0.3, 0.5 * Ca.dot(adj));
+    pa = p0.sub(Ca.mult(dd));
+    ret.ABC.push({ x: fx(pa.x), y: fy(pa.y), txt: Px[0] });
+    dd = Math.max(0.3, 0.5 * Cb.dot(adj));
+    pa = p1.sub(Cb.mult(dd));
+    ret.ABC.push({ x: fx(pa.x), y: fy(pa.y), txt: Px[1] });
+    dd = Math.max(0.3, 0.5 * Cc.dot(adj));
+    pa = p2.sub(Cc.mult(dd));
+    ret.ABC.push({ x: fx(pa.x), y: fy(pa.y), txt: Px[2] });
+  }
+  return ret;
 
   function fx(x) {
     let wx = (size.w * x) / size.sx;
@@ -176,8 +213,13 @@ class Point {
   x;
   y;
   constructor(x, y) {
-    this.x = x;
-    this.y = y;
+    if (typeof x === "object") {
+      this.x = x.x;
+      this.y = x.y;
+    } else {
+      this.x = x;
+      this.y = y;
+    }
   }
   length() {
     return Math.sqrt(this.x * this.x + this.y * this.y);
