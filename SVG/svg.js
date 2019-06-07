@@ -10,29 +10,51 @@ function setup() {
   let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   divMain.appendChild(svg);
   svg.setAttribute("viewBox", "0 0 500 500");
-  let b = trig({ a: 3, b: 4, c: 5, ABC: "A,B,C" });
-  if (b.valid) {
-    svg.innerHTML += `<polygon points="${
-      b.polygon
-      }" stroke="green" fill="none" />`;
-    if (b.ABC) {
-      let s = b.ABC.map(e => `<text x="${e.x}" y="${e.y}">${e.txt}</text>`)
-      svg.innerHTML += s.join("");
-    }
-  }
-  let pp = new Point(b.points.p2).add(new Point(1,0));
-  let qq = new Point(b.points.p1).add(new Point(1,0));
+  let b = trig({ a: 3, b: 4, c: 5, ABC: "A,B,C", abc: "$,$,x" });
+  b.color = "red";
+  // svg.innerHTML += svgBuilder(b);
 
-  let c = tri({ a: 3, b: 4, B: 90, p: pp, q: qq, ABC: "D,E,F" });
-  if (c.valid) {
-    svg.innerHTML += `<polygon points="${
-      c.polygon
-      }" stroke="red" fill="none" />`;
-    if (c.ABC) {
-      let s = c.ABC.map(e => `<text x="${e.x}" y="${e.y}">${e.txt}</text>`)
-      svg.innerHTML += s.join("");
+  let pp = new Point(b.points.p2).add(new Point(2, 0));
+  
+
+  
+  let i = 1;
+  let end = setInterval(() => {
+    i+=1;
+    test(i);
+    if (i > 8720) clearInterval(end);
+  },20);
+
+  
+  function test(i) {
+    let x = Math.cos(i*Math.PI / 360);
+    let y = Math.sin(i*Math.PI / 360)
+    let pp = new Point(5,5);
+    let qq = pp.add(new Point(x, y));
+    
+    let c = tri({ a: 2.981, b: 4.221, c: 3.789, p: pp, q: qq, ABC: "A,B,C", 
+    abc: "1,2,3" });
+    svg.innerHTML = svgBuilder(c);
+  }
+
+}
+
+function svgBuilder(p) {
+  let s = "";
+  if (p.valid) {
+    if (p.polygon) {
+      s += `<polygon points="${
+        p.polygon
+        }" stroke="${p.color || "blue"}" fill="none" />`;
+    }
+    if (p.ABC) {
+      s += p.ABC.map(e => `<text x="${e.x}" y="${e.y}">${e.txt}</text>`)
+    }
+    if (p.abc) {
+      s += p.abc.map(e => `<text x="${e.x}" y="${e.y}" text-anchor="${e.anchor}">${e.txt}</text>`)
     }
   }
+  return s;
 }
 
 const SIN = x => Math.sin((Math.PI * x) / 180);
@@ -47,11 +69,6 @@ let tri = param => {
     A = 0,
     B = 0,
     C = 0,
-    abc,
-    ABC,
-    vABC,
-    p,
-    q
   } = param;
   let sides = [a, b, c].filter(e => e !== 0);
   let angles = [A, B, C].filter(e => e > 0);
@@ -125,6 +142,8 @@ let tri = param => {
   return { valid: false };
 };
 
+
+
 function trig(param) {
   let {
     a = 0,
@@ -140,6 +159,7 @@ function trig(param) {
     q,
     size = { w: 500, h: 500, sx: 10, sy: 10 }
   } = param;
+  let V = new Point(1, 0);  // unit vector along x-axis
   let ret = { valid: true };  // return value
   p = new Point(p.x, p.y);
   let p0 = new Point(p.x, p.y);
@@ -177,6 +197,7 @@ function trig(param) {
   let Cc = CO.sub(p2).unit();
   let Px, ptxt = {};
   let adj = new Point(1, 1).unit();
+  let jad = new Point(-1, -1).unit(); // opposite of adj
   if (ABC) {
     // supplied text for corner points
     // text pushed away from triangle center
@@ -192,20 +213,52 @@ function trig(param) {
     pa = p2.sub(Cc.mult(dd));
     ret.ABC.push({ x: fx(pa.x), y: fy(pa.y), txt: Px[2] });
   }
+
+  if (abc) {
+    ret.abc = [];
+    let sides = [a, b, c];
+    let dot; // (1,0) dot Side
+    let anchor; // start|middle|end
+    // place side text using text - not textpath - needed if printing
+    let Sx = abc.split(",").map((e, i) => e === "$" ? nice(sides[i]) : e);
+    dot = ab.unit().norm().dot(V);  // ~ 0 means nearly horizontal
+    anchor = dot < 0 ? "start" : "end";
+    anchor = (Math.abs(dot) < 0.1) ? "middle" : anchor;
+    dd = Math.max(0.3, 0.5 * Cc.dot(jad));
+    pa = p0.add(v.mult(a / 2)).add(Cc.mult(dd));
+    ret.abc.push({ x: fx(pa.x), y: fy(pa.y), txt: Sx[0], anchor });
+
+    dot = bc.unit().norm().dot(V);  // ~ 0 means nearly horizontal
+    anchor = dot < 0 ? "start" : "end";
+    anchor = (Math.abs(dot) < 0.1) ? "middle" : anchor;
+    dd = Math.max(0.3, 0.5 * Ca.dot(jad));
+    pa = p2.sub(bc.unit().mult(b / 2)).add(Ca.mult(dd));
+    ret.abc.push({ x: fx(pa.x), y: fy(pa.y), txt: Sx[1], anchor });
+
+    dot = ca.unit().norm().dot(V);  // ~ 0 means nearly horizontal
+    anchor = dot < 0 ? "start" : "end";
+    anchor = (Math.abs(dot) < 0.1) ? "middle" : anchor;
+    dd = Math.max(0.3, 0.5 * Cb.dot(jad));
+    pa = p0.sub(ca.unit().mult(c / 2)).add(Cb.mult(dd));
+    ret.abc.push({ x: fx(pa.x), y: fy(pa.y), txt: Sx[2], anchor });
+  }
   return ret;
 
   function fx(x) {
     let wx = (size.w * x) / size.sx;
     // clean up for use as coordinates
-    if (wx % 1 === 0) return String(wx);
-    return wx.toFixed(2);
+    return nice(wx);
   }
 
   function fy(y) {
     let hy = size.h - (size.h * y) / size.sy;
     // clean up for use as coordinates
-    if (hy % 1 === 0) return String(hy);
-    return hy.toFixed(2);
+    return nice(hy);
+  }
+
+  function nice(x) {
+    if (x % 1 === 0) return String(x);
+    return x.toFixed(2);
   }
 }
 
