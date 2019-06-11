@@ -7,54 +7,81 @@ const new$ = e => document.createElement(e);
 
 function setup() {
   let divMain = $i("main");
-  let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  divMain.appendChild(svg);
-  svg.setAttribute("viewBox", "0 0 500 500");
+  let divSVG = document.createElement("div");
+  //let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  divMain.appendChild(divSVG);
+  //svg.setAttribute("viewBox", "0 0 500 500");
   let b = trig({ a: 3, b: 4, c: 5, ABC: "A,B,C", abc: "$,$,x" });
   b.color = "red";
   // svg.innerHTML += svgBuilder(b);
 
-  let pp = new Point(b.points.p2).add(new Point(2, 0));
-  
+  let end;
 
-  
+  divSVG.addEventListener("click", () => {
+    if (end) {
+      clearInterval(end);
+      end = null;
+    } else {
+      end = setInterval(animate, 20);
+    }
+  });
+
+  let pp = new Point(b.points.p2).add(new Point(2, 0));
+
   let i = 1;
-  let end = setInterval(() => {
-    i+=1;
+  end = setInterval(animate, 20);
+  function animate() {
+    i += 1;
     test(i);
     if (i > 8720) clearInterval(end);
-  },20);
-
-  
-  function test(i) {
-    let x = Math.cos(i*Math.PI / 360);
-    let y = Math.sin(i*Math.PI / 360)
-    let pp = new Point(5,5);
-    let qq = pp.add(new Point(x, y));
-    
-    let c = tri({ a: 2.981, b: 4.221, c: 3.789, p: pp, q: qq, ABC: "A,B,C", 
-    abc: "1,2,3" });
-    svg.innerHTML = svgBuilder(c);
   }
 
+  function test(i) {
+    let x = Math.cos((i * Math.PI) / 360);
+    let y = Math.sin((i * Math.PI) / 360);
+    let pp = new Point(5, 5);
+    let qq = pp.add(new Point(x, y));
+
+    let c = tri({
+      a: 2.981,
+      b: 4.221,
+      c: 3.789,
+      p: pp,
+      q: qq,
+      color: "green",
+      vert:"abc",
+      ABC: "A,B,C",
+      abc: "1112342341111,22223222222,33333333"
+    });
+    divSVG.innerHTML = svgBuilder(c);
+  }
 }
 
 function svgBuilder(p) {
-  let s = "";
+  let s = '<svg viewBox="0 0  500 500">';
   if (p.valid) {
     if (p.polygon) {
-      s += `<polygon points="${
-        p.polygon
-        }" stroke="${p.color || "blue"}" fill="none" />`;
+      s += `<polygon points="${p.polygon}" stroke="${p.color ||
+        "blue"}" fill="none" />`;
     }
     if (p.ABC) {
-      s += p.ABC.map(e => `<text x="${e.x}" y="${e.y}">${e.txt}</text>`)
+      s += p.ABC.map(e => `<text x="${e.x}" y="${e.y}">${e.txt}</text>`).join('');
     }
     if (p.abc) {
-      s += p.abc.map(e => `<text x="${e.x}" y="${e.y}" text-anchor="${e.anchor}">${e.txt}</text>`)
+      s += p.abc.map(
+        e =>
+          `<text x="${e.x}" y="${e.y}" text-anchor="${e.anchor}">${
+            e.txt
+          }</text>`
+      ).join('');
+    }
+    if (p.vert) {
+      s += p.vert.map(e => 
+        `<circle cx="${e.x}" cy="${e.y}" r="3" fill="${p.color || "red"}" />`
+        ).join('');
     }
   }
-  return s;
+  return s + "</svg>";
 }
 
 const SIN = x => Math.sin((Math.PI * x) / 180);
@@ -62,14 +89,7 @@ const COS = x => Math.cos((Math.PI * x) / 180);
 const ASIN = x => (180 * Math.asin(x)) / Math.PI;
 
 let tri = param => {
-  let {
-    a = 0,
-    b = 0,
-    c = 0,
-    A = 0,
-    B = 0,
-    C = 0,
-  } = param;
+  let { a = 0, b = 0, c = 0, A = 0, B = 0, C = 0 } = param;
   let sides = [a, b, c].filter(e => e !== 0);
   let angles = [A, B, C].filter(e => e > 0);
   if (sides.length === 3) {
@@ -142,8 +162,6 @@ let tri = param => {
   return { valid: false };
 };
 
-
-
 function trig(param) {
   let {
     a = 0,
@@ -155,12 +173,13 @@ function trig(param) {
     abc = "",
     ABC = "",
     vABC = "",
+    vert = "",
     p = { x: 1, y: 1 },
     q,
     size = { w: 500, h: 500, sx: 10, sy: 10 }
   } = param;
-  let V = new Point(1, 0);  // unit vector along x-axis
-  let ret = { valid: true };  // return value
+  let V = new Point(1, 0); // unit vector along x-axis
+  let ret = { valid: true }; // return value
   p = new Point(p.x, p.y);
   let p0 = new Point(p.x, p.y);
   let p1 = new Point(p.x, p.y);
@@ -178,14 +197,15 @@ function trig(param) {
   p2 = p2.add(n.mult(ry));
   ret.polygon = [p0, p1, p2].map(e => fx(e.x) + "," + fy(e.y)).join(" ");
   ret.points = { p0, p1, p2 };
-  ret.scaled = [p0, p1, p2].map(e => [fx(e.x), fy(e.y)]);   // scaled points
+  ret.scaled = [p0, p1, p2].map(e => [fx(e.x), fy(e.y)]); // scaled points
   let ab = p1.sub(p0);
   let bc = p2.sub(p1);
   let ca = p0.sub(p2);
   a = Math.abs(a);
   b = Math.abs(b);
   c = Math.abs(c);
-  ret.area = Math.sqrt((a + b + c) * (a + b - c) * (a + c - b) * (b + c - a)) / 4;
+  ret.area =
+    Math.sqrt((a + b + c) * (a + b - c) * (a + c - b) * (b + c - a)) / 4;
   let s = (a + b + c) / 2;
   let r = ret.area / s;
   let e = (b + a - c) / 2;
@@ -195,9 +215,13 @@ function trig(param) {
   let Ca = CO.sub(p0).unit(); // vectors towards triangle center
   let Cb = CO.sub(p1).unit();
   let Cc = CO.sub(p2).unit();
-  let Px, ptxt = {};
+  let Px,
+    ptxt = {};
   let adj = new Point(1, 1).unit();
   let jad = new Point(-1, -1).unit(); // opposite of adj
+  if (param.color) {
+    ret.color = param.color;
+  }
   if (ABC) {
     // supplied text for corner points
     // text pushed away from triangle center
@@ -214,33 +238,43 @@ function trig(param) {
     ret.ABC.push({ x: fx(pa.x), y: fy(pa.y), txt: Px[2] });
   }
 
+  if (vert) {
+    // vert = "abc" flag for placing point on vertice
+    ret.vert = [];
+    if (vert.includes("a")) {
+      ret.vert.push({ x:fx(p0.x), y:fy(p0.y) }) ;
+    }
+    if (vert.includes("b")) {
+      ret.vert.push({ x:fx(p1.x), y:fy(p1.y) }) ;
+    }
+    if (vert.includes("c")) {
+      ret.vert.push({ x:fx(p2.x), y:fy(p2.y) }) ;
+    }
+  }
+
   if (abc) {
     ret.abc = [];
     let sides = [a, b, c];
-    let dot; // (1,0) dot Side
-    let anchor; // start|middle|end
+   
     // place side text using text - not textpath - needed if printing
-    let Sx = abc.split(",").map((e, i) => e === "$" ? nice(sides[i]) : e);
-    dot = ab.unit().norm().dot(V);  // ~ 0 means nearly horizontal
-    anchor = dot < 0 ? "start" : "end";
-    anchor = (Math.abs(dot) < 0.1) ? "middle" : anchor;
-    dd = Math.max(0.3, 0.5 * Cc.dot(jad));
-    pa = p0.add(v.mult(a / 2)).add(Cc.mult(dd));
-    ret.abc.push({ x: fx(pa.x), y: fy(pa.y), txt: Sx[0], anchor });
-
-    dot = bc.unit().norm().dot(V);  // ~ 0 means nearly horizontal
-    anchor = dot < 0 ? "start" : "end";
-    anchor = (Math.abs(dot) < 0.1) ? "middle" : anchor;
-    dd = Math.max(0.3, 0.5 * Ca.dot(jad));
-    pa = p2.sub(bc.unit().mult(b / 2)).add(Ca.mult(dd));
-    ret.abc.push({ x: fx(pa.x), y: fy(pa.y), txt: Sx[1], anchor });
-
-    dot = ca.unit().norm().dot(V);  // ~ 0 means nearly horizontal
-    anchor = dot < 0 ? "start" : "end";
-    anchor = (Math.abs(dot) < 0.1) ? "middle" : anchor;
-    dd = Math.max(0.3, 0.5 * Cb.dot(jad));
-    pa = p0.sub(ca.unit().mult(c / 2)).add(Cb.mult(dd));
-    ret.abc.push({ x: fx(pa.x), y: fy(pa.y), txt: Sx[2], anchor });
+    let Sx = abc.split(",").map((e, i) => (e === "$" ? nice(sides[i]) : e));
+    ret.abc.push(sideText(ab,Cc,p1,Sx[0],a));
+    ret.abc.push(sideText(bc,Ca,p2,Sx[1],b));
+    ret.abc.push(sideText(ca,Cb,p0,Sx[2],c));
+   
+    function sideText(vec1, vec2, pnt, txt, side) {
+      let dot; // (1,0) dot Side
+      let anchor; // start|middle|end
+      dot = vec1
+        .unit()
+        .norm()
+        .dot(V); // ~ 0 means nearly horizontal
+      anchor = dot < 0 ? "start" : "end";
+      anchor = Math.abs(dot) < 0.1 ? "middle" : anchor;
+      dd = Math.max(0.3, 0.5 * vec2.dot(jad));
+      pa = pnt.sub(vec1.unit().mult(side / 2)).add(vec2.mult(dd));
+      return { x: fx(pa.x), y: fy(pa.y), txt: txt, anchor };
+    }
   }
   return ret;
 
