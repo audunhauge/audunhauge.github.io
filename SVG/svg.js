@@ -49,7 +49,8 @@ function setup() {
       p: pp,
       q: qq,
       color: "green",
-      vert:"abc",
+      vert: "abc",
+      vABC: "abc",
       ABC: "A,B,C",
       abc: "1112342341111,22223222222,33333333"
     });
@@ -71,14 +72,25 @@ function svgBuilder(p) {
       s += p.abc.map(
         e =>
           `<text x="${e.x}" y="${e.y}" text-anchor="${e.anchor}">${
-            e.txt
+          e.txt
           }</text>`
       ).join('');
     }
     if (p.vert) {
-      s += p.vert.map(e => 
+      s += p.vert.map(e =>
         `<circle cx="${e.x}" cy="${e.y}" r="3" fill="${p.color || "red"}" />`
-        ).join('');
+      ).join('');
+    }
+    if (p.vABC) {
+      s += p.vABC.map(
+        (e, i) =>
+          `<path id="mm${i}" d="${e.p}" />
+          <text><textPath x="${e.x}" y="${e.y}" startOffset="25%" href="#mm${i}">
+          <tspan dy="5" dx="5">
+          ${e.txt}
+          </tspan>
+          </textpath></text>`
+      ).join('');
     }
   }
   return s + "</svg>";
@@ -170,10 +182,10 @@ function trig(param) {
     A = 0,
     B = 0,
     C = 0,
-    abc = "",
-    ABC = "",
-    vABC = "",
-    vert = "",
+    abc = "",             // text on edges
+    ABC = "",             // text on vertices
+    vABC = "",            // "abc" show angles
+    vert = "",            // "abc" show dot on vertice
     p = { x: 1, y: 1 },
     q,
     size = { w: 500, h: 500, sx: 10, sy: 10 }
@@ -242,26 +254,84 @@ function trig(param) {
     // vert = "abc" flag for placing point on vertice
     ret.vert = [];
     if (vert.includes("a")) {
-      ret.vert.push({ x:fx(p0.x), y:fy(p0.y) }) ;
+      ret.vert.push({ x: fx(p0.x), y: fy(p0.y) });
     }
     if (vert.includes("b")) {
-      ret.vert.push({ x:fx(p1.x), y:fy(p1.y) }) ;
+      ret.vert.push({ x: fx(p1.x), y: fy(p1.y) });
     }
     if (vert.includes("c")) {
-      ret.vert.push({ x:fx(p2.x), y:fy(p2.y) }) ;
+      ret.vert.push({ x: fx(p2.x), y: fy(p2.y) });
+    }
+  }
+
+  if (vABC) {
+    // show angles inside triangle
+    ret.vABC = [];
+    let Acos = 180 - (Math.acos(ab.dot(ca) / (a * c)) * 180) / Math.PI;
+    let Bcos = 180 - (Math.acos(ab.dot(bc) / (a * b)) * 180) / Math.PI;
+    let Ccos = 180 - (Math.acos(bc.dot(ca) / (c * b)) * 180) / Math.PI;
+    let ag = p0.add(
+      ab
+        .unit()
+        .sub(ca.unit())
+        .mult(1)
+    ); // displace angle text from p0
+    let bg = p1.add(
+      bc
+        .unit()
+        .sub(ab.unit())
+        .mult(1)
+    ); // change mult(1) to push further
+    let cg = p2.add(
+      ca
+        .unit()
+        .sub(bc.unit())
+        .mult(1)
+    ); //
+
+    let w = new Point(1,-1);
+
+    if (vABC.includes("a")) {
+      let dot = ab.dot(w);
+      let start = p0; let stop = ag;
+      if (dot < 0) { start = ag; stop = p0 }
+      let pathA = `M ${fx(start.x)} ${fy(start.y)} L ${fx(stop.x)} ${fy(stop.y)}`;
+      ret.vABC.push(
+        { x: fx(ag.x), y: fy(ag.y), txt: Acos.toFixed(1), p: pathA }
+      );
+    }
+    if (vABC.includes("b")) {
+      let dot = bc.dot(w);
+      let start = p1; let stop = bg;
+      if (dot < 0) { start = bg; stop = p1 }
+      let pathB = `M ${fx(start.x)} ${fy(start.y)} L ${fx(stop.x)} ${fy(stop.y)}`;
+      //let pathB = `M ${fx(p1.x)} ${fy(p1.y)} L ${fx(bg.x)} ${fy(bg.y)}`;
+      ret.vABC.push(
+        { x: fx(bg.x), y: fy(bg.y), txt: Bcos.toFixed(1), p: pathB }
+      );
+    }
+    if (vABC.includes("c")) {
+      let dot = ca.dot(V);
+      let start = p2; let stop = cg;
+      if (dot < 0) { start = cg; stop = p2 }
+      let pathC = `M ${fx(start.x)} ${fy(start.y)} L ${fx(stop.x)} ${fy(stop.y)}`;
+      //let pathC = `M ${fx(p2.x)} ${fy(p2.y)} L ${fx(cg.x)} ${fy(cg.y)}`;
+      ret.vABC.push(
+        { x: fx(cg.x), y: fy(cg.y), txt: Ccos.toFixed(1), p: pathC }
+      );
     }
   }
 
   if (abc) {
     ret.abc = [];
     let sides = [a, b, c];
-   
+
     // place side text using text - not textpath - needed if printing
     let Sx = abc.split(",").map((e, i) => (e === "$" ? nice(sides[i]) : e));
-    ret.abc.push(sideText(ab,Cc,p1,Sx[0],a));
-    ret.abc.push(sideText(bc,Ca,p2,Sx[1],b));
-    ret.abc.push(sideText(ca,Cb,p0,Sx[2],c));
-   
+    ret.abc.push(sideText(ab, Cc, p1, Sx[0], a));
+    ret.abc.push(sideText(bc, Ca, p2, Sx[1], b));
+    ret.abc.push(sideText(ca, Cb, p0, Sx[2], c));
+
     function sideText(vec1, vec2, pnt, txt, side) {
       let dot; // (1,0) dot Side
       let anchor; // start|middle|end
