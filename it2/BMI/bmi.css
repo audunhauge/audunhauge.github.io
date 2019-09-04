@@ -1,0 +1,7 @@
+img {
+    display: none;
+}
+
+img.vismeg {
+    display: inline;
+}
