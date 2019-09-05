@@ -1,3 +1,8 @@
+:root {
+    --walktime: 40s;
+}
+
+
 header h1 {
     color: blue;
     text-align: center;
@@ -42,7 +47,7 @@ footer {
     background-position-x: 0;
     background-position-y: calc(-112px * 2);
     animation: walk 1.4s steps(8) infinite,
-               slide 4s linear forwards;
+               slide var(--walktime) linear forwards;
 }
 
 @keyframes walk {
@@ -87,12 +92,21 @@ footer {
 
 #skeleton {
     position: absolute;
-    width: 30px;
-    height: 120px;
-    right: 300px;
+    opacity: 0;
+    width: 60px;
+    height: 60px;
+    right: 280px;
     bottom: 20px;
-    background-color: white;
-    border-radius: 13px;
-    transform-origin: bottom;
-    transform: rotate(90deg);
+    background-image: url("pile.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation: hide var(--walktime) linear forwards;
+}
+
+
+@keyframes hide {
+    0% { left: 60px; opacity: 0;}
+    99.9% { left: 70vw; opacity: 0;}
+    100% { left: 70vw; opacity: 1;}
 }
