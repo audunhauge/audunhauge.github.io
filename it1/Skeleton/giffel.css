@@ -1,5 +1,5 @@
 header h1 {
-    color:blue;
+    color: blue;
     text-align: center;
 }
 
@@ -21,9 +21,10 @@ footer {
 
 #himmel {
     position: relative;
-    height:80%;
+    height: 80%;
     background-color: blue;
 }
+
 #jord {
     position: relative;
     height: 20%;
@@ -32,17 +33,26 @@ footer {
 
 #person {
     position: absolute;
-    left: -60px;
+    opacity: 1.0;
+    left: 60px;
     bottom: 40px;
-    height: 120px;
-    width: 30px;
-    background-color: gray;
-    border-radius: 7px;
-    animation: slide 60s linear;
+    width: 112px;
+    height: 112px;
+    background-image: url("puppet.png");
+    background-position-x: 0;
+    background-position-y: calc(-112px * 2);
+    animation: walk 1.4s steps(8) infinite,
+               slide 4s linear forwards;
+}
+
+@keyframes walk {
+    100% { background-position-x: calc( -112px * 8 ); }
 }
 
 @keyframes slide {
-    100% { left: 110vw; }
+    0% { left: 60px; opacity: 1;}
+    99.9% { left: 70vw; opacity: 1;}
+    100% { left: 70vw; opacity: 0;}
 }
 
 #sol {
@@ -57,47 +67,32 @@ footer {
 }
 
 @keyframes flimmer {
-    100% { width: 43px; height: 43px;}
+    100% {
+        width: 43px;
+        height: 43px;
+    }
 }
 
 #kaktus {
     position: absolute;
-    width: 30px;
-    height: 120px;
-    right:100px;
+    width: 150px;
+    height: 200px;
+    right: 100px;
     bottom: 30px;
-    background-color: green;
-    border-radius: 13px;
+    background-image: url("cactus.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 #skeleton {
     position: absolute;
     width: 30px;
     height: 120px;
-    right:300px;
+    right: 300px;
     bottom: 20px;
     background-color: white;
     border-radius: 13px;
     transform-origin: bottom;
     transform: rotate(90deg);
-}
-
-.shadow {
-    position: absolute;
-    width: 30px;
-    height: 20px;
-    left:20px;
-    bottom: -10px;
-    background-color: rgba(0, 0, 0, 0.473);
-    border-radius: 13px;
-    
-}
-
-div.shadow.moving {
-    left:-10px;
-    animation: shift 60s linear;
-}
-
-@keyframes shift {
-    100% { left: 40px; }
 }
