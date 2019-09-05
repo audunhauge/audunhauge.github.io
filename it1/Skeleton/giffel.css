@@ -1,0 +1,103 @@
+header h1 {
+    color:blue;
+    text-align: center;
+}
+
+main {
+    height: 70vh;
+}
+
+header {
+    height: 10vh;
+}
+
+footer {
+    height: 10vh;
+}
+
+#verden {
+    height: 70vh;
+}
+
+#himmel {
+    position: relative;
+    height:80%;
+    background-color: blue;
+}
+#jord {
+    position: relative;
+    height: 20%;
+    background-color: burlywood;
+}
+
+#person {
+    position: absolute;
+    left: -60px;
+    bottom: 40px;
+    height: 120px;
+    width: 30px;
+    background-color: gray;
+    border-radius: 7px;
+    animation: slide 60s linear;
+}
+
+@keyframes slide {
+    100% { left: 110vw; }
+}
+
+#sol {
+    position: absolute;
+    top: 80px;
+    left: calc(50% - 20px);
+    width: 40px;
+    height: 40px;
+    background-color: yellow;
+    border-radius: 50%;
+    animation: flimmer 2s infinite alternate;
+}
+
+@keyframes flimmer {
+    100% { width: 43px; height: 43px;}
+}
+
+#kaktus {
+    position: absolute;
+    width: 30px;
+    height: 120px;
+    right:100px;
+    bottom: 30px;
+    background-color: green;
+    border-radius: 13px;
+}
+
+#skeleton {
+    position: absolute;
+    width: 30px;
+    height: 120px;
+    right:300px;
+    bottom: 20px;
+    background-color: white;
+    border-radius: 13px;
+    transform-origin: bottom;
+    transform: rotate(90deg);
+}
+
+.shadow {
+    position: absolute;
+    width: 30px;
+    height: 20px;
+    left:20px;
+    bottom: -10px;
+    background-color: rgba(0, 0, 0, 0.473);
+    border-radius: 13px;
+    
+}
+
+div.shadow.moving {
+    left:-10px;
+    animation: shift 60s linear;
+}
+
+@keyframes shift {
+    100% { left: 40px; }
+}
