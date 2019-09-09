@@ -4,9 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="bil.css">
+    <script src="bil.js"></script>
     <title>Bilregister</title>
 </head>
 <body>
-    
+    <header>
+        <h1>Registrer dine biler</h1>
+    </header>
+    <main>
+        <form id="skjema">
+            <div><label>Fabrikant<input type="text" id="fabrikant"></label></div>
+            <div><label>Modell<input type="text" id="modell"></label></div>
+            <div><label>Årsmodell<input type="number" id="aarsmod"></label></div>
+            <div><label>Farge<input type="text" id="farge"></label></div>
+            <div><label>Motor-volum<input type="number" id="volum"></label></div>
+            <div><label>Antall sitteplasser<input type="number" id="plasser"></label></div>
+            <div><button type="button" id="lagre">Lagre</button></div>
+        </form>
+        <div id="liste">
+
+        </div>
+    </main>
+    <footer></footer>
+
+    <script>
+        setup();
+    </script>
 </body>
 </html>

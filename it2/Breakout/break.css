@@ -1,0 +1,38 @@
+.brikke {
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 26px;
+    height: 12px;
+    background-color: aqua;
+    border: solid 1px gray;
+}
+
+#brett {
+    position: relative;
+    width: 900px;
+    height: 500px;
+    border: solid green 1px;
+    margin: 2em;
+}
+
+.plate {
+    position: absolute;
+    bottom: 20px;
+    left: 200px;
+    width: 150px;
+    height: 10px;
+    background-color: blue;
+    border: solid gray 1px;
+}
+
+.ball {
+    position: absolute;
+    bottom: 40px;
+    left: 200px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red;
+    border: solid gray 1px;
+}
