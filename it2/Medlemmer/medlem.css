@@ -1,5 +1,7 @@
+/* endre de to neste linjene for å tilpasse skjema */
 :root {
-    --Skjema-bredde: 20em;
+    --Skjema-bredde: 40em;  /* bredde på skjema */
+    --Input-bredde: 30%;    /* bredde på input */
 }
 
 form {
@@ -19,6 +21,7 @@ div {
 label > input {
     position: absolute;
     right: 0px;
+    width: var(--Input-bredde);
 }
 
 button {
