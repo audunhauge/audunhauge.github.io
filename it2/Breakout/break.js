@@ -1,12 +1,8 @@
 // @ts-check
 
 class Sprite {
-    div;
-    x;
-    y;
-    w;
-    h;
-    constructor(div,x,y,w,h) {
+    div; x; y; w; h;
+    constructor(div, x, y, w, h) {
         this.div = div;
         this.x = x;
         this.y = y;
@@ -21,10 +17,9 @@ class Sprite {
 }
 
 class Movable extends Sprite {
-    vx;
-    vy;
-    constructor(div,x,y,w,h,vx,vy) {
-        super(div,x,y,w,h);
+    vx; vy;
+    constructor(div, x, y, w, h, vx, vy) {
+        super(div, x, y, w, h);
         this.vx = vx;
         this.vy = vy;
     }
@@ -32,6 +27,24 @@ class Movable extends Sprite {
     move() {
         this.x += this.vx;
         this.y += this.vy;
+    }
+}
+
+class Breakable extends Sprite {
+    broken = false;
+    constructor(div, x, y, w, h) {
+        super(div, x, y, w, h);
+    }
+
+    breakme(thing) {
+        if (this.broken) return;  // already broken
+        if (this.overlap(thing)) {
+            this.broken = true;
+        }
+    }
+    overlap(thing) {
+        
+        return true;
     }
 }
 
@@ -44,6 +57,9 @@ function setup() {
     let divInfo = $("info");
     let divScore = $("score");
     let ball, plate;
+
+    let movables = [];
+    let breakables = [];
 
     const keys = new Set();
 
@@ -61,14 +77,16 @@ function setup() {
         let div = document.createElement("div");
         div.className = "ball";
         divBrett.appendChild(div);
-        ball = new Movable(div, 100, 400,10,10,2,2);
+        ball = new Movable(div, 100, 400, 10, 10, 2, 2);
+        movables.push(ball);
     }
 
     function lagPlate() {
         let div = document.createElement("div");
         div.className = "plate";
         divBrett.appendChild(div);
-        plate = new Movable(div,100,450,150,10,0,0)
+        plate = new Movable(div, 100, 450, 150, 10, 0, 0)
+        movables.push(plate);
     }
 
     function lagBrikker() {
@@ -91,10 +109,8 @@ function setup() {
         if (keys.has("a")) {
             plate.vx = -5;
         }
-        ball.move();
-        plate.move();
-        ball.draw();
-        plate.draw();
+        movables.forEach(e => {e.move(); e.draw(); })
+        breakables.forEach(e => e.breakme(ball) );
 
     }
 
@@ -109,6 +125,6 @@ function setup() {
         setInterval(animate, 50);
     }
 
-   
+
 
 }
