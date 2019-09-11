@@ -42,10 +42,11 @@ class Breakable extends Sprite {
    }
    breakme() {
        this.dead = true;
+       this.div.classList.add("hidden");
    }
    overlap(b) {
        if (this.dead) return false;
-       super.overlap(b);
+       return super.overlap(b);
    }
 
 }
@@ -140,7 +141,7 @@ function setup() {
 
         for (let brikke of brikkeListe) {
             if (brikke.overlap(ball)) {
-                brikke.div.classList.add("hidden");
+                brikke.breakme();
                 ball.vy = -ball.vy;
                 break;
             }
