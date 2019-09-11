@@ -24,7 +24,7 @@
     height: 10px;
     background-color: blue;
     border: solid gray 1px;
-    transition: 50ms;
+    transition: 50ms; 
 }
 
 .ball {
