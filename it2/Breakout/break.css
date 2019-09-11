@@ -38,3 +38,7 @@
     border: solid gray 1px;
     transition: 50ms;
 }
+
+.hidden {
+    display:none;
+}
