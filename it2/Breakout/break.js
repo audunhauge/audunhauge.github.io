@@ -51,6 +51,17 @@ class Breakable extends Sprite {
 
 }
 
+class Keys {
+    static keys = new Set();
+    static za = document.addEventListener("keydown", Keys.mark) 
+    static zb = document.addEventListener("keyup", Keys.unmark);
+    static mark(e) { Keys.keys.add(e.key);}
+    static unmark(e) { Keys.keys.delete(e.key);}
+    static any() { return Keys.keys.size > 0; }
+    static many() { return Keys.keys.size > 1; }
+    static has(a) { return Keys.keys.has(a); }
+}
+
 
 function $(element) {
     return document.getElementById(element);
@@ -63,23 +74,6 @@ function setup() {
     let ball, plate;
 
     const brikkeListe = [ ];
-
-    const keys = new Set();
-
-    addEventListener("keydown", lagreKey);
-    addEventListener("keyup", slettKey);
-
-    function lagreKey(e) {
-        let k = e.key;
-        console.log(k);
-        keys.add(k);
-    }
-
-    function slettKey(e) {
-        let k = e.key;
-        keys.delete(k);
-    }
-
 
     function lagBall() {
         let div = document.createElement("div");
@@ -116,10 +110,10 @@ function setup() {
 
     function animate() {
         plate.vx *= 0.85;
-        if (keys.has("a") || keys.has("ArrowLeft")) {
+        if (Keys.has("a") || Keys.has("ArrowLeft")) {
             plate.vx = -10;
         }
-        if (keys.has("d") || keys.has("ArrowRight")) {
+        if (Keys.has("d") || Keys.has("ArrowRight")) {
             plate.vx = 10;
         }
         if (ball.y < 0) {
