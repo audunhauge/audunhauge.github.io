@@ -8,6 +8,12 @@
     border: solid 1px gray;
 }
 
+#info {
+    min-height: 3em;
+    display: grid;
+    grid-template-columns: 1fr 5fr 2fr;
+}
+
 #brett {
     position: relative;
     width: 900px;

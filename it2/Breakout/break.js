@@ -15,17 +15,17 @@ class Sprite {
     }
     overlap(b) {
         let a = this;
-        return a.x > b.x - a.w && 
-               a.x < b.x + b.w &&
-               a.y > b.y - a.h && 
-               a.y < b.y + b.h
+        return a.x > b.x - a.w &&
+            a.x < b.x + b.w &&
+            a.y > b.y - a.h &&
+            a.y < b.y + b.h
     }
 }
 
 class Movable extends Sprite {
     vx; vy;
-    constructor(div,x,y,w,h,vx,vy) {
-        super(div,x,y,w,h);
+    constructor(div, x, y, w, h, vx, vy) {
+        super(div, x, y, w, h);
         this.vx = vx;
         this.vy = vy;
     }
@@ -36,27 +36,28 @@ class Movable extends Sprite {
 }
 
 class Breakable extends Sprite {
-   dead = false;
-   constructor(div,x,y,w,h) {
-       super(div,x,y,w,h);
-   }
-   breakme() {
-       this.dead = true;
-       this.div.classList.add("hidden");
-   }
-   overlap(b) {
-       if (this.dead) return false;
-       return super.overlap(b);
-   }
+    dead = false;
+    constructor(div, x, y, w, h) {
+        super(div, x, y, w, h);
+    }
+    breakme() {
+        this.dead = true;
+        this.div.classList.add("hidden");
+    }
+    overlap(b) {
+        if (this.dead) return false;
+        return super.overlap(b);
+    }
 
 }
 
+
 class Keys {
     static keys = new Set();
-    static za = document.addEventListener("keydown", Keys.mark) 
+    static za = document.addEventListener("keydown", Keys.mark)
     static zb = document.addEventListener("keyup", Keys.unmark);
-    static mark(e) { Keys.keys.add(e.key);}
-    static unmark(e) { Keys.keys.delete(e.key);}
+    static mark(e) { Keys.keys.add(e.key); }
+    static unmark(e) { Keys.keys.delete(e.key); }
     static any() { return Keys.keys.size > 0; }
     static many() { return Keys.keys.size > 1; }
     static has(a) { return Keys.keys.has(a); }
@@ -69,17 +70,21 @@ function $(element) {
 
 function setup() {
     let divBrett = $("brett");
-    let divInfo = $("info");
+    let divStatus = $("status");
     let divScore = $("score");
     let ball, plate;
 
-    const brikkeListe = [ ];
+    let anime;
+    let poeng = 0;
+    let baller = 7;
+
+    const brikkeListe = [];
 
     function lagBall() {
         let div = document.createElement("div");
         div.className = "ball";
         divBrett.appendChild(div);
-        ball = new Movable(div,200,400,10,10,5,-5);
+        ball = new Movable(div, 200, 400, 10, 10, 5, -5);
         ball.draw();
     }
 
@@ -87,7 +92,7 @@ function setup() {
         let div = document.createElement("div");
         div.className = "plate";
         divBrett.appendChild(div);
-        plate = new Movable(div,150,450,150,10,0,0);
+        plate = new Movable(div, 150, 450, 150, 10, 0, 0);
         plate.draw();
     }
 
@@ -101,7 +106,7 @@ function setup() {
                 div.style.left = x + "px";
                 div.style.top = y + "px";
                 divBrett.appendChild(div);
-                let brikke = new Breakable(div,x,y,26,12);
+                let brikke = new Breakable(div, x, y, 26, 12);
                 brikke.draw();
                 brikkeListe.push(brikke);
             }
@@ -110,6 +115,12 @@ function setup() {
 
     function animate() {
         plate.vx *= 0.85;
+        if (Keys.has(" ")) {
+            if (ball.vx === 0 && ball.vy === 0) {
+                ball.vx = Math.random() * 8 + 2;
+                ball.vy = -Math.random() * 8 + -5;
+            }
+        }
         if (Keys.has("a") || Keys.has("ArrowLeft")) {
             plate.vx = -10;
         }
@@ -122,9 +133,24 @@ function setup() {
         if (ball.x > 890) {
             ball.vx = -Math.abs(ball.vx);
         }
+
         if (ball.y > 490) {
-            ball.vy = -Math.abs(ball.vy);
+            ball.vx = ball.vy = 0;
+            ball.x = plate.x + plate.w / 2 - ball.w / 2;
+            ball.y = plate.y - ball.h;
+            poeng -= 20;
+            baller -= 1;
+            if (baller < 1) {
+                clearInterval(anime);
+                divStatus.innerHTML = "Game over";
+            } else {
+                divStatus.innerHTML = `You 
+                have 
+                ${baller} 
+                left`;
+            }
         }
+
         if (ball.x < 0) {
             ball.vx = Math.abs(ball.vx);
         }
@@ -137,6 +163,8 @@ function setup() {
             if (brikke.overlap(ball)) {
                 brikke.breakme();
                 ball.vy = -ball.vy;
+                poeng += 1;
+                divScore.innerHTML = String(poeng);
                 break;
             }
         }
@@ -155,6 +183,6 @@ function setup() {
     startSpill();
 
     function startSpill() {
-        setInterval(animate, 50);
+        anime = setInterval(animate, 50);
     }
 }
