@@ -58,3 +58,17 @@ tbody tr:nth-child(odd) {
 th {
     background-color:lightcyan;
 }
+
+#grid {
+    display: grid;
+    grid-template-columns: 1fr 3fr 4fr 8fr;
+}
+
+#grid > div {
+    border: solid gray 1px;
+    height: 10em;
+}
+
+#grid > div > img {
+    width: 9em;
+}
