@@ -7,6 +7,19 @@ function setup() {
     let divNm = document.getElementById("nm");
     let divPm = document.getElementById("pm");
     let divMonth = document.getElementById("month");
+    let divDatoer = document.getElementById("datoer");
+
+    let datoer = [];
+    let dagerImnd = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+    for (let i = 0; i < 42; i++) {
+        let div = document.createElement("div");
+        div.className = "dato";
+        div.innerHTML = String(i);
+        divDatoer.appendChild(div);
+        datoer.push(div);
+    }
+
 
     let now = new Date();
     let year = now.getFullYear();
@@ -58,8 +71,20 @@ function setup() {
     }
 
     function visCalender() {
+        let monthStart = new Date(`${month}.1.${year}`);
+        let start = (monthStart.getDay() + 6) % 7;
         divMonth.innerHTML = mNavn[month - 1];
         divYear.innerHTML = String(year);
+        for (let i = 0; i < 42; i++) {
+            let div = datoer[i];
+            div.classList.add("hidden");
+        }
+        let siste = dagerImnd[month - 1];
+        for (let i = 0 + start; i < siste + start; i++) {
+            let div = datoer[i];
+            div.classList.remove("hidden");
+            div.innerHTML = String(i - start + 1);
+        }
     }
 
     visCalender();

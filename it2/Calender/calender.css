@@ -13,9 +13,21 @@
     transform: translate(2px, 2px);
 }
 
+#datoer,
 #mm, #yy, #ukedager {
     display: grid;
     width: 20em;
+}
+
+#datoer {
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.dato {
+    text-align: center;
+    border: solid 1px gray;
+    margin:2px;
+    padding: 2px;
 }
 
 #mm,
@@ -36,4 +48,8 @@
     width: 30em;
     margin-left: auto;
     margin-right: auto;
+}
+
+div.hidden {
+    opacity:0;
 }
