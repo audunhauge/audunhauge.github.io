@@ -1,0 +1,55 @@
+.nav {
+    width: 1.5em;
+    height: 1.5em;
+    border: solid gray 1px;
+    padding: 1px;
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px gray;
+}
+
+.nav:active {
+    box-shadow: none;
+    transform: translate(2px, 2px);
+}
+
+#datoer,
+#mm, #yy, #ukedager {
+    display: grid;
+    width: 20em;
+}
+
+#datoer {
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.dato {
+    text-align: center;
+    border: solid 1px gray;
+    margin:2px;
+    padding: 2px;
+}
+
+#mm,
+#yy {
+    grid-template-columns: 1fr 6fr 1fr;
+    margin: 2px;
+}
+#ukedager > div,
+#year, #month {
+    text-align: center;
+}
+
+#ukedager {
+    grid-template-columns: repeat(7, 1fr);
+}
+
+#calender {
+    width: 30em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.hidden {
+    opacity:0;
+}
