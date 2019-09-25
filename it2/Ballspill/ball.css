@@ -1,0 +1,16 @@
+#box {
+    width: 500px;
+    height: 500px;
+    border:solid green 1px;
+}
+
+.ball {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 10px;
+    height: 10px;
+    border:solid green 1px;
+    background-color: blue;
+    border-radius: 50%;
+}
