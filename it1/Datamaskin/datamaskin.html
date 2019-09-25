@@ -10,8 +10,21 @@
 </head>
 
 <body>
+    <script>
+    function hide(e) {
+        let t = document.getElementById("hide");
+        t.style.position = "relative";
+        let top = +(t.style.top.replace("px","")) + 20;
+        t.style.top = top + "px";
+    }
+      function helpme() {
+          // alert("HELP ME");
+          document.location.href = "https://vg.no";
+      }    
+    </script>
     <header>
         <h1>Datamaskinens oppbygging og virkemåte</h1>
+        <button id="hide" onclick="helpme()" onmouseover="hide()">Helpme</button>
     </header>
     <main>
         <article>
@@ -26,7 +39,7 @@
                     Dagens CPU kan jobbe med tall på 2^64 = 18446744073709552000.
                     <div>
                         <!-- bilde av en 8086 -->
-                        <img src="8086.png" alt="8086 intel">
+                        <img id="intel" src="8086.png" alt="8086 intel">
                     </div>
                 </p>
                 <h1>AMD</h1>

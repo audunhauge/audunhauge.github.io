@@ -10,3 +10,11 @@ article > h1 {
   color:blue;
 }
 
+img {
+  width: 200px;
+}
+
+#intel {
+  width: 300px;
+}
+
