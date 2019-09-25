@@ -4,6 +4,7 @@
     border:solid green 1px;
 }
 
+.bounce,
 .ball {
     position: absolute;
     top:0;
@@ -13,4 +14,10 @@
     border:solid green 1px;
     background-color: blue;
     border-radius: 50%;
+}
+
+.bounce {
+    background-color: green;
+    width:20px;
+    height: 20px;
 }

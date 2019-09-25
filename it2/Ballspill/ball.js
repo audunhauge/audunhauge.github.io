@@ -291,7 +291,21 @@ function setup() {
     }
   }
 
+  // lag en ball som følger brukers mus
+  let divBounce = document.createElement("div");
+  divBounce.className = "bounce";
+  let bounce = new Movable(divBounce,200,200,20,20,0,0);
+  divMain.appendChild(divBounce);
+  manyThings.push(bounce);
+
   let ge = setInterval(gameEngine, 40);
+  document.addEventListener("mousemove", getxy);
+
+  function getxy(e) {
+    let x = e.clientX;
+    let y = e.clientY;
+    
+  }
 
   function gameEngine(e) {
     for (let thing of manyThings) {
