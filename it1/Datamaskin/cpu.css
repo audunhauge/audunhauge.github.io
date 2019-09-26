@@ -1,10 +1,40 @@
-#controll {}
-#processor {}
-#registers {}
-#alu {}
-#memory {}
-#input {}
-#output {}
+#controll {
+    left: calc((350px - 110px) / 2);
+    background-color: red;
+    height: 110px;
+}
+#processor {
+    background-color: rgb(247, 233, 114);
+    top: 100px;
+    border-radius: 10px;
+    width: 250px;
+    height: 200px;
+}
+#registers {
+    height: 50px;
+    top: 10px;
+    left: 20px;
+    background-color: pink;
+}
+#alu {
+    top: 100px;
+    background-color: green;
+}
+#memory {
+    left: 200px;
+    top: 400px;
+    background-color: violet;
+}
+#input {
+    left: -70px;
+    top: 200px;
+    background-color: black;
+}
+#output {
+    left: 470px;
+    top: 200px;
+    background-color: azure;
+}
 #cpu {
     left: 100px;
     top: 50px;
@@ -17,9 +47,9 @@
 
 .firkant {
     position: absolute;
-    left:0;
-    top:0;
-    width: 100px;
+    left:40px;
+    top:20px;
+    width: 150px;
     height: 100px;
-    background-color: green;
+    background-color: rgba(0, 140, 255, 0.829);
 }
