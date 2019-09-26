@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Datamaskinens oppbygging</title>
+    <link rel="stylesheet" href="data.css">
+</head>
+
+<body>
+    <script>
+    function hide(e) {
+        let t = document.getElementById("hide");
+        t.style.position = "relative";
+        let left = +(t.style.left.replace("px","")) + 20;
+        t.style.left = left + "px";
+    }
+      function helpme() {
+          // alert("HELP ME");
+          document.location.href = "https://vg.no";
+      }    
+    </script>
+    <header>
+        <h1>Datamaskinens oppbygging og virkemåte</h1>
+        <button id="hide" onclick="helpme()" onmouseover="hide()">Helpme</button>
+    </header>
+    <main>
+        <article>
+            <h1>Prosessor</h1>
+            <div>
+                <h1>Intel</h1>
+                <p>
+                    Amerikansk produsent av prosessorer.
+                    Grunnlagt 1968 - laget intel 4004 CPU, 4 bits cpu.
+                    Dagens CPUer er 64bit. 4 bit gir 2^4 som største tall = 16.
+                    For 5-6 år siden var standard størrlese 32 bit (tall på 4294967296)
+                    Dagens CPU kan jobbe med tall på 2^64 = 18446744073709552000.
+                    <div>
+                        <!-- bilde av en 8086 -->
+                        <img id="intel" src="8086.png" alt="8086 intel">
+                    </div>
+                </p>
+                <h1>AMD</h1>
+                <p>
+                    AMD (Advanced Micro Devices) laget sin første CPU 8080 AM9080
+                    (en klone av intel 8080).
+                    <div>
+                        <!-- bilde av en AMD valgfritt-->
+                    </div>
+                </p>
+                <h1>ARM</h1>
+                <p>
+                    Acorn (Advanced) RISC (Reduced Instruction Set Computer) Machine.
+                    RISC CPUer har få og enkle instruksjoner (i motsetning til Intel).
+                    Hver instruksjon skal ta minst mulig tid.
+                    Kompliserte beregninger består av mange instruksjoner.
+
+                    Brukes i mobiler (nesten alle?)
+                    <div>
+                        <!-- bilde av en arm brukt i en mobil-->
+                    </div>
+
+                </p>
+                <p>
+                    Prosessoren er hjernen i datamaskinen.
+                    Hastigheten på en CPU er mellom 2 - 4 GHz for nye maskiner.
+
+
+                </p>
+            </div>
+        </article>
+        <article>
+            <h1>RAM og ROM</h1>
+            <div>
+                <p>
+                    RAM er en forkortelse som betyr
+                    Random Access Memory
+                </p>
+            </div>
+        </article>
+        <article>
+            <h1>Lagring</h1>
+            <div>
+                <p>
+                    Standard lagringsmedia i dag er SSD.
+                    Tidligere (for få år siden) var HDD det mest brukte.
+                </p>
+            </div>
+        </article>
+        <article>
+            <h1>Etc</h1>
+        </article>
+    </main>
+    <footer>
+        Denne sida er laga av ah med vscode
+    </footer>
+</body>
+
+</html>

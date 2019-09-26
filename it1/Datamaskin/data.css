@@ -1,0 +1,20 @@
+article {
+    background-color: antiquewhite;
+}
+
+article h1 {
+    color: green;
+}
+
+article > h1 {
+  color:blue;
+}
+
+img {
+  width: 200px;
+}
+
+#intel {
+  width: 300px;
+}
+

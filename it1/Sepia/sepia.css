@@ -10,13 +10,13 @@
     background-position: center;
     min-height: 200px;
     background-repeat: no-repeat;
-    filter: sepia(80%);
+    filter: grayscale(100%);
     flex: 1;
     transition: 2s;
 }
 
 .bilde:hover {
-    filter: sepia(0%);
+    filter: grayscale(0);
     flex: 5;
     min-height: 600px;
     background-size: contain;
