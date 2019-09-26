@@ -63,6 +63,7 @@ function setup() {
     let ball, plate;
 
     const brikkeListe = [ ];
+    const movingStuff = [ ];
 
     const keys = new Set();
 
@@ -98,7 +99,7 @@ function setup() {
     }
 
     function lagBrikker() {
-        for (let j = 0; j < 12; j += 1) {
+        for (let j = 0; j < 32; j += 1) {
             for (let i = 0; i < 30; i += 1) {
                 let div = document.createElement("div");
                 div.className = "brikke";
@@ -147,12 +148,10 @@ function setup() {
             }
         }
 
-
-        plate.move();
-        plate.draw();
-
-        ball.move();
-        ball.draw();
+        movingStuff.forEach(e => {
+            e.move();
+            e.draw();
+        })
     }
 
     lagBrikker();
@@ -161,6 +160,7 @@ function setup() {
     startSpill();
 
     function startSpill() {
+        movingStuff.push(ball,plate);
         setInterval(animate, 50);
     }
 }

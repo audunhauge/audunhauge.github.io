@@ -123,6 +123,8 @@ class Movable extends Sprite {
     this.ay = 0;
   }
 
+  // flytter på elementet
+  // farten er gitt av forrige posisjon: vx = this.x - this.px
   inertia() {
     if (!this.alive) return;
     let x = this.x * 2 - this.px;
@@ -424,12 +426,12 @@ function setup() {
 
   function registrerKey(keyEvent) {
     event.preventDefault();
-    keys[keyEvent.keyCode] = 1; // marker at denne key er aktiv
+    keys[keyEvent.key] = 1; // marker at denne key er aktiv
   }
 
   function cancelKey(keyEvent) {
     event.preventDefault();
-    keys[keyEvent.keyCode] = 0; // bruker slapp opp denne key-en
+    keys[keyEvent.key] = 0; // bruker slapp opp denne key-en
   }
 
   function gameEngine(e) {
