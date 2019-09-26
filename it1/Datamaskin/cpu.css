@@ -21,7 +21,7 @@
 }
 #memory {
     left: 200px;
-    top: 400px;
+    top: 440px;
 }
 #input {
     left: -70px;
@@ -39,6 +39,35 @@
     background-color: bisque;
     border-radius: 10px;
 }
+
+#skisse {
+    position: relative;
+    margin: 10em;
+}
+
+
+.firkant[data-info]:hover::after
+ {
+    z-index:200;
+    white-space: pre-wrap;
+    padding: 10px;
+    content: attr(data-info);
+    position: absolute;
+    right: -200px;
+    top:20px;
+    width: 200px;
+    height: 200px;
+    background-color: whitesmoke;
+    border: solid black 2px;
+    box-shadow: 0 0 6px black;
+    border-radius: 12px;
+}
+
+.firkant[data-more]:hover::after {
+    background-color: lightseagreen;
+    color: white;
+}
+
 
 .firkant {
     text-align: center;
@@ -74,4 +103,16 @@ div.pil:nth-child(2) {
     top: 50px;
     width: 200px;
     height: 250px;
+}
+
+#svg {
+    pointer-events: none;
+    position: absolute;
+    left:0;
+    top:0;
+}
+#svg svg {
+    width: 700px;
+    height: 700px;
+    border:solid green 1px;
 }
