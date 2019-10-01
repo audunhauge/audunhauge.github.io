@@ -2,7 +2,7 @@
 
 function setup() {
     let skisse = document.getElementById("skisse");
-    // skisse.addEventListener("click", showme);
+    skisse.addEventListener("click", showme);
 
     function showme(e) {
         let u = e.target;
@@ -11,7 +11,5 @@ function setup() {
         }
 
     }
-
-    start();
 
 }
