@@ -7,7 +7,7 @@ function setup() {
     function showme(e) {
         let u = e.target;
         if (u.dataset && u.dataset.more) {
-            location.href = u.dataset.more + "html";
+            location.href = u.dataset.more + ".html";
         }
 
     }
