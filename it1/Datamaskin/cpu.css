@@ -1,39 +1,41 @@
 #controll {
-    left: 95px;
+    left: 269px;
+    top: 180px;
     height: 60px;
 }
 #processor {
     background-color: rgb(247, 233, 114);
-    top: 100px;
+    top: 269px;
+    left:225px;
     border-radius: 10px;
     width: 250px;
     height: 200px;
 }
 #registers {
     height: 50px;
-    top: 40px;
-    left: 50px;
+    top: 296px;
+    left: 278px;
 }
 #alu {
-    left: 50px;
-    top: 120px;
+    left: 278px;
+    top: 376px;
     height: 60px;
 }
 #memory {
-    left: 200px;
-    top: 440px;
+    left: 281px;
+    top: 519px;
 }
 #input {
-    left: -70px;
-    top: 200px;
+    left: 3px;
+    top: 275px;
 }
 #output {
-    left: 470px;
-    top: 200px;
+    left: 547px;
+    top: 283px;
 }
 #cpu {
-    left: 100px;
-    top: 50px;
+    left: 178px;
+    top: 153px;
     width: 350px;
     height: 350px;
     background-color: bisque;
@@ -42,7 +44,7 @@
 
 #skisse {
     position: relative;
-    margin: 10em;
+   
 }
 
 
@@ -115,4 +117,37 @@ div.pil:nth-child(2) {
     width: 700px;
     height: 700px;
     border:solid green 1px;
+}
+
+#panel {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    align-content: space-around;
+    position: absolute;
+    bottom:0px;
+    left:0px;
+    padding: 15px;
+    height: 30px;
+    width: 700px;
+    background-color: darkslategrey;
+}
+
+#panel span {
+    display: inline-block;
+    width: 6em;
+    text-align: center;
+    height: 1.2em;
+    border: solid gray 1px;
+    padding:2px;
+    background-color: gainsboro;
+    box-shadow: 2px 2px 2px gray;
+}
+#panel i {
+    display: inline-block;
+    padding: 3px;
+    color:white;
+}
+
+.firkant.selected {
+    box-shadow: 3px 3px 3px black, inset 0 0 6px gold;
 }

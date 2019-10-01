@@ -7,52 +7,59 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CPU</title>
     <link rel="stylesheet" href="cpu.css">
+    <script src="piler.js"></script>
     <script src="cpu.js"></script>
 </head>
 
 <body>
     <div id="skisse">
-        <div class="firkant" id="cpu">
-            CPU
-            <div class="firkant" id="controll"  data-info="Controll unit">
+        <div>
+            <div class="firkant" id="cpu">
+                CPU
+            </div>
+            <div class="firkant" id="controll" data-info="Controll unit">
                 Controll Unit
             </div>
             <div class="firkant" id="processor">
                 Prosessor
-                <div class="firkant" id="registers" data-more="register" 
-                   data-info='Prosessorens arbeidsminne.    Typisk 8bit for tidlige cpuer, nå 64bit'>
-                    Registre
-                </div>
-                <div class="firkant blue" id="alu" data-info="Beregninger og logikk">
-                    Aritmetikk/Logikk
-                </div>
             </div>
-        </div>
-        <div class="firkant" id="memory" data-info="RAM">
-            HovedMinne
-        </div>
-        <div class="firkant" id="input" data-info="Keyboard, mus, nettverk">
-            Input
-        </div>
-        <div class="firkant" id="output" data-info="Skjerm, nettverk">
-            Output
-        </div>
+            <div class="firkant" id="registers" data-more="register"
+                data-info='Prosessorens arbeidsminne.    Typisk 8bit for tidlige cpuer, nå 64bit'>
+                Registre
+            </div>
+            <div class="firkant blue" id="alu" data-info="Beregninger og logikk">
+                Aritmetikk/Logikk
+            </div>
 
-        <div id="svg">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700">
-                <defs>
-                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
-                        <polygon fill="#f00" points="0 0, 10 3.5, 0 7" />
-                    </marker>
-                </defs>
-                <line x1="350" y1="100" x2="550" y2="100" stroke="#f00" stroke-width="2" />
-                <line x1="550" y1="100" x2="550" y2="180" stroke="#f00" stroke-width="2" marker-end="url(#arrowhead)" />
-            </svg>
+            <div class="firkant" id="memory" data-info="RAM">
+                HovedMinne
+            </div>
+            <div class="firkant" id="input" data-info="Keyboard, mus, nettverk">
+                Input
+            </div>
+            <div class="firkant" id="output" data-info="Skjerm, nettverk">
+                Output
+            </div>
+
+            <div id="svg">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700">
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                            <polygon fill="#f00" points="0 0, 10 3.5, 0 7" />
+                        </marker>
+                    </defs>
+                    <g>
+                        <line x1="350" y1="100" x2="550" y2="100" stroke="#f00" stroke-width="2" />
+                        <line x1="550" y1="100" x2="550" y2="180" stroke="#f00" stroke-width="2"
+                            marker-end="url(#arrowhead)" />
+                    </g>
+                </svg>
+            </div>
         </div>
     </div>
 
     <script>
-      setup();
+        setup();
     </script>
 
 </body>
