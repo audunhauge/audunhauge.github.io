@@ -1,0 +1,153 @@
+#controll {
+    left: 269px;
+    top: 180px;
+    height: 60px;
+}
+#processor {
+    background-color: rgb(247, 233, 114);
+    top: 269px;
+    left:225px;
+    border-radius: 10px;
+    width: 250px;
+    height: 200px;
+}
+#registers {
+    height: 50px;
+    top: 296px;
+    left: 278px;
+}
+#alu {
+    left: 278px;
+    top: 376px;
+    height: 60px;
+}
+#memory {
+    left: 281px;
+    top: 519px;
+}
+#input {
+    left: 3px;
+    top: 275px;
+}
+#output {
+    left: 547px;
+    top: 283px;
+}
+#cpu {
+    left: 178px;
+    top: 153px;
+    width: 350px;
+    height: 350px;
+    background-color: bisque;
+    border-radius: 10px;
+}
+
+#skisse {
+    position: relative;
+   
+}
+
+
+.firkant[data-info]:hover::after
+ {
+    z-index:200;
+    white-space: pre-wrap;
+    padding: 10px;
+    content: attr(data-info);
+    position: absolute;
+    right: -200px;
+    top:20px;
+    width: 200px;
+    height: 200px;
+    background-color: whitesmoke;
+    border: solid black 2px;
+    box-shadow: 0 0 6px black;
+    border-radius: 12px;
+}
+
+.firkant[data-more]:hover::after {
+    background-color: lightseagreen;
+    color: white;
+}
+
+
+.firkant {
+    text-align: center;
+    position: absolute;
+    left:40px;
+    top:20px;
+    width: 150px;
+    height: 100px;
+    background-color: rgba(0, 140, 255, 0.829);
+    border: solid black 2px;
+}
+
+.pil {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    left:0;
+    top:0;
+}
+.oh {
+  border-top: solid 2px red;
+  border-right: solid 2px red;
+}
+
+div.pil:nth-child(1) {
+    left:350px;
+    top: 100px;
+    width: 200px;
+    height: 98px;
+}
+div.pil:nth-child(2) {
+    left:400px;
+    top: 50px;
+    width: 200px;
+    height: 250px;
+}
+
+#svg {
+    pointer-events: none;
+    position: absolute;
+    left:0;
+    top:0;
+}
+#svg svg {
+    width: 700px;
+    height: 700px;
+    border:solid green 1px;
+}
+
+#panel {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    align-content: space-around;
+    position: absolute;
+    bottom:0px;
+    left:0px;
+    padding: 15px;
+    height: 30px;
+    width: 700px;
+    background-color: darkslategrey;
+}
+
+#panel span {
+    display: inline-block;
+    width: 6em;
+    text-align: center;
+    height: 1.2em;
+    border: solid gray 1px;
+    padding:2px;
+    background-color: gainsboro;
+    box-shadow: 2px 2px 2px gray;
+}
+#panel i {
+    display: inline-block;
+    padding: 3px;
+    color:white;
+}
+
+.firkant.selected {
+    box-shadow: 3px 3px 3px black, inset 0 0 6px gold;
+}
