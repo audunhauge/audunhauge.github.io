@@ -1,0 +1,77 @@
+.battery {
+    border:solid gray 1px;
+    min-width:20px;
+    min-height: 20px;
+    background-color: aquamarine;
+}
+
+.battery.left {
+    grid-area:left;
+}
+
+.battery.right {
+    grid-area:right;
+}
+
+.battery.center {
+    grid-area:center;
+}
+
+#diode {
+    display:grid;
+    grid-template-columns: 1fr 20fr 1fr;
+    grid-template-rows: 300px 100px 100px 100px;
+    grid-template-areas:
+    "left center right"
+    "left  ....  right"
+    "left lower  right"
+    "..   voltage  .."
+
+}
+
+#conductor {
+    position: relative;
+    border:solid blue 2px;
+    min-width:20px;
+    min-height: 20px;
+    grid-area:lower;
+}
+
+#voltage {
+    position: relative;
+    border:solid pink 2px;
+    grid-area:voltage;
+    display:grid;
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.electron {
+    position: absolute;
+    top:0;
+    left:0;
+    width:10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+
+.ohm {
+    position: absolute;
+    top:0;
+    left:0;
+    width:30px;
+    height: 30px;
+    background-color: yellow;
+    border-radius: 50%;
+}
+
+.hidden {
+    display:none;
+}
+
+.volt {
+    background-color: green;
+    margin:4px;
+    height: 2px;
+}

@@ -48,29 +48,6 @@
 }
 
 
-.firkant[data-info]:hover::after
- {
-    z-index:200;
-    white-space: pre-wrap;
-    padding: 10px;
-    content: attr(data-info);
-    position: absolute;
-    right: -200px;
-    top:20px;
-    width: 200px;
-    height: 200px;
-    background-color: whitesmoke;
-    border: solid black 2px;
-    box-shadow: 0 0 6px black;
-    border-radius: 12px;
-}
-
-.firkant[data-more]:hover::after {
-    background-color: lightseagreen;
-    color: white;
-}
-
-
 .firkant {
     text-align: center;
     position: absolute;
