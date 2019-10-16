@@ -18,3 +18,22 @@ img {
   width: 300px;
 }
 
+
+td,th,
+table {
+    border: solid gray 1px;
+    border-collapse: collapse;
+    padding: 8px;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: rgb(198, 221, 198);
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgba(53, 97, 148, 0.5);
+}
+
+th {
+    background-color:lightcyan;
+}
