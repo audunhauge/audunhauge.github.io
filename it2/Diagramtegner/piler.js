@@ -31,7 +31,7 @@ function setup() {
     if (state !== "move") {
       state = "move";
       flytt.innerHTML = "klikk for å slippe";
-    } else  {
+    } else {
       state = "off";
       movingDiv = null;
       flytt.innerHTML = "Du kan flytte";
@@ -62,6 +62,7 @@ function setup() {
   }
 
   function selectedDiv(e) {
+    console.log(e.offsetX, e.offsetY);
     let div = e.target;
     if (!div.classList.contains("firkant")) return;
     switch (state) {
@@ -107,6 +108,29 @@ function setup() {
     }
   }
 
+  let getSide = (p,c) => {
+    let mx = c.x;
+    let my = c.y;
+    let sides = [
+      [p.x + p.w / 2, p.y],
+      [p.x + p.w / 2, p.y + p.h],
+      [p.x, p.y + p.h / 2],
+      [p.x + p.w, p.y + p.h / 2]
+    ];
+    let closest = sides.reduce(
+      (s, e) => {
+        let [x, y] = e;
+        let dx = mx - x;
+        let dy = my - y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+        let min = s[0] > dist ? [dist, x, y] : s;
+        return min;
+      },
+      [Number.MAX_SAFE_INTEGER, 0, 0]
+    );
+    return closest;
+  };
+
   function makeArrow([d1, d2]) {
     let nuline = (x1, y1, x2, y2, mark = "") =>
       `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#f00" stroke-width="2" ${mark}/>`;
@@ -115,29 +139,29 @@ function setup() {
       x: +d1.offsetLeft,
       y: +d1.offsetTop,
       w: +d1.clientWidth,
-      h: +d1.clientHeight
+      h: +d1.clientHeight,
+      mx: +d1.dataset.x,
+      my: +d1.dataset.y
     };
     let p2 = {
       x: +d2.offsetLeft,
       y: +d2.offsetTop,
       w: +d2.clientWidth,
-      h: +d2.clientHeight
+      h: +d2.clientHeight,
+      mx: +d2.dataset.x,
+      my: +d2.dataset.y
     };
-    console.log(p1, p2);
-    let l1;
-    if (p1.y < p2.y && p1.x < p2.x) {
-      let x1 = Math.trunc(p1.x + p1.w / 2);
-      let y1 = p1.y + p1.h + 2;
-      let x2 = x1;
-      let y2 = Math.trunc(p2.y + p2.h / 2 - 2);
-      l1 = nuline(x1, y1, x2, y2);
-      x1 = p2.x - 20;
-      y1 = y2;
-      l1 += nuline(x2, y2, x1, y1,'marker-end="url(#arrowhead)"');
-    }
+    let c1 = { x:p2.x+p2.w/2,y:p2.y+p2.h/2 };
+    let c2 = { x:p1.x+p1.w/2,y:p1.y+p1.h/2 };
+    let [_a,x1,y1] = getSide(p1,c1);
+    let [_b,x2,y2] = getSide(p2,c2);
+
+    
+    let l1 = nuline(x1, y1, x2, y2, 'marker-end="url(#arrowhead)"');
     if (l1) {
       let g = nug();
-      g.innerHTML = l1;
+      g.innerHTML = l1 + `<circle cx="${close[1]}" cy="${close[2]}" r="2"/>`;
+
       svg.appendChild(g);
     }
   }
