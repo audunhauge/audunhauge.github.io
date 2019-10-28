@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bruk av canvas</title>
+    <link rel="stylesheet" href="graf.css">
+    <script src="graf.js"></script>
+</head>
+<body>
+    <div id="registrer">
+        <!--form id="skjema"-->
+            <div><label>Skriv inn temp
+                <input type="number" id="temp" placeholder="trykk enter for å lagre">
+            </label></div>
+            <div><button type="button" id="tegn">Tegn graf</button></div>
+        <!--/form-->
+    </div>
+    <div id="main">
+        <canvas id="bilde" width="500" height="500">
+
+        </canvas>
+    </div>
+
+    <script>
+      setup();
+    </script>
+</body>
+</html>
