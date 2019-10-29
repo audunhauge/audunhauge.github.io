@@ -1,0 +1,17 @@
+#box {
+    position: relative;
+    background-color: blue;
+    width: 800px;
+    height: 600px;
+}
+
+#ball {
+    position: absolute;
+    left:0;
+    top:0;
+    background-color: yellow;
+    width:30px;
+    height: 30px;
+    border-radius: 50%;
+    /*transition: 100ms;*/
+}
