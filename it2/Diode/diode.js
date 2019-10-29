@@ -228,6 +228,12 @@ class Ohm extends Movable {
         this.x = this.ox;
         this.y = this.oy;
     }
+    effectOn(other) {
+        other.px = other.x;
+        other.py = other.y;
+        return false;
+      }
+    
   }
 
 function setup() {
@@ -236,9 +242,18 @@ function setup() {
   let friction = 0.03;
   let power;
 
+  const SLOTS = 7;
+  const RESIST = 5;
+  const RSIZE = 7;
+  const VOLTAGE = 3.52;  // volts over battery
+
+  // oppdater css slik at antall diver vist i #volt stemmer
+  let root = document.documentElement;
+  root.style.setProperty("--slots",String(SLOTS));
+  root.style.setProperty("--resist",String(RSIZE) + "px");
+
   let volts = [];
 
-  let ohms = [];
 
   let manyThings = [];
   let box;
@@ -247,10 +262,10 @@ function setup() {
     let h = divMain.clientHeight;
     let w = divMain.clientWidth;
     box = new Sprite(null, 0, 0, w, h); // rammen rundt spillet
-    segment = w / 10; // used to count charges in 10 segments
+    segment = w / SLOTS; // used to count charges in SLOTS segments
   }
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < SLOTS; i++) {
     let div = document.createElement("div");
     div.className = "volt";
     divVoltage.appendChild(div);
@@ -272,12 +287,12 @@ function setup() {
 
   // vi lager noen hindringer (motstand - ohm)
   if (divMain) {
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < RESIST; i++) {
       let x = Math.random() * 400 + 500;
       let y = Math.random() * 100 + 5;
       let divOhm = document.createElement("div");
       divOhm.className = "ohm";
-      let ohm = new Ohm(divOhm, x, y, 30, 30, 0, 0);
+      let ohm = new Ohm(divOhm, x, y, RSIZE, RSIZE, 0, 0);
       divMain.appendChild(divOhm);
       manyThings.push(ohm);
     }
@@ -306,19 +321,19 @@ function setup() {
   }
 
   function voltage() {
-    let charges = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // bin the charges (note extra bin for edge)
+    let charges = new Array(SLOTS+1).fill(0);
     let theQuick = manyThings.filter(e => e.alive && e.charge === -1);
     if (theQuick.length > 0) {
       theQuick.forEach(e => {
         let segid = Math.trunc(e.x / segment);
         charges[segid] += e.charge;
-        volts[segid].style.height = 2 - 5*(charges[segid+1] - charges[segid]) + "px";
       });
       theQuick.forEach(e => {
         let segid = Math.trunc(e.x / segment);
-        let dv = charges[segid + 1] - charges[segid];
+        let dv = charges[segid + 1] - charges[segid] + VOLTAGE;
         e.ax = dv;
         e.accelerate(0.08);
+        volts[segid].style.height = 2 - 5*(charges[segid+1] - charges[segid]) + "px";
       });
     }
   }

@@ -1,3 +1,9 @@
+:root {
+    --slots: 50;
+    --resist: 10px;
+}
+
+
 .battery {
     border:solid gray 1px;
     min-width:20px;
@@ -42,7 +48,7 @@
     border:solid pink 2px;
     grid-area:voltage;
     display:grid;
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-columns: repeat(var(--slots), 1fr);
 }
 
 .electron {
@@ -60,10 +66,11 @@
     position: absolute;
     top:0;
     left:0;
-    width:30px;
-    height: 30px;
-    background-color: yellow;
+    width: var(--resist);
+    height: var(--resist);
+    background-color: teal;
     border-radius: 50%;
+    border:solid blue 1px;
 }
 
 .hidden {
