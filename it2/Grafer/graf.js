@@ -4,8 +4,10 @@ const temperaturListe = [];
 
 function setup() {
     let inpTemp = document.getElementById('temp');
+
     let canvas = document.getElementById('bilde');
     let ctx = canvas.getContext('2d');
+    
     inpTemp.focus();
 
     inpTemp.addEventListener("keypress", sjekkInput);
@@ -53,9 +55,13 @@ function setup() {
             ctx.stroke();
             ctx.fill();
             ctx.beginPath();
-            ctx.fillStyle = 'red';
             for (let i = 0; i < antall; i++) {
                 let temp = temperaturListe[i];
+                if (temp < 0 ) {
+                    ctx.fillStyle = 'red';
+                } else {
+                    ctx.fillStyle = 'green';
+                }
                 let y = 500 - (temp + 20) * 500 / 60;
                 let x = 10 + i * diff;
                 if (x > 460) {
