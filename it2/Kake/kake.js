@@ -54,7 +54,7 @@ function setup() {
 
     function tegnKakeDiagram() {
         let total = totalSum(matvareListe);
-        let start = 0;
+        let start = 0; 
         let fargeIndex = 0;
         ctx.clearRect(0, 0, 500, 500);
         for (let matvare of matvareListe) {
