@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +9,24 @@
     <link rel="stylesheet" href="kake.css">
     <script src="kake.js"></script>
 </head>
+
 <body>
-    <div id="skjema">
-        <div><label>Matvare<input type="text" id="mat"></label></div>
-        <div><label>Kcal<input type="number" id="kcal"></label></div>
-    </div>
-    <div id="kake">
-        <canvas id="diagram" width="500" height="500"></canvas>
+    <div id="main">
+        <div id="skjema">
+            <div>Skriv inn matvare og antall kcal. Trykk enter for å lagre.
+                Du kan slette siste datapunkt med sletteknappen.
+            </div>
+            <div class="inputDiv"><label>Matvare</label><input type="text" id="mat"></div>
+            <div class="inputDiv"><label>Kcal</label><input type="number" id="kcal"></div>
+            <div class="inputDiv"><button type="button" id="slett">Slett</button></div>
+        </div>
+        <div id="kake">
+            <canvas id="diagram" width="500" height="500"></canvas>
+        </div>
     </div>
     <script>
-       setup();
+        setup();
     </script>
 </body>
+
 </html>

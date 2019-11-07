@@ -1,3 +1,37 @@
 #diagram {
-    border:solid gray 1px;
+    border: solid gray 1px;
+}
+
+#main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+#skjema {
+    display: flex;
+    flex-flow: row wrap;
+    width: 16em;
+    justify-content: space-around;
+    margin: 3em;
+}
+
+#skjema .inputDiv {
+    flex: 1 1 45%;
+    display: flex;
+    margin-right: 1em;
+    padding-top: 10px;
+    max-height: 2em;
+}
+
+#skjema .inputDiv label {
+    flex: 1 1 30%;
+    margin-right: 10px;
+}
+
+#skjema .inputDiv input {
+    flex: 1 1 40%;
+}
+
+#skjema .inputDiv button {
+    flex: 1 1 50%;
 }
