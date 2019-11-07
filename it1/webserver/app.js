@@ -1,6 +1,6 @@
 // @ts-check
 
-const CONNECTSTRING = "postgres://admin:123simple@localhost/planner";
+const CONNECTSTRING = "postgres://audun:123@localhost/bib";
 
 const PORT = 3000;
 
@@ -34,7 +34,7 @@ async function runsql(res, obj) {
   let results;
   let sql = obj.sql;
   let data = obj.data;
-  await db.many(
+  await db.any(
     sql,data
   )
     .then(data => {

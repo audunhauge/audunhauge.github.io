@@ -16,30 +16,13 @@
       <div id="antall"></div>
       <p><a href="bokliste.html">Vis boklister</a></p>
     </header>
-    <form id="registrer" data-info="Registrer bok">
-      <label for="bokid">BOK-ID <input type="text" id="bokid"/></label>
-      <label for="isbn">ISBN <input type="text" id="isbn"/></label>
-      <label for="tittel">Tittel <input type="text" id="tittel"/></label>
-      <label for="forfatter"
-        >Forfatter <input type="text" id="forfatter"
-      /></label>
-      <label for="sjanger"
-        >Sjanger
-        <select name="sjanger" id="sjanger">
-          <option value="romaner">Romaner</option>
-          <option value="historie">Historie</option>
-          <option value="biografi">Biografier</option>
-          <option value="andre">Andre</option>
-        </select>
-      </label>
-      <label for="sider">Antall sider <input type="number" id="sider"/></label>
-      <button type="button" id="lagre">Lagre bok</button>
-    </form>
+    
 
     <db-form
-      fields="username,firstname,lastname,password"
-      table="users" >
-      <span slot="heading">Registrer bok</span>
+      fields="tillstand"
+      foreign="bok.bokid:tittel"
+      table="eksemplar" >
+      <span slot="heading">Registrer eksemplar</span>
     </db-form>
     <script>
       setup();

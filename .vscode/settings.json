@@ -1,3 +1,14 @@
 {
-    "javascript.validate.enable": true
+    "javascript.validate.enable": true,
+    "sqltools.connections": [
+        {
+            "askForPassword": false,
+            "database": "bib",
+            "dialect": "PostgreSQL",
+            "name": "bib",
+            "port": 5432,
+            "server": "localhost",
+            "username": "audun"
+        }
+    ]
 }

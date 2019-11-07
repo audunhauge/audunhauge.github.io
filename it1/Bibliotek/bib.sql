@@ -1,5 +1,4 @@
-CREATE TABLE laaner
-(
+CREATE TABLE laaner (
   laanerid serial primary key,
   fornavn text not null,
   etternavn text not null,
@@ -8,41 +7,38 @@ CREATE TABLE laaner
   tlf text,
   kjonn text
 );
-
-CREATE TABLE bok
-(
+CREATE TABLE bok (
   bokid serial primary key,
   tittel text not null,
   pdato date,
   isbn text,
-  antallSider int,
+  antallSider int check (antallsider > 0),
   sjanger text,
   spraak text,
-  forfatterid int
+  forfatterid int references forfatter
 );
-
-CREATE TABLE forfatter
-(
+CREATE TABLE gummi (
   forfatterid serial primary key,
   fornavn text not null,
   etternavn text not null,
   fdato date,
-  kjonn text
+  kjonn text check (
+    kjonn = 'm'
+    or kjonn = 'f'
+  )
 );
-
-CREATE TABLE eksemplar
-(
+CREATE TABLE eksemplar (
   eksemplarid serial primary key,
   tillstand text,
   bokid int
 );
-
-CREATE TABLE utlaan
-(
+CREATE TABLE utlaan (
   utlaanid serial primary key,
   udato date,
-  innlevert text default 'nei',
+  innlevert text default 'nei' check (
+    innlevert = 'ja'
+    or innlevert = 'nei'
+  ),
   laanerid int,
   eksemplarid int
 );
-
