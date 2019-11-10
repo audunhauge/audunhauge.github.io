@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registrer forfatter</title>
+    <script src="DbForm.js"></script>
+    <script src="DbTable.js"></script>
+</head>
+
+<body>
+
+    <db-table id="table" fields="fornavn,etternavn" sql="select * from laaner">
+        <span slot="caption">Lånere</span>
+    </db-table>
+
+    <db-form id="form" fields="fornavn,etternavn" table="laaner">
+        <span slot="heading">Registrer Låner</span>
+    </db-form>
+
+    <script>
+      let dbForm = document.getElementById("form");
+      let dbTable = document.getElementById("table");
+      dbForm.addEventListener("dbUpdate", () => {
+          dbTable.redraw();
+      })
+    </script>
+
+</body>
+
+</html>
