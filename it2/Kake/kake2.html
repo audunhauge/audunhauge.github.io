@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="PieChart.js"></script>
+    <script src="PieChartSVG.js"></script>
+</head>
+
+<body>
+    <pie-chart heading="Middag" id="middag" width="495"></pie-chart>
+    <svg-chart font="yellow" heading="Kvelds" id="kvelds" width="495">
+        </pie-chart>
+
+        <script>
+
+            let middag = document.getElementById("middag");
+            middag.init([
+                { label: "ost", value: 120 },
+                { value: 16 }
+
+            ]);
+            let kvelds = document.getElementById("kvelds");
+            kvelds.init([
+                { value: 312 },
+                { label: "brød", value: 212 },
+                { label: "post", value: 412 },
+                { label: "lost", value: 612, color: "black" },
+
+            ]);
+        </script>
+</body>
+
+</html>

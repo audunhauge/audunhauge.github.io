@@ -1,0 +1,21 @@
+div.soyle {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: lightskyblue;
+    border: solid gray 1px;
+    width: 18px;
+    transform: translate(0,0);
+}
+
+div.soyle span {
+    display: inline-block;
+    transform: translate(0, -25px) rotate(-45deg);
+}
+
+#grafikk2 {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    margin-bottom: 100px;
+}

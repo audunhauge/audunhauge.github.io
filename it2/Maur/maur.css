@@ -1,0 +1,28 @@
+div.maur {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 5px;
+    background-color: red;
+    transform: translate(0,0) rotate(0deg);
+}
+
+#game {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    border: solid gray 1px;
+}
+
+#fing {
+    position: absolute;
+    top:0;
+    left:0;
+    height: 40px;
+    width: 40px;
+    background-color: sandybrown;
+    border-radius: 9px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
