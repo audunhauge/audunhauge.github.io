@@ -9,6 +9,15 @@
             "port": 5432,
             "server": "localhost",
             "username": "audun"
+        },
+        {
+            "database": "bib",
+            "dialect": "PostgreSQL",
+            "name": "bib",
+            "password": "123",
+            "port": 5432,
+            "server": "localhost",
+            "username": "bib"
         }
     ]
 }

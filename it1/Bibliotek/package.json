@@ -1,0 +1,12 @@
+{
+  "name": "webserver",
+  "version": "1.0.0",
+  "description": "server for bib",
+  "main": "app.js",
+  "author": "audun",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "pg-promise": "^8.5.1"
+  }
+}

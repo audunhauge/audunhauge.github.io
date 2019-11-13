@@ -7,17 +7,8 @@ CREATE TABLE laaner (
   tlf text,
   kjonn text
 );
-CREATE TABLE bok (
-  bokid serial primary key,
-  tittel text not null,
-  pdato date,
-  isbn text,
-  antallSider int check (antallsider > 0),
-  sjanger text,
-  spraak text,
-  forfatterid int references forfatter
-);
-CREATE TABLE gummi (
+
+CREATE TABLE forfatter (
   forfatterid serial primary key,
   fornavn text not null,
   etternavn text not null,
@@ -27,11 +18,24 @@ CREATE TABLE gummi (
     or kjonn = 'f'
   )
 );
+
+CREATE TABLE bok (
+  bokid serial primary key,
+  tittel text not null,
+  pdato date,
+  isbn text,
+  antallSider int check (antallsider > 0),
+  sjanger text,
+  spraak text,
+  forfatterid int references forfatter (forfatterid)
+);
+
 CREATE TABLE eksemplar (
   eksemplarid serial primary key,
   tillstand text,
-  bokid int
+  bokid int references bok (bokid)
 );
+
 CREATE TABLE utlaan (
   utlaanid serial primary key,
   udato date,
@@ -39,6 +43,6 @@ CREATE TABLE utlaan (
     innlevert = 'ja'
     or innlevert = 'nei'
   ),
-  laanerid int,
-  eksemplarid int
+  laanerid int references laaner (laanerid),
+  eksemplarid int references eksemplar (eksemplarid)
 );
