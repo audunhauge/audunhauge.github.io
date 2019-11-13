@@ -5,6 +5,7 @@ div.maur {
     width: 20px;
     height: 5px;
     background-color: red;
+    opacity: 1;
     transform: translate(0,0) rotate(0deg);
 }
 
