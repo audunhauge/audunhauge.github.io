@@ -1,3 +1,5 @@
+-- drop table bok,laaner,forfatter,eksemplar,utlaan cascade;
+
 CREATE TABLE laaner (
   laanerid serial primary key,
   fornavn text not null,

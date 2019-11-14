@@ -81,7 +81,7 @@ function setup() {
 
     let fing = new Finger(divFing, 250, 250, 40, 40);
 
-    setInterval(animate, 40);
+    setInterval(animate, 80);
 
     function animate() {
         if (alleMaur.length < 10) {
