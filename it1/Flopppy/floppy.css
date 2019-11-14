@@ -1,0 +1,18 @@
+#brett {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    background-color: aqua;
+}
+
+#fuggel {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background-image: url("floppy.jpg");
+    background-position: center;
+    background-size: 90px;
+    border: solid gray 1px;
+    left: 180px;
+    top: 180px;
+}
