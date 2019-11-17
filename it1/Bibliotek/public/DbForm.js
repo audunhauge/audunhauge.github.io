@@ -50,6 +50,7 @@
         span.foreign {
           color: green;
           font-size: 0.9em;
+          padding-right:3px;
         }
         
         #lagre {
@@ -59,8 +60,9 @@
         <form>
           <div class="heading"><slot name="heading"></slot></div>
           <div id="fields"></div>
-          <div id="foreign"></div>
-          <label> &nbsp; <button type="button" id="save"><slot name="save">Save</slot></label>
+          <div id="foreign">
+          </div>
+          <label> &nbsp; <button type="button" id="save"><slot name="save">Save</slot></button></label>
         </form>
     `;
 
@@ -118,7 +120,7 @@
           use = use || field;
           let text = use.charAt(0).toUpperCase() + use.substr(1);
           let label = document.createElement("label");
-          label.innerHTML = `${text} <span class="foreign">fra ${table}</span> <select id="${field}"></select>`;
+          label.innerHTML = `${text} <span class="foreign">fra&nbsp;${table}</span> <select id="${field}"></select>`;
           divForeign.appendChild(label);
           this.makeSelect(table,field,use);
 
@@ -163,7 +165,11 @@
       };
       console.log(sql, data);
       fetch("runsql", init)
-      .then( () => this.dispatchEvent(new Event("dbUpdate")))
+      .then( () => this.dispatchEvent(new CustomEvent('dbUpdate', {
+        bubbles: true,
+        composed: true,
+        detail: "upsert"
+      })))
       .catch(e => console.log(e.message));
     }
   }

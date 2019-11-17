@@ -14,9 +14,6 @@
 </head>
 
 <body>
-    <!--Du kan lett legge til nye menyvalg
-        Bare sørg for at du oppgir en data-link = htmlsida du vil koble til
-    -->
     <home-bar heading="Skolebibliotek PÅ Skeisvang" crumb="låner">
         <li data-link="forfatter">Registrer forfatter</li>
         <li data-link="bok">Registrer bok</li>
@@ -25,27 +22,26 @@
     </home-bar>
 
     <div id="main">
-
-        <!--angi feltnavn du ønsker å bruke i fields="" 
-            viser en liste over lånere
-        -->
-        <db-table id="table" fields="fornavn,etternavn" sql="select * from laaner">
+        <!-- angi feltnavn du ønsker å bruke i fields="" -->
+        <db-table id="table" fields="laanerid,eksemplarid" sql="select * from utlaan">
             <span slot="caption">Lånere</span>
         </db-table>
 
         <!-- angi feltnavn du ønsker å bruke i fields=""  -->
-        <db-form id="form" fields="fornavn,etternavn" table="laaner">
-            <span slot="heading">Registrer Låner</span>
+        <db-form id="form" 
+                 foreign="laaner.laanerid:fornavn,eksemplar.eksemplarid:tittel" 
+                 table="utlaan">
+            <span slot="heading">Registrer Utlån</span>
         </db-form>
-        
     </div>
 
     <script>
-        // dersom ny post lagres - da tegner vi opp tabellen på nytt
         let dbTable = document.getElementById("table");
         addEventListener("dbUpdate", () => {
             dbTable.redraw();
         })
+
+
     </script>
 
 </body>
