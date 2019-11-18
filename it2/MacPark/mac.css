@@ -1,0 +1,33 @@
+#registrer {
+    display: grid;
+    grid-template-columns: 1fr;
+    border: gray solid 1px;
+}
+
+div.display {
+    position: relative;
+    width: 25em;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    border: solid gray 1px;
+    padding: 20px;
+    margin-top: 2em;
+}
+
+div.display > div {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    color: lightcoral;
+}
+
+div.display > div > label {
+    color: green;
+}
+
+div.display::after {
+  color: blue;
+  position: absolute;
+  right: 50px;
+  top: -22px;
+  content: "Nr " attr(data-idx);
+}

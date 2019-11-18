@@ -1,0 +1,61 @@
+KRAVSPESIFIKASJON
+
+Hensikt
+  de på it skal kunne få god oversikt over maskinparken til
+  leraradne.
+
+
+Funksjonelle krav
+    1. velger lærer
+    2. får se info om dennes mac
+
+    3. Velger maskin (årstall/hd/macversjon)
+    4. får en liste over lærere som har slik maskin
+
+    5. sortert liste over siste service
+
+    6. Legge inn feilmelding på en maskin
+    6.1 mangler program
+    6.2 mangler opplæring
+    6.3 mangler minne
+    6.4 mangler ledig hd plass 
+
+    7. hvem mangler strøm
+
+Wireframe
+
+    1. Startvindu
+
+        velg lærer |___________\/_| 
+
+
+    2. Ved valg av lærer vises info om maskin
+
+        lærernavn   : Ole Olsen
+        os-versjon  : mojave 14.3
+        minne       : 8 Gb
+        hd          : 120Gb, 37Gb ledig
+        Modell      : macAir 2015
+
+    3. Skriv inn data om en lærermaskin
+
+        lærernavn   : Ole Olsen
+        os-versjon  : mojave 14.3
+        minne       : 8 Gb
+        hd          : 120Gb, 37Gb ledig
+        Modell      : macAir 2015
+
+            |Lagre|
+
+Pseudocode
+     3. Skriv inn data
+
+     Ved klikk på lagre
+       les navn
+       les os
+       les minne
+       les hd total
+       les hd ledig
+       les Modell
+       pakk leste data inn i en klasse
+       lagre pakken med data i en array 
