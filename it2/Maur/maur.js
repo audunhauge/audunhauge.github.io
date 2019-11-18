@@ -84,7 +84,7 @@ function setup() {
     setInterval(animate, 80);
 
     function animate() {
-        if (alleMaur.length < 10) {
+        if (alleMaur.length < 1000) {
             let div = document.createElement("div");
             div.className = "maur";
             divGame.appendChild(div);
