@@ -57,7 +57,5 @@ Pseudocode
        les hd total
        les hd ledig
        les Modell
-       lagre leste data i en array eller arrays
-
-
-  
+       pakk leste data inn i en klasse
+       lagre pakken med data i en array 
