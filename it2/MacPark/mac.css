@@ -1,0 +1,5 @@
+#registrer {
+    display: grid;
+    grid-template-columns: 1fr;
+    border: gray solid 1px;
+}
