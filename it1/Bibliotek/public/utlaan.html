@@ -8,6 +8,7 @@
     <title>Registrer forfatter</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="DbForm.js"></script>
+    <script src="DbForeign.js"></script>
     <script src="DbTable.js"></script>
     <script src="Homebar.js"></script>
     <link rel="stylesheet" href="bib.css">
@@ -29,9 +30,15 @@
 
         <!-- angi feltnavn du ønsker å bruke i fields=""  -->
         <db-form id="form" 
-                 foreign="laaner.laanerid:fornavn,eksemplar.eksemplarid:tittel" 
+                 foreign="laaner.laanerid:fornavn" 
                  table="utlaan">
             <span slot="heading">Registrer Utlån</span>
+            <db-foreign label="fornavn" foreign="laanerid" 
+                   sql="select laanerid,fornavn from laaner">
+            </db-foreign>
+            <db-foreign label="tittel" foreign="eksemplarid" 
+                   sql="select e.eksemplarid,b.tittel from eksemplar e inner join bok b on (e.bokid = b.bokid)">
+            </db-foreign>
         </db-form>
     </div>
 

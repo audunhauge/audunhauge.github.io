@@ -62,6 +62,9 @@
           <div id="fields"></div>
           <div id="foreign">
           </div>
+          <div>
+            <slot></slot>
+          </div>
           <label> &nbsp; <button type="button" id="save"><slot name="save">Save</slot></button></label>
         </form>
     `;
