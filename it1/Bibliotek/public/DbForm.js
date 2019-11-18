@@ -1,6 +1,6 @@
 // @ts-check
 
-(function () {
+(function() {
   const template = document.createElement("template");
   template.innerHTML = `
         <style>
@@ -62,7 +62,7 @@
           <div id="fields"></div>
           <div id="foreign">
           </div>
-          <div>
+          <div id="alien">
             <slot></slot>
           </div>
           <label> &nbsp; <button type="button" id="save"><slot name="save">Save</slot></button></label>
@@ -76,8 +76,16 @@
       this._root = this.attachShadow({ mode: "open" });
       this.shadowRoot.appendChild(template.content.cloneNode(true));
       this._root.querySelector("#save").addEventListener("click", e => {
-        let inputs = Array.from(this._root.querySelectorAll("#fields input")).
-            concat(Array.from(this._root.querySelectorAll("#foreign select")));
+        // aliens will pick out any db-foreign placed into alien-slot
+        let aliens = Array.from(this._root.querySelectorAll("#alien slot")).map(
+          e => e.assignedElements()[0]
+        );
+        let foreign = Array.from(
+          this._root.querySelectorAll("#foreign select")
+        );
+        let inputs = Array.from(this._root.querySelectorAll("#fields input"))
+          .concat(foreign)
+          .concat(aliens);
         let names = inputs.map(e => e.id);
         let valueList = names.map(e => `$[${e}]`).join(",");
         let namelist = names.join(",");
@@ -119,24 +127,23 @@
         let fieldlist = newValue.split(",");
         for (let i = 0; i < fieldlist.length; i++) {
           let [table, fields] = fieldlist[i].split(".");
-          let [field,use] = fields.split(":");
+          let [field, use] = fields.split(":");
           use = use || field;
           let text = use.charAt(0).toUpperCase() + use.substr(1);
           let label = document.createElement("label");
           label.innerHTML = `${text} <span class="foreign">fra&nbsp;${table}</span> <select id="${field}"></select>`;
           divForeign.appendChild(label);
-          this.makeSelect(table,field,use);
-
+          this.makeSelect(table, field, use);
         }
       }
     }
 
     // assumes foreign key has same name in both tables
     // bok.forfatterid references forfatter.forfatterid
-    makeSelect(table,field,use) {
-      let fields = (field === use) ? field : `${field}, ${use}`;
+    makeSelect(table, field, use) {
+      let fields = field === use ? field : `${field}, ${use}`;
       let sql = `select ${fields} from ${table} order by ${use}`;
-      let data = '';
+      let data = "";
       let init = {
         method: "POST",
         credentials: "include",
@@ -145,17 +152,20 @@
           "Content-Type": "application/json"
         }
       };
-      fetch("runsql", init).then(r => r.json()).then(data => {
-        console.log(data);
-        let list = data.results;
-        if (list.length) {
-          let options = list.map(e => `<option value="${e[field]}">${e[use]}</option>`).join('');
-          this._root.querySelector(`#${field}`).innerHTML = options;
-        }
-      });
+      fetch("runsql", init)
+        .then(r => r.json())
+        .then(data => {
+          console.log(data);
+          let list = data.results;
+          if (list.length) {
+            let options = list
+              .map(e => `<option value="${e[field]}">${e[use]}</option>`)
+              .join("");
+            this._root.querySelector(`#${field}`).innerHTML = options;
+          }
+        });
       //.catch(e => console.log(e.message));
     }
-
 
     upsert(sql = "", data) {
       let init = {
@@ -168,12 +178,16 @@
       };
       console.log(sql, data);
       fetch("runsql", init)
-      .then( () => this.dispatchEvent(new CustomEvent('dbUpdate', {
-        bubbles: true,
-        composed: true,
-        detail: "upsert"
-      })))
-      .catch(e => console.log(e.message));
+        .then(() =>
+          this.dispatchEvent(
+            new CustomEvent("dbUpdate", {
+              bubbles: true,
+              composed: true,
+              detail: "upsert"
+            })
+          )
+        )
+        .catch(e => console.log(e.message));
     }
   }
 

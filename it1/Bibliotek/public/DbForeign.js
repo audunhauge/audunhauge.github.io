@@ -42,10 +42,14 @@
       console.log(this.sql);
     }
 
-    get value() {
+    get id() {
       let select = this._root.querySelector("#select > select");
-      return select.nodeValue;
+      return select.id;
     }
+    get value() {
+        let select = this._root.querySelector("#select > select");
+        return select.value;
+      }
 
     attributeChangedCallback(name, oldValue, newValue) {
       let lbl = this._root.querySelector("#select > span");

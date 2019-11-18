@@ -19,6 +19,7 @@
     constructor() {
       super();
       this.table = "";
+      this.delete = "";
       this._root = this.attachShadow({ mode: "open" });
       this.shadowRoot.appendChild(template.content.cloneNode(true));
       addEventListener("dbUpdate", e => {
