@@ -11,8 +11,8 @@ div.maur {
 
 #game {
     position: relative;
-    width: 500px;
-    height: 500px;
+    width: 1000px;
+    height: 800px;
     border: solid gray 1px;
 }
 

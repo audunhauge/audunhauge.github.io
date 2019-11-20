@@ -4,7 +4,24 @@
   const template = document.createElement("template");
   template.innerHTML = `
           <style>
-          
+            table {
+              width: 100%;
+              border-collapse:collapse;
+            }
+            thead {
+              background-color: var(--head, beige);
+            }
+            td,th {
+              border: solid gray 1px;
+              padding: 2px;
+            }
+            tr:nth-child(odd) {
+              background-color: var(--alternate, lightsteelblue);
+            }
+            caption {
+              color:blue;
+              font-size: 1.1em;
+            }
           </style>
           <table>
             <caption><slot name="caption"></slot></caption>
@@ -19,15 +36,16 @@
     constructor() {
       super();
       this.table = "";
+      this.delete = "";
       this._root = this.attachShadow({ mode: "open" });
       this.shadowRoot.appendChild(template.content.cloneNode(true));
       addEventListener("dbUpdate", e => {
-        console.log("Need to update");
+        if (this.update === "true") this.redraw();
       });
     }
 
     static get observedAttributes() {
-      return ["fields", "sql"];
+      return ["fields", "sql", "update"];
     }
 
     connectedCallback() {
@@ -50,6 +68,9 @@
       }
       if (name === "sql") {
         this.sql = newValue;
+      }
+      if (name === "update") {
+        this.update = newValue;
       }
     }
 
