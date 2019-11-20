@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Registrer forfatter</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="DbForm.js"></script>
+    <script src="DbInsert.js"></script>
     <script src="DbForeign.js"></script>
     <script src="DbTable.js"></script>
     <script src="Homebar.js"></script>
@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <home-bar heading="Skolebibliotek PÅ Skeisvang" crumb="utlån">
+    <home-bar heading="Skolebibliotek Skeisvang" crumb="utlån">
         <li data-link="forfatter">Registrer forfatter</li>
         <li data-link="bok">Registrer bok</li>
         <li data-link="laaner">Registrer låner</li>
@@ -24,8 +24,11 @@
 
     <div id="main">
         <!-- angi feltnavn du ønsker å bruke i fields="" -->
-        <db-table id="table" fields="fornavn,etternavn,tittel,innlevert" 
-             sql="select l.fornavn,l.etternavn,b.tittel,e.tillstand,u.innlevert 
+        <db-table 
+            id="table" 
+            update="true"
+            fields="fornavn,etternavn,tittel,innlevert" 
+            sql="select l.fornavn,l.etternavn,b.tittel,e.tillstand,u.innlevert 
              from laaner l inner join utlaan u on (l.laanerid = u.laanerid) 
              inner join eksemplar e on (e.eksemplarid = u.eksemplarid) inner join bok b on (b.bokid=e.bokid)"
              >
@@ -33,7 +36,7 @@
         </db-table>
 
         <!-- angi feltnavn du ønsker å bruke i fields=""  -->
-        <db-form id="form" 
+        <db-insert id="form" 
                 fields="innlevert"
                 foreign="laaner.laanerid:fornavn" 
                 table="utlaan">
@@ -41,17 +44,8 @@
             <db-foreign label="tittel" foreign="eksemplarid" 
                    sql="select e.eksemplarid,b.tittel from eksemplar e inner join bok b on (e.bokid = b.bokid)">
             </db-foreign>
-        </db-form>
+        </db-insert>
     </div>
-
-    <script>
-        let dbTable = document.getElementById("table");
-        addEventListener("dbUpdate", () => {
-            dbTable.redraw();
-        })
-
-
-    </script>
 
 </body>
 

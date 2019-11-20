@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Registrer bok</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="DbForm.js"></script>
+    <script src="DbInsert.js"></script>
     <script src="DbTable.js"></script>
     <script src="Homebar.js"></script>
     <link rel="stylesheet" href="bib.css">
@@ -34,12 +34,12 @@
         </db-table>
 
         <!-- angi feltnavn du ønsker å bruke i fields=""  -->
-        <db-form    id="form" 
+        <db-insert  id="form" 
                     fields="tittel,antallsider" 
                     foreign="forfatter.forfatterid:fornavn"
                     table="bok">
             <span slot="heading">Registrer Bok</span>
-        </db-form>
+        </db-insert>
 
     </div>
 

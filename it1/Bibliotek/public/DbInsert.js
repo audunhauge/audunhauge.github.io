@@ -69,17 +69,28 @@
         </form>
     `;
 
-  class DBForm extends HTMLElement {
+  // extend to more datatypes if needed
+  const getval = e => {
+    switch(e.type) {
+      case "checkbox":
+        return e.checked;
+      default:
+        return e.value;
+    }
+  }
+
+  class DBInsert extends HTMLElement {
     constructor() {
       super();
       this.table = "";
       this._root = this.attachShadow({ mode: "open" });
       this.shadowRoot.appendChild(template.content.cloneNode(true));
+      // this is code for creating sql insert statement
       this._root.querySelector("#save").addEventListener("click", e => {
         // aliens will pick out any db-foreign placed into alien-slot
         let aliens = Array.from(this._root.querySelectorAll("#alien slot")).map(
           e => e.assignedElements()[0]
-        );
+        ).filter(e => e !== undefined);
         let foreign = Array.from(
           this._root.querySelectorAll("#foreign select")
         );
@@ -89,7 +100,8 @@
         let names = inputs.map(e => e.id);
         let valueList = names.map(e => `$[${e}]`).join(",");
         let namelist = names.join(",");
-        let data = inputs.reduce((s, e) => ((s[e.id] = e.value), s), {});
+        // get value of input element - handles checkboxes
+        let data = inputs.reduce((s, e) => ((s[e.id] = getval(e)), s), {});
         let table = this.table;
         let sql = `insert into ${table} (${namelist}) values (${valueList})`;
         this.upsert(sql, data);
@@ -191,5 +203,5 @@
     }
   }
 
-  window.customElements.define("db-form", DBForm);
+  window.customElements.define("db-insert", DBInsert);
 })();

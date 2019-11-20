@@ -41,9 +41,9 @@ CREATE TABLE eksemplar (
 CREATE TABLE utlaan (
   utlaanid serial primary key,
   udato date,
-  innlevert text default 'nei' check (
-    innlevert = 'ja'
-    or innlevert = 'nei'
+  innlevert text default 'false' check (
+    innlevert = 'true'
+    or innlevert = 'false'
   ),
   laanerid int references laaner (laanerid),
   eksemplarid int references eksemplar (eksemplarid)

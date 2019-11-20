@@ -20,4 +20,22 @@
 
 #form {
     grid-area: editor;
+    background-color: bis;
 }
+
+db-table {
+    width: 20em;
+   --alternate: slategray;
+   --head: bisque;
+}
+
+@media screen and (max-width: 850px) {
+    #username , #info { display:none; }
+    #main {
+        grid-template-columns: 1fr;
+        grid-template-rows: 300px;
+        grid-template-areas:
+        "editor"
+        "view";
+    }
+  }

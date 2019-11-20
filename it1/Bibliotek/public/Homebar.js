@@ -89,9 +89,13 @@ class HomeBar extends HTMLElement {
               #username , #info, #crumb { display:none; }
               #home {grid-template-columns: 1fr 1fr 3fr;}
             }
-            @media screen and (max-width: 550px) {
+            @media screen and (max-width: 750px) {
               #username , #info { display:none; }
-              #home {grid-template-columns: 1fr 1fr 3fr;}
+              #home {grid-template-columns: 1fr  1fr 3fr;}
+            }
+            @media screen and (max-width: 550px) {
+              #username , #info, #crumb { display:none; }
+              #home {grid-template-columns: 1fr 2fr; }
             }
           </style>
         `;
