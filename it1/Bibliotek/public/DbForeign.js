@@ -26,6 +26,14 @@
       this.sql = "";
       this._root = this.attachShadow({ mode: "open" });
       this.shadowRoot.appendChild(template.content.cloneNode(true));
+      this._root.querySelector("#select > select").addEventListener("change", (e) => {
+        this.dispatchEvent(
+          new CustomEvent("dbChange", {
+            bubbles: true,
+            composed: true,
+            detail: this.id
+          }) );
+      });
     }
 
     /**
