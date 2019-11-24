@@ -1,0 +1,82 @@
+KRAVSPESIFIKASJON
+
+Hensikt
+  En forening skal ha en forestilling hvor medlemmen skal stilles opp på 
+  en scene. De vil ha en nettside hvor scenografen kan legge inn alle deltagerene
+  og plassere dem i en rute på 800x600 px. Se ascii skisse - fig.1
+  .__________________________________________________________.
+  |                                                          |
+  |                                    petter                |
+  |             ole                                          |
+  |                                                          |
+  |                            lise                          |
+  |                                                          |
+  |                                                          |
+  |       kari                        lars n.                |
+  |                                                          |
+  |           lars p.                                        |
+  |                                      nina                |
+  |                     jan ove                              |
+  |__________________________________________________________|
+                           fig.1
+
+  Navnene skal vises med en ramme eller farge - ikke vist i fig.1
+
+Funksjonelle krav
+    1. scenografen skal kunne registrere medlemmer med
+         navn, høyde, kjønn, x, y
+       (x,y) er startposisjonen som skal brukes i diagrammet (fig.1)
+    2. Ved klikk på knapp skal diagrammet tegnes/vises (det kan være en skjult div)
+
+    3. Ved mouse-over på en person skal høyde og kjønn vises (som tooltip)
+       Her er title="175cm M" godt nok (innebygd effekt for html) (1p)
+    4. Ved klikk på en person skal bakgrunnen utheves  og person skal kunne
+       flyttes med piltaster, avsluttes med nytt klikk (2p)
+    5. Siste person skal kunne slettes (1p)
+    6. Lagre plassering til localStorage (og lese denne ved start) (2p)
+    7. Alle personer vises med egen farge (1p)
+    8. Automatisk plassering - ved klikk på knapp skal medlemmene
+       fordeles jevnt utover (2p)
+
+Wireframe
+
+    Registrering av medlem:
+       navn     ________________ 
+       kjønn    ________________ 
+       høyde    ________________ 
+       x        ________________ 
+       y        ________________ 
+          |lagre|
+
+Pseudocode
+
+1. Registrering av person
+    ved klikk på lagre
+      les skjema-data
+      lag en ny div og legg den til divMain
+      gi div.className navn som er en css regel (.person { })
+      lag en ny instance av klassen
+      dytt instansen inn i tabellen medlemsliste
+
+    
+2. Tegning av diagram
+    dersom medlemsliste ikke er tom
+      gjør diagrammet synlig
+      for medlem of medlemsliste 
+        medlem.render()
+
+
+Alle må løse oppgave 1. og 2.
+Forventer en løsning slik som vist i teoriboka
+  audun.gitbook.io - klasser elev og Sprite
+  Se også maur.js og mac.js for bruk av klasser og registrerings-skjema.
+Du skal lage en klasse for medlemmer og en funksjon for å 
+rendre et medlem på skjermen. Kombiner løsningen for MacInfo og
+eksemplet med Sprite fra teoriboka.
+
+Dere kan velge fritt mellom 
+3,4,5,6,7 og 8 - men velg oppgaver slik at du får tilsammen 2p.
+Du trenger dermed 2*(1p) eller 1*(2p) oppgaver.
+
+Spør om hjelp dersom noe er uklart - dette er tilbakemelding underveis -
+ikke en prøve som påvirker standpunkt.

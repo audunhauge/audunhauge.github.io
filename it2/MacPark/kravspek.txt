@@ -59,3 +59,6 @@ Pseudocode
        les Modell
        pakk leste data inn i en klasse
        lagre pakken med data i en array 
+
+       for alle mac i liste-over-macer 
+          skriv ut mac.info 
