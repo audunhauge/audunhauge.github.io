@@ -79,7 +79,7 @@
     }
   }
 
-  class DBInsert extends HTMLElement {
+  class DBUpdate extends HTMLElement {
     constructor() {
       super();
       this.table = "";
@@ -148,6 +148,7 @@
         }
       }
     }
+    
 
     // assumes foreign key has same name in both tables
     // bok.forfatterid references forfatter.forfatterid
@@ -202,5 +203,5 @@
     }
   }
 
-  window.customElements.define("db-insert", DBInsert);
+  window.customElements.define("db-update", DBUpdate);
 })();

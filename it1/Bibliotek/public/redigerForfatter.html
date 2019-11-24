@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Registrer forfatter</title>
+    <title>Rediger forfatter</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="DbInsert.js"></script>
-    <script src="DbTable.js"></script>
+    <script src="DbUpdate.js"></script>
+    <script src="DbForeign.js"></script>
     <script src="Homebar.js"></script>
     <link rel="stylesheet" href="bib.css">
 </head>
@@ -17,7 +17,7 @@
     <!--Du kan lett legge til nye menyvalg
         Bare sørg for at du oppgir en data-link = htmlsida du vil koble til
     -->
-    <home-bar heading="Skolebibliotek Skeisvang" crumb="forfatter">
+    <home-bar heading="Skolebibliotek Skeisvang" crumb="edit-forfatter">
         <li data-link="forfatter">Registrer forfatter</li>
         <li data-link="bok">Registrer bok</li>
         <li data-link="laaner">Registrer låner</li>
@@ -31,17 +31,15 @@
             viser en liste over lånere
             update="true" gjør at tabellen tegnes på nytt dersom nye blir lagt til
         -->
-        <db-table id="table" 
-            update="true"
-            fields="fornavn,etternavn" 
-            sql="select * from forfatter">
-            <span slot="caption">Forfattere</span>
-        </db-table>
+
 
         <!-- angi feltnavn du ønsker å bruke i fields=""  -->
-        <db-insert id="form" fields="fornavn,etternavn" table="forfatter">
-            <span slot="heading">Registrer Forfatter</span>
-        </db-insert>
+        <db-update id="form" fields="fornavn,etternavn" table="forfatter">
+            <span slot="heading">Rediger Forfatter</span>
+            <db-foreign label="fornavn" foreign="forfatterid"
+                sql="select forfatterid,fornavn from forfatter order by fornavn">
+            </db-foreign>
+        </db-update>
 
     </div>
 
