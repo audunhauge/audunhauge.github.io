@@ -27,7 +27,8 @@ app.post("/runsql", function (req, res) {
 });
 
 app.listen(3000, function () {
-  console.log(`Quiz server started on port ${PORT}`);
+  console.log(`Serveren min har startet på port ${PORT}
+  Du kan koble deg til på http://localhost:${PORT}`);
 });
 
 async function runsql(res, obj) {

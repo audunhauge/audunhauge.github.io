@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Scenograf</title>
+    <link rel="stylesheet" href="scene.css">
+    <script src="scene.js"></script>
+</head>
+
+<body>
+    <div>
+        <div id="registrer">
+            <div><label>Navn</label><input type="text" id="navn"></div>
+            <div><label>Kjønn</label><input type="text" id="kjonn"></div>
+            <div><label>Høyde</label><input type="text" id="hoyde"></div>
+            <div><label>x</label><input type="number" id="x"></div>
+            <div><label>y</label><input type="number" id="y"></div>
+            <div><button id="lagre">Lagre</button></div>
+            <div><button id="tegn">Tegn</button></div>
+            <div><button id="slett">Slett</button></div>
+            <div><button id="fordel">Fordel</button></div>
+        </div>
+        <div id="main" class="hidden">
+
+        </div>
+    </div>
+    <script>
+        setup();
+    </script>
+</body>
+
+</html>

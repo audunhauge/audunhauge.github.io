@@ -1,0 +1,53 @@
+body > div {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+#registrer {
+    position: relative;
+    margin: 3em;
+    width: 20em;
+    background-color: rgb(228, 222, 222);
+    border: solid gray 1px;
+    border-radius: 5px;
+}
+#registrer:after {
+    position: absolute;
+    content:"Registrer medlem";
+    top: -20px;
+    right: 2em;
+    color:blue;
+}
+
+#registrer > div {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    padding: 5px;
+    margin: 2px;
+    background-color: lightgrey;
+}
+
+#main {
+    width: 800px;
+    height: 600px;
+    background-color: lightyellow;
+    border: solid gray 1px;
+}
+
+#main.hidden {
+    display: none;
+}
+
+.person {
+    background-color: linen;
+    width: 10em;
+    height: 2em;
+    border:solid gray 1px;
+    position: absolute;
+    transform: translate(0,0) rotate(0rad);
+    text-align: center;
+}
+
+.person.flyttmeg {
+    box-shadow: 3px 3px 3px greenyellow;
+}

@@ -39,7 +39,7 @@ Funksjonelle krav
        fordeles jevnt utover (2p)
 
 Wireframe
-
+ 
     Registrering av medlem:
        navn     ________________ 
        kjønn    ________________ 
