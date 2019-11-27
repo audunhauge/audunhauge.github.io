@@ -34,11 +34,8 @@
 
 
         <!-- angi feltnavn du ønsker å bruke i fields=""  -->
-        <db-update id="form" fields="fornavn,etternavn" table="forfatter">
+        <db-update id="form" key="forfatterid" fields="fornavn,etternavn" table="forfatter">
             <span slot="heading">Rediger Forfatter</span>
-            <db-foreign label="fornavn" foreign="forfatterid"
-                sql="select forfatterid,fornavn from forfatter order by fornavn">
-            </db-foreign>
         </db-update>
 
     </div>
