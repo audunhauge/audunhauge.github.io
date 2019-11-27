@@ -82,6 +82,8 @@
   class DBUpdate extends HTMLElement {
     constructor() {
       super();
+      this.rows = [];  
+      this.idx = 0;
       this.table = "";
       this._root = this.attachShadow({ mode: "open" });
       this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -103,17 +105,17 @@
         // get value of input element - handles checkboxes
         let data = inputs.reduce((s, e) => ((s[e.id] = getval(e)), s), {});
         let table = this.table;
-        let sql = `insert into ${table} (${namelist}) values (${valueList})`;
+        let sql = `update ${table} set ${fieldvalues} where `;
         this.upsert(sql, data);
       });
     }
 
     static get observedAttributes() {
-      return ["table", "fields", "foreign"];
+      return ["table", "key", "fields", "foreign"];
     }
 
     connectedCallback() {
-      console.log(this.table);
+      this.redraw();
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
@@ -129,9 +131,16 @@
           label.innerHTML = `${text} <input type="${type}" id="${name}">`;
           divFields.appendChild(label);
         }
+        this.fieldlist = fieldlist.map(e => this._root.querySelector("#"+e));
       }
       if (name === "table") {
         this.table = newValue;
+      }
+      if (name === "fields") {
+        this.fields = newValue;
+      }
+      if (name === "key") {
+        this.key = newValue;
       }
       if (name === "foreign") {
         divForeign.innerHTML = "";
@@ -146,6 +155,42 @@
           divForeign.appendChild(label);
           this.makeSelect(table, field, use);
         }
+      }
+    }
+
+    show() {
+      // places data for row[idx] in form for editing
+      if (this.rows.length && this.fieldlist.length) {
+        let current = this.rows[this.idx];
+        this.fieldlist.forEach(e => e.value = current[e.id]);
+      }
+    }
+
+    redraw() {
+      if (this.table && this.key) {
+        let table = this.table;
+        let key = this.key;
+        let fields = this.fields || "*";
+        let keyfields = key + ',' + fields; 
+        let sql = `select ${keyfields} from ${table} order by ${key}`;
+        let init = {
+          method: "POST",
+          credentials: "include",
+          body: JSON.stringify({ sql }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        };
+        fetch("runsql", init)
+          .then(r => r.json())
+          .then(data => {
+            console.log(data);
+            let list = data.results;
+            if (list.length) {
+              this.rows = list;
+              this.show();
+            }
+          });
       }
     }
     
