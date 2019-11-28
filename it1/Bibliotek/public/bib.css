@@ -2,11 +2,8 @@
   margin: 10px;
   display: grid;
   grid-template-columns: 1fr 4fr 4fr 1fr;
-  grid-template-rows: 100px 100px 100px; 
   grid-template-areas:
-    ".... editor  view ..."
-    ".... editor  view ..."
-    ".... editor  view ...";
+    ". editor  view .";
 }
 
 #main > * {
@@ -15,12 +12,10 @@
 
 #table {
     grid-area: view;
-    
 }
 
 #form {
     grid-area: editor;
-    background-color: bis;
 }
 
 db-table {
@@ -33,7 +28,6 @@ db-table {
     #username , #info { display:none; }
     #main {
         grid-template-columns: 1fr;
-        grid-template-rows: 300px;
         grid-template-areas:
         "editor"
         "view";

@@ -12,7 +12,7 @@ class HomeBar extends HTMLElement {
     this._root.innerHTML = `
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <div id="home">
-        <div id="menu">
+        <div id="menu" tabindex="0">
         <i class="material-icons">menu</i>
             <ul>
               <slot><li>simple menu</li></slot>
@@ -56,6 +56,7 @@ class HomeBar extends HTMLElement {
               padding: 5px;
             }
 
+            div#menu:focus-within ul,
             div#menu:hover ul,
             div#info:hover > ul {
                visibility: visible;
@@ -99,33 +100,40 @@ class HomeBar extends HTMLElement {
             }
           </style>
         `;
-       
-        this._root.querySelector("#crumb").addEventListener("click", () => this.dispatchEvent(new Event("crumb")));
-        this._root.querySelector("#menu").addEventListener("click", (e) => {
-          let t = e.target;
-          this._info.target = t;
-          if (t.localName === "li" && t.dataset.link) {
-            let link = t.dataset.link;
-            location.href = `${link}.html`;
-          } else
-          this.dispatchEvent(new Event("menu"));
-        });
-        this._root.querySelector("#info").addEventListener("click", (e) => {
-          let t = e.target;
-          this._info.target = t;
-          this.dispatchEvent(new Event("info"))
-        });
-        this._root.querySelector("#username").addEventListener("click", () => this.dispatchEvent(new Event("username")));
+
+    this._root.querySelector("#crumb").addEventListener("click", () => this.dispatchEvent(new Event("crumb")));
+    this._root.querySelector("#menu").addEventListener("click", (e) => {
+      let t = e.target;
+      this._info.target = t;
+      if (t.localName === "li" && t.dataset.link) {
+        let link = t.dataset.link;
+        location.href = `${link}.html`;
+      } else
+        this.dispatchEvent(new Event("menu"));
+    });
+    this._root.querySelector("#info").addEventListener("click", (e) => {
+      let t = e.target;
+      this._info.target = t;
+      this.dispatchEvent(new Event("info"))
+    });
+    this._root.querySelector("#username").addEventListener("click", () => this.dispatchEvent(new Event("username")));
+  }
+
+  connectedCallback() {
+    let links = this._root.querySelectorAll("#menu li");
+      links.forEach((e,i) => {
+      e.tabindex = String(10 + i);
+    });
   }
 
   get info() { return this._info; }
 
   static get observedAttributes() {
-    return ["username","heading","menu","info","crumb"];
+    return ["username", "heading", "menu", "info", "crumb"];
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    this._root.querySelector("#"+name).innerHTML = newValue;
+    this._root.querySelector("#" + name).innerHTML = newValue;
   }
 }
 
