@@ -8,6 +8,7 @@ class Medlem {
         this.div.innerHTML = this.navn;
         // oppg. 3
         this.div.title = `${this.kjonn} ${this.hoyde}`;
+        
         this.div.style.transform =
             `translate(${this.x}px,${this.y}px)`;
     }
