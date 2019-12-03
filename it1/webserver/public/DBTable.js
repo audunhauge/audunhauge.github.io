@@ -91,7 +91,7 @@
                 "Content-Type": "application/json"
             }
         };
-        const response = await fetch("runsql", init);
+        const response = await fetch("/runsql", init);
         let res = await response.json();
         return res;
       }

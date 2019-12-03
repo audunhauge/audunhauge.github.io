@@ -91,7 +91,7 @@
           "Content-Type": "application/json"
         }
       };
-      fetch("runsql", init)
+      fetch("/runsql", init)
         .then(r => r.json())
         .then(data => {
           console.log(data);

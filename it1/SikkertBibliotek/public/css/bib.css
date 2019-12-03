@@ -13,9 +13,9 @@
 #main {
   margin: 10px;
   display: grid;
-  grid-template-columns: 1fr 4fr 4fr 1fr;
+  grid-template-columns: 1fr 4fr 1fr;
   grid-template-areas:
-    ". editor  view .";
+    ". view .";
 }
 
 #main > * {
@@ -35,7 +35,7 @@ home-bar {
 }
 
 db-table {
-    width: 20em;
+    width: 30em;
    --alternate: slategray;
    --head: bisque;
 }

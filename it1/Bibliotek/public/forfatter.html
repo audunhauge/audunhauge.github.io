@@ -14,9 +14,10 @@
 </head>
 
 <body>
-    <!--Du kan lett legge til nye menyvalg
-        Bare sørg for at du oppgir en data-link = htmlsida du vil koble til
-    -->
+    <!-- denne varianten henter menyene fra /htmlfiler (som er definert i app.js)    -->  
+    <home-bar heading="Skolebibliotek Skeisvang" crumb="forfatter" getlinks="/htmlfiler">
+    </home-bar>
+    <!--
     <home-bar heading="Skolebibliotek Skeisvang" crumb="forfatter">
         <li data-link="forfatter">Registrer forfatter</li>
         <li data-link="bok">Registrer bok</li>
@@ -24,6 +25,7 @@
         <li data-link="utlaan">Registrer utlån</li>
         <li data-link="eksemplar">Registrer eksemplar</li>
     </home-bar>
+    -->
 
     <div id="main">
 

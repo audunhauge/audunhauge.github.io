@@ -15,6 +15,7 @@ class HomeBar extends HTMLElement {
         <div id="menu" tabindex="0">
             <i class="material-icons">menu</i>
             <ul>
+              <li data-link="/index">Home</li>
               <slot><li>simple menu</li></slot>
             </ul>
         </div>
@@ -149,6 +150,15 @@ class HomeBar extends HTMLElement {
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
+    if (name === "username") {
+      fetch(newValue)
+        .then(r => r.json())
+        .then(({ username }) => {
+          this._root.querySelector("#username").innerHTML = username;
+        })
+        .catch(e => console.log("Dette virka ikke."));
+        return;
+    } 
     if (name === "getlinks") {
       // links can be got by fetch
       fetch(newValue)
@@ -157,14 +167,15 @@ class HomeBar extends HTMLElement {
           let html = items
             .filter(e => e.endsWith(".html"))
             .map(e => e.replace(".html", ""));
-          this._root.querySelector("#menu ul").innerHTML = html
+          this._root.querySelector("#menu ul").innerHTML += html
             .map(e => `<li data-link="${e}">${e}</li>`)
             .join("");
         })
         .catch(e => console.log("Dette virka ikke."));
-    } else {
-      this._root.querySelector("#" + name).innerHTML = newValue;
-    }
+        return;
+    } 
+    this._root.querySelector("#" + name).innerHTML = newValue;
+    
   }
 }
 

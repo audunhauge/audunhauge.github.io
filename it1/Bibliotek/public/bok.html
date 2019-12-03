@@ -14,16 +14,18 @@
 </head>
 
 <body>
-    <!--Du kan lett legge til nye menyvalg
-        Bare sørg for at du oppgir en data-link = htmlsida du vil koble til
-    -->
-    <home-bar heading="Skolebibliotek Skeisvang" crumb="bok">
-            <li data-link="forfatter">Registrer forfatter</li>
-            <li data-link="bok">Registrer bok</li>
-            <li data-link="laaner">Registrer låner</li>
-            <li data-link="utlaan">Registrer utlån</li>
-            <li data-link="eksemplar">Registrer eksemplar</li>
+    <!-- denne varianten henter menyene fra /htmlfiler (som er definert i app.js)    -->  
+    <home-bar heading="Skolebibliotek Skeisvang" crumb="bok" getlinks="/htmlfiler">
     </home-bar>
+    <!--
+    <home-bar heading="Skolebibliotek Skeisvang" crumb="forfatter">
+        <li data-link="forfatter">Registrer forfatter</li>
+        <li data-link="bok">Registrer bok</li>
+        <li data-link="laaner">Registrer låner</li>
+        <li data-link="utlaan">Registrer utlån</li>
+        <li data-link="eksemplar">Registrer eksemplar</li>
+    </home-bar>
+    -->
 
     <div id="main">
 
@@ -37,13 +39,6 @@
             <span slot="caption">Bøker</span>
         </db-table>
 
-        <!-- angi feltnavn du ønsker å bruke i fields=""  -->
-        <db-insert  id="form" 
-                    fields="tittel,antallsider" 
-                    foreign="forfatter.forfatterid:fornavn+etternavn"
-                    table="bok">
-            <span slot="heading">Registrer Bok</span>
-        </db-insert>
 
     </div>
 
