@@ -26,14 +26,20 @@
     </home-bar>
 
     <div id="main">
-      
-        <db-table id="table" fields="tittel,fornavn,antallsider" sql="select b.*,f.fornavn from bok b inner join forfatter f on (b.forfatterid = f.forfatterid)">
+
+        <!--angi feltnavn du ønsker å bruke i fields="" 
+            viser en liste over lånere
+        -->
+        <db-table id="table" 
+                update="true"
+                fields="tittel,fornavn,etternavn,antallsider" 
+                sql="select b.*,f.fornavn,f.etternavn from bok b inner join forfatter f on (b.forfatterid = f.forfatterid)">
             <span slot="caption">Bøker</span>
         </db-table>
 
         <db-insert  id="form" 
                     fields="tittel,antallsider" 
-                    foreign="forfatter.forfatterid:fornavn"
+                    foreign="forfatter.forfatterid:fornavn+etternavn"
                     table="bok">
             <span slot="heading">Registrer Bok</span>
         </db-insert>
