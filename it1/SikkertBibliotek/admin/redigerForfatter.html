@@ -31,7 +31,7 @@
                 <span slot="caption">Bøker av valgt forfatter</span>
             </db-table>
 
-            <db-table connected="form:forfatterid" fields="antall"
+            <db-table connected="form:forfatterid" fields="antall:number"
                 sql="select count(u.utlaanid) as antall from utlaan u join eksemplar e on (u.eksemplarid=e.eksemplarid) join bok b on (b.bokid=e.bokid)">
                 <span slot="caption">Antall bøker utlånt</span>
             </db-table>
