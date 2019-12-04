@@ -135,12 +135,12 @@ app.post("/runsql", function(req, res) {
 
 async function saferSQL(res, obj, options) {
   const predefined = [
-    "select * from bok b inner join forfatter f on (b.forfatterid = f.forfatterid)",
+    "select * from bok b join forfatter f on (b.forfatterid = f.forfatterid)",
     "select e.*, b.tittel from eksemplar e join bok b on (e.bokid = b.bokid)"
   ]
   let results = { error:"Illegal sql" };
   let tables = options.tables.split(",");
-  let sql = obj.sql;
+  let sql = obj.sql.replace("inner ","");
   let data = obj.data;
   let allowed = predefined.concat( tables.map(e => `select * from ${e}`) );
   if (allowed.includes(sql)) {
