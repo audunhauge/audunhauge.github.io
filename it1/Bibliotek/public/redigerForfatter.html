@@ -9,35 +9,26 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="DbUpdate.js"></script>
     <script src="DbForeign.js"></script>
+    <script src="DbTable.js"></script>
     <script src="Homebar.js"></script>
     <link rel="stylesheet" href="bib.css">
 </head>
 
 <body>
-    <!--Du kan lett legge til nye menyvalg
-        Bare sørg for at du oppgir en data-link = htmlsida du vil koble til
-    -->
-    <home-bar heading="Skolebibliotek Skeisvang" crumb="edit-forfatter">
-        <li data-link="forfatter">Registrer forfatter</li>
-        <li data-link="bok">Registrer bok</li>
-        <li data-link="laaner">Registrer låner</li>
-        <li data-link="utlaan">Registrer utlån</li>
-        <li data-link="eksemplar">Registrer eksemplar</li>
+
+
+    <home-bar heading="Skolebibliotek Skeisvang" crumb="rediger forfatter" getlinks="/htmlfiler">
     </home-bar>
 
+
     <div id="main">
-
-        <!--angi feltnavn du ønsker å bruke i fields="" 
-            viser en liste over lånere
-            update="true" gjør at tabellen tegnes på nytt dersom nye blir lagt til
-        -->
-
-
-        <!-- angi feltnavn du ønsker å bruke i fields=""  -->
-        <db-update id="form" key="forfatterid" fields="fornavn,etternavn" table="forfatter">
+        <db-update id="form" key="forfatterid" fields="forfatterid,fornavn,etternavn" table="forfatter">
             <span slot="heading">Rediger Forfatter</span>
         </db-update>
 
+        <db-table id="table" connected="form:forfatterid" fields="tittel" sql="select * from bok">
+            <span slot="caption">Bøker av valgt forfatter</span>
+        </db-table>
     </div>
 
 

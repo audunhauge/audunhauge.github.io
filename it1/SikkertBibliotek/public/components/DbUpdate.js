@@ -220,7 +220,7 @@
             "Content-Type": "application/json"
           }
         };
-        fetch("runsql", init)
+        fetch("/runsql", init)
           .then(r => r.json())
           .then(data => {
             console.log(data);
@@ -247,7 +247,7 @@
           "Content-Type": "application/json"
         }
       };
-      fetch("runsql", init)
+      fetch("/runsql", init)
         .then(r => r.json())
         .then(data => {
           console.log(data);
@@ -272,7 +272,7 @@
         }
       };
       console.log(sql, data);
-      fetch("runsql", init)
+      fetch("/runsql", init)
         .then(() =>  // others may want to refresh view
           this.dispatchEvent(
             new CustomEvent("dbUpdate", {

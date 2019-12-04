@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Registrer Låner</title>
+    <title>Registrer Eksemplar</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="DbInsert.js"></script>
     <script src="DbTable.js"></script>
+    <script src="DbForeign.js"></script>
     <script src="Homebar.js"></script>
     <link rel="stylesheet" href="bib.css">
 </head>
@@ -17,18 +18,8 @@
     <!--Du kan lett legge til nye menyvalg
         Bare sørg for at du oppgir en data-link = htmlsida du vil koble til
     -->
-    <!-- denne varianten henter menyene fra /htmlfiler (som er definert i app.js)    -->  
-    <home-bar heading="Skolebibliotek Skeisvang" crumb="låner" getlinks="/htmlfiler">
+    <home-bar heading="Skolebibliotek Skeisvang" crumb="eksemplar" getlinks="/htmlfiler">
     </home-bar>
-    <!--
-    <home-bar heading="Skolebibliotek Skeisvang" crumb="forfatter">
-        <li data-link="forfatter">Registrer forfatter</li>
-        <li data-link="bok">Registrer bok</li>
-        <li data-link="laaner">Registrer låner</li>
-        <li data-link="utlaan">Registrer utlån</li>
-        <li data-link="eksemplar">Registrer eksemplar</li>
-    </home-bar>
-    -->
 
     <div id="main">
 
@@ -36,16 +27,19 @@
             viser en liste over lånere
             update="true" gjør at tabellen tegnes på nytt dersom nye blir lagt til
         -->
-        <db-table id="table" 
-            update="true"
-            fields="fornavn,etternavn,adresse,epost" 
-            sql="select * from laaner">
-            <span slot="caption">Lånere</span>
+        <db-table id="table" update="true" fields="tittel,tillstand"
+            sql="select e.*, b.tittel from eksemplar e join bok b on (e.bokid = b.bokid)">
+            <span slot="caption">Eksemplar</span>
         </db-table>
 
         <!-- angi feltnavn du ønsker å bruke i fields=""  -->
-        <db-insert id="form" fields="fornavn,etternavn,adresse,epost" table="laaner">
-            <span slot="heading">Registrer Nye Lånere</span>
+        <db-insert id="form" fields="tillstand" table="eksemplar">
+            <span slot="heading">Registrer eksemplar</span>
+
+            <db-foreign label="tittel" foreign="bokid"
+                sql="select bokid,tittel from bok">
+            </db-foreign>
+
         </db-insert>
 
     </div>

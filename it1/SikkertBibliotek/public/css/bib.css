@@ -13,12 +13,9 @@
 #main {
   margin: 10px;
   display: grid;
-  grid-template-columns: 1fr 4fr 4fr 1fr;
-  grid-template-rows: 100px 100px 100px; 
+  grid-template-columns: 1fr 4fr 1fr;
   grid-template-areas:
-    ".... editor  view ..."
-    ".... editor  view ..."
-    ".... editor  view ...";
+    ". view .";
 }
 
 #main > * {
@@ -27,12 +24,10 @@
 
 #table {
     grid-area: view;
-    
 }
 
 #form {
     grid-area: editor;
-    background-color: bis;
 }
 
 home-bar {
@@ -40,7 +35,7 @@ home-bar {
 }
 
 db-table {
-    width: 20em;
+    width: 30em;
    --alternate: slategray;
    --head: bisque;
 }
@@ -49,7 +44,6 @@ db-table {
     #username , #info { display:none; }
     #main {
         grid-template-columns: 1fr;
-        grid-template-rows: 300px;
         grid-template-areas:
         "editor"
         "view";
