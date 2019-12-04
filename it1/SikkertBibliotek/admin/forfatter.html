@@ -23,9 +23,11 @@
     <div id="admin">
 
 
-        <db-table id="table" update="true" fields="fornavn,etternavn" sql="select * from forfatter">
-            <span slot="caption">Forfattere</span>
-        </db-table>
+        <div class="table">
+            <db-table id="table" update="true" fields="fornavn,etternavn" sql="select * from forfatter">
+                <span slot="caption">Forfattere</span>
+            </db-table>
+        </div>
 
         <db-insert id="form" fields="fornavn,etternavn" table="forfatter">
             <span slot="heading">Registrer Forfatter</span>

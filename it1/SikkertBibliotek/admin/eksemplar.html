@@ -16,26 +16,27 @@
 
 <body>
 
-    <home-bar heading="Skolebibliotek Skeisvang" crumb="eksemplar"  getlinks="/htmlfiler/admin" username="/myself"">
+    <home-bar heading="Skolebibliotek Skeisvang" crumb="eksemplar" getlinks="/htmlfiler/admin" username="/myself"">
     </home-bar>
 
     <div id="admin">
 
-        <db-table id="table" update="true" fields="tittel,tillstand"
-            sql="select e.*, b.tittel from eksemplar e join bok b on (e.bokid = b.bokid)">
-            <span slot="caption">Eksemplar</span>
-        </db-table>
+        <div class="table">
+            <db-table id="table" update="true" fields="tittel,tillstand"
+                sql="select e.*, b.tittel from eksemplar e join bok b on (e.bokid = b.bokid)">
+                <span slot="caption">Eksemplar</span>
+            </db-table>
+        </div>
 
         <db-insert id="form" fields="tillstand" table="eksemplar">
             <span slot="heading">Registrer eksemplar</span>
 
-            <db-foreign label="tittel" foreign="bokid"
-                sql="select bokid,tittel from bok">
+            <db-foreign label="tittel" foreign="bokid" sql="select bokid,tittel from bok">
             </db-foreign>
 
         </db-insert>
 
-    </div>
+        </div>
 
 
 </body>

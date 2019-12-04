@@ -15,24 +15,23 @@
 </head>
 
 <body>
-   
-    <home-bar heading="Skolebibliotek Skeisvang" crumb="låner"  getlinks="/htmlfiler/admin" username="/myself"">
+
+    <home-bar heading="Skolebibliotek Skeisvang" crumb="låner" getlinks="/htmlfiler/admin" username="/myself"">
     </home-bar>
    
     <div id="admin">
-
-        <db-table id="table" 
-            update="true"
-            fields="fornavn,etternavn,adresse,epost" 
-            sql="select * from laaner">
-            <span slot="caption">Lånere</span>
-        </db-table>
+        <div class="table">
+            <db-table id="table" update="true" fields="fornavn,etternavn,adresse,epost" sql="select * from laaner">
+                <span slot="caption">Lånere</span>
+            </db-table>
+        </div>
 
         <db-insert id="form" fields="fornavn,etternavn,adresse,epost" table="laaner">
             <span slot="heading">Registrer Nye Lånere</span>
         </db-insert>
 
     </div>
+    
 
 
 </body>

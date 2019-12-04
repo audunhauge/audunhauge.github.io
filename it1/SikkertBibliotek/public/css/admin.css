@@ -44,7 +44,7 @@
   
   @media screen and (max-width: 850px) {
       #username , #info { display:none; }
-      #main {
+      #admin {
           grid-template-columns: 1fr;
           grid-template-areas:
           "editor"
