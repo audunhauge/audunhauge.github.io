@@ -139,10 +139,10 @@
         for (let i = 0; i < fieldlist.length; i++) {
           let [table, fields] = fieldlist[i].split(".");
           let [field, use] = fields.split(":");
-          use = (use || field).replace("+",",");
-          let text = table.charAt(0).toUpperCase() + table.substr(1);
+          use = use || field;
+          let text = use.charAt(0).toUpperCase() + use.substr(1);
           let label = document.createElement("label");
-          label.innerHTML = `${text} <span class="foreign">${field} </span> <select id="${field}"></select>`;
+          label.innerHTML = `${text} <span class="foreign">fra&nbsp;${table}</span> <select id="${field}"></select>`;
           divForeign.appendChild(label);
           this.makeSelect(table, field, use);
         }
@@ -168,10 +168,9 @@
         .then(data => {
           console.log(data);
           let list = data.results;
-          let labels = use.split(",");
           if (list.length) {
             let options = list
-              .map(e => `<option value="${e[field]}">${labels.map(l => e[l]).join(" ")}</option>`)
+              .map(e => `<option value="${e[field]}">${e[use]}</option>`)
               .join("");
             this._root.querySelector(`#${field}`).innerHTML = options;
           }

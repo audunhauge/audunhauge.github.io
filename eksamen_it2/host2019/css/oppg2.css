@@ -1,0 +1,15 @@
+#form  {
+    width: 20em;
+    display: grid;
+    align-content: space-around;
+}
+
+#form > div {
+    margin: 1em;
+}
+
+#svar {
+    background-color: whitesmoke;
+    border: solid gray 1px;
+    min-height: 2em;
+}

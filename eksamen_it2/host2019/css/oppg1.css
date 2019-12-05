@@ -1,0 +1,64 @@
+#kropp {
+    position: relative;
+    background-image: url("../media/kropp2.png");
+    width: 607px;
+    height: 700px;
+    transform: scale(0.9);
+}
+
+#main>div {
+    border: none;
+    background-color: transparent;
+}
+
+#arm,
+#rygg {
+    position: absolute;
+    left: 360px;
+    top: 169px;
+    border: solid red 1px;
+    width: 20px;
+    height: 20px;
+}
+
+#rygg {
+    top: 219px;
+    left: 311px;
+    width: 50px;
+    height: 50px;
+}
+
+#arm>span,
+#rygg>span {
+    position: absolute;
+    left: 30px;
+    top: 0;
+    opacity: 0;
+    color:blue;
+    white-space: nowrap;
+}
+
+div.animert span {
+    animation: slide 5s ease-in-out reverse;
+}
+
+/*
+Alle animasjoner med transform eller opacity da disse
+ikke medfører reflow av sida. De har mye bedre ytelse (framerate)
+enn alle andre animasjonseffekter
+*/
+
+@keyframes slide {
+    0% {
+        opacity: 1;
+        transform: scale(3) translate(20px) rotate(1turn);
+    }
+    96% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}

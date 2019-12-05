@@ -57,7 +57,6 @@ class HomeBar extends HTMLElement {
               padding: 5px;
             }
 
-            div#menu:focus-within ul,
             div#menu:hover ul,
             div#info:hover > ul {
                visibility: visible;
