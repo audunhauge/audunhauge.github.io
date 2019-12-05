@@ -33,6 +33,7 @@
             border-radius: 5px;
             border: solid gray 1px;
             background-color: whitesmoke;
+            text-transform:capitalize;
         }
 
         form  div#foreign label {
@@ -159,17 +160,16 @@
       let divForeign = this._root.querySelector("#foreign");
       if (name === "fields") {
         divFields.innerHTML = "";
-        let fieldlist = newValue.split(",");
+        let rawfields = newValue.split(",");
+        let fieldlist = rawfields.map(h => { let [name,type="text"] = h.split(":"); return {name,type} })
         let readonly = this.update === "";
-        for (let i = 0; i < fieldlist.length; i++) {
-          let [name, type = "text", text = ""] = fieldlist[i].split(":");
-          text = (t => t.charAt(0).toUpperCase() + t.substr(1))(text || name);
+        for (let f of fieldlist) {
           let label = document.createElement("label");
-          let disabled = (name === this.key || readonly) ? " disabled" : ""; // can not change key
-          label.innerHTML = `${text} <input type="${type}" id="${name}" ${disabled}>`;
+          let disabled = (f.name === this.key || readonly) ? " disabled" : ""; // can not change key
+          label.innerHTML = `${f.name} <input type="${f.type}" id="${f.name}" ${disabled}>`;
           divFields.appendChild(label);
         }
-        this.fieldlist = fieldlist.map(e => this._root.querySelector("#" + e));
+        this.fieldlist = fieldlist.map(e => this._root.querySelector("#" + e.name));
       }
       if (name === "table") {
         this.table = newValue;
