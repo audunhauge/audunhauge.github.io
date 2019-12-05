@@ -11,7 +11,6 @@ function setup() {
         lyder.set(divId,e);
     })
    
-
     divKropp.addEventListener("click",muskelAnimasjon);
 
     function muskelAnimasjon(e) {

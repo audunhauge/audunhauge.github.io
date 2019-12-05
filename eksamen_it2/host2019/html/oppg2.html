@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Oppg2</title>
+    <link rel="stylesheet" href="../css/basic.css">
+    <link rel="stylesheet" href="../css/oppg2.css">
+    <script src="../js/oppg2.js"></script>
+</head>
+<body>
+    <h1>Beregning av kaloriforbruk</h1>
+    <div id="main">
+        <!-- bruker ikke form for å slippe
+           at skjema blir post-et, kan bruke button
+           uten å måtte overstyre submit som default
+        -->
+        <div id="form">
+            <div><select id="aktivitet">
+                <option value="">Velg aktivitet</option>
+                <option value="814">Aerobics</option>
+                <option value="236">Bordtennis</option>
+                <option value="510">Fotball</option>
+                <option value="244">Golf</option>
+                <option value="666">Jogging</option>
+            </select></div>
+            <div >
+                <div><label>Velg intensitet</label></div>
+                <div> &nbsp; </div>
+                <div><label><input value="0.8" type="radio" name="intens">Lav</label></div>
+                <div><label><input value="1.0" type="radio" name="intens">Middels</label></div>
+                <div><label><input value="1.2" type="radio" name="intens">Høy</label></div>
+            </div>
+            <div>
+                <div><label>Oppgi varighet på trening i minutter</label></div>
+                <div><input placeholder="tid" type="number" id="varighet"></div>
+            </div>
+            <div><button id="beregn">Beregn kaloriforbruk</button></div>
+            <div><div id="svar"></div></div>
+        </div>
+
+    </div>
+    <script>
+      setup();
+    </script>
+</body>
+</html>

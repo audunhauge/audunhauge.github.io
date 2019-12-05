@@ -39,7 +39,7 @@
 }
 
 div.animert span {
-    animation: slide 5s forwards ease-in-out reverse;
+    animation: slide 5s ease-in-out reverse;
 }
 
 /*
