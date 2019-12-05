@@ -67,6 +67,9 @@
           display: grid;
           grid-template-columns: 5fr 1fr;
         }
+        .hidden {
+          display:none;
+        }
         </style>
         <form>
           <div class="heading"><slot name="heading"></slot><div id="number">1</div></div>
@@ -78,51 +81,55 @@
           </div>
           <div id="next"></div>
           <div id="prev"></div>
-          <label> &nbsp; <button type="button" id="save"><slot name="save">Save</slot></button></label>
+          <label class="hidden"> &nbsp; <button type="button" id="save"><slot name="save">Save</slot></button></label>
         </form>
     `;
 
   // extend to more datatypes if needed
   const getval = e => {
-    switch(e.type) {
+    switch (e.type) {
       case "checkbox":
         return e.checked;
       default:
         return e.value;
     }
-  }
+  };
 
   class DBUpdate extends HTMLElement {
     constructor() {
       super();
-      this.rows = [];  
+      this.rows = [];
       this.idx = 0;
       this.table = "";
+      this.update = "";
       this._root = this.attachShadow({ mode: "open" });
       this.shadowRoot.appendChild(template.content.cloneNode(true));
-      
+
       // this is code for creating sql insert statement
       this._root.querySelector("#save").addEventListener("click", e => {
-        let current = this.rows[this.idx];  // save any changes to the rows array
-        let keyint = current[this.key];
-        this.fieldlist.forEach(e => current[e.id] = e.value);
-        // aliens will pick out any db-foreign placed into alien-slot
-        let aliens = Array.from(this._root.querySelectorAll("#alien slot")).map(
-          e => e.assignedElements()[0]
-        ).filter(e => e !== undefined);
-        let foreign = Array.from(
-          this._root.querySelectorAll("#foreign select")
-        );
-        let inputs = Array.from(this._root.querySelectorAll("#fields input"))
-          .concat(foreign)
-          .concat(aliens).filter(e => ! e.disabled );
-        let names = inputs.map(e => e.id);
-        let fieldvalues = names.map(e => `${e}=$[${e}]`).join(",");
-        // get value of input element - handles checkboxes
-        let data = inputs.reduce((s, e) => ((s[e.id] = getval(e)), s), {});
-        let table = this.table;
-        let sql = `update ${table} set ${fieldvalues} where ${this.key} = ${keyint}`;
-        this.upsert(sql, data);
+        if (this.update) {
+          let current = this.rows[this.idx]; // save any changes to the rows array
+          let keyint = current[this.key];
+          this.fieldlist.forEach(e => (current[e.id] = e.value));
+          // aliens will pick out any db-foreign placed into alien-slot
+          let aliens = Array.from(this._root.querySelectorAll("#alien slot"))
+            .map(e => e.assignedElements()[0])
+            .filter(e => e !== undefined);
+          let foreign = Array.from(
+            this._root.querySelectorAll("#foreign select")
+          );
+          let inputs = Array.from(this._root.querySelectorAll("#fields input"))
+            .concat(foreign)
+            .concat(aliens)
+            .filter(e => !e.disabled);
+          let names = inputs.map(e => e.id);
+          let fieldvalues = names.map(e => `${e}=$[${e}]`).join(",");
+          // get value of input element - handles checkboxes
+          let data = inputs.reduce((s, e) => ((s[e.id] = getval(e)), s), {});
+          let table = this.table;
+          let sql = `update ${table} set ${fieldvalues} where ${this.key} = ${keyint}`;
+          this.upsert(sql, data);
+        }
       });
       this._root.querySelector("#next").addEventListener("click", () => {
         this.idx = (this.idx + 1) % this.rows.length;
@@ -135,7 +142,7 @@
     }
 
     static get observedAttributes() {
-      return ["table", "key", "fields", "foreign"];
+      return ["table", "key", "fields", "foreign", "update"];
     }
 
     connectedCallback() {
@@ -147,25 +154,30 @@
       return current[this.key];
     }
 
-
     attributeChangedCallback(name, oldValue, newValue) {
       let divFields = this._root.querySelector("#fields");
       let divForeign = this._root.querySelector("#foreign");
       if (name === "fields") {
         divFields.innerHTML = "";
         let fieldlist = newValue.split(",");
+        let readonly = this.update === "";
         for (let i = 0; i < fieldlist.length; i++) {
           let [name, type = "text", text = ""] = fieldlist[i].split(":");
           text = (t => t.charAt(0).toUpperCase() + t.substr(1))(text || name);
           let label = document.createElement("label");
-          let disabled = (name === this.key) ? ' disabled' : '';  // can not change key
+          let disabled = (name === this.key || readonly) ? " disabled" : ""; // can not change key
           label.innerHTML = `${text} <input type="${type}" id="${name}" ${disabled}>`;
           divFields.appendChild(label);
         }
-        this.fieldlist = fieldlist.map(e => this._root.querySelector("#"+e));
+        this.fieldlist = fieldlist.map(e => this._root.querySelector("#" + e));
       }
       if (name === "table") {
         this.table = newValue;
+      }
+      if (name === "update") {
+        this.update = newValue;
+        this._root.querySelector("label.hidden").classList.remove("hidden");
+        // Array.from(this._root.querySelectorAll("input")).forEach(e => e.setAttribute("disabled","true"));
       }
       if (name === "fields") {
         this.fields = newValue;
@@ -193,15 +205,16 @@
       // places data for row[idx] in form for editing
       if (this.rows.length && this.fieldlist.length) {
         let current = this.rows[this.idx];
-        this.fieldlist.forEach(e => e.value = current[e.id]);
-        this._root.querySelector("#number").innerHTML = "#" + String(this.idx + 1);
+        this.fieldlist.forEach(e => (e.value = current[e.id]));
+        this._root.querySelector("#number").innerHTML =
+          "#" + String(this.idx + 1);
         this.dispatchEvent(
           new CustomEvent("dbUpdate", {
             bubbles: true,
             composed: true,
             detail: "upsert"
           })
-        )
+        );
       }
     }
 
@@ -210,7 +223,7 @@
         let table = this.table;
         let key = this.key;
         let fields = this.fields || "*";
-        let keyfields = key + ',' + fields; 
+        let keyfields = key + "," + fields;
         let sql = `select ${keyfields} from ${table} order by ${key}`;
         let init = {
           method: "POST",
@@ -232,7 +245,7 @@
           });
       }
     }
-    
+
     // assumes foreign key has same name in both tables
     // bok.forfatterid references forfatter.forfatterid
     makeSelect(table, field, use) {
@@ -273,7 +286,8 @@
       };
       console.log(sql, data);
       fetch("/runsql", init)
-        .then(() =>  // others may want to refresh view
+        .then(() =>
+          // others may want to refresh view
           this.dispatchEvent(
             new CustomEvent("dbUpdate", {
               bubbles: true,

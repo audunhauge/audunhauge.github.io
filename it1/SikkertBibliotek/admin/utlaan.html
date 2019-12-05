@@ -15,11 +15,11 @@
 </head>
 
 <body>
-    <!-- denne varianten henter menyene fra /htmlfiler (som er definert i app.js)    -->  
-    <home-bar heading="Skolebibliotek Skeisvang" crumb="utlån"  getlinks="/htmlfiler/admin" username="/myself"">
+    <!-- denne varianten henter menyene fra /htmlfiler (som er definert i app.js)    -->
+    <home-bar heading="Skolebibliotek Skeisvang" crumb="utlån" getlinks="/htmlfiler/admin" username="/myself"">
     </home-bar>
     <!--
-    <home-bar heading="Skolebibliotek Skeisvang" crumb="forfatter">
+    <home-bar heading=" Skolebibliotek Skeisvang" crumb="forfatter">
         <li data-link="forfatter">Registrer forfatter</li>
         <li data-link="bok">Registrer bok</li>
         <li data-link="laaner">Registrer låner</li>
@@ -30,25 +30,19 @@
 
     <div id="admin">
         <!-- angi feltnavn du ønsker å bruke i fields="" -->
-        <db-table 
-            id="table" 
-            update="true"
-            fields="fornavn,etternavn,tittel,innlevert" 
-            sql="select l.fornavn,l.etternavn,b.tittel,e.tillstand,u.innlevert 
+        <div class="table">
+            <db-table id="table" update="true" fields="fornavn,etternavn,tittel,innlevert" sql="select l.fornavn,l.etternavn,b.tittel,e.tillstand,u.innlevert 
              from laaner l inner join utlaan u on (l.laanerid = u.laanerid) 
-             inner join eksemplar e on (e.eksemplarid = u.eksemplarid) inner join bok b on (b.bokid=e.bokid)"
-             >
-            <span slot="caption">Utlån</span>
-        </db-table>
+             inner join eksemplar e on (e.eksemplarid = u.eksemplarid) inner join bok b on (b.bokid=e.bokid)">
+                <span slot="caption">Utlån</span>
+            </db-table>
+        </div>
 
         <!-- angi feltnavn du ønsker å bruke i fields=""  -->
-        <db-insert id="form" 
-                fields="innlevert"
-                foreign="laaner.laanerid:fornavn+etternavn" 
-                table="utlaan">
+        <db-insert id="form" fields="innlevert:checkbox" foreign="laaner.laanerid:fornavn+etternavn" table="utlaan">
             <span slot="heading">Registrer Utlån</span>
-            <db-foreign label="tittel" foreign="eksemplarid" 
-                   sql="select e.eksemplarid,b.tittel from eksemplar e inner join bok b on (e.bokid = b.bokid)">
+            <db-foreign label="tittel" foreign="eksemplarid"
+                sql="select e.eksemplarid,concat(b.tittel,' av ',f.fornavn, ' ',f.etternavn) as tittel from eksemplar e join bok b on (e.bokid = b.bokid) join forfatter f on (f.forfatterid = b.forfatterid)">
             </db-foreign>
         </db-insert>
     </div>
