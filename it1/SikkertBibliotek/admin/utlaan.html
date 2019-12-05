@@ -42,7 +42,10 @@
         <db-insert id="form" fields="innlevert:checkbox" foreign="laaner.laanerid:fornavn+etternavn" table="utlaan">
             <span slot="heading">Registrer Utlån</span>
             <db-foreign label="tittel" foreign="eksemplarid"
-                sql="select e.eksemplarid,concat(b.tittel,' av ',f.fornavn, ' ',f.etternavn) as tittel from eksemplar e join bok b on (e.bokid = b.bokid) join forfatter f on (f.forfatterid = b.forfatterid)">
+                sql="select e.eksemplarid,
+                concat(b.tittel,' av ',f.fornavn, ' ',f.etternavn) as tittel 
+                from eksemplar e join bok b on (e.bokid = b.bokid) 
+                join forfatter f on (f.forfatterid = b.forfatterid)">
             </db-foreign>
         </db-insert>
     </div>
