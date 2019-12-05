@@ -30,7 +30,6 @@ class HomeBar extends HTMLElement {
                 align-items: center;
                 grid-template-columns: 1fr 1fr 2fr 3fr 1fr;
                 height: 70px;
-                /*background: rgba(32,166,231,.8) linear-gradient(180deg,#20a8e9,rgba(30,158,220,.5)) repeat-x;*/
                 background-color: rgba(32,166,231,.8);
                 background-image: var(--grad, linear-gradient(180deg,#20a8e9,rgba(30,158,220,.5)) );
                 color: #fff;
@@ -43,6 +42,7 @@ class HomeBar extends HTMLElement {
             div#menu ul,
             div#info > ul {
               text-align: left;
+              text-transform: capitalize;
               visibility: hidden;
               list-style: none;
               margin: 0;
@@ -129,6 +129,9 @@ class HomeBar extends HTMLElement {
       );
   }
 
+  /*
+  // TODO ikke vits i da jeg ikke vet hvordan jeg
+  // kan trigge click inne i menyen når tab -> focus
   connectedCallback() {
     setTimeout(() => {
       // set tabindex on assigned menu items
@@ -140,6 +143,7 @@ class HomeBar extends HTMLElement {
       }
     }, 1000);
   }
+  */
 
   get info() {
     return this._info;
