@@ -123,7 +123,7 @@
         fetch("/runsql", init)
           .then(r => r.json())
           .then(data => {
-            console.log(data);
+            // console.log(data);
             let list = data.results;
             let rows = '';
             if (list.length) {

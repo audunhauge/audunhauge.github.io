@@ -25,7 +25,7 @@
     <div id="admin">
 
         <db-update id="form" key="bokid" update="true"
-                fields="bokid,tittel,pdato,isbn,antallSider" table="bok">
+                fields="bokid,tittel,pdato:date,isbn,antallsider:number" table="bok">
             <span slot="heading">Rediger Bok</span>
         </db-update>
 

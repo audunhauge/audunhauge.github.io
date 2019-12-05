@@ -91,15 +91,40 @@
     switch (e.type) {
       case "checkbox":
         return e.checked;
+      case "number":
+        return e.value !== "" ? Number(e.value) : 0;
+      case "date":
+        return e.value;
       default:
         return e.value;
     }
   };
 
+  const assignInput = (inp,type,value) => {
+    // NOTE (value == null) covers (value == undefined) also
+    switch(type) {
+      case "checkbox":
+        inp.checked = (value !== false);
+        break;
+      case "date":
+        let date = "";
+        date = (value == null) ? "" : value.split("T")[0] ;
+        inp.value = date;
+        break;
+      default:
+        let cleanValue = (value === null) ? "" : value;
+        inp.value = cleanValue;
+        break;
+    }
+  }
+
+  
+
   class DBUpdate extends HTMLElement {
     constructor() {
       super();
       this.rows = [];
+      this.types = {};  // fields need typing so we can store dates and number correctly
       this.idx = 0;
       this.table = "";
       this.update = "";
@@ -170,17 +195,16 @@
           divFields.appendChild(label);
         }
         this.fieldlist = fieldlist.map(e => this._root.querySelector("#" + e.name));
+        this.fields = fieldlist.map(e => e.name);
+        this.types = fieldlist.reduce( (s,e) => { s[e.name] = e.type; return s}, {});
       }
-      if (name === "table") {
+      if (name === "table") {assignInput
         this.table = newValue;
       }
       if (name === "update") {
         this.update = newValue;
         this._root.querySelector("label.hidden").classList.remove("hidden");
         // Array.from(this._root.querySelectorAll("input")).forEach(e => e.setAttribute("disabled","true"));
-      }
-      if (name === "fields") {
-        this.fields = newValue;
       }
       if (name === "key") {
         this.key = newValue;
@@ -205,7 +229,8 @@
       // places data for row[idx] in form for editing
       if (this.rows.length && this.fieldlist.length) {
         let current = this.rows[this.idx];
-        this.fieldlist.forEach(e => (e.value = current[e.id]));
+        //assignInput
+        this.fieldlist.forEach(e => assignInput(e,this.types[e.id],current[e.id]) );
         this._root.querySelector("#number").innerHTML =
           "#" + String(this.idx + 1);
         this.dispatchEvent(
@@ -236,7 +261,7 @@
         fetch("/runsql", init)
           .then(r => r.json())
           .then(data => {
-            console.log(data);
+            // console.log(data);
             let list = data.results;
             if (list.length) {
               this.rows = list;
@@ -263,7 +288,7 @@
       fetch("/runsql", init)
         .then(r => r.json())
         .then(data => {
-          console.log(data);
+          //console.log(data);
           let list = data.results;
           if (list.length) {
             let options = list
@@ -284,7 +309,7 @@
           "Content-Type": "application/json"
         }
       };
-      console.log(sql, data);
+      //console.log(sql, data);
       fetch("/runsql", init)
         .then(() =>
           // others may want to refresh view

@@ -43,7 +43,7 @@
             <span slot="heading">Registrer Utlån</span>
             <db-foreign label="tittel" foreign="eksemplarid"
                 sql="select e.eksemplarid,
-                concat(b.tittel,' av ',f.fornavn, ' ',f.etternavn) as tittel 
+                concat(e.eksemplarid,':',b.tittel,' av ',f.fornavn, ' ',f.etternavn,', tillstand:',e.tillstand) as tittel 
                 from eksemplar e join bok b on (e.bokid = b.bokid) 
                 join forfatter f on (f.forfatterid = b.forfatterid)">
             </db-foreign>
