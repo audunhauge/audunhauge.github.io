@@ -1,0 +1,13 @@
+#form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+}
+#form > div {
+    background-color: wheat;
+    min-height: 12em;
+    min-width: 15em;
+    margin: 2em;
+    border-radius: 8px;
+    padding: 10px;
+}

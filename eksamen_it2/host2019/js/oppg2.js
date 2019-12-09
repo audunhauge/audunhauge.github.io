@@ -1,10 +1,15 @@
 // @ts-check
 
-const g = id => document.getElementById(id);
+const g = id => {
+   let elm = document.getElementById(id);
+   if (elm == null || elm == undefined) {
+       alert(`Stavefeil? finner ikke ${id}`)
+   }
+}
 const get = element => element.value;
 
 function setup() {
-    let selAktivitet = g("aktivitet");
+    let selAktivitet = g("aktiviet");
     let inpVarighet = g("varighet");
     let btnBeregn = g("beregn");
     let divSvar = g("svar");
