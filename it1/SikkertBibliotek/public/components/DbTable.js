@@ -43,6 +43,9 @@
               font-size: 1.1rem;
               font-weight:bold;
             }
+            tr.selected {
+              box-shadow: inset 0 0 5px blue;
+            }
           </style>
           <table>
             <caption><slot name="caption"></slot></caption>
@@ -56,7 +59,10 @@
   class DBTable extends HTMLElement {
     constructor() {
       super();
+      this.selectedRow = 0;
+      this.rows = [];  // data from sql
       this.table = "";
+      this.key = "";
       this.delete = "";
       this.connected = ""; // use given db-component as where, assumed to implement get.value
       // also assumed to emit dbUpdate
@@ -82,14 +88,40 @@
         }
         if (this.update === "true") this.redraw(this.sql);
       });
+      // can set focus on a row in table
+      let divBody = this._root.querySelector("#tbody");
+      divBody.addEventListener("click", e => {
+        let prev = divBody.querySelector("tr.selected")
+        if (prev) prev.classList.remove("selected");  // should be only one
+        let t = e.target;
+        while(t && t.localName !== "tr" ) {
+          t = t.parentNode;
+        }
+        if (t && t.dataset && t.dataset.idx) {
+           t.classList.add("selected");
+           this.selectedRow = Number(t.dataset.idx); 
+           this.dispatchEvent(
+            new CustomEvent("dbTableSelect", {
+              bubbles: true,
+              composed: true,
+              detail: { row:this.selectedRow, table:this.table }
+            })
+          )
+        }
+      });
     }
 
     static get observedAttributes() {
-      return ["fields", "sql", "update", "connected", "delete"];
+      return ["fields", "sql", "update", "key", "connected", "delete"];
     }
 
     connectedCallback() {
       this.redraw(this.sql);
+    }
+
+    get value() {
+      let current = this.rows[this.selectedRow];
+      return current[this.key];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
@@ -120,7 +152,7 @@
               .map(e => e.value)
               .join(",");
             let sql = `delete from ${table} where ${leader} in (${selected})`;
-            console.log(sql);
+            //console.log(sql);
             let data = {};
             let init = {
               method: "POST",
@@ -138,7 +170,7 @@
                   new CustomEvent("dbUpdate", {
                     bubbles: true,
                     composed: true,
-                    detail: "upsert"
+                    detail: {delete:true, table:this.table}
                   })
                 )
               )
@@ -151,6 +183,9 @@
       }
       if (name === "sql") {
         this.sql = newValue;
+      }
+      if (name === "key") {
+        this.key = newValue;
       }
       if (name === "update") {
         this.update = newValue;
@@ -181,6 +216,7 @@
           .then(data => {
             // console.log(data);
             let list = data.results;
+            this.rows = list;   // so we can pick values
             let rows = "";
             let headers = this.fieldlist;
             let chkDelete = this.delete;
@@ -188,9 +224,9 @@
             if (list.length) {
               rows = list
                 .map(
-                  e =>
-                    `<tr>${headers
-                      .map(h => `<td class="${h.type}">${e[h.name]}</td>`)
+                  (e,i) =>
+                    `<tr data-idx="${i}">${headers
+                      .map((h,i) => `<td class="${h.type}">${e[h.name]}</td>`)
                       .join("")} ${
                       chkDelete
                         ? `<td><input type="checkbox" value="${e[leader]}"></td>`

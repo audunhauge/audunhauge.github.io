@@ -237,7 +237,7 @@
           new CustomEvent("dbUpdate", {
             bubbles: true,
             composed: true,
-            detail: "upsert"
+            detail: { table:this.table}
           })
         );
       }
@@ -317,7 +317,7 @@
             new CustomEvent("dbUpdate", {
               bubbles: true,
               composed: true,
-              detail: "upsert"
+              detail: {table:this.table}
             })
           )
         )

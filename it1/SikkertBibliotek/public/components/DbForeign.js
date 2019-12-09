@@ -33,7 +33,7 @@
             new CustomEvent("dbChange", {
               bubbles: true,
               composed: true,
-              detail: this.id
+              detail: { id:this.id }
             })
           );
         });
