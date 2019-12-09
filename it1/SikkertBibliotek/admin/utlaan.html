@@ -31,7 +31,8 @@
     <div id="admin">
         <!-- angi feltnavn du ønsker å bruke i fields="" -->
         <div class="table">
-            <db-table id="table" update="true" fields="fornavn,etternavn,tittel,innlevert" sql="select l.fornavn,l.etternavn,b.tittel,e.tillstand,u.innlevert 
+            <db-table id="table" update="true" delete="utlaan" fields="utlaanid,fornavn,etternavn,tittel,innlevert" 
+            sql="select u.utlaanid,l.fornavn,l.etternavn,b.tittel,e.tillstand,u.innlevert 
              from laaner l inner join utlaan u on (l.laanerid = u.laanerid) 
              inner join eksemplar e on (e.eksemplarid = u.eksemplarid) inner join bok b on (b.bokid=e.bokid)">
                 <span slot="caption">Utlån</span>

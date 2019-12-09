@@ -21,7 +21,7 @@
    
     <div id="admin">
         <div class="table">
-            <db-table id="table" update="true" fields="fornavn,etternavn,adresse,epost" sql="select * from laaner">
+            <db-table id="table" update="true" delete="laaner" fields="laanerid,fornavn,etternavn,adresse,epost" sql="select * from laaner">
                 <span slot="caption">Lånere</span>
             </db-table>
         </div>

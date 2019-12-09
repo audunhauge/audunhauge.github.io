@@ -24,7 +24,7 @@
 
 
         <div class="table">
-            <db-table id="table" update="true" fields="fornavn,etternavn" sql="select * from forfatter">
+            <db-table id="table" update="true" delete="forfatter" fields="forfatterid:hidden,fornavn,etternavn" sql="select * from forfatter">
                 <span slot="caption">Forfattere</span>
             </db-table>
         </div>

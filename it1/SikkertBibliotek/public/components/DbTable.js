@@ -1,6 +1,6 @@
 // @ts-check
 
-(function () {
+(function() {
   const template = document.createElement("template");
   template.innerHTML = `
           <style>
@@ -29,10 +29,19 @@
               text-align: left;
               padding-left: 10px;
             }
+            th.hidden,
+            td.hidden {
+              display:none;
+            }
             td.number {
               text-align: right;
               color: blue;
               padding-right: 10px;
+            }
+            th button {
+              color:red;
+              font-size: 1.1rem;
+              font-weight:bold;
             }
           </style>
           <table>
@@ -49,7 +58,7 @@
       super();
       this.table = "";
       this.delete = "";
-      this.connected = "";  // use given db-component as where, assumed to implement get.value
+      this.connected = ""; // use given db-component as where, assumed to implement get.value
       // also assumed to emit dbUpdate
       this._root = this.attachShadow({ mode: "open" });
       this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -65,19 +74,18 @@
               // check that sql does not have where clause and value is int
               let sql = this.sql;
               let intvalue = Math.trunc(Number(value));
-              if (sql.includes("where") || !Number.isInteger(intvalue)) return;  // do nothing
-              sql += ` where ${field} = ${intvalue}`;  // value is integer
+              if (sql.includes("where") || !Number.isInteger(intvalue)) return; // do nothing
+              sql += ` where ${field} = ${intvalue}`; // value is integer
               this.redraw(sql);
             }
           }
-
         }
         if (this.update === "true") this.redraw(this.sql);
       });
     }
 
     static get observedAttributes() {
-      return ["fields", "sql", "update", "connected"];
+      return ["fields", "sql", "update", "connected", "delete"];
     }
 
     connectedCallback() {
@@ -86,15 +94,56 @@
 
     attributeChangedCallback(name, oldValue, newValue) {
       let divThead = this._root.querySelector("#thead");
+      let divBody = this._root.querySelector("#tbody");
       if (name === "fields") {
         divThead.innerHTML = "";
         let fieldlist = newValue.split(",");
-        let headers = fieldlist.map(h => { let [name,type="text"] = h.split(":"); return {name,type} })
+        let headers = fieldlist.map(h => {
+          let [name, type = "text"] = h.split(":");
+          return { name, type };
+        });
         this.fieldlist = headers;
-        for (let {name} of headers) {
+        for (let { name,type } of headers) {
           let th = document.createElement("th");
           th.innerHTML = name;
+          th.className = type;
           divThead.appendChild(th);
+        }
+        if (this.delete) {
+          let th = document.createElement("th");
+          th.innerHTML = "<button>x</button>";
+          divThead.appendChild(th);
+          divThead.querySelector("button").addEventListener("click", () => {
+            let table = this.delete;
+            let leader = this.fieldlist[0].name;
+            let selected = Array.from(divBody.querySelectorAll("input:checked"))
+              .map(e => e.value)
+              .join(",");
+            let sql = `delete from ${table} where ${leader} in (${selected})`;
+            console.log(sql);
+            let data = {};
+            let init = {
+              method: "POST",
+              credentials: "include",
+              body: JSON.stringify({ sql, data }),
+              headers: {
+                "Content-Type": "application/json"
+              }
+            };
+            //console.log(sql, data);
+            fetch("/runsql", init)
+              .then(() =>
+                // others may want to refresh view
+                this.dispatchEvent(
+                  new CustomEvent("dbUpdate", {
+                    bubbles: true,
+                    composed: true,
+                    detail: "upsert"
+                  })
+                )
+              )
+              .catch(e => console.log(e.message));
+          });
         }
       }
       if (name === "connected") {
@@ -105,6 +154,13 @@
       }
       if (name === "update") {
         this.update = newValue;
+      }
+      if (name === "delete") {
+        // must be name of table to delete from
+        // first field of fields will be used as shown
+        // delete from tablename where field in ( collect field.value of checked rows)
+        // the first field value is stored on checkbox to make this easy
+        this.delete = newValue;
       }
     }
 
@@ -125,10 +181,23 @@
           .then(data => {
             // console.log(data);
             let list = data.results;
-            let rows = '';
+            let rows = "";
+            let headers = this.fieldlist;
+            let chkDelete = this.delete;
+            let leader = headers[0].name; // name of first field
             if (list.length) {
-              let headers = this.fieldlist;
-              rows = list.map(e => `<tr>${headers.map(h => `<td class="${h.type}">${e[h.name]}</td>`).join('')}</tr>`).join("");
+              rows = list
+                .map(
+                  e =>
+                    `<tr>${headers
+                      .map(h => `<td class="${h.type}">${e[h.name]}</td>`)
+                      .join("")} ${
+                      chkDelete
+                        ? `<td><input type="checkbox" value="${e[leader]}"></td>`
+                        : ""
+                    }</tr>`
+                )
+                .join("");
             }
             divBody.innerHTML = rows;
           });
