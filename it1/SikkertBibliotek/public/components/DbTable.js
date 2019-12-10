@@ -46,7 +46,7 @@
             tr.selected {
               box-shadow: inset 0 0 5px blue;
             }
-            table.error tr {
+            table.error thead tr {
               box-shadow: inset 0 0 5px red, 0 0 0 orange;
               animation: pulse 1s alternate infinite;
             }
@@ -98,7 +98,7 @@
               let divBody = this._root.querySelector("#tbody");
               divBody.innerHTML = "";
               this.selectedRow = undefined;
-              this.trigger({});  // cascade
+              this.trigger({}); // cascade
             }
           }
         } else {
@@ -118,7 +118,7 @@
         if (t && t.dataset && t.dataset.idx) {
           t.classList.add("selected");
           this.selectedRow = Number(t.dataset.idx);
-          this.trigger({ row: this.selectedRow});
+          this.trigger({ row: this.selectedRow });
         }
       });
     }
@@ -151,7 +151,7 @@
           composed: true,
           detail
         })
-      )
+      );
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
@@ -182,7 +182,6 @@
               .map(e => e.value)
               .join(",");
             let sql = `delete from ${table} where ${leader} in (${selected})`;
-            //console.log(sql);
             let data = {};
             let init = {
               method: "POST",
@@ -192,13 +191,33 @@
                 "Content-Type": "application/json"
               }
             };
-            //console.log(sql, data);
             fetch("/runsql", init)
-              .then(() =>
+              .then(r => r.json())
+              .then(data => {
+                let list = data.results;  // check for errors
+                let htmltable = this._root.querySelector("table");
+                if (list.error) {
+                  htmltable.classList.add("error");
+                  htmltable.title = sql + "\n" + list.error;
+                  return;
+                } else {
+                  this.trigger({ delete: true, table });
+                }
+              }).catch(e => console.log(e.message));
+            /*
+            fetch("/runsql", init)
+              .then(resp => {
+                if (resp && resp.error) {
+                  let htmltable = this._root.querySelector("table");
+                  htmltable.classList.add("error");
+                  htmltable.title = sql + "\n" + resp.error;
+                  return;
+                }
                 // others may want to refresh view
-                this.trigger({ delete:true}) 
-              )
+                this.trigger({ delete: true, table });
+              })
               .catch(e => console.log(e.message));
+              */
           });
         }
       }
@@ -241,14 +260,14 @@
           .then(data => {
             // console.log(data);
             let list = data.results;
-            let table = this._root.querySelector("table");
+            let htmltable = this._root.querySelector("table");
             if (list.error) {
-              table.classList.add("error");
-              table.title = sql + "\n" + list.error;
+              htmltable.classList.add("error");
+              htmltable.title = sql + "\n" + list.error;
               return;
             }
-            table.classList.remove("error");
-            table.title = "";   
+            htmltable.classList.remove("error");
+            htmltable.title = "";
             this.rows = list; // so we can pick values
             let rows = "";
             let headers = this.fieldlist;
@@ -269,7 +288,7 @@
                 .join("");
             }
             divBody.innerHTML = rows;
-            this.trigger({});   // dependents may redraw
+            this.trigger({}); // dependents may redraw
           });
       }
     }
