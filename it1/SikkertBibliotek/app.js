@@ -248,7 +248,7 @@ async function runsql(res, obj) {
     })
     .catch(error => {
       console.log("ERROR:", sql, ":", error.message); // print error;
-      results = {};
+      results = { error:error.message };
     });
   res.send({ results });
 }

@@ -22,13 +22,12 @@
 
 
     <div id="admin">
-        <db-update id="form" key="forfatterid" update="true"
-                fields="forfatterid,fornavn,etternavn" table="forfatter">
+        <db-update id="form" key="forfatterid" update="true" fields="forfatterid,fornavn,etternavn" table="forfatter">
             <span slot="heading">Rediger Forfatter</span>
         </db-update>
 
         <div class="table">
-            <db-table connected="form:forfatterid" fields="tittel" sql="select * from bok">
+            <db-table id="boker" key="bokid" connected="form:forfatterid" fields="tittel" sql="select * from bok">
                 <span slot="caption">Bøker av valgt forfatter</span>
             </db-table>
 
@@ -36,6 +35,20 @@
                 sql="select count(u.utlaanid) as antall from utlaan u join eksemplar e on (u.eksemplarid=e.eksemplarid) join bok b on (b.bokid=e.bokid)">
                 <span slot="caption">Antall bøker utlånt</span>
             </db-table>
+
+            <db-table id="laaner" connected="boker:bokid" fields="laaner" key="laanerid" sql="select l.laanerid,l.fornavn as laaner from laaner l join utlaan u on (u.laanerid = l.laanerid)
+                    join eksemplar e on (e.eksemplarid = u.eksemplarid)">
+                <span slot="caption">Lånere av valgt bok</span>
+            </db-table>
+
+            <db-table connected="laaner:laanerid" fields="fornavn,etternavn,adresse" sql="select * from laaner">
+                <span slot="caption">Detaljer om valgt låner</span>
+            </db-table>
+
+            <db-update key="laanerid" fields="fornavn,etternavn,adresse" connected="laaner:laanerid"
+                table="laaner">
+                <span slot="heading">Detaljer om låner</span>
+            </db-update>
         </div>
     </div>
 
