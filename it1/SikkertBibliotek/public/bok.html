@@ -18,7 +18,7 @@
     </home-bar>
 
     <div id="main">
-        <db-table id="table" update="true" fields="tittel,fornavn,etternavn,antallsider"
+        <db-table id="table" fields="tittel,fornavn,etternavn,antallsider"
             sql="select * from bok b inner join forfatter f on (b.forfatterid = f.forfatterid)">
             <span slot="caption">Bøker</span>
         </db-table>

@@ -8,7 +8,7 @@
               width: 100%;
               border-collapse:collapse;
             }
-            thead {
+            #thead {
               background-color: var(--head, beige);
             }
             th {
@@ -46,10 +46,18 @@
             tr.selected {
               box-shadow: inset 0 0 5px blue;
             }
+            table.error tr {
+              box-shadow: inset 0 0 5px red, 0 0 0 orange;
+              animation: pulse 1s alternate infinite;
+            }
+            @keyframes pulse {
+              100% { box-shadow: inset 0 0 2px black, 0 0 6px red; }
+            }
           </style>
           <table>
             <caption><slot name="caption"></slot></caption>
-            <thead id="thead">
+            <thead>
+              <tr id="thead"></tr>
             </thead>
             <tbody id="tbody">
             </tbody>
@@ -59,9 +67,8 @@
   class DBTable extends HTMLElement {
     constructor() {
       super();
-      this.selectedRow = 0;
-      this.rows = [];  // data from sql
-      this.table = "";
+      this.selectedRow;
+      this.rows = []; // data from sql
       this.key = "";
       this.delete = "";
       this.connected = ""; // use given db-component as where, assumed to implement get.value
@@ -69,9 +76,12 @@
       this._root = this.attachShadow({ mode: "open" });
       this.shadowRoot.appendChild(template.content.cloneNode(true));
       addEventListener("dbUpdate", e => {
+        let source = e.detail.source;
+        let table = e.detail.table;
         if (this.connected !== "") {
           // NOTE update ignored if connected is set
           let [id, field] = this.connected.split(":");
+          if (id !== source) return; // we are not interested
           let dbComponent = document.getElementById(id);
           if (dbComponent) {
             // component found - get its value
@@ -83,30 +93,32 @@
               if (sql.includes("where") || !Number.isInteger(intvalue)) return; // do nothing
               sql += ` where ${field} = ${intvalue}`; // value is integer
               this.redraw(sql);
+            } else {
+              // we must redraw as empty
+              let divBody = this._root.querySelector("#tbody");
+              divBody.innerHTML = "";
+              this.selectedRow = undefined;
+              this.trigger({});  // cascade
             }
           }
+        } else {
+          if (this.update && this.update === table) this.redraw(this.sql);
         }
-        if (this.update === "true") this.redraw(this.sql);
+        //if (this.update === table) this.redraw(this.sql);
       });
       // can set focus on a row in table
       let divBody = this._root.querySelector("#tbody");
       divBody.addEventListener("click", e => {
-        let prev = divBody.querySelector("tr.selected")
-        if (prev) prev.classList.remove("selected");  // should be only one
+        let prev = divBody.querySelector("tr.selected");
+        if (prev) prev.classList.remove("selected"); // should be only one
         let t = e.target;
-        while(t && t.localName !== "tr" ) {
+        while (t && t.localName !== "tr") {
           t = t.parentNode;
         }
         if (t && t.dataset && t.dataset.idx) {
-           t.classList.add("selected");
-           this.selectedRow = Number(t.dataset.idx); 
-           this.dispatchEvent(
-            new CustomEvent("dbTableSelect", {
-              bubbles: true,
-              composed: true,
-              detail: { row:this.selectedRow, table:this.table }
-            })
-          )
+          t.classList.add("selected");
+          this.selectedRow = Number(t.dataset.idx);
+          this.trigger({ row: this.selectedRow});
         }
       });
     }
@@ -116,12 +128,30 @@
     }
 
     connectedCallback() {
-      this.redraw(this.sql);
+      // only make initial redraw if not connected
+      // a connected table must be triggered by event
+      if (this.connected === "") {
+        this.redraw(this.sql);
+      }
     }
 
     get value() {
+      if (this.selectedRow === undefined) {
+        return undefined;
+      }
       let current = this.rows[this.selectedRow];
       return current[this.key];
+    }
+
+    trigger(detail) {
+      detail.source = this.id;
+      this.dispatchEvent(
+        new CustomEvent("dbUpdate", {
+          bubbles: true,
+          composed: true,
+          detail
+        })
+      )
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
@@ -135,7 +165,7 @@
           return { name, type };
         });
         this.fieldlist = headers;
-        for (let { name,type } of headers) {
+        for (let { name, type } of headers) {
           let th = document.createElement("th");
           th.innerHTML = name;
           th.className = type;
@@ -166,13 +196,7 @@
             fetch("/runsql", init)
               .then(() =>
                 // others may want to refresh view
-                this.dispatchEvent(
-                  new CustomEvent("dbUpdate", {
-                    bubbles: true,
-                    composed: true,
-                    detail: {delete:true, table:this.table}
-                  })
-                )
+                this.trigger({ delete:true}) 
               )
               .catch(e => console.log(e.message));
           });
@@ -200,6 +224,7 @@
     }
 
     redraw(sql) {
+      this.selectedRow = undefined;
       let divBody = this._root.querySelector("#tbody");
       if (this.sql && divBody) {
         //let sql = this.sql;
@@ -216,7 +241,15 @@
           .then(data => {
             // console.log(data);
             let list = data.results;
-            this.rows = list;   // so we can pick values
+            let table = this._root.querySelector("table");
+            if (list.error) {
+              table.classList.add("error");
+              table.title = sql + "\n" + list.error;
+              return;
+            }
+            table.classList.remove("error");
+            table.title = "";   
+            this.rows = list; // so we can pick values
             let rows = "";
             let headers = this.fieldlist;
             let chkDelete = this.delete;
@@ -224,9 +257,9 @@
             if (list.length) {
               rows = list
                 .map(
-                  (e,i) =>
+                  (e, i) =>
                     `<tr data-idx="${i}">${headers
-                      .map((h,i) => `<td class="${h.type}">${e[h.name]}</td>`)
+                      .map((h, i) => `<td class="${h.type}">${e[h.name]}</td>`)
                       .join("")} ${
                       chkDelete
                         ? `<td><input type="checkbox" value="${e[leader]}"></td>`
@@ -236,6 +269,7 @@
                 .join("");
             }
             divBody.innerHTML = rows;
+            this.trigger({});   // dependents may redraw
           });
       }
     }
