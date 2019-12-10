@@ -1,0 +1,29 @@
+/* endre de to neste linjene for å tilpasse skjema */
+:root {
+    --Skjema-bredde: 40em;  /* bredde på skjema */
+    --Input-bredde: 30%;    /* bredde på input */
+}
+
+form {
+    width: var(--Skjema-bredde);
+    border: solid gray 1px;
+    border-radius: 5px;
+    box-shadow: 3px 3px rgba(0, 0, 0, 0.26);
+    background-color: whitesmoke;
+    padding: 1em;
+}
+
+div {
+    position: relative;
+    padding: 2px;
+}
+
+label > input {
+    position: absolute;
+    right: 0px;
+    width: var(--Input-bredde);
+}
+
+button {
+   /* font-size: 0.9em; */
+}
