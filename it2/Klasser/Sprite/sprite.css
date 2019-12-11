@@ -6,6 +6,10 @@
   background-color: whitesmoke;
 }
 
+#game div {
+  position: absolute;
+}
+
 .tree {
   width: 5px;
   height: 25px;
@@ -19,8 +23,8 @@
   border-radius: 50%;
 }
 
-.dog {
-  width: 30px;
-  height: 15px;
+.fly {
+  width: 6px;
+  height: 2px;
   background-color: red;
 }
