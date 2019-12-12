@@ -1,0 +1,30 @@
+#game {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  border: solid 1px gray;
+  background-color: whitesmoke;
+}
+
+#game div {
+  position: absolute;
+}
+
+.tree {
+  width: 5px;
+  height: 25px;
+  background-color: teal;
+}
+
+.bird {
+  width: 20px;
+  height: 20px;
+  background-color: green;
+  border-radius: 50%;
+}
+
+.fly {
+  width: 6px;
+  height: 2px;
+  background-color: red;
+}
