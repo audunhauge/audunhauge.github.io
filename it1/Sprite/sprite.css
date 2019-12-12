@@ -24,7 +24,10 @@
 }
 
 .fly {
-  width: 6px;
-  height: 2px;
-  background-color: red;
+  width: 25px;
+  height: 38px;
+  background-image: url("barn.png");
+  background-position-x: 0px;
+  background-size: 165px;
+
 }

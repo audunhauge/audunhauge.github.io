@@ -93,7 +93,7 @@ function setup() {
     itemList.push(s);
   }
 
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < 20; i++) {
     let x = 50 + Math.random() * 500;
     let y = 50 + Math.random() * 500;
     let v = Math.random() * 2 + 0.5;
