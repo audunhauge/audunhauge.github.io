@@ -1,6 +1,6 @@
 // @ts-check
 
-(function() {
+(function () {
   const template = document.createElement("template");
   template.innerHTML = `
           <style>
@@ -171,55 +171,6 @@
           th.className = type;
           divThead.appendChild(th);
         }
-        if (this.delete) {
-          let th = document.createElement("th");
-          th.innerHTML = "<button>x</button>";
-          divThead.appendChild(th);
-          divThead.querySelector("button").addEventListener("click", () => {
-            let table = this.delete;
-            let leader = this.fieldlist[0].name;
-            let selected = Array.from(divBody.querySelectorAll("input:checked"))
-              .map(e => e.value)
-              .join(",");
-            let sql = `delete from ${table} where ${leader} in (${selected})`;
-            let data = {};
-            let init = {
-              method: "POST",
-              credentials: "include",
-              body: JSON.stringify({ sql, data }),
-              headers: {
-                "Content-Type": "application/json"
-              }
-            };
-            fetch("/runsql", init)
-              .then(r => r.json())
-              .then(data => {
-                let list = data.results;  // check for errors
-                let htmltable = this._root.querySelector("table");
-                if (list.error) {
-                  htmltable.classList.add("error");
-                  htmltable.title = sql + "\n" + list.error;
-                  return;
-                } else {
-                  this.trigger({ delete: true, table });
-                }
-              }).catch(e => console.log(e.message));
-            /*
-            fetch("/runsql", init)
-              .then(resp => {
-                if (resp && resp.error) {
-                  let htmltable = this._root.querySelector("table");
-                  htmltable.classList.add("error");
-                  htmltable.title = sql + "\n" + resp.error;
-                  return;
-                }
-                // others may want to refresh view
-                this.trigger({ delete: true, table });
-              })
-              .catch(e => console.log(e.message));
-              */
-          });
-        }
       }
       if (name === "connected") {
         this.connected = newValue;
@@ -239,6 +190,40 @@
         // delete from tablename where field in ( collect field.value of checked rows)
         // the first field value is stored on checkbox to make this easy
         this.delete = newValue;
+
+        let th = document.createElement("th");
+        th.innerHTML = "<button>x</button>";
+        divThead.appendChild(th);
+        divThead.querySelector("button").addEventListener("click", () => {
+          let table = this.delete;
+          let leader = this.fieldlist[0].name;
+          let selected = Array.from(divBody.querySelectorAll("input:checked"))
+            .map(e => e.value)
+            .join(",");
+          let sql = `delete from ${table} where ${leader} in (${selected})`;
+          let data = {};
+          let init = {
+            method: "POST",
+            credentials: "include",
+            body: JSON.stringify({ sql, data }),
+            headers: {
+              "Content-Type": "application/json"
+            }
+          };
+          fetch("/runsql", init)
+            .then(r => r.json())
+            .then(data => {
+              let list = data.results;  // check for errors
+              let htmltable = this._root.querySelector("table");
+              if (list.error) {
+                htmltable.classList.add("error");
+                htmltable.title = sql + "\n" + list.error;
+                return;
+              } else {
+                this.trigger({ delete: true, table });
+              }
+            }).catch(e => console.log(e.message));
+        });
       }
     }
 
@@ -280,9 +265,9 @@
                     `<tr data-idx="${i}">${headers
                       .map((h, i) => `<td class="${h.type}">${e[h.name]}</td>`)
                       .join("")} ${
-                      chkDelete
-                        ? `<td><input type="checkbox" value="${e[leader]}"></td>`
-                        : ""
+                    chkDelete
+                      ? `<td><input type="checkbox" value="${e[leader]}"></td>`
+                      : ""
                     }</tr>`
                 )
                 .join("");

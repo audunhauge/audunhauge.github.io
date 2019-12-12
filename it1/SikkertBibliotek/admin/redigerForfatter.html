@@ -36,8 +36,8 @@
                 <span slot="caption">Antall bøker utlånt</span>
             </db-table>
 
-            <db-table id="laaner" connected="boker:bokid" fields="laaner" key="laanerid" sql="select l.laanerid,l.fornavn as laaner from laaner l join utlaan u on (u.laanerid = l.laanerid)
-                    join eksemplar e on (e.eksemplarid = u.eksemplarid)">
+            <db-table id="laaner" connected="boker:bokid" fields="laaner"  key="laanerid" sql="select l.laanerid,l.fornavn as laaner from laaner l join utlaan u on (u.laanerid = l.laanerid)
+                    join eksemplar e on (e.eksemplarid = u.eksemplarid)" >
                 <span slot="caption">Lånere av valgt bok</span>
             </db-table>
 

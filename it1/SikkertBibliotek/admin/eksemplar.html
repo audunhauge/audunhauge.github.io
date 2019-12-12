@@ -22,8 +22,8 @@
     <div id="admin">
 
         <div class="table">
-            <db-table id="table" update="eksemplar" delete="eksemplar" fields="eksemplarid,tittel,tillstand,bokid"
-                sql="select e.*, b.tittel from eksemplar e join bok b on (e.bokid = b.bokid)">
+            <db-table id="table" update="eksemplar" fields="eksemplarid,tittel,tillstand,bokid"
+                sql="select e.*, b.tittel from eksemplar e join bok b on (e.bokid = b.bokid)" delete="eksemplar">
                 <span slot="caption">Eksemplar</span>
             </db-table>
         </div>

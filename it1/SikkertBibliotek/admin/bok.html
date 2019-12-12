@@ -18,7 +18,7 @@
     </home-bar>
     <div id="admin">
         <div class="table">
-            <db-table id="table" update="bok" delete="bok" fields="bokid,tittel,fornavn,etternavn,antallsider:number"
+            <db-table id="table" update="bok"  fields="bokid,tittel,fornavn,etternavn,antallsider:number" delete="bok"
                 sql="select b.*,f.fornavn,f.etternavn from bok b inner join forfatter f on (b.forfatterid = f.forfatterid)">
                 <span slot="caption">Bøker</span>
             </db-table>
