@@ -1,4 +1,5 @@
 // @ts-check
+const WIDTH = 900;
 class Sprite {
   constructor({ div, x, y, w, h }) {
     this.div = div;
@@ -21,9 +22,9 @@ class Movable extends Sprite {
   move() {
     this.x += this.vx;
     this.y += this.vy;
-    if (this.x > 600 - this.w) this.vx = -Math.abs(this.vx);
+    if (this.x > WIDTH - this.w) this.vx = -Math.abs(this.vx);
     if (this.x < 0) this.vx = Math.abs(this.vx);
-    if (this.y > 600 - this.h) this.vy = -Math.abs(this.vy);
+    if (this.y > WIDTH - this.h) this.vy = -Math.abs(this.vy);
     if (this.y < 0) this.vy = Math.abs(this.vy);
   }
 }
@@ -58,9 +59,9 @@ class Turnable extends Movable {
   move() {
     this.x += this.vx;
     this.y += this.vy;
-    if (this.x > 600 - this.w) this.vx = -Math.abs(this.vx);
+    if (this.x > WIDTH - this.w) this.vx = -Math.abs(this.vx);
     if (this.x < 0) this.vx = Math.abs(this.vx);
-    if (this.y > 600 - this.h) this.vy = -Math.abs(this.vy);
+    if (this.y > WIDTH - this.h) this.vy = -Math.abs(this.vy);
     if (this.y < 0) this.vy = Math.abs(this.vy);
     this.angle = Math.atan2(this.vy, this.vx);
   }
@@ -84,8 +85,8 @@ function setup() {
     h = 10;
 
   for (let i = 0; i < 20; i++) {
-    let x = 50 + Math.random() * 500;
-    let y = 50 + Math.random() * 500;
+    let x = 50 + Math.random() * WIDTH-100;
+    let y = 50 + Math.random() * WIDTH-100;
     let s = new Sprite({ div: getdiv(), x, y, w: 5, h: 25 });
     s.div.className = "tree";
     divGame.append(s.div);
@@ -93,14 +94,15 @@ function setup() {
     itemList.push(s);
   }
 
-  for (let i = 0; i < 20; i++) {
-    let x = 50 + Math.random() * 500;
-    let y = 50 + Math.random() * 500;
+  for (let i = 0; i < 35; i++) {
+    let x = 50 + Math.random() * WIDTH-100;
+    let y = 50 + Math.random() * WIDTH-100;
     let v = Math.random() * 2 + 0.5;
     let r = new Turnable({ div: getdiv(), x, y, w: 6, h: 2 }, 0.3, v);
     r.div.className = "fly";
     divGame.append(r.div);
     itemList.push(r);
+    r.div.classList.add("p"+ (i%8 + 1));
   }
 
 
@@ -121,8 +123,8 @@ function setup() {
   itemList.push(m);
 
 
-  const treListe = itemList.slice().filter(e => e.div.className === "tree");
-  const flueListe = itemList.filter(e => e.div.className === "fly");
+  const treListe = itemList.slice().filter(e => e.div.classList.contains("tree"));
+  const flueListe = itemList.filter(e => e.div.classList.contains("fly"));
 
   const ANTALLFLUER = flueListe.length;
 

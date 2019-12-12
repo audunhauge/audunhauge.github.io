@@ -1,7 +1,7 @@
 #game {
   position: relative;
-  width: 600px;
-  height: 600px;
+  width: 900px;
+  height: 900px;
   border: solid 1px gray;
   background-color: whitesmoke;
 }
@@ -11,23 +11,60 @@
 }
 
 .tree {
-  width: 5px;
-  height: 25px;
-  background-color: teal;
+  width: 100px;
+  height: 94px;
+  background-image: url("juletre.png");
+  background-position: center;
+  background-size: contain;
+  z-index:2;
 }
 
 .bird {
-  width: 20px;
-  height: 20px;
-  background-color: green;
+  width: 60px;
+  height: 60px;
+  background-image: url("santa.png");
   border-radius: 50%;
+  z-index:1;
+  background-position: center;
+  background-size: contain;
 }
 
 .fly {
-  width: 25px;
-  height: 38px;
+  width: 38px;
+  height: 60px;
   background-image: url("barn.png");
   background-position-x: 0px;
-  background-size: 165px;
-
+  background-size: 295px;
+  z-index:0;
 }
+
+.fly.p1 {
+  background-position-x: 80px;
+}
+
+.fly.p2 {
+  background-position-x: 150px;
+}
+
+.fly.p3 {
+  background-position-x: 114px;
+}
+
+.fly.p4 {
+  background-position-x: 190px;
+}
+.fly.p5 {
+  background-position-x: 225px;
+}
+.fly.p6 {
+  background-position-x: 258px;
+}
+.fly.p7 {
+  background-position-x: 292px;
+}
+.fly.p0 {
+  background-position-x: 332px;
+}
+
+
+
