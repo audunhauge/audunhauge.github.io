@@ -1,0 +1,69 @@
+#game {
+  position: relative;
+  width: 900px;
+  height: 900px;
+  border: solid 1px gray;
+  background-color: whitesmoke;
+}
+
+#game div {
+  position: absolute;
+}
+
+
+.tree {
+  width: 100px;
+  height: 94px;
+  background-image: url("juletre.png");
+  background-position: center;
+  background-size: contain;
+  z-index:2;
+}
+
+.santa {
+  width: 60px;
+  height: 60px;
+  background-image: url("santa.png");
+  border-radius: 50%;
+  z-index:1;
+  background-position: center;
+  background-size: contain;
+}
+
+.child {
+  width: 38px;
+  height: 60px;
+  background-image: url("barn.png");
+  background-position-x: 0px;
+  background-size: 295px;
+  z-index:0;
+}
+
+.child.p1 {
+  background-position-x: 80px;
+}
+
+.child.p2 {
+  background-position-x: 150px;
+}
+
+.child.p3 {
+  background-position-x: 114px;
+}
+
+.child.p4 {
+  background-position-x: 190px;
+}
+.child.p5 {
+  background-position-x: 225px;
+}
+.child.p6 {
+  background-position-x: 258px;
+}
+.child.p7 {
+  background-position-x: 292px;
+}
+.child.p0 {
+  background-position-x: 332px;
+}
+

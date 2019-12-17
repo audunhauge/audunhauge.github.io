@@ -55,6 +55,7 @@ class Movable extends Sprite {
   ax = 0;
   ay = 0;
   diverge = 0;
+  edgy = 0;
   rot;
   constructor(spriteInfo, vx, vy) {
     super(spriteInfo);
@@ -66,7 +67,7 @@ class Movable extends Sprite {
   }
 
   static get damping() {
-    return 0.985;
+    return 0.9985;
   }
 
   get isa() {
@@ -109,29 +110,36 @@ class Movable extends Sprite {
     let radius = this.radius;
     let x = this.x;
     let y = this.y;
-
-    if (x - radius < box.x) {
-      // utenfor box venstre kant
-      let vx = (this.px - this.x) * damping;
-      this.x = radius;
-      this.px = this.x - vx;
-    } else if (x + radius > box.w) {
-      // utenfor høyre kant
-      let vx = (this.px - this.x) * damping;
-      this.x = box.w - radius;
-      this.px = this.x - vx;
-    }
-    if (y - radius < box.y) {
-      // utenfor top av box
-      let vy = (this.py - this.y) * damping;
-      this.y = radius;
-      this.py = this.y - vy;
-    } else if (y + radius > box.h) {
-      // utenfor bunn av box
-      let vy = (this.py - this.y) * damping;
-      this.y = box.h - radius;
-      this.py = this.y - vy;
-    }
+      if (x - radius < box.x) {
+        // utenfor box venstre kant
+        let vx = (this.px - this.x) * damping;
+        this.x = radius;
+        this.px = this.x - vx;
+    
+      } else if (x + radius > box.w) {
+        // utenfor høyre kant
+        let vx = (this.px - this.x) * damping;
+        this.x = box.w - 3*radius;
+        this.px = this.x - vx;
+    
+      }
+      if (y - radius < box.y) {
+        // utenfor top av box
+        let vy = (this.py - this.y) * damping;
+        this.y = radius;
+        this.py = this.y - vy;
+    
+      } else if (y + radius > box.h) {
+        // utenfor bunn av box
+        let vy = (this.py - this.y) * damping;
+        this.y = box.h - radius;
+        this.py = this.y - vy;
+    
+      }
+    this.vx = this.x - this.px;
+    this.vy = this.y - this.py;
+    this.rot = Math.atan2(this.vy, this.vx);
+    this.edgy = this.edgy > 0 ? this.edgy - 1 : 0;
   }
 
   /**
@@ -167,19 +175,21 @@ class Movable extends Sprite {
           if (body2.isa === "Sprite") {
             // collided with a static sprite
             // find lesser of dx,dy
+            /*
             let dx = body1.x - body2.x;
             let dy = body1.y - body2.y;
             if (Math.abs(dx) > Math.abs(dy)) {
               // mostly x overlap
               let vx = (body1.px - body1.x) * damping;
-              body1.x += dx;
+              body1.x += dx*body1.radius/Math.abs(dx);
               body1.px = body1.x - vx;
             } else {
               // mostly y overlap
               let vy = (body1.py - body1.y) * damping;
-              body1.y += dy;
+              body1.y += dy*body1.radius/Math.abs(dy);
               body1.py = body1.y - vy;
             }
+            */
           } else {
             // collided with a movable
             let v1x = body1.x - body1.px;
@@ -232,6 +242,7 @@ class Child extends Movable {
     let vy = Math.sin(rot) * velocity;
     super(spriteInfo, vx, vy);
     this.excited = false;
+    this.edgy = 0;
   }
   // turn towards m
   turn(m, maxDist = 1000, minDist = 100000) {
@@ -244,7 +255,7 @@ class Child extends Movable {
     if (dist > minDist) {
       // child cant see santa
       this.excited = false;
-      if (velocity < 0.01) {
+      if (velocity < 0.01 && this.edgy === 0) {
         velocity = Math.random() * 0.2 + 0.1;
       }
     } else {
@@ -270,43 +281,76 @@ class Child extends Movable {
 
 const g = id => document.getElementById(id);
 const getdiv = () => document.createElement("div");
-const box = new Sprite({ div: getdiv(), x: 0, y: 0, h: 900, w: 900 });
+
+
+const meldinger = [
+  "God Jul",
+  "Merry Xmas",
+  "Hei",
+  "Glædelig Jul",
+  "Godt nytt år",
+  "Takk det samme"
+];
+
+
 
 const itemList = [];
 
 function setup() {
-  let divGame = g("game");
+  let divGame = g("julekal");
+  let rect = divGame.getBoundingClientRect();
+  let {left:x, top:y, bottom:b, right:r} = rect;
+  const btop = y;
+  const bleft = x;
+  const box = new Sprite({ div: divGame, x:0, y:0, w:r-x, h:b-y });
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 124; i++) {
     let x = 50 + Math.random() * 800;
     let y = 50 + Math.random() * 800;
     let r = new Child({ div: getdiv(), x, y, w: 10, h: 10 });
-    r.div.className = "child p" + (i%8);
+    r.div.className = "child p" + (i % 8);
     divGame.append(r.div);
     itemList.push(r);
   }
 
-  for (let i = 0; i < 20; i++) {
+  // finn luker
+  let lukene = document.querySelectorAll(".luker");
+  let bx = divGame.offsetLeft;
+  let by = divGame.offsetTop;
+  for (let luke of lukene) {
+    let rect = luke.getBoundingClientRect();
+    let {left, top, bottom:b, right:r} = rect;
+    let s = new Sprite({ div: luke, x:left-bleft, y:top-btop, w:r-x, h:b-y });
+    // s.div.className = "tree";
+    //divGame.append(s.div);
+    // s.render();
+    itemList.push(s);
+  }
+  /*
+  for (let i = 0; i < 24; i++) {
     let x = 50 + Math.random() * 800;
     let y = 50 + Math.random() * 800;
-    let s = new Sprite({ div: getdiv(), x, y, w: 25, h: 25 });
+    let s = new Sprite({ div: getdiv(), x, y, w: 50, h: 50 });
     s.div.className = "tree";
     divGame.append(s.div);
     s.render();
     itemList.push(s);
   }
+  */
 
-  let m = new Santa({ div: getdiv(), x: 200, y: 200, w: 40, h: 40 }, 3, 4);
+  let m = new Santa({ div: getdiv(), x: 200, y: 200, w: 40, h: 40 }, 3, -4);
   m.div.className = "santa";
   divGame.append(m.div);
   itemList.push(m);
 
   const treListe = itemList
     .slice()
-    .filter(e => e.div.classList.contains("tree"));
+    .filter(e => e.div.classList.contains("luker"));
   const flueListe = itemList.filter(e => e.div.classList.contains("child"));
 
   const ANTALLFLUER = flueListe.length;
+
+  let mittTre = null;
 
   function letEtterEtTre() {
     // beregner avstand til nærmeste tre
@@ -317,20 +361,24 @@ function setup() {
       m.angry--;
     } else {
       let minst = 600 * 600;
-      let mittTre = null;
+      mittTre = null;
       for (let tre of treListe) {
+        if (!tre.alive) continue;
+        tre.div.classList.remove("target");
         let dist = (m.x - tre.x) ** 2 + (m.y - tre.y) ** 2; // kvadrat av avstand
-        if (dist < 1000) {
+        if (dist < 90000 && dist < minst) {
           minst = dist;
           mittTre = tre;
-        }
+        } 
       }
       if (minst < 10) {
         // vi har funnet et tre og kan stoppe
         m.px = m.x;
         m.py = m.y;
-      } else if (minst < 1000) {
+        mittTre.div.classList.add("target");
+      } else if (minst < 90000) {
         let speed = 3;
+        mittTre.div.classList.add("target");
         let dx = mittTre.x - m.x;
         let dy = mittTre.y - m.y;
         let angle = Math.atan2(dy, dx);
@@ -346,28 +394,36 @@ function setup() {
     let antall = 0;
     for (let flue of flueListe) {
       let dist = (m.x - flue.x) ** 2 + (m.y - flue.y) ** 2; // kvadrat av avstand
-      if (dist < 1000) {
+      if (dist < 2500) {
         antall++;
       }
     }
-    if (antall > 8 || antall / ANTALLFLUER > 0.85) {
+    if (antall > 5 || antall / ANTALLFLUER > 0.85) {
       m.vx = Math.random() * 20 - 10;
       m.vy = Math.random() * 20 - 10;
       m.px = m.x - m.vx;
       m.py = m.y - m.vy;
       m.angry = 100; // fuggel er irritert
+      if (mittTre) {
+        //  åpne denne luka
+        mittTre.div.classList.add("open");
+        mittTre.div.classList.remove("target");
+        mittTre.die();
+        let idx = Math.trunc(Math.random()* meldinger.length);
+        mittTre.div.innerHTML = meldinger[idx];
+      }
     }
   }
 
   setInterval(() => {
     for (let item of itemList) {
-      item.render(); // alle
       if (item instanceof Movable) {
+        item.render(); // alle
         item.inertia(); // bird og fly
-        item.edge(box);
         if (item instanceof Child ) {
           item.turn(m); // bare ungene
         }
+        item.edge(box);
       }
     }
     Movable.collide(itemList);

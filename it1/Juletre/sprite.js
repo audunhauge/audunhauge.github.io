@@ -55,6 +55,7 @@ class Movable extends Sprite {
   ax = 0;
   ay = 0;
   diverge = 0;
+  edgy = 0;
   rot;
   constructor(spriteInfo, vx, vy) {
     super(spriteInfo);
@@ -66,7 +67,7 @@ class Movable extends Sprite {
   }
 
   static get damping() {
-    return 0.985;
+    return 0.9985;
   }
 
   get isa() {
@@ -109,29 +110,36 @@ class Movable extends Sprite {
     let radius = this.radius;
     let x = this.x;
     let y = this.y;
-
-    if (x - radius < box.x) {
-      // utenfor box venstre kant
-      let vx = (this.px - this.x) * damping;
-      this.x = radius;
-      this.px = this.x - vx;
-    } else if (x + radius > box.w) {
-      // utenfor høyre kant
-      let vx = (this.px - this.x) * damping;
-      this.x = box.w - radius;
-      this.px = this.x - vx;
-    }
-    if (y - radius < box.y) {
-      // utenfor top av box
-      let vy = (this.py - this.y) * damping;
-      this.y = radius;
-      this.py = this.y - vy;
-    } else if (y + radius > box.h) {
-      // utenfor bunn av box
-      let vy = (this.py - this.y) * damping;
-      this.y = box.h - radius;
-      this.py = this.y - vy;
-    }
+      if (x - radius < box.x) {
+        // utenfor box venstre kant
+        let vx = (this.px - this.x) * damping;
+        this.x = radius;
+        this.px = this.x - vx;
+    
+      } else if (x + radius > box.w) {
+        // utenfor høyre kant
+        let vx = (this.px - this.x) * damping;
+        this.x = box.w - 3*radius;
+        this.px = this.x - vx;
+    
+      }
+      if (y - radius < box.y) {
+        // utenfor top av box
+        let vy = (this.py - this.y) * damping;
+        this.y = radius;
+        this.py = this.y - vy;
+    
+      } else if (y + radius > box.h) {
+        // utenfor bunn av box
+        let vy = (this.py - this.y) * damping;
+        this.y = box.h - radius;
+        this.py = this.y - vy;
+    
+      }
+    this.vx = this.x - this.px;
+    this.vy = this.y - this.py;
+    this.rot = Math.atan2(this.vy, this.vx);
+    this.edgy = this.edgy > 0 ? this.edgy - 1 : 0;
   }
 
   /**
@@ -232,6 +240,7 @@ class Child extends Movable {
     let vy = Math.sin(rot) * velocity;
     super(spriteInfo, vx, vy);
     this.excited = false;
+    this.edgy = 0;
   }
   // turn towards m
   turn(m, maxDist = 1000, minDist = 100000) {
@@ -244,7 +253,7 @@ class Child extends Movable {
     if (dist > minDist) {
       // child cant see santa
       this.excited = false;
-      if (velocity < 0.01) {
+      if (velocity < 0.01 && this.edgy === 0) {
         velocity = Math.random() * 0.2 + 0.1;
       }
     } else {
@@ -277,11 +286,11 @@ const itemList = [];
 function setup() {
   let divGame = g("game");
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 40; i++) {
     let x = 50 + Math.random() * 800;
     let y = 50 + Math.random() * 800;
     let r = new Child({ div: getdiv(), x, y, w: 10, h: 10 });
-    r.div.className = "child p" + (i%8);
+    r.div.className = "child p" + (i % 8);
     divGame.append(r.div);
     itemList.push(r);
   }
@@ -289,7 +298,7 @@ function setup() {
   for (let i = 0; i < 20; i++) {
     let x = 50 + Math.random() * 800;
     let y = 50 + Math.random() * 800;
-    let s = new Sprite({ div: getdiv(), x, y, w: 25, h: 25 });
+    let s = new Sprite({ div: getdiv(), x, y, w: 50, h: 50 });
     s.div.className = "tree";
     divGame.append(s.div);
     s.render();
@@ -346,11 +355,11 @@ function setup() {
     let antall = 0;
     for (let flue of flueListe) {
       let dist = (m.x - flue.x) ** 2 + (m.y - flue.y) ** 2; // kvadrat av avstand
-      if (dist < 1000) {
+      if (dist < 2500) {
         antall++;
       }
     }
-    if (antall > 8 || antall / ANTALLFLUER > 0.85) {
+    if (antall > 5 || antall / ANTALLFLUER > 0.85) {
       m.vx = Math.random() * 20 - 10;
       m.vy = Math.random() * 20 - 10;
       m.px = m.x - m.vx;
@@ -364,10 +373,10 @@ function setup() {
       item.render(); // alle
       if (item instanceof Movable) {
         item.inertia(); // bird og fly
-        item.edge(box);
         if (item instanceof Child ) {
           item.turn(m); // bare ungene
         }
+        item.edge(box);
       }
     }
     Movable.collide(itemList);

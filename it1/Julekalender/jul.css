@@ -9,6 +9,7 @@ body {
 }
 
 #julekal {
+    position: relative;
     background-image: url("jul.png");
     background-size: cover;
     background-position: center;
@@ -23,29 +24,82 @@ body {
 }
 
 .luker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 120px;
     height: 60px;
     border: solid red 1px;
-    text-align: center;
-    background-image: none;
+    background-color: green;
+}
+
+.luker.target {
+  background-image: url("b1.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+}
+
+.luker.open {
+    background-color: white;
+}
+
+
+
+
+.santa {
+    position: absolute;
+    left:0;
+    top:0;
+    width: 60px;
+    height: 60px;
+    background-image: url("santa.png");
+    border-radius: 50%;
+    z-index:1;
     background-position: center;
-    background-size: 0%;
-    background-repeat: no-repeat;
-}
-
-
-.luker:nth-child(1):hover {
-    background-image: url("b1.png");
-    animation: reveal 2s forwards;
-}
-@keyframes reveal {
-    100% { background-size: 100%;}
-}
-
-#b1 {
-    opacity: 0;
-}
-
-#b1:hover {
-    opacity: 1;
-}
+    background-size: contain;
+  }
+  
+  .child {
+    position: absolute;
+    left:0;
+    top:0;
+    width: 38px;
+    height: 60px;
+    background-image: url("barn.png");
+    background-position-x: 0px;
+    background-size: 295px;
+    z-index:0;
+  }
+  
+  .child.p1 {
+    background-position-x: 80px;
+  }
+  
+  .child.p2 {
+    background-position-x: 150px;
+  }
+  
+  .child.p3 {
+    background-position-x: 114px;
+  }
+  
+  .child.p4 {
+    background-position-x: 190px;
+  }
+  .child.p5 {
+    background-position-x: 225px;
+  }
+  .child.p6 {
+    background-position-x: 258px;
+  }
+  .child.p7 {
+    background-position-x: 292px;
+  }
+  .child.p0 {
+    background-position-x: 332px;
+  }
+  
+  
