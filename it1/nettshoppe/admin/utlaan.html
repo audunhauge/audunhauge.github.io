@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registrer forfatter</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="/components/DbInsert.js"></script>
+    <script src="/components/DbTable.js"></script>
+    <script src="/components/DbForeign.js"></script>
+    <script src="/components/Homebar.js"></script>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <!-- denne varianten henter menyene fra /htmlfiler (som er definert i app.js)    -->
+    <home-bar heading="Skolebibliotek Skeisvang" crumb="utlån" getlinks="/htmlfiler/admin" username="/myself"">
+    </home-bar>
+    <!--
+    <home-bar heading=" Skolebibliotek Skeisvang" crumb="forfatter">
+        <li data-link="forfatter">Registrer forfatter</li>
+        <li data-link="bok">Registrer bok</li>
+        <li data-link="laaner">Registrer låner</li>
+        <li data-link="utlaan">Registrer utlån</li>
+        <li data-link="eksemplar">Registrer eksemplar</li>
+    </home-bar>
+    -->
+
+    <div id="admin">
+        <!-- angi feltnavn du ønsker å bruke i fields="" -->
+        <div class="table">
+            <db-table id="table" update="utlaan" fields="utlaanid,fornavn,etternavn,tittel,innlevert" delete="utlaan"
+            sql="select u.utlaanid,l.fornavn,l.etternavn,b.tittel,e.tillstand,u.innlevert 
+             from laaner l inner join utlaan u on (l.laanerid = u.laanerid) 
+             inner join eksemplar e on (e.eksemplarid = u.eksemplarid) inner join bok b on (b.bokid=e.bokid)">
+                <span slot="caption">Utlån</span>
+            </db-table>
+        </div>
+
+        <!-- angi feltnavn du ønsker å bruke i fields=""  -->
+        <db-insert id="form" fields="innlevert:checkbox" foreign="laaner.laanerid:fornavn+etternavn" table="utlaan">
+            <span slot="heading">Registrer Utlån</span>
+            <db-foreign label="tittel" foreign="eksemplarid"
+                sql="select e.eksemplarid,
+                concat(e.eksemplarid,':',b.tittel,' av ',f.fornavn, ' ',f.etternavn,', tillstand:',e.tillstand) as tittel 
+                from eksemplar e join bok b on (e.bokid = b.bokid) 
+                join forfatter f on (f.forfatterid = b.forfatterid)">
+            </db-foreign>
+        </db-insert>
+    </div>
+
+</body>
+
+</html>

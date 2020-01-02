@@ -1,0 +1,53 @@
+/**
+  css for et bibliotek med custom components for
+  å manipulere databasen
+**/
+
+
+:root {
+    --light-grad: linear-gradient(125deg, rgba(255,255,255,0), rgba(255,255,255,.16));
+    --dark-grad: linear-gradient(125deg, rgba(0,0,0,0), rgba(0,0,0,.16));
+  }
+  
+  
+  #admin {
+    margin: 10px;
+    display: grid;
+    grid-template-columns: 1fr 4fr 4fr 1fr;
+    grid-template-areas:
+      ". editor  view ."
+      ".   .     view .";
+  }
+  
+  #admin > * {
+      justify-self: center;
+  }
+  
+  .table {
+    width: 30em;
+    grid-area: view;
+  }
+  
+  #form {
+      grid-area: editor;
+  }
+  
+  home-bar {
+     /* --grad: var(--light-grad); */
+  }
+  
+  db-table {
+    margin: 2em;
+     --alternate: rgba(188, 208, 228, 0.555);
+     --head: oldlace;
+  }
+  
+  @media screen and (max-width: 850px) {
+      #username , #info { display:none; }
+      #admin {
+          grid-template-columns: 1fr;
+          grid-template-areas:
+          "editor"
+          "view";
+      }
+    }
