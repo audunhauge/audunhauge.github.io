@@ -30,7 +30,7 @@
         .querySelector("#select > select")
         .addEventListener("change", e => {
           this.dispatchEvent(
-            new CustomEvent("dbChange", {
+            new CustomEvent("dbUpdate", {
               bubbles: true,
               composed: true,
               detail: { id:this.id }

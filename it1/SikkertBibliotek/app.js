@@ -133,6 +133,19 @@ app.post("/runsql", function(req, res) {
   }
 });
 
+// delivers userinfo about logged in user
+app.post("/userinfo", function(req, res) {
+  let user = req.user;
+  let data = req.body;
+  if (req.isAuthenticated()) {
+    let sql = data.sql;
+    console.log(sql);
+    res.send( { userid:1 } );
+  } else {
+    res.send( {error:"player unknown b."} )
+  }
+});
+
 async function saferSQL(res, obj, options) {
   const predefined = [
     "select * from bok b join forfatter f on (b.forfatterid = f.forfatterid)",

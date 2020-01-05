@@ -1,11 +1,11 @@
 // @ts-check
 
-(function () {
+(function() {
   const template = document.createElement("template");
   template.innerHTML = `
           <style>
             table {
-              width: 100%;
+              width: var(--tsize, 100%);
               border-collapse:collapse;
             }
             #thead {
@@ -32,6 +32,14 @@
             th.hidden,
             td.hidden {
               display:none;
+            }
+            td.true, td.false {
+              text-align: center;
+              color: green;
+              font-size: 1.2rem;
+            } 
+            td.false {
+              color:red;
             }
             td.number {
               text-align: right;
@@ -64,12 +72,34 @@
           </table>
       `;
 
+  const formatField = (type, value) => {
+    // NOTE (value == null) covers (value == undefined) also
+    switch (type) {
+      case "boolean":
+        return (value ? {type:'true', value:'✓'} : { type:'false',value:'✗'});
+      case "number":
+        return {type, value:+value };
+      case "money":
+        return {type:"number", value:(+value).toFixed(2) };
+      case "int":
+        return {type:"number", value:Math.trunc(+value)};
+      case "date":
+        let date = "";
+        date = value == null ? "" : value.split("T")[0];
+        return {type,value:date};
+      default:
+        let cleanValue = value === null ? "" : value;
+        return {type,value:cleanValue};
+    }
+  };
+
   class DBTable extends HTMLElement {
     constructor() {
       super();
       this.selectedRow;
       this.rows = []; // data from sql
       this.key = "";
+      this.refsql = ""; // set if updated by dbupdate - reused by simple refresh
       this.delete = "";
       this.connected = ""; // use given db-component as where, assumed to implement get.value
       // also assumed to emit dbUpdate
@@ -78,33 +108,38 @@
       addEventListener("dbUpdate", e => {
         let source = e.detail.source;
         let table = e.detail.table;
-        if (this.connected !== "") {
-          // NOTE update ignored if connected is set
+        let done = false;
+        if (source && this.connected !== "") {
+          // otherwise do an update
           let [id, field] = this.connected.split(":");
-          if (id !== source) return; // we are not interested
-          let dbComponent = document.getElementById(id);
-          if (dbComponent) {
-            // component found - get its value
-            let value = dbComponent.value || "";
-            if (value !== "") {
-              // check that sql does not have where clause and value is int
-              let sql = this.sql;
-              let intvalue = Math.trunc(Number(value));
-              if (sql.includes("where") || !Number.isInteger(intvalue)) return; // do nothing
-              sql += ` where ${field} = ${intvalue}`; // value is integer
-              this.redraw(sql);
-            } else {
-              // we must redraw as empty
-              let divBody = this._root.querySelector("#tbody");
-              divBody.innerHTML = "";
-              this.selectedRow = undefined;
-              this.trigger({}); // cascade
+          if (id === source) {
+            done = true;
+            let dbComponent = document.getElementById(id);
+            if (dbComponent) {
+              // component found - get its value
+              let value = dbComponent.value || "";
+              if (value !== "") {
+                // check that sql does not have where clause and value is int
+                let sql = this.sql;
+                let intvalue = Math.trunc(Number(value));
+                if (sql.includes("where") || !Number.isInteger(intvalue))
+                  return; // do nothing
+                sql += ` where ${field} = ${intvalue}`; // value is integer
+                this.refsql = sql; // reuse if refreshed by update
+                this.redraw(sql);
+              } else {
+                // we must redraw as empty
+                let divBody = this._root.querySelector("#tbody");
+                divBody.innerHTML = "";
+                this.selectedRow = undefined;
+                this.trigger({}); // cascade
+              }
             }
           }
-        } else {
-          if (this.update && this.update === table) this.redraw(this.sql);
         }
-        //if (this.update === table) this.redraw(this.sql);
+        // check if we need a simple refresh
+        if (!done && this.update && this.update === table)
+          this.redraw(this.refsql || this.sql);
       });
       // can set focus on a row in table
       let divBody = this._root.querySelector("#tbody");
@@ -213,16 +248,17 @@
           fetch("/runsql", init)
             .then(r => r.json())
             .then(data => {
-              let list = data.results;  // check for errors
+              let list = data.results; // check for errors
               let htmltable = this._root.querySelector("table");
               if (list.error) {
                 htmltable.classList.add("error");
                 htmltable.title = sql + "\n" + list.error;
                 return;
               } else {
-                this.trigger({ delete: true, table });
+                this.trigger({ update: true, table });
               }
-            }).catch(e => console.log(e.message));
+            })
+            .catch(e => console.log(e.message));
         });
       }
     }
@@ -263,11 +299,14 @@
                 .map(
                   (e, i) =>
                     `<tr data-idx="${i}">${headers
-                      .map((h, i) => `<td class="${h.type}">${e[h.name]}</td>`)
+                      .map((h, i) => {
+                        let {value,type} = formatField(h.type,e[h.name]);
+                        return `<td class="${type}">${value}</td>`
+                      })
                       .join("")} ${
-                    chkDelete
-                      ? `<td><input type="checkbox" value="${e[leader]}"></td>`
-                      : ""
+                      chkDelete
+                        ? `<td><input type="checkbox" value="${e[leader]}"></td>`
+                        : ""
                     }</tr>`
                 )
                 .join("");

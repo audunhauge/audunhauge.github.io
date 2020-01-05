@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registrer forfatter</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="/components/DbUser.js"></script>
+    <script src="/components/DbInsert.js"></script>
+    <script src="/components/DbList.js"></script>
+    <script src="/components/DbTable.js"></script>
+    <script src="/components/Homebar.js"></script>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+
+    <home-bar heading="Nettbutikk" crumb="bestilling" getlinks="/htmlfiler/admin" username="/myself"">
+    </home-bar>
+    
+    <h1 class=" centered">Mine Bestillinger</h1>
+        <div id="admin">
+
+            <db-insert id="form" fields="dato:date" table="bestilling">
+                <span slot="heading">Bestilling Vare</span>
+                <db-user id="kundeid" field="kundeid" label="Kundenr"></db-user>
+            </db-insert>
+           
+
+            <div class="table">
+                <db-table connected="kundeid:kundeid" id="bestilling" update="bestilling" key="bestillingid"
+                    fields="bestillingid:number,dato:date" delete="bestilling" sql="select * from bestilling">
+                    <span slot="caption">Mine bestillinger</span>
+                </db-table>
+
+                <db-insert id="linje" fields="antall" foreign="vare.vareid:navn+pris"
+                    connected="bestilling:bestillingid" table="linje">
+                    <span slot="heading">Bestilling Vare</span>
+                </db-insert>
+
+                <db-table connected="bestilling:bestillingid" fields="linjeid:hidden,navn,antall:int,pris:money"
+                    update="linje" delete="linje"
+                    sql="select l.*,v.navn,v.pris from linje l inner join vare v on (v.vareid = l.vareid)">
+                    <span slot="caption">Varelinje</span>
+                </db-table>
+
+                <db-table id="total" connected="bestilling:bestillingid" fields="total:money" update="linje" sql="select sum(l.antall * v.pris) as total
+                                from linje l inner join vare v on (v.vareid = l.vareid)">
+                    <span slot="caption">Totalsum</span>
+                </db-table>
+
+            </div>
+
+        </div>
+
+</body>
+
+</html>

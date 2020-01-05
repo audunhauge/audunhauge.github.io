@@ -41,6 +41,10 @@
      --alternate: rgba(188, 208, 228, 0.555);
      --head: oldlace;
   }
+
+  #total {
+    --tsize: 150px;
+  }
   
   @media screen and (max-width: 850px) {
       #username , #info { display:none; }

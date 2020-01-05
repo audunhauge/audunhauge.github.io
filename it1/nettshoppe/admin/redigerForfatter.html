@@ -32,11 +32,13 @@
             </db-table>
 
             <db-table connected="form:forfatterid" fields="antall:number"
-                sql="select count(u.utlaanid) as antall from utlaan u join eksemplar e on (u.eksemplarid=e.eksemplarid) join bok b on (b.bokid=e.bokid)">
+                sql="select count(u.utlaanid) as antall from utlaan u join eksemplar e 
+                    on (u.eksemplarid=e.eksemplarid) join bok b on (b.bokid=e.bokid)">
                 <span slot="caption">Antall bøker utlånt</span>
             </db-table>
 
-            <db-table id="laaner" connected="boker:bokid" fields="laaner"  key="laanerid" sql="select l.laanerid,l.fornavn as laaner from laaner l join utlaan u on (u.laanerid = l.laanerid)
+            <db-table id="laaner" connected="boker:bokid" fields="laaner"  key="laanerid" 
+                  sql="select l.laanerid,l.fornavn as laaner from laaner l join utlaan u on (u.laanerid = l.laanerid)
                     join eksemplar e on (e.eksemplarid = u.eksemplarid)" >
                 <span slot="caption">Lånere av valgt bok</span>
             </db-table>

@@ -38,6 +38,11 @@
         form  div#foreign label {
           grid-template-columns: 5fr 1fr 4fr;
         }
+
+        form.invalid  {
+          height: 1em;
+          overflow:hidden;
+        }
         
         form::after {
             color:blue;
@@ -71,26 +76,27 @@
 
   // extend to more datatypes if needed
   const getval = e => {
-    switch(e.type) {
+    switch (e.type) {
       case "checkbox":
         return e.checked;
       default:
         return e.value;
     }
-  }
+  };
 
   class DBInsert extends HTMLElement {
     constructor() {
       super();
       this.table = "";
+      this.fields = "";
       this._root = this.attachShadow({ mode: "open" });
       this.shadowRoot.appendChild(template.content.cloneNode(true));
       // this is code for creating sql insert statement
       this._root.querySelector("#save").addEventListener("click", e => {
         // aliens will pick out any db-foreign placed into alien-slot
-        let aliens = Array.from(this._root.querySelectorAll("#alien slot")).map(
-          e => e.assignedElements()[0]
-        ).filter(e => e !== undefined);
+        let aliens = Array.from(this._root.querySelectorAll("#alien slot"))
+          .map(e => e.assignedElements()[0])
+          .filter(e => e !== undefined);
         let foreign = Array.from(
           this._root.querySelectorAll("#foreign select")
         );
@@ -109,29 +115,61 @@
     }
 
     static get observedAttributes() {
-      return ["table", "fields", "foreign"];
+      return ["table", "fields", "foreign", "connected"];
     }
 
     connectedCallback() {
       console.log(this.table);
     }
 
+    makeform(fields) {
+      let divFields = this._root.querySelector("#fields");
+      divFields.innerHTML = "";
+      let fieldlist = fields.split(",");
+      for (let i = 0; i < fieldlist.length; i++) {
+        let [name, type = "text", text = ""] = fieldlist[i].split(":");
+        text = (t => t.charAt(0).toUpperCase() + t.substr(1))(text || name);
+        let label = document.createElement("label");
+        label.innerHTML = `${text} <input type="${type}" id="${name}">`;
+        divFields.appendChild(label);
+      }
+    }
+
     attributeChangedCallback(name, oldValue, newValue) {
       let divFields = this._root.querySelector("#fields");
       let divForeign = this._root.querySelector("#foreign");
       if (name === "fields") {
-        divFields.innerHTML = "";
-        let fieldlist = newValue.split(",");
-        for (let i = 0; i < fieldlist.length; i++) {
-          let [name, type = "text", text = ""] = fieldlist[i].split(":");
-          text = (t => t.charAt(0).toUpperCase() + t.substr(1))(text || name);
-          let label = document.createElement("label");
-          label.innerHTML = `${text} <input type="${type}" id="${name}">`;
-          divFields.appendChild(label);
-        }
+        this.fields = newValue;
+        this.makeform(this.fields);
       }
       if (name === "table") {
         this.table = newValue;
+      }
+      if (name === "connected") {
+        this.connected = newValue;
+        // this component depends on another
+        addEventListener("dbUpdate", e => {
+          let source = e.detail.source;
+          let [id, field] = this.connected.split(":");
+          if (id !== source) return; // we are not interested
+          let dbComponent = document.getElementById(id);
+          if (dbComponent) {
+            this.makeform(this.fields);
+            // component found - get its value
+            let value = dbComponent.value || "";
+            if (value !== "") {
+              let label = document.createElement("label");
+              label.innerHTML = `${field} <input disabled type="text" id="${field}" value="${value}">`;
+              divFields.appendChild(label);
+              this._root.querySelector("form").classList.remove("invalid");
+            } else {
+              // we must redraw as empty
+              this._root.querySelector("form").classList.add("invalid");
+              this.idx = undefined;
+              this.trigger({}); // cascade
+            }
+          }
+        });
       }
       if (name === "foreign") {
         divForeign.innerHTML = "";
@@ -139,7 +177,7 @@
         for (let i = 0; i < fieldlist.length; i++) {
           let [table, fields] = fieldlist[i].split(".");
           let [field, use] = fields.split(":");
-          use = (use || field).replace("+",",");
+          use = (use || field).replace("+", ",");
           let text = table.charAt(0).toUpperCase() + table.substr(1);
           let label = document.createElement("label");
           label.innerHTML = `${text} <span class="foreign">${field} </span> <select id="${field}"></select>`;
@@ -147,6 +185,17 @@
           this.makeSelect(table, field, use);
         }
       }
+    }
+
+    trigger(detail) {
+      detail.source = this.id;
+      this.dispatchEvent(
+        new CustomEvent("dbUpdate", {
+          bubbles: true,
+          composed: true,
+          detail
+        })
+      );
     }
 
     // assumes foreign key has same name in both tables
@@ -171,7 +220,12 @@
           let labels = use.split(",");
           if (list.length) {
             let options = list
-              .map(e => `<option value="${e[field]}">${labels.map(l => e[l]).join(" ")}</option>`)
+              .map(
+                e =>
+                  `<option value="${e[field]}">${labels
+                    .map(l => e[l])
+                    .join(" ")}</option>`
+              )
               .join("");
             this._root.querySelector(`#${field}`).innerHTML = options;
           }
@@ -190,14 +244,9 @@
       };
       console.log(sql, data);
       fetch("/runsql", init)
-        .then(() =>  // others may want to refresh view
-          this.dispatchEvent(
-            new CustomEvent("dbUpdate", {
-              bubbles: true,
-              composed: true,
-              detail: { table:this.table, insert:true }
-            })
-          )
+        .then(
+          () =>
+            this.trigger({ table: this.table, insert: true })
         )
         .catch(e => console.log(e.message));
     }
