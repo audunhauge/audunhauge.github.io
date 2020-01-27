@@ -5,12 +5,13 @@
     "version": "0.2.0",
     "configurations": [
 
+
         {
             "type": "node",
             "request": "launch",
-            "cwd": "${workspaceFolder}/it1/SikkertBibliotek",
+            "cwd": "${workspaceFolder}/it1/nettshoppe",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/it1/SikkertBibliotek/app.js"
+            "program": "${workspaceFolder}/it1/nettshoppe/app.js"
         }
     ]
 }

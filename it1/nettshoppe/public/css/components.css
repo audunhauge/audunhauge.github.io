@@ -1,0 +1,10 @@
+li {
+    color:green;
+}
+
+li div { display:flex;} 
+li div div { 
+    display:inline-flexbox; 
+    width: 5em; 
+    margin: 4px; 
+}

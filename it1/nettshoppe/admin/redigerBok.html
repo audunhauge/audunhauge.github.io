@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rediger bok</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="/components/DbUpdate.js"></script>
+    <script src="/components/DbTable.js"></script>
+    <script src="/components/Homebar.js"></script>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+
+
+    <home-bar heading="Skolebibliotek Skeisvang" crumb="rediger bok" 
+        getlinks="/htmlfiler/admin"
+        username="/myself">
+    </home-bar>
+
+
+    <div id="admin">
+
+        <db-update id="form" key="bokid" update="true"
+                fields="bokid,tittel,pdato:date,isbn,antallsider:number" table="bok">
+            <span slot="heading">Rediger Bok</span>
+        </db-update>
+
+        <div class="table">
+            <db-table connected="form:bokid" fields="eksemplarid,tillstand" sql="select * from eksemplar">
+                <span slot="caption">Eksemplar av valgt bok</span>
+            </db-table>
+
+            <db-table connected="form:bokid" fields="antall:number"
+                sql="select count(u.utlaanid) as antall from utlaan u join eksemplar e on (u.eksemplarid=e.eksemplarid)">
+                <span slot="caption">Antall utlån av denne boka</span>
+            </db-table>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

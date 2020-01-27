@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Brukerinfo</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="/components/DbInsert.js"></script>
+    <script src="/components/DbTable.js"></script>
+    <script src="/components/Homebar.js"></script>
+    <link rel="stylesheet" href="/css/shop.css">
+</head>
+
+<body>
+    <home-bar heading="Nettbutikk" username="/myself">
+    </home-bar>
+    <h1 class="centered">Du er registrert</h1>
+    <div class="centered">Du har fått en mail med en kode, skriv den inn i feltet under.
+        Dette for å bekrefte at vi har registrert riktig mail på deg.
+        (koden kan ses i adressen til denne sida som en enkel demo)
+    </div>
+    <div id="main">
+        <form id="login" action="/verify" method="post">
+            
+            <div>
+                <label>Engangskode:</label>
+                <input id="token" type="text" name="token" />
+            </div>
+            <div>
+                <input id="sub" type="submit" value="lagre" />
+            </div
+        </form>
+    </div>
+</body>
+</html>

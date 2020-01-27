@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Brukerinfo</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="/components/DbInsert.js"></script>
+    <script src="/components/DbTable.js"></script>
+    <script src="/components/Homebar.js"></script>
+    <link rel="stylesheet" href="/css/shop.css">
+</head>
+
+<body>
+    <home-bar heading="Nettbutikk" username="/myself">
+    </home-bar>
+    <h1 class="centered">Registrer deg som kunde</h1>
+    <div id="main">
+        <form id="login" action="/signup" onsubmit="return markBad(this)" method="post">
+            <div>
+                <label>Fornavn:</label>
+                <input id="fornavn" type="text" placeholder="fn" name="fornavn" /><br />
+            </div>
+            <div>
+                <label>Etternavn:</label>
+                <input id="etternavn" type="text" placeholder="en" name="etternavn" />
+            </div>
+            <div>
+                <label>Adresse:</label>
+                <input id="adresse" type="text" placeholder="ad" name="adresse" /><br />
+            </div>
+            <div>
+                <label>Epost:</label>
+                <input id="epost" type="email" placeholder="ep" name="epost" />
+            </div>
+            <div>
+                <label>Username:</label>
+                <input id="username" type="text" placeholder="un" name="username" /><br />
+            </div>
+            <div>
+                <label>Password:</label>
+                <input id="password" type="password" placeholder="pw" name="password" />
+            </div>
+            <div>
+                <input id="sub" type="submit" value="lagre" onclick="markBad()" />
+            </div>
+        </form>
+    </div>
+    <script>
+        {
+
+            let query = window.location.search;
+            if (query.includes("message")) {
+                let [_, info] = query.split("=");
+                setTimeout(() => alert(info), 500);
+                //markBad(false);
+            }
+            function markBad(submit = true) {
+                let inputs = document.querySelectorAll("#login input:placeholder-shown");
+                inputs.forEach(e => e.classList.add("bad"));
+                return (inputs.length === 0 );
+            }
+        }
+    </script>
+</body>
+
+</html>
