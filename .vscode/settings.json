@@ -19,5 +19,6 @@
             "server": "localhost",
             "username": "bib"
         }
-    ]
+    ],
+    "liveServer.settings.port": 5501
 }

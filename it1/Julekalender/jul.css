@@ -10,9 +10,7 @@ body {
 
 #julekal {
     position: relative;
-    background-image: url("jul.png");
-    background-size: cover;
-    background-position: center;
+    background-image: linear-gradient(black, blue);
     border: solid 1px gray;
     width: 90vw;
     height: 80vh;

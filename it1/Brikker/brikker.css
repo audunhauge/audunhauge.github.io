@@ -1,0 +1,184 @@
+#brett {
+    border: solid gray 1px;
+    width:calc(64px * 8);
+    height:calc(64px * 8);
+    background-color: whitesmoke;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+
+.castle {
+    position: relative;
+    top: 40px;
+    margin-left: 8px;
+    width:45px;
+    height: 20px;
+    background-image: linear-gradient(cornsilk,cornsilk 60%,black,black 68%,cornsilk 70%,cornsilk);
+    box-shadow: 2px 2px 2px black;
+}
+
+.castle:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    background-color: cornsilk;
+    width: 30px;
+    height: 40px;
+    top: -30px;
+    left:8px;
+}
+.castle:after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    background-image: linear-gradient(90deg, 
+       cornsilk, cornsilk 10%,black 11%,black 16%, 
+       cornsilk 17%, cornsilk 20%,black 21%,black 26%,
+       cornsilk 27%, cornsilk 30%,black 31%,black 36%,
+       cornsilk 37%, cornsilk 50%,black 51%,black 56%,
+       cornsilk 57%, cornsilk 70%,black 71%,black 76%,
+       cornsilk 77%);
+    width: 38px;
+    height: 12px;
+    top: -35px;
+    left:3px;
+    box-shadow: 2px 2px 2px black;
+}
+
+.springer {
+    position: relative;
+    top: 40px;
+    margin-left: 8px;
+    width:45px;
+    height: 20px;
+    background-color: cornsilk;
+    box-shadow: 2px 2px 2px black;
+}
+
+.springer:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    background-color: cornsilk;
+    width: 20px;
+    height: 10px;
+    top: -10px;
+    left:12px;
+}
+.springer:after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    background-color: cornsilk;
+    background-image: radial-gradient(circle at 70% 30%, black, black 5%, cornsilk 6%);
+    width: 32px;
+    height: 22px;
+    top: -35px;
+    left:6px;
+    border-top-left-radius: 50%;
+    border-bottom-right-radius: 12px;
+    box-shadow: 2px 2px 2px black;
+}
+
+.bonde {
+    position: relative;
+    top: 40px;
+    margin-left: 8px;
+    width:45px;
+    height: 20px;
+    background-color: cornsilk;
+    box-shadow: 2px 2px 2px black;
+}
+
+.bonde:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    background-color: cornsilk;
+    width: 20px;
+    height: 10px;
+    top: -10px;
+    left:12px;
+}
+.bonde:after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    background-color: cornsilk;
+    width: 32px;
+    height: 32px;
+    top: -35px;
+    left:6px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 2px black;
+}
+
+.bonde.svart:before {
+    background-color: black;
+    box-shadow: inset 0 0 8px white;
+}
+.bonde.svart:after {
+    background-color: black;
+    box-shadow: inset 0 0 8px white;
+}
+.bonde.svart {
+    background-color: black;
+    box-shadow: inset 0 0 8px white;
+}
+
+
+
+.rute {
+    width: 62px;
+    height: 62px;
+    border: solid gray 1px;
+    background-color: white;
+}
+
+.rute:nth-child(odd) {
+    background-color: black;
+}
+
+.rute:nth-child(2n+9) {
+    background-color: white;
+}
+.rute:nth-child(2n+10) {
+    background-color: black;
+}
+.rute:nth-child(2n+16) {
+    background-color: white;
+}
+.rute:nth-child(2n+17) {
+    background-color: black;
+}
+.rute:nth-child(2n+25) {
+    background-color: white;
+}
+.rute:nth-child(2n+26) {
+    background-color: black;
+}
+.rute:nth-child(2n+33) {
+    background-color: black;
+}
+.rute:nth-child(2n+34) {
+    background-color: white;
+}
+.rute:nth-child(2n+41) {
+    background-color: white;
+}
+.rute:nth-child(2n+42) {
+    background-color: black;
+}
+.rute:nth-child(2n+49) {
+    background-color: black;
+}
+.rute:nth-child(2n+50) {
+    background-color: white;
+}
+.rute:nth-child(2n+57) {
+    background-color: white;
+}
+.rute:nth-child(2n+58) {
+    background-color: black;
+}
