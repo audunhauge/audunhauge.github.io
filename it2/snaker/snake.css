@@ -1,0 +1,24 @@
+#brett {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    border: solid gray 1px;
+}
+
+.ting {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: blue;
+    border-radius: 50%;
+}
+
+.gul.ting {
+    background-color: yellow;
+    box-shadow: inset 0 0 3px black;
+}
+
+.roed.ting.hidden,
+.gul.ting.hidden {
+    display: none;
+} 

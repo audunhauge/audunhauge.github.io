@@ -1,0 +1,22 @@
+#brett {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    border: solid gray 1px;
+}
+
+.ting {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: blue;
+    border-radius: 50%;
+}
+
+.robot.ting {
+    background-color: red;
+}
+
+.dead.ting {
+    background-color: gray;
+}

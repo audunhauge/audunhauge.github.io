@@ -286,10 +286,19 @@ const getdiv = () => document.createElement("div");
 const meldinger = [
   "God Jul",
   "Merry Xmas",
+  "Feliz navidad",
+  "Glücliger Weinacht",
+  "Bon Noel",
+  "Wesołych Świąt",
+  "buon Natale",
+  "Eguberri on",
+  "圣诞节快乐",
   "Hei",
   "Glædelig Jul",
   "Godt nytt år",
-  "Takk det samme"
+  "Takk det samme",
+  "Nydelig",
+  "Ho Ho Ho",
 ];
 
 
@@ -297,6 +306,8 @@ const meldinger = [
 const itemList = [];
 
 function setup() {
+  let now = new Date();
+  let day = now.getDate();
   let divGame = g("julekal");
   let rect = divGame.getBoundingClientRect();
   let {left:x, top:y, bottom:b, right:r} = rect;
@@ -304,7 +315,7 @@ function setup() {
   const bleft = x;
   const box = new Sprite({ div: divGame, x:0, y:0, w:r-x, h:b-y });
 
-  for (let i = 0; i < 124; i++) {
+  for (let i = 0; i < 53; i++) {
     let x = 50 + Math.random() * 800;
     let y = 50 + Math.random() * 800;
     let r = new Child({ div: getdiv(), x, y, w: 10, h: 10 });
@@ -315,9 +326,8 @@ function setup() {
 
   // finn luker
   let lukene = document.querySelectorAll(".luker");
-  let bx = divGame.offsetLeft;
-  let by = divGame.offsetTop;
   for (let luke of lukene) {
+    if (+luke.innerHTML > day) continue;
     let rect = luke.getBoundingClientRect();
     let {left, top, bottom:b, right:r} = rect;
     let s = new Sprite({ div: luke, x:left-bleft, y:top-btop, w:r-x, h:b-y });
