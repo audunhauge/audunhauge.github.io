@@ -46,18 +46,34 @@ function setup() {
     let player = new Ting($("player"), 0, 0);
     plasserSpiller();
 
-
+    newRobotz(10);
     putRobotz();
 
-    function putRobotz() {
-        for (let i = 0; i < 10; i++) {
-            let x = Math.trunc(Math.random() * 60);
-            let y = Math.trunc(Math.random() * 60);
+    
+
+    function newRobotz(n) {
+        for (let i = 0; i < n; i++) {
             let div = document.createElement("div");
             div.className = "robot ting";
-            let robot = new Ting(div, x, y);
+            let robot = new Ting(div, 0, 0);
             divBrett.append(div);
             robotz.push(robot);
+        }
+    }
+
+    function putRobotz() {
+        for (let robot of robotz) {
+            let ledig = false;
+            let x, y;
+            while (!ledig) {
+                x = Math.trunc(Math.random() * 40) + 10;
+                y = Math.trunc(Math.random() * 40) + 10;
+                ledig = ruter[x][y] === 0;
+            }
+            robot.div.className = "robot ting";
+            robot.x = x;
+            robot.y = y;
+            robot.alive = true;
             robot.render();
         }
     }
@@ -69,67 +85,61 @@ function setup() {
         switch (e.key) {
             case "t":
                 plasserSpiller();
-                player.render();
                 break;
             case "d":
                 player.x += 1;
                 gyldig = true;
-                player.render();
                 break;
             case "a":
                 player.x -= 1;
-                player.render();
                 gyldig = true;
                 break;
             case "q":
                 player.x -= 1;
                 player.y -= 1;
-                player.render();
                 gyldig = true;
                 break;
             case "e":
                 player.x += 1;
                 player.y -= 1;
-                player.render();
                 gyldig = true;
                 break;
             case "w":
                 player.y -= 1;
-                player.render();
                 gyldig = true;
                 break;
             case "s":
                 player.y += 1;
-                player.render();
                 gyldig = true;
                 break;
             case "z":
                 player.x -= 1;
                 player.y += 1;
-                player.render();
                 gyldig = true;
                 break;
             case "x":
                 player.x += 1;
                 player.y += 1;
-                player.render();
                 gyldig = true;
                 break;
         }
+        player.x = (player.x + 60) % 60;
+        player.y = (player.y + 60) % 60;
         ruter[player.x][player.y] = 2;
+        player.render();
         if (gyldig) {
             flyttRobotz();
             if (alleErFinito(robotz) ) {
-                alert("game won");
+                alert("level won");
+                newRobotz(5);
+                putRobotz();
+                plasserSpiller();
             } 
         }
     }
 
     function alleErFinito(a) {
-        for (let r of a) {
-            if (r.alive) return false;
-        }
-        return true;
+       return ! a.some(e => e.alive);
     }
 
     function flyttRobotz() {
@@ -139,6 +149,9 @@ function setup() {
                 let dx = Math.sign(robot.x - player.x);
                 let dy = Math.sign(robot.y - player.y);
                 if (ruter[robot.x - dx][robot.y - dy] !== 0) {
+                    if (ruter[robot.x - dx][robot.y - dy] === 2) {
+                        alert("jo dead");
+                    }
                     robot.alive = false;
                     robot.div.className = "dead ting";
                     ruter[robot.x][robot.y] = 3;
