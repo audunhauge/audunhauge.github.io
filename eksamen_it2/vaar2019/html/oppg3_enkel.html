@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/oppg3_enkel.js"></script>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="hyttevelger">
+        <div>Velg start: 
+            <select name="start" id="start">
+            </select></div>
+    </div>
+    <div id="valg"></div>
+    <div id="stivelger">
+        <div id="divneste" class="hidden">
+            Velg neste: <select name="neste" id="neste"></select></div>
+        <div><button class="hidden" id="avslutt">Avslutt turen</button></div>
+    </div>
+    <div id="oppsummering"></div>
+    <script>
+        setup();
+    </script>
+</body>
+</html>

@@ -1,8 +1,10 @@
 // {type:activity}
 // {generate:true}
-(start)->(les alder)-><a> ugyldig alder ->(Feil)
-<a> gyldig alder-> (les antall)
+(start)->(les bredde og hoyde)-><a> bredde for stor ->(Feil)
+<a> gyldig bredde-> (beregn piksler)
 (Feil)->(end)
-(les antall) -> <c>
-<c> antall > 7 -> (Feil)
-<c> -> (beregn pris) -> (end)
+(beregn piksler) -> (mult bredde hoyde)
+(mult bredde hoyde) -> (vis antall pix)
+(vis antall pix) -> <b> bredde større hoyde -> (stående) -> (end)
+<b> -> <c> bredde mindre høyde -> (liggende) -> (end)
+<c> -> (kvadratisk) -> (end)
