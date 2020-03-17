@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="oppg2.js"></script>
+    <link rel="stylesheet" href="oppg2.css">
+</head>
+<!--
+/**
+ * 
+ * vs-chat:
+ *   dersom discord sliter ...
+ * Skriv her
+ */
+
+-->
+<body>
+    <!--lyden forsvant  ser ut som discord sliter, ok er ikke så viktig da ser hva du gjør ...-->
+    <div id="form">
+        <div><label> Hvor mange middager
+            <select name="antallmidd" id="antallmidd">
+                <option>to</option>
+                <option>tre</option>
+            </select>
+        </label></div>
+        <div><label>Hvor mange personer 
+            <input id="antallpers" type="text" placeholder="1..25">
+        </label></div>
+        <div><label><button id="lagre">Lagre min bestilling</button></label></div>
+    </div>
+    <div id="bilde"></div>
+    <div id="bekreftelse">
+        <div id="pris"></div>
+        <div><label>Skriv inn navn<input type="text" id="navn"></label></div>
+        <div><label>Skriv inn adresse<input type="text" id="adresse"></label></div>
+        <div><label><button id="bekreft">Bekreft</button></label></div>
+    </div>
+    <div id="avslutning"></div>
+    <script>
+        setup();
+    </script>
+</body>
+</html>
