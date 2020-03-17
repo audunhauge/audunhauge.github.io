@@ -22,6 +22,8 @@ function $(id) { return document.getElementById(id) }
 
 
 function setup() {
+    let poeng = 0;
+    let brett = 0;
     const divBrett = $("brett");
     for (let i = 0; i < 60; i++) {
         ruter.push([]);
@@ -155,6 +157,7 @@ function setup() {
                     robot.alive = false;
                     robot.div.className = "dead ting";
                     ruter[robot.x][robot.y] = 3;
+                    poeng++;
                 } else {
                     robot.x -= dx;
                     robot.y -= dy;

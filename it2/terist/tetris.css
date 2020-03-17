@@ -1,0 +1,42 @@
+:root {
+  --size: 20px;
+}
+
+#brett {
+    position: relative;
+    width: calc(var(--size) * 12);
+    height: calc(var(--size) * 20);
+    border: solid gray 1px;
+    background-color: whitesmoke;
+}
+
+div.brikke {
+    position: absolute;
+    left:0;
+    top:0;
+    border: solid gray 1px;
+    width: var(--size);
+    height: var(--size);
+}
+
+div.s {
+    background-color: blue;
+}
+div.z {
+    background-color: red;
+}
+div.o {
+    background-color: yellow;
+}
+div.l {
+    background-color: indigo;
+}
+div.j {
+    background-color: orange;
+}
+div.t {
+    background-color: green;
+}
+div.i {
+    background-color: lightskyblue;
+}
