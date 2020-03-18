@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +8,22 @@
     <link rel="stylesheet" href="fisk.css">
     <script src="fisk.js"></script>
 </head>
+
 <body>
+    <div id="message"></div>
     <div id="skjema">
         <div><label>Ukenr<input type="text" id="ukenr"></label></div>
-        <div><label>Antall middager<input type="text" id="antallm"></label></div>
+        <div><label>Velg antall middager</label>
+            <select name="antallm" id="antallm">
+                <option value="2">to</option>
+                <option value="3">tre</option>
+            </select>
+        </div>
         <div><label>Antall barn<input type="text" id="barn"></label></div>
         <div><label>Antall ungdom<input type="text" id="ungdom"></label></div>
         <div><label>Antall voksne<input type="text" id="voksne"></label></div>
         <div><button id="lagre">Lagre bestilling</button></div>
+        <div><button id="beregn">Beregn forbruk uke 26</button></div>
     </div>
     <div id="visning">
 
@@ -23,4 +32,5 @@
         setup();
     </script>
 </body>
+
 </html>
