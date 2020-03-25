@@ -1,0 +1,46 @@
+#main {
+    position: relative;
+    width:800px;
+    height: 800px;
+    border: solid blue 1px;
+}
+
+#tools,#canvas,#farger {
+    position: absolute;
+    background-color: whitesmoke;
+    border: solid red 1px;
+}
+
+#tools {
+    left:0;
+    top:0;
+    width: 150px;
+    height: 750px;
+}
+
+#canvas {
+    width:600px;
+    height: 600px;
+    left: 180px;
+    top: 10px;
+}
+
+#farger {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  bottom: 50px;
+  left: 180px;
+  width: 600px;
+  height: 80px;
+}
+
+#tools > div {
+    width: 64px;
+    height: 64px;
+    border: solid black 1px;
+    margin:1rem;
+}
+
+#tools > div:nth-child(2) {
+    border-radius: 50%;
+}
