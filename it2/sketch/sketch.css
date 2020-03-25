@@ -44,3 +44,38 @@
 #tools > div:nth-child(2) {
     border-radius: 50%;
 }
+
+#tools > div:nth-child(3) {
+    width: 0;
+    height: 0;
+    border-left: 54px solid transparent;
+    border-right: 54px solid transparent;
+    border-bottom: 64px solid green;
+}
+
+#tools > div:nth-child(4) {
+    width: 64px;
+    height: 4px;
+    background-color: blue;
+    transform: rotate(-20deg);
+    margin-top:3rem;
+    margin-bottom:3rem;
+}
+
+#tools > div:nth-child(4) {
+    width: 64px;
+    height: 4px;
+    background-color: blue;
+    transform: rotate(-20deg);
+    margin-top:3rem;
+    margin-bottom:3rem;
+}
+
+#tools > div:nth-child(5) {
+    width: 64px;
+    height: 34px;
+    background: linear-gradient( to right, red 0%, red 49%, blue 50%, blue 100%);
+    transform: rotate(-45deg);
+    margin-top:3rem;
+    margin-bottom:3rem;
+}
