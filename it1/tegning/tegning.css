@@ -44,3 +44,39 @@
 #tools > div:nth-child(2) {
     border: solid brown 3px;
 }
+
+
+#tools > div:nth-child(3) {
+    border: solid red 3px;
+    border-radius: 50%;
+}
+
+#tools > div:nth-child(4) {
+    width: 0px;
+    height: 0px;
+    border-left: solid transparent 36px;
+    border-top: solid transparent 6px;
+    border-right: solid transparent 36px;
+    border-bottom: solid green 56px;
+}
+
+#tools > div:nth-child(5) {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    background-color: blue;
+    width: 60px;
+    height: 4px;
+    transform: rotate(-30deg);
+}
+
+#tools > div:nth-child(6) {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(to right, red 0%, 
+      red 49%, blue 50%,
+    blue 100%);
+    width: 58px;
+    height: 28px;
+    transform: rotate(-45deg);
+}
+
