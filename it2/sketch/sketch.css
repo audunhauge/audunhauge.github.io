@@ -25,15 +25,6 @@
     top: 10px;
 }
 
-#farger {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  bottom: 50px;
-  left: 180px;
-  width: 600px;
-  height: 80px;
-}
-
 #tools > div {
     width: 64px;
     height: 64px;
@@ -41,37 +32,56 @@
     margin:1rem;
 }
 
+#tools > div:nth-child(1) {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-top: 0 solid transparent;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-bottom: 28px solid darkslategrey;
+    transform: rotate(-45deg) translate(2px, -4px);
+}
+
+#tools > div:nth-child(1):after {
+  content: "";
+  width:12px;
+  height: 6px;
+  background-color: darkslategrey;
+  position: absolute;
+  transform: rotate(-90deg) translate(-32px, -7px);
+  border: solid black 1px;
+}
+
 #tools > div:nth-child(2) {
-    border-radius: 50%;
+    border: solid brown 3px;
 }
 
 #tools > div:nth-child(3) {
+    border-radius: 50%;
+    border: solid red 3px;
+}
+
+#tools > div:nth-child(4) {
     width: 0;
     height: 0;
-    border-left: 54px solid transparent;
-    border-right: 54px solid transparent;
-    border-bottom: 64px solid green;
+    border-top: 0 solid transparent;
+    border-left: 38px solid transparent;
+    border-right: 38px solid transparent;
+    border-bottom: 48px solid green;
 }
 
-#tools > div:nth-child(4) {
-    width: 64px;
-    height: 4px;
-    background-color: blue;
-    transform: rotate(-20deg);
-    margin-top:3rem;
-    margin-bottom:3rem;
-}
-
-#tools > div:nth-child(4) {
-    width: 64px;
-    height: 4px;
-    background-color: blue;
-    transform: rotate(-20deg);
-    margin-top:3rem;
-    margin-bottom:3rem;
-}
 
 #tools > div:nth-child(5) {
+    width: 64px;
+    height: 4px;
+    background-color: blue;
+    transform: rotate(-20deg);
+    margin-top:3rem;
+    margin-bottom:3rem;
+}
+
+#tools > div:nth-child(6) {
     width: 64px;
     height: 34px;
     background: linear-gradient( to right, red 0%, red 49%, blue 50%, blue 100%);
@@ -79,3 +89,37 @@
     margin-top:3rem;
     margin-bottom:3rem;
 }
+
+/*          farger      */
+
+#farger {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    bottom: 50px;
+    left: 180px;
+    width: 600px;
+    height: 80px;
+  }
+
+#farger > div {
+    width:32px;
+    height: 32px;
+    margin: 1rem;
+    background-color: gray;
+}
+
+#farger > div:nth-child(1) {
+   background-color: red;
+}
+#farger > div:nth-child(2) {
+    background-color: green;
+ }
+ #farger > div:nth-child(3) {
+    background-color: blue;
+ }
+ #farger > div:nth-child(4) {
+    background-color: yellow;
+ }
+ #farger > div:nth-child(5) {
+    background-color: black;
+ }
