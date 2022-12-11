@@ -8,7 +8,7 @@
   "dependencies": {
     "connect-ensure-login": "^0.1.1",
     "cookie-parser": "^1.4.4",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-session": "^1.17.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
